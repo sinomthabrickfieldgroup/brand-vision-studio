@@ -455,3 +455,63 @@ export const media = {
 } as const satisfies Record<string, Shot>;
 
 export type MediaId = keyof typeof media;
+
+/**
+ * STAND-INS — Unsplash photos used to plan the photoshoot selection. They show the kind of
+ * shot each slot wants; they are not Brickfield buildings. Replace each with a real photo
+ * (set `src` on the shot above and delete its line here) before launch.
+ */
+import si_08df4776 from "@/assets/stand-in/08df4776.webp";
+import si_1aafbb24 from "@/assets/stand-in/1aafbb24.webp";
+import si_23053cb2 from "@/assets/stand-in/23053cb2.webp";
+import si_29810c3b from "@/assets/stand-in/29810c3b.webp";
+import si_357f12aa from "@/assets/stand-in/357f12aa.webp";
+import si_5bc69ba9 from "@/assets/stand-in/5bc69ba9.webp";
+import si_66ae3f86 from "@/assets/stand-in/66ae3f86.webp";
+import si_711614b0 from "@/assets/stand-in/711614b0.webp";
+import si_7449a88d from "@/assets/stand-in/7449a88d.webp";
+import si_97512505 from "@/assets/stand-in/97512505.webp";
+import si_9871ff25 from "@/assets/stand-in/9871ff25.webp";
+import si_9c720f5d from "@/assets/stand-in/9c720f5d.webp";
+import si_b153bae0 from "@/assets/stand-in/b153bae0.webp";
+import si_b23d9d70 from "@/assets/stand-in/b23d9d70.webp";
+import si_b772ec77 from "@/assets/stand-in/b772ec77.webp";
+import si_bdf2b160 from "@/assets/stand-in/bdf2b160.webp";
+import si_c7bb7a9e from "@/assets/stand-in/c7bb7a9e.webp";
+import si_c9344f4f from "@/assets/stand-in/c9344f4f.webp";
+import si_cc3873b2 from "@/assets/stand-in/cc3873b2.webp";
+import si_cd9275ce from "@/assets/stand-in/cd9275ce.webp";
+import si_d1597a16 from "@/assets/stand-in/d1597a16.webp";
+import si_d53154cb from "@/assets/stand-in/d53154cb.webp";
+import si_f9854d80 from "@/assets/stand-in/f9854d80.webp";
+import si_fb1e5004 from "@/assets/stand-in/fb1e5004.webp";
+import si_ffbe175e from "@/assets/stand-in/ffbe175e.webp";
+
+export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> = {
+  canvasBefore: { src: si_9871ff25, focus: "50% 55%" },
+  canvasAfter: { src: si_66ae3f86, focus: "50% 60%" },
+  canvasCourtyard: { src: si_fb1e5004, focus: "35% 60%" },
+  canvasEvents: { src: si_bdf2b160, focus: "50% 50%" },
+  canvasSolar: { src: si_b772ec77, focus: "50% 60%" },
+  loopBefore: { src: si_b23d9d70, focus: "50% 55%" },
+  loopWarehouse: { src: si_7449a88d, focus: "50% 50%" },
+  loopYard: { src: si_cd9275ce, focus: "50% 60%" },
+  loopOffice: { src: si_cc3873b2, focus: "50% 80%" },
+  loopPower: { src: si_08df4776, focus: "50% 55%" },
+  loopFabrication: { src: si_357f12aa, focus: "50% 55%" },
+  callHero: { src: si_b153bae0, focus: "50% 62%" },
+  callPlant: { src: si_f9854d80, focus: "50% 45%" },
+  wierdaHero: { src: si_23053cb2, focus: "50% 40%" },
+  wierdaStreet: { src: si_c7bb7a9e, focus: "50% 55%" },
+  montagueHero: { src: si_5bc69ba9, focus: "70% 60%" },
+  montagueYard: { src: si_97512505, focus: "50% 70%" },
+  montagueInterior: { src: si_d53154cb, focus: "50% 50%" },
+  montagueStreet: { src: si_d1597a16, focus: "50% 50%" },
+  albertHero: { src: si_ffbe175e, focus: "50% 50%" },
+  albertInterior: { src: si_1aafbb24, focus: "50% 40%" },
+  albertLoading: { src: si_29810c3b, focus: "45% 60%" },
+  aboutHero: { src: si_c9344f4f, focus: "50% 55%" },
+  precinct: { src: si_9c720f5d, focus: "50% 50%" },
+  heritageDetail: { src: si_ffbe175e, focus: "62% 45%" },
+  generator: { src: si_711614b0, focus: "50% 40%" },
+};

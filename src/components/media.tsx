@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
-import { media, type MediaId } from "@/lib/media";
+import { media, standIns, type MediaId } from "@/lib/media";
 import { cn } from "@/lib/utils";
 
 interface MediaProps {
@@ -41,7 +41,8 @@ export function Media({
     const el = img.current;
     if (el && el.complete && el.naturalWidth === 0) setFailed(true);
   }, []);
-  const src = "src" in shot ? (shot.src as string | undefined) : undefined;
+  const stand = standIns[id];
+  const src = ("src" in shot ? (shot.src as string | undefined) : undefined) ?? stand?.src;
   const showImage = src && !failed;
 
   return (
@@ -63,6 +64,7 @@ export function Media({
             decoding="async"
             onError={() => setFailed(true)}
             className="h-full w-full object-cover"
+            style={stand && !("src" in shot) ? { objectPosition: stand.focus } : undefined}
           />
         ) : (
           <div
