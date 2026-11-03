@@ -1105,18 +1105,6 @@
   }
 
   /* ─── Footer ────────────────────────────────────────────────────────────── */
-  .footer-wordmark {
-    font-family: var(--font-display);
-    font-size: clamp(5rem, 21vw, 22rem);
-    line-height: 0.78;
-    letter-spacing: -0.04em;
-    text-align: center;
-    color: oklch(1 0 0 / 0.06);
-    margin-bottom: -0.12em;
-    user-select: none;
-    white-space: nowrap;
-  }
-
   /* ─── Reduced motion ────────────────────────────────────────────────────── */
   @media (prefers-reduced-motion: reduce) {
     html {
@@ -1201,13 +1189,6 @@
   .status-badge { display: inline-flex; align-items: center; gap: .45rem; padding: .4rem .85rem; border-radius: 999px; font-size: .7rem; letter-spacing: .18em; text-transform: uppercase; color: var(--primary); background: color-mix(in oklch, var(--accent) 35%, transparent); border: 1px solid color-mix(in oklch, var(--accent) 70%, transparent); }
 }
 @layer components {
-  .logo-mark { display: inline-flex; align-items: stretch; user-select: none; line-height: 1; }
-  .logo-mark-brick { display: flex; align-items: center; padding: .5rem .8rem; background: var(--primary); color: var(--primary-foreground); font-weight: 300; font-size: .9rem; letter-spacing: .18em; text-transform: uppercase; }
-  .logo-mark-initial { font-size: 1.12em; }
-  .logo-mark-group { display: flex; align-items: center; padding: .5rem .8rem; background: var(--accent); color: var(--primary); font-family: var(--font-display); font-weight: 600; font-size: .9rem; text-transform: uppercase; }
-  .logo-mark-light { outline: 1px solid oklch(1 0 0 / .2); }
-}
-@layer components {
   .field-error { margin-top: .5rem; font-size: .82rem; color: var(--destructive); animation: rise .4s var(--ease-editorial) both; }
   .field.has-error .field-input { border-bottom-color: var(--destructive); }
   .field.has-error { animation: field-shake .45s var(--ease-editorial); }
@@ -1251,8 +1232,6 @@
   @keyframes brick-lay { from { transform: translateY(-14px) scale(1.04); opacity: 0; } to { transform: none; opacity: 1; } }
   .site-loader-logo { clip-path: inset(0 100% 0 0); transition: clip-path 1.2s var(--ease-editorial); }
   .site-loader-logo.is-in { clip-path: inset(0 0 0 0); }
-  .site-loader-logo .logo-mark { font-size: 1.15rem; }
-  .site-loader-logo .logo-mark-brick, .site-loader-logo .logo-mark-group { padding: .7rem 1.1rem; font-size: 1.05rem; }
   .site-loader-foot { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; padding: 2rem clamp(1.5rem, 4vw, 2.5rem) 2.2rem; transition: opacity .6s, transform .9s var(--ease-editorial); }
   .site-loader-phrase { display: flex; align-items: center; gap: .75rem; font-size: .72rem; letter-spacing: .22em; text-transform: uppercase; color: var(--fern); animation: rise .7s var(--ease-editorial) both; }
   .site-loader-count { font-family: var(--font-display); font-size: clamp(3rem, 9vw, 6.5rem); line-height: .8; letter-spacing: -0.03em; font-variant-numeric: tabular-nums; }
@@ -1271,4 +1250,92 @@
 }
 @layer components {
   .media-credit { position: absolute; left: 10px; bottom: 8px; z-index: 2; font-size: .62rem; letter-spacing: .02em; color: oklch(1 0 0 / .85); text-shadow: 0 1px 6px oklch(0 0 0 / .5); pointer-events: none; }
+}
+@layer components {
+  .wordmark { display: block; height: 15px; width: auto; overflow: visible; }
+  .wordmark-brickfield { fill: currentColor; }
+  .wordmark-group { fill: var(--accent); }
+  .site-header .wordmark { height: 15px; }
+  footer .wordmark { height: 20px; }
+  .site-loader-logo .wordmark-stacked { height: 64px; }
+  @media (min-width: 768px) { .site-header .wordmark { height: 17px; } .site-loader-logo .wordmark-stacked { height: 84px; } }
+}
+
+/* ─── System diagrams ────────────────────────────────────────────────────── */
+@layer components {
+  .diagram { display: flex; flex-direction: column; gap: 1.25rem; }
+  .diagram-canvas { position: relative; aspect-ratio: 4 / 5; background: var(--card); border: 1px solid var(--border); overflow: hidden; }
+  .diagram-canvas svg { width: 100%; height: 100%; font-family: var(--font-sans); }
+  .diagram-legend { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .diagram-key { display: inline-flex; align-items: center; gap: .55rem; padding: .45rem .8rem; border: 1px solid var(--border); border-radius: 999px; font-size: .78rem; background: var(--background); transition: border-color .3s, background-color .3s; }
+  .diagram-key:hover, .diagram-key[aria-pressed="true"] { border-color: var(--foreground); }
+  .diagram-swatch { width: 22px; height: 0; border-top: 2px solid var(--foreground); }
+  .swatch-flow { border-top: 2px dashed var(--accent); }
+  .swatch-dotted { border-top: 2px dotted color-mix(in oklch, var(--foreground) 45%, transparent); }
+
+  .d-soil { fill: color-mix(in oklch, var(--foreground) 4%, transparent); }
+  .d-ground { stroke: var(--foreground); stroke-width: 1.5; }
+  .d-aquifer { fill: color-mix(in oklch, var(--fern) 18%, transparent); stroke: color-mix(in oklch, var(--fern) 45%, transparent); stroke-width: 1; }
+  .d-building path, .d-building > line { fill: none; stroke: var(--foreground); stroke-width: 1.5; }
+  .d-roof { stroke-width: 2.5 !important; }
+  .d-floor { stroke-width: 1 !important; opacity: .45; }
+  .d-window { fill: none; stroke: color-mix(in oklch, var(--foreground) 35%, transparent); stroke-width: 1; }
+  .d-brick line { stroke: color-mix(in oklch, var(--foreground) 30%, transparent); stroke-width: 1; }
+  .d-tank, .d-pump, .c-room { fill: var(--background); fill-opacity: .25; stroke: var(--foreground); stroke-width: 1.5; }
+  .d-water { fill: color-mix(in oklch, var(--fern) 30%, transparent); transform-box: fill-box; transform-origin: bottom; transform: scaleY(.62); }
+  .d-pipe { fill: none; stroke: color-mix(in oklch, var(--foreground) 22%, transparent); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+  .d-flow { fill: none; stroke: var(--accent); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 6 9; }
+  .d-supply { fill: none; stroke: var(--foreground); stroke-width: 2; stroke-linecap: round; }
+  .d-muni { fill: none; stroke: color-mix(in oklch, var(--foreground) 40%, transparent); stroke-width: 2; stroke-dasharray: 1 6; stroke-linecap: round; }
+  .d-valve { fill: var(--background); stroke: color-mix(in oklch, var(--foreground) 50%, transparent); stroke-width: 1.5; }
+  .d-rain line { stroke: color-mix(in oklch, var(--fern) 60%, transparent); stroke-width: 1.5; stroke-linecap: round; opacity: 0; }
+  .d-label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; fill: var(--foreground); font-weight: 500; }
+  .d-note { font-size: 10px; letter-spacing: .08em; fill: var(--muted-foreground); }
+
+  /* comms */
+  .c-status-box { fill: var(--background); stroke: var(--border); }
+  .c-dot { fill: var(--fern); }
+  .c-node { fill: var(--accent); stroke: var(--background); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
+  .c-break { opacity: 0; }
+  .c-break circle { fill: var(--background); stroke: var(--destructive); stroke-width: 1.5; }
+  .c-break path { stroke: var(--destructive); stroke-width: 2; stroke-linecap: round; }
+  .c-backup-flow { opacity: 0; }
+  .c-on-backup { opacity: 0; }
+
+  /* animation (only while on screen) */
+  .diagram.is-playing .d-flow { animation: d-flow 1.1s linear infinite; }
+  .diagram.is-playing .d-rain line { animation: d-rain 1.15s linear infinite; }
+  .diagram.is-playing .d-water { animation: d-level 9s ease-in-out infinite; }
+  .diagram.is-playing .c-node { animation: c-pulse 2.4s ease-in-out infinite; }
+  .diagram.is-playing .c-dot { animation: c-blink 2.4s ease-in-out infinite; }
+  .diagram.is-playing .c-primary-flow { animation: d-flow 1.1s linear infinite, c-primary 10s ease infinite; }
+  .diagram.is-playing .c-backup-flow { animation: d-flow 1.1s linear infinite, c-backup 10s ease infinite; }
+  .diagram.is-playing .c-break { animation: c-break 10s ease infinite; }
+  .diagram.is-playing .c-on-primary { animation: c-primary 10s ease infinite; }
+  .diagram.is-playing .c-on-backup { animation: c-backup 10s ease infinite; }
+  @keyframes d-flow { to { stroke-dashoffset: -30; } }
+  @keyframes d-rain { 0% { opacity: 0; transform: translateY(-10px); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(70px); } }
+  @keyframes d-level { 0%, 100% { transform: scaleY(.55); } 50% { transform: scaleY(.78); } }
+  @keyframes c-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
+  @keyframes c-blink { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
+  @keyframes c-primary { 0%, 44% { opacity: 1; } 48%, 90% { opacity: 0; } 95%, 100% { opacity: 1; } }
+  @keyframes c-backup { 0%, 46% { opacity: 0; } 50%, 90% { opacity: 1; } 94%, 100% { opacity: 0; } }
+  @keyframes c-break { 0%, 44% { opacity: 0; transform: translate(112px, 338px) scale(.6); } 47%, 90% { opacity: 1; transform: translate(112px, 338px) scale(1); } 94%, 100% { opacity: 0; transform: translate(112px, 338px) scale(.6); } }
+
+  /* legend highlight: dim everything except the chosen part */
+  .diagram[data-active] [data-part] { opacity: .15; transition: opacity .35s; }
+  .diagram[data-active="rain"] [data-part="rain"], .diagram[data-active="bore"] [data-part="bore"], .diagram[data-active="supply"] [data-part="supply"],
+  .diagram[data-active="muni"] [data-part="muni"], .diagram[data-active="primary"] [data-part="primary"], .diagram[data-active="backup"] [data-part="backup"],
+  .diagram[data-active="riser"] [data-part="riser"] { opacity: 1; }
+  .diagram[data-active="backup"] .c-backup-flow { animation-name: d-flow; opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .c-backup-flow { opacity: .5 !important; }
+  .d-rain line { opacity: .6 !important; }
+}
+
+@layer components {
+  .footer-wordmark { display: flex; justify-content: center; padding: 3rem 1.5rem 2.5rem; font-size: 0; line-height: 0; color: oklch(1 0 0 / .07); margin: 0; }
+  .footer-wordmark .wordmark { width: min(92vw, 1180px); height: auto; }
+  .footer-wordmark .wordmark-group { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
 }

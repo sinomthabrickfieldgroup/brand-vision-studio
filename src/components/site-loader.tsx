@@ -154,7 +154,7 @@ export function SiteLoader() {
           ))}
         </svg>
         <div className={`site-loader-logo${progress > 0.55 ? " is-in" : ""}`}>
-          <LogoMark />
+          <LogoMark layout="stacked" />
         </div>
       </div>
 

@@ -20,6 +20,7 @@ import {
   TabShowcase,
 } from "@/components/editorial";
 import { Media } from "@/components/media";
+import { SystemDiagram } from "@/components/system-diagram";
 import type { MediaId } from "@/lib/media";
 
 export const Route = createFileRoute("/sustainability")({
@@ -172,7 +173,11 @@ function Sustainability() {
         >
           <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
             <div className={i % 2 === 1 ? "md:order-2" : undefined}>
-              <Media id={s.media} className="aspect-[4/5]" parallax={0.06} />
+              {s.key === "power" ? (
+                <Media id={s.media} className="aspect-[4/5]" parallax={0.06} />
+              ) : (
+                <SystemDiagram kind={s.key === "water" ? "water" : "comms"} />
+              )}
             </div>
             <div>
               <SectionIntro eyebrow={s.eyebrow} title={s.title} text={s.text} />

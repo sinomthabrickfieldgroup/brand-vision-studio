@@ -2,6 +2,7 @@ import { Link, useLocation } from "@tanstack/react-router";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Media } from "@/components/media";
+import { Wordmark } from "@/components/wordmark";
 import { CONTACT, properties, propertyTypes } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -11,22 +12,17 @@ const navigation = [
   { label: "Services", to: "/services" },
 ] as const;
 
-/** The Brickfield Group lockup: a charcoal BRICKFIELD block beside a gold GROUP block. */
+/** Kept for callers that still import LogoMark; renders the approved wordmark. */
 export function LogoMark({
   light,
   className,
+  layout,
 }: {
   light?: boolean | undefined;
   className?: string | undefined;
+  layout?: "horizontal" | "stacked";
 }) {
-  return (
-    <span className={cn("logo-mark", light && "logo-mark-light", className)}>
-      <span className="logo-mark-brick">
-        <span className="logo-mark-initial">B</span>rickfield
-      </span>
-      <span className="logo-mark-group">Group</span>
-    </span>
-  );
+  return <Wordmark layout={layout} className={cn(light && "text-primary-foreground", className)} />;
 }
 
 export function Logo({ light }: { light?: boolean }) {
@@ -331,9 +327,9 @@ export function SiteFooter() {
           <p>Cape Town · Johannesburg</p>
         </div>
       </div>
-      <p className="footer-wordmark" aria-hidden="true">
-        Brickfield
-      </p>
+      <div className="footer-wordmark" aria-hidden="true">
+        <Wordmark title="" />
+      </div>
     </footer>
   );
 }
