@@ -1,6 +1,7 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
+import { ArrowUpRight, ChevronDown, Mail, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Media } from "@/components/media";
 import { Wordmark } from "@/components/wordmark";
 import { CONTACT, properties, propertyTypes } from "@/lib/portfolio";
@@ -145,9 +146,24 @@ export function SiteHeader() {
       )}
       onKeyDown={(e) => e.key === "Escape" && (setMegaOpen(false), setMobileOpen(false))}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 md:px-10">
-        <Logo />
-        <nav aria-label="Main navigation" className="hidden items-center gap-8 text-sm lg:flex">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 md:px-10 lg:flex lg:justify-between lg:gap-6">
+        <button
+          type="button"
+          className="round-btn order-1 justify-self-start lg:hidden"
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setMobileOpen(!mobileOpen)}
+        >
+          {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
+        <div className="order-2 justify-self-center lg:order-1">
+          <Logo />
+        </div>
+        <nav
+          aria-label="Main navigation"
+          className="hidden items-center gap-8 text-sm lg:order-2 lg:flex"
+        >
           {navigation.map((item) => (
             <Link
               key={item.to}
@@ -182,22 +198,16 @@ export function SiteHeader() {
             )}
           </div>
         </nav>
-        <div className="flex items-center gap-3">
-          <Link to="/contact" className="action action-solid hidden sm:inline-flex">
+        <div className="order-3 flex items-center justify-self-end gap-3">
+          <Link to="/contact" className="action action-solid hidden lg:inline-flex">
             <span className="action-label">Contact</span>
             <span className="action-icon" aria-hidden="true">
               <ArrowUpRight size={16} />
             </span>
           </Link>
-          <button
-            type="button"
-            className="round-btn lg:hidden"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-            onClick={() => setMobileOpen(!mobileOpen)}
-          >
-            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
+          <Link to="/contact" className="round-btn lg:hidden" aria-label="Contact us">
+            <Mail size={17} />
+          </Link>
         </div>
       </div>
       {megaOpen && (
@@ -207,43 +217,45 @@ export function SiteHeader() {
           aria-hidden="true"
         />
       )}
-      {mobileOpen && (
-        <nav aria-label="Mobile navigation" className="mobile-menu lg:hidden">
-          <div className="px-6 pb-10 pt-4">
-            {[
-              ...navigation,
-              { label: "Portfolio", to: "/portfolio" as const },
-              { label: "Contact", to: "/contact" as const },
-            ].map((item, i) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className="mobile-link"
-                style={{ animationDelay: `${i * 60}ms` }}
-              >
-                <span className="font-display text-4xl">{item.label}</span>
-                <ArrowUpRight size={20} />
-              </Link>
-            ))}
-            <p className="eyebrow mt-10">
-              <span className="eyebrow-rule" aria-hidden="true" />
-              The portfolio
-            </p>
-            <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
-              {properties.map((p) => (
+      {mobileOpen &&
+        createPortal(
+          <nav id="mobile-menu" aria-label="Mobile navigation" className="mobile-menu lg:hidden">
+            <div className="px-6 pb-10 pt-4">
+              {[
+                ...navigation,
+                { label: "Portfolio", to: "/portfolio" as const },
+                { label: "Contact", to: "/contact" as const },
+              ].map((item, i) => (
                 <Link
-                  key={p.slug}
-                  to="/portfolio/$slug"
-                  params={{ slug: p.slug }}
-                  className="text-muted-foreground"
+                  key={item.to}
+                  to={item.to}
+                  className="mobile-link"
+                  style={{ animationDelay: `${i * 60}ms` }}
                 >
-                  {p.name}
+                  <span className="font-display text-4xl">{item.label}</span>
+                  <ArrowUpRight size={20} />
                 </Link>
               ))}
+              <p className="eyebrow mt-10">
+                <span className="eyebrow-rule" aria-hidden="true" />
+                The portfolio
+              </p>
+              <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+                {properties.map((p) => (
+                  <Link
+                    key={p.slug}
+                    to="/portfolio/$slug"
+                    params={{ slug: p.slug }}
+                    className="text-muted-foreground"
+                  >
+                    {p.name}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
-        </nav>
-      )}
+          </nav>,
+          document.body,
+        )}
     </header>
   );
 }

@@ -42,6 +42,15 @@ function Portfolio() {
         }
         text="Fifteen years of disciplined adaptive reuse across Cape Town's industrial and mixed-use precincts, and beyond. Every property is held for the long term and managed by our own team."
         media="precinct"
+        slidesEyebrow="The portfolio"
+        slides={[
+          { id: "canvasHero", label: "Brickfield Canvas", slug: "brickfield-canvas" },
+          { id: "loopHero", label: "9 Loop Street", slug: "9-loop-street" },
+          { id: "albertHero", label: "219 Albert Road", slug: "219-albert-road" },
+          { id: "montagueHero", label: "24 Montague", slug: "24-montague" },
+          { id: "wierdaHero", label: "66/68 Wierda", slug: "66-68-wierda" },
+          { id: "callHero", label: "Brickfield Call Centre", slug: "brickfield-call-centre" },
+        ]}
         actions={
           <>
             <ActionLink href="#properties">Explore</ActionLink>

@@ -83,6 +83,8 @@ export interface Property {
   headline: string;
   summary: string;
   hero: MediaId;
+  /** Extra hero slides after the main photo. */
+  slides?: MediaId[];
   card: MediaId;
   facts: Stat[];
   specs: Spec[];
@@ -108,7 +110,8 @@ export const properties: Property[] = [
     summary:
       "10,400m² of A-Grade workspace in Woodstock, home to 20+ businesses across tech, health, finance and the sciences. Built green, fully tenanted since 2022.",
     hero: "canvasHero",
-    card: "canvasCourtyard",
+    slides: ["canvasLobby", "canvasCafe", "canvasCourtyard", "canvasOffices", "canvasGym"],
+    card: "canvasLobby",
     facts: [
       { value: "10,400m²", label: "Gross lettable area" },
       { value: "100%", label: "Tenanted since 2022" },
@@ -168,7 +171,7 @@ export const properties: Property[] = [
             label: "Community",
             title: "20+ businesses, one campus",
             text: "Tech, health, biotech, finance and consulting, working side by side.",
-            media: "canvasCourtyard",
+            media: "canvasBreakout",
           },
           {
             label: "Café",
@@ -263,12 +266,14 @@ export const properties: Property[] = [
         eyebrow: "Gallery",
         title: "Walk the campus",
         media: [
-          "canvasOffices",
+          "canvasLobby",
           "canvasCourtyard",
-          "canvasCafe",
+          "canvasBreakout",
           "canvasMeeting",
+          "canvasAtrium",
           "canvasGym",
-          "canvasHero",
+          "canvasNook",
+          "canvasOffices",
         ],
       },
     ],
@@ -302,6 +307,7 @@ export const properties: Property[] = [
     summary:
       "A newly refurbished premium industrial facility in Maitland: 2,362m² GLA, 400A three-phase power and dual yard access, occupied by AMD Engineering.",
     hero: "loopHero",
+    slides: ["loopWarehouse", "loopOffice", "loopTopDown"],
     card: "loopWarehouse",
     facts: [
       { value: "2,362m²", label: "Gross lettable area" },
@@ -408,6 +414,7 @@ export const properties: Property[] = [
     summary:
       "6,101m² of purpose-built office space in Woodstock, fully occupied by Nimble Group, next door to Brickfield Canvas.",
     hero: "callHero",
+    slides: [],
     card: "callFloor",
     facts: [
       { value: "6,101m²", label: "Contiguous office space" },
@@ -490,6 +497,7 @@ export const properties: Property[] = [
     summary:
       "Two A-Grade office buildings in Wierda Valley, Sandton: 5,636m² GLA combined, fully let to Nimble Group on a long-term basis.",
     hero: "wierdaHero",
+    slides: ["wierdaStreet"],
     card: "wierdaLobby",
     facts: [
       { value: "5,636m²", label: "Combined GLA" },
@@ -593,6 +601,7 @@ export const properties: Property[] = [
     summary:
       "A multi-tenant industrial park in Montague Gardens: a 7,362m² General Industrial site with dual access, 35 parking bays and room to load.",
     hero: "montagueHero",
+    slides: ["montagueYard", "montagueInterior"],
     card: "montagueInterior",
     facts: [
       { value: "4,232m²", label: "Gross lettable area" },
@@ -670,6 +679,7 @@ export const properties: Property[] = [
     summary:
       "A heritage industrial building on Albert Road, Woodstock, home to a mix of makers and print operations.",
     hero: "albertHero",
+    slides: ["albertInterior", "albertLoading"],
     card: "albertInterior",
     facts: [
       { value: "5,200m²", label: "Gross lettable area" },

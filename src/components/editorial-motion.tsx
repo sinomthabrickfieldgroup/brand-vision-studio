@@ -75,7 +75,9 @@ export function EditorialMotion({ children }: { children: ReactNode }) {
             fill: "backwards",
           }),
         );
-        const inner = el.querySelector<HTMLElement>(".media-inner > *");
+        const inner = el.querySelector<HTMLElement>(
+          ".media-inner > .media-img, .media-inner > .media-placeholder",
+        );
         if (inner)
           animations.push(
             inner.animate([{ transform: "scale(1.18)" }, { transform: "scale(1)" }], {
@@ -147,7 +149,10 @@ export function EditorialMotion({ children }: { children: ReactNode }) {
       root
         .querySelectorAll(`${TEXT_SELECTOR}, [data-reveal="frame"], [data-count]`)
         .forEach((el) => {
-          if (watched.has(el) || el.closest("[role='tabpanel'], .tab-image, .marquee, header"))
+          if (
+            watched.has(el) ||
+            el.closest("[role='tabpanel'], .tab-image, .marquee, .ticker, .hero-show, header")
+          )
             return;
           // Skip nested matches so a paragraph inside a revealing block doesn't animate twice.
           const parent = el.parentElement?.closest(`[data-reveal-item], .stat`);

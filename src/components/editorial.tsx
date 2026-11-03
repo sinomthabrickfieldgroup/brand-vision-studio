@@ -1,8 +1,9 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
+import { HeroSlideshow, type Slide } from "@/components/hero-slideshow";
 import { Media } from "@/components/media";
-import type { MediaId } from "@/lib/media";
+import { hasImage, type MediaId } from "@/lib/media";
 import type { Item, Stat } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -121,10 +122,7 @@ export function StatFigure({
 }) {
   return (
     <div className={cn("stat", className)}>
-      <div
-        className="font-display text-4xl leading-none tracking-tight sm:text-5xl md:text-6xl"
-        data-count={stat.value}
-      >
+      <div className="stat-value font-display leading-none tracking-tight" data-count={stat.value}>
         {stat.value}
       </div>
       <div
@@ -174,24 +172,105 @@ export function StatRow({
 
 /* ─── Marquee ───────────────────────────────────────────────────────────── */
 
-export function Marquee({ items, className }: { items: string[]; className?: string }) {
-  const row = (
-    <div className="marquee-row">
-      {items.map((item) => (
-        <span key={item} className="marquee-item">
-          {item}
-          <span className="marquee-star" aria-hidden="true">
-            ✦
-          </span>
-        </span>
-      ))}
-    </div>
-  );
+const DEFAULT_SUBLINE = [
+  "Cape Town",
+  "Johannesburg",
+  "Since 2009",
+  "Held for the long term",
+  "Operated in-house",
+  "Patient capital",
+];
+
+/**
+ * An editorial ticker: a large serif line drifting one way and a small tracked line drifting
+ * the other. It speeds up with scroll velocity and settles back, pauses off screen, and is a
+ * static, wrapped list for reduced motion.
+ */
+export function Marquee({
+  items,
+  subline = DEFAULT_SUBLINE,
+  className,
+}: {
+  items: string[];
+  subline?: string[] | undefined;
+  className?: string | undefined;
+}) {
+  const root = useRef<HTMLDivElement>(null);
+  const rowA = useRef<HTMLDivElement>(null);
+  const rowB = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    el.classList.add("is-live");
+    let visible = false;
+    let raf = 0;
+    let last = performance.now();
+    let lastY = window.scrollY;
+    let boost = 0;
+    let xa = 0;
+    let xb = 0;
+    const io = new IntersectionObserver(([e]) => {
+      visible = !!e?.isIntersecting;
+      if (visible) {
+        last = performance.now();
+        raf = requestAnimationFrame(tick);
+      } else cancelAnimationFrame(raf);
+    });
+    const tick = (now: number) => {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      const y = window.scrollY;
+      const v = (y - lastY) / Math.max(dt, 0.001);
+      lastY = y;
+      boost += (Math.max(-1600, Math.min(1600, v)) * 0.06 - boost) * 0.08;
+      const wa = (rowA.current?.scrollWidth ?? 0) / 4;
+      const wb = (rowB.current?.scrollWidth ?? 0) / 4;
+      xa -= (28 + Math.abs(boost)) * dt;
+      xb += (18 + Math.abs(boost) * 0.6) * dt;
+      if (wa) xa = ((xa % wa) - wa) % wa;
+      if (wb) xb = ((xb % wb) - wb) % wb;
+      if (rowA.current) rowA.current.style.transform = `translate3d(${xa.toFixed(2)}px,0,0)`;
+      if (rowB.current) rowB.current.style.transform = `translate3d(${xb.toFixed(2)}px,0,0)`;
+      if (visible) raf = requestAnimationFrame(tick);
+    };
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(raf);
+      el.classList.remove("is-live");
+    };
+  }, []);
+
+  const set = (list: string[], big: boolean, dup = false) =>
+    list.map((item, i) => (
+      <span
+        key={item + i + String(dup)}
+        className={cn("ticker-item", big && i % 2 === 1 && "is-italic", dup && "ticker-dup")}
+      >
+        {item}
+        <span className={big ? "ticker-brick" : "ticker-dot"} aria-hidden="true" />
+      </span>
+    ));
+
   return (
-    <div className={cn("marquee", className)} aria-label={items.join(", ")}>
-      <div className="marquee-track" aria-hidden="true">
-        {row}
-        {row}
+    <div ref={root} className={cn("ticker", className)}>
+      <p className="sr-only">{items.join(", ")}</p>
+      <div className="ticker-line ticker-line-a" aria-hidden="true">
+        <div ref={rowA} className="ticker-track">
+          {set(items, true)}
+          {[1, 2, 3].map((k) => (
+            <Fragment key={k}>{set(items, true, true)}</Fragment>
+          ))}
+        </div>
+      </div>
+      <div className="ticker-line ticker-line-b" aria-hidden="true">
+        <div ref={rowB} className="ticker-track">
+          {set(subline, false)}
+          {[1, 2, 3].map((k) => (
+            <Fragment key={k}>{set(subline, false, true)}</Fragment>
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -540,6 +619,8 @@ export function PageHero({
   actions,
   tags,
   badge,
+  slides,
+  slidesEyebrow,
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -548,6 +629,8 @@ export function PageHero({
   actions?: ReactNode;
   tags?: string[];
   badge?: ReactNode;
+  slides?: Slide[] | undefined;
+  slidesEyebrow?: string | undefined;
 }) {
   return (
     <section className="relative">
@@ -576,7 +659,11 @@ export function PageHero({
         </div>
       </div>
       <div className="hero-media-wrap" data-expand>
-        <Media id={media} fill reveal={false} parallax={0.1} priority />
+        {slides && slides.filter((s) => hasImage(s.id)).length > 0 ? (
+          <HeroSlideshow slides={slides.filter((s) => hasImage(s.id))} eyebrow={slidesEyebrow} />
+        ) : (
+          <Media id={media} fill reveal={false} parallax={0.1} priority />
+        )}
       </div>
     </section>
   );

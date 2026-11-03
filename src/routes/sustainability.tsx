@@ -114,6 +114,12 @@ function Sustainability() {
         }
         text="We invest in infrastructure that works for decades. Not for a quarterly report."
         media="canvasSolar"
+        slidesEyebrow="Built to endure"
+        slides={[
+          { id: "canvasSolar", label: "Solar on the roof" },
+          { id: "canvasLivingWall", label: "Gardens inside the building" },
+          { id: "canvasAtrium", label: "Daylight through the atrium" },
+        ]}
         actions={
           <>
             <ActionLink to="/portfolio">Portfolio</ActionLink>
@@ -140,7 +146,7 @@ function Sustainability() {
                 key={s.label}
                 stat={s}
                 light
-                className="border-t border-primary-foreground/20 pt-6 [&>div:first-child]:text-6xl md:[&>div:first-child]:text-8xl"
+                className="stat-xl border-t border-primary-foreground/20 pt-6"
               />
             ))}
           </div>

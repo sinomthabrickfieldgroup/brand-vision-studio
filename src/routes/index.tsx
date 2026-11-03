@@ -9,9 +9,10 @@ import {
   SectionIntro,
   StatFigure,
 } from "@/components/editorial";
+import { HeroSlideshow, type Slide } from "@/components/hero-slideshow";
 import { Media } from "@/components/media";
 import { PortfolioReel } from "@/components/portfolio-views";
-import type { MediaId } from "@/lib/media";
+import { hasImage, type MediaId } from "@/lib/media";
 import { portfolioTotals, properties } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/")({
@@ -65,6 +66,16 @@ const pillars: {
   },
 ];
 
+const heroSlides: Slide[] = [
+  { id: "canvasHero", label: "Brickfield Canvas, Woodstock", slug: "brickfield-canvas" },
+  { id: "canvasLobby", label: "Inside Canvas", slug: "brickfield-canvas" },
+  { id: "loopHero", label: "9 Loop Street, Maitland", slug: "9-loop-street" },
+  { id: "canvasCourtyard", label: "The Canvas terrace", slug: "brickfield-canvas" },
+  { id: "albertHero", label: "219 Albert Road, Woodstock", slug: "219-albert-road" },
+  { id: "callHero", label: "Brickfield Call Centre", slug: "brickfield-call-centre" },
+  { id: "wierdaHero", label: "66/68 Wierda, Sandton", slug: "66-68-wierda" },
+];
+
 function Index() {
   const canvas = properties[0]!;
   return (
@@ -91,26 +102,10 @@ function Index() {
         </div>
         <div className="relative">
           <div className="hero-media-wrap" data-expand>
-            <Media id="canvasHero" fill reveal={false} parallax={0.1} priority />
-            <div className="absolute inset-x-0 bottom-0 z-[2] h-1/3 bg-gradient-to-t from-black/35 to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 z-[3] flex items-end justify-between text-white md:bottom-10 md:left-10 md:right-10">
-              <p className="text-sm">
-                <span className="opacity-70">Featured · </span>Brickfield Canvas, Woodstock
-              </p>
-              <Link
-                to="/portfolio/$slug"
-                params={{ slug: canvas.slug }}
-                className="hidden items-center gap-2 text-sm md:inline-flex"
-              >
-                View the precinct <ArrowUpRight size={16} />
-              </Link>
-            </div>
-          </div>
-          <div
-            className="pointer-events-none absolute -bottom-24 right-6 z-10 hidden w-[22vw] max-w-[320px] md:block md:right-10"
-            data-parallax="-0.12"
-          >
-            <Media id="canvasCafe" className="aspect-[3/4] shadow-2xl" />
+            <HeroSlideshow
+              eyebrow="The portfolio"
+              slides={heroSlides.filter((sl) => hasImage(sl.id))}
+            />
           </div>
         </div>
       </section>
@@ -125,7 +120,7 @@ function Index() {
           "Sandton",
           "Operated in-house",
         ]}
-        className="mt-20 py-10 md:mt-32"
+        className="mt-16 md:mt-24"
       />
 
       {/* Numbers */}

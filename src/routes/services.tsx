@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Check, Mail, MapPin, Phone, ShieldCheck, Sparkles } from "lucide-react";
 import { ActionLink, CtaPair, Marquee, PageHero, SectionIntro } from "@/components/editorial";
 import { Media } from "@/components/media";
+import { Legible, LegibleScrim } from "@/components/legible";
 import type { MediaId } from "@/lib/media";
 import { CONTACT, mailto } from "@/lib/portfolio";
 
@@ -64,6 +65,12 @@ function Services() {
         }
         text="We don't just buy buildings. We run businesses inside them. Since 2019 our in-house cleaning and security teams have worked the ground at Brickfield Canvas and across the group, and they're available to third-party clients."
         media="cleaningTeam"
+        slidesEyebrow="Brickfield Services"
+        slides={[
+          { id: "cleaningTeam", label: "Cleaning, run in-house" },
+          { id: "securityControl", label: "Security, monitored around the clock" },
+          { id: "contactHero", label: "On the ground at Canvas since 2019" },
+        ]}
         actions={
           <>
             <ActionLink to="/contact" search={{ topic: "Cleaning services" }}>
@@ -121,24 +128,22 @@ function Services() {
                 className="project-card group relative block overflow-hidden"
                 data-reveal-item
               >
-                <div className="relative aspect-[4/5] md:aspect-[5/6]">
+                <Legible className="relative aspect-[4/5] md:aspect-[5/6]">
                   <Media id={o.media} fill reveal={false} bare />
-                  <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/30 to-transparent transition-opacity duration-700 group-hover:opacity-90" />
-                  <div className="absolute inset-x-0 bottom-0 p-8 text-primary-foreground md:p-10">
+                  <LegibleScrim />
+                  <div className="legible-text absolute inset-x-0 bottom-0 p-8 md:p-10">
                     <span className="grid h-12 w-12 place-items-center rounded-full bg-accent text-primary">
                       <o.icon size={20} />
                     </span>
-                    <p className="mt-6 text-xs uppercase tracking-[0.22em] text-accent">
-                      {o.label}
-                    </p>
+                    <p className="eyebrow-on-photo mt-6">{o.label}</p>
                     <h3 className="mt-3 max-w-sm font-display text-3xl leading-tight md:text-4xl">
                       {o.title}
                     </h3>
-                    <p className="mt-4 inline-flex items-center gap-2 text-sm text-primary-foreground/80">
+                    <p className="mt-4 inline-flex items-center gap-2 text-sm">
                       In-house team, available to third-party clients <ArrowUpRight size={16} />
                     </p>
                   </div>
-                </div>
+                </Legible>
               </a>
             ))}
           </div>
@@ -196,7 +201,6 @@ function Services() {
           "Access control",
           "Daily deep-clean",
         ]}
-        className="border-y py-8"
       />
 
       {/* Security */}

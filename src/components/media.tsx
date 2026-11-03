@@ -1,26 +1,41 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { media, standIns, type MediaId } from "@/lib/media";
+import { LQIP } from "@/lib/media-lqip";
 import { cn } from "@/lib/utils";
 
 interface MediaProps {
   id: MediaId;
-  className?: string;
+  className?: string | undefined;
   /** Fill the parent box instead of using the shot's own aspect ratio. */
-  fill?: boolean;
+  fill?: boolean | undefined;
   /** Scroll parallax strength (e.g. 0.08). Handled by EditorialMotion. */
-  parallax?: number;
+  parallax?: number | undefined;
   /** Clip-path reveal when the frame enters the viewport. */
-  reveal?: boolean;
-  priority?: boolean;
-  caption?: boolean;
-  style?: CSSProperties;
+  reveal?: boolean | undefined;
+  priority?: boolean | undefined;
+  caption?: boolean | undefined;
+  style?: CSSProperties | undefined;
   /** Hide the placeholder label (for background and decorative uses). */
-  bare?: boolean;
+  bare?: boolean | undefined;
+}
+
+/** Find the blurred preview for an imported asset URL, in dev ("/src/.../name.webp") or production ("/assets/name-HASH.webp"). */
+function lqipFor(src: string | undefined) {
+  if (!src) return undefined;
+  const file =
+    src
+      .split("/")
+      .pop()
+      ?.split("?")[0]
+      ?.replace(/\.\w+$/, "") ?? "";
+  return LQIP[file] ?? LQIP[file.replace(/-[\w-]{8}$/, "")];
 }
 
 /**
- * Renders a shot from the shot list. Shots without a real image yet (or whose image fails
- * to load) render an art-directed placeholder so layouts still read as photographic.
+ * Renders a shot from the shot list.
+ * - Photos load progressively: a blurred preview shows at once, the full image fades in sharp.
+ * - Shots with a `video` play muted and looped, with the photo as poster.
+ * - Shots without an image yet render an art-directed placeholder.
  */
 export function Media({
   id,
@@ -35,19 +50,31 @@ export function Media({
 }: MediaProps) {
   const shot = media[id];
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
   const img = useRef<HTMLImageElement>(null);
-  // An image can fail before hydration attaches onError; catch that case too.
-  useEffect(() => {
-    const el = img.current;
-    if (el && el.complete && el.naturalWidth === 0) setFailed(true);
-  }, []);
   const stand = standIns[id];
   const src = ("src" in shot ? (shot.src as string | undefined) : undefined) ?? stand?.src;
+  const video = "video" in shot ? (shot.video as string | undefined) : undefined;
+  const focus = ("focus" in shot ? (shot.focus as string | undefined) : undefined) ?? stand?.focus;
+  const preview = lqipFor(src);
   const showImage = src && !failed;
+
+  // The image may finish (or fail) before hydration attaches its handlers.
+  useEffect(() => {
+    const el = img.current;
+    if (!el || !el.complete) return;
+    if (el.naturalWidth === 0) setFailed(true);
+    else setLoaded(true);
+  }, [src]);
 
   return (
     <figure
-      className={cn("media-frame", fill && "absolute inset-0 h-full w-full", className)}
+      className={cn(
+        "media-frame",
+        fill && "absolute inset-0 h-full w-full",
+        showImage && !loaded && "is-loading",
+        className,
+      )}
       style={{
         ...(fill || /\baspect-/.test(className ?? "") ? {} : { aspectRatio: shot.aspect }),
         ...style,
@@ -56,20 +83,42 @@ export function Media({
     >
       <div className="media-inner" data-parallax={parallax}>
         {showImage ? (
-          <img
-            ref={img}
-            src={src}
-            alt={shot.alt}
-            loading={priority ? "eager" : "lazy"}
-            decoding="async"
-            onError={() => setFailed(true)}
-            className="h-full w-full object-cover"
-            style={{
-              objectPosition:
-                ("focus" in shot ? (shot.focus as string) : undefined) ??
-                (stand && !("src" in shot) ? stand.focus : undefined),
-            }}
-          />
+          <>
+            {preview && (
+              <span
+                className="media-preview"
+                aria-hidden="true"
+                style={{ backgroundImage: `url(${preview})`, backgroundPosition: focus }}
+              />
+            )}
+            {video ? (
+              <video
+                className="media-img h-full w-full object-cover"
+                src={video}
+                poster={src}
+                autoPlay
+                muted
+                loop
+                playsInline
+                aria-label={shot.alt}
+                onLoadedData={() => setLoaded(true)}
+                style={{ objectPosition: focus }}
+              />
+            ) : (
+              <img
+                ref={img}
+                src={src}
+                alt={shot.alt}
+                loading={priority ? "eager" : "lazy"}
+                fetchPriority={priority ? "high" : "auto"}
+                decoding="async"
+                onLoad={() => setLoaded(true)}
+                onError={() => setFailed(true)}
+                className="media-img h-full w-full object-cover"
+                style={{ objectPosition: focus }}
+              />
+            )}
+          </>
         ) : (
           <div
             role="img"

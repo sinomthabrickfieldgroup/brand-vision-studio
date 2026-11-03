@@ -15,7 +15,23 @@
 // Real photography from the shoot and existing Brickfield libraries.
 import photo_canvas_cafe from "@/assets/photos/canvas-cafe.webp";
 import photo_canvas_before_aerial from "@/assets/photos/canvas-before-aerial.webp";
-import photo_canvas_exterior from "@/assets/photos/canvas-exterior.webp";
+import photo_canvas_upper_lobby from "@/assets/photos/canvas-upper-lobby.webp";
+import photo_canvas_gym_detail from "@/assets/photos/canvas-gym-detail.webp";
+import photo_canvas_barista from "@/assets/photos/canvas-barista.webp";
+import photo_canvas_lobby_desk from "@/assets/photos/canvas-lobby-desk.webp";
+import photo_canvas_coworking_people from "@/assets/photos/canvas-coworking-people.webp";
+import photo_canvas_breakout from "@/assets/photos/canvas-breakout.webp";
+import photo_canvas_desks_detail from "@/assets/photos/canvas-desks-detail.webp";
+import photo_canvas_gym from "@/assets/photos/canvas-gym.webp";
+import photo_canvas_terrace from "@/assets/photos/canvas-terrace.webp";
+import photo_canvas_presentation from "@/assets/photos/canvas-presentation.webp";
+import photo_canvas_meeting_room from "@/assets/photos/canvas-meeting-room.webp";
+import photo_canvas_garden_corridor from "@/assets/photos/canvas-garden-corridor.webp";
+import photo_canvas_atrium from "@/assets/photos/canvas-atrium.webp";
+import photo_canvas_open_floor from "@/assets/photos/canvas-open-floor.webp";
+import photo_canvas_front_desk from "@/assets/photos/canvas-front-desk.webp";
+import photo_canvas_reading_nook from "@/assets/photos/canvas-reading-nook.webp";
+import photo_canvas_exterior from "@/assets/photos/canvas-exterior-hd.webp";
 import photo_call_centre_exterior from "@/assets/photos/call-centre-exterior.webp";
 import photo_loop_aerial from "@/assets/photos/loop-aerial.webp";
 import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
@@ -40,6 +56,8 @@ export interface Shot {
   focus?: string;
   /** Required credit shown over the image, e.g. for third-party imagery. */
   credit?: string;
+  /** Optional muted, looping video (MP4/WebM). `src` is used as its poster. */
+  video?: string;
 }
 
 /** Shared art direction appended to every prompt so the set reads as one shoot. */
@@ -85,10 +103,12 @@ export const media = {
       "The same building AFTER redevelopment from an identical straight-on wide facade framing: restored brick, new black steel windows, a green living wall, landscaped forecourt with benches and trees, warm golden-hour light.",
   }),
   canvasCourtyard: shot({
-    title: "Canvas · courtyard",
-    alt: "Shared courtyard at Brickfield Canvas",
+    title: "Canvas · terrace",
+    alt: "The covered terrace at Brickfield Canvas, with white umbrellas, planters and high tables",
     aspect: "4/5",
     tone: "sage",
+    src: photo_canvas_terrace,
+    focus: "50% 55%",
     prompt:
       "Inner courtyard of a converted industrial office campus, exposed brick, steel walkways, potted olive trees and timber benches, two people chatting out of focus, dappled late-afternoon light.",
   }),
@@ -102,51 +122,135 @@ export const media = {
     prompt:
       "Bright community café inside a converted warehouse, polished concrete floor, long timber counter, pendant lights, espresso machine, people working on laptops in soft focus, morning light through tall steel windows.",
   }),
-  canvasCowork: shot({
-    title: "Canvas · co-working",
-    alt: "Co-working space at Brickfield Canvas",
+  canvasBarista: shot({
+    title: "Canvas · barista",
+    alt: "Coffee being made at the Canvas café",
+    aspect: "4/3",
+    tone: "night",
+    src: photo_canvas_barista,
+    focus: "55% 50%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasLobby: shot({
+    title: "Canvas · upper lobby",
+    alt: "The upper lobby at Brickfield Canvas: a slatted timber desk, leather chairs and glazing over the atrium",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_canvas_upper_lobby,
+    focus: "50% 55%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasLobbyDesk: shot({
+    title: "Canvas · lobby desk",
+    alt: "The slatted timber lobby desk at Brickfield Canvas",
+    aspect: "4/5",
+    tone: "stone",
+    src: photo_canvas_lobby_desk,
+    focus: "40% 50%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasBreakout: shot({
+    title: "Canvas · breakout",
+    alt: "A breakout lounge at Brickfield Canvas with patchwork beanbags and a brick screen wall",
+    aspect: "16/9",
+    tone: "brick",
+    src: photo_canvas_breakout,
+    focus: "55% 55%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasDesks: shot({
+    title: "Canvas · desks",
+    alt: "Desks and chairs in a Canvas office",
     aspect: "4/3",
     tone: "stone",
+    src: photo_canvas_desks_detail,
+    focus: "50% 60%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasAtrium: shot({
+    title: "Canvas · atrium",
+    alt: "Looking up through the glazed atrium at Brickfield Canvas",
+    aspect: "3/4",
+    tone: "sage",
+    src: photo_canvas_atrium,
+    focus: "50% 40%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasNook: shot({
+    title: "Canvas · reading nook",
+    alt: "A quiet corner at Brickfield Canvas with floor cushions and colourful plywood shelving",
+    aspect: "3/4",
+    tone: "sage",
+    src: photo_canvas_reading_nook,
+    focus: "50% 50%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasGymDetail: shot({
+    title: "Canvas · training",
+    alt: "Training with dumbbells at the Canvas gym",
+    aspect: "4/3",
+    tone: "night",
+    src: photo_canvas_gym_detail,
+    focus: "50% 40%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasCowork: shot({
+    title: "Canvas · co-working",
+    alt: "Two people working together at a standing desk in the Canvas co-working space",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_canvas_coworking_people,
+    focus: "50% 40%",
     prompt:
       "Calm co-working floor in a converted industrial building, long oak desks, exposed concrete soffit and services, indoor plants, large windows, soft daylight, a few people focused on work, out of focus.",
   }),
   canvasMeeting: shot({
     title: "Canvas · meeting room",
-    alt: "Glass-walled meeting room at Brickfield Canvas",
+    alt: "A meeting room at Brickfield Canvas: dark table, tan leather chairs and a wall-mounted screen",
     aspect: "4/3",
     tone: "concrete",
+    src: photo_canvas_meeting_room,
+    focus: "50% 60%",
     prompt:
       "Glass-walled meeting room with a large timber table and black chairs, exposed brick wall, a screen on the wall turned off, soft daylight, empty and ready for use.",
   }),
   canvasGym: shot({
     title: "Canvas · gym",
-    alt: "On-site gym at Brickfield Canvas",
+    alt: "The on-site gym at Brickfield Canvas, with a forest mural and herringbone floor",
     aspect: "4/3",
     tone: "night",
+    src: photo_canvas_gym,
+    focus: "55% 50%",
     prompt:
       "Small boutique gym in a converted warehouse, rubber floor, timber wall slats, racks of dumbbells and two rowing machines, warm accent lighting, empty, early evening.",
   }),
   canvasEvents: shot({
-    title: "Canvas · community event",
-    alt: "A community event in the Canvas courtyard",
+    title: "Canvas · in session",
+    alt: "A presentation in a Canvas meeting space",
     aspect: "4/3",
     tone: "dusk",
+    src: photo_canvas_presentation,
+    focus: "40% 45%",
     prompt:
       "Evening community event in a brick courtyard, festoon string lights, people standing in small groups holding drinks, all slightly out of focus, warm dusk sky.",
   }),
   canvasOffices: shot({
-    title: "Canvas · offices",
-    alt: "A-grade office suite at Brickfield Canvas",
+    title: "Canvas · open floor",
+    alt: "An open A-Grade floor at Brickfield Canvas: polished concrete, exposed steel trusses and a glazed core",
     aspect: "4/3",
     tone: "stone",
+    src: photo_canvas_open_floor,
+    focus: "50% 55%",
     prompt:
       "A-grade private office suite inside a heritage industrial conversion, oak floors, white walls, black steel window frames, plants, ergonomic desks, bright clean daylight.",
   }),
   canvasLivingWall: shot({
-    title: "Canvas · living wall",
-    alt: "Living wall at Brickfield Canvas",
+    title: "Canvas · garden corridor",
+    alt: "A corridor at Brickfield Canvas looking onto a planted internal garden and timber deck",
     aspect: "4/3",
     tone: "sage",
+    src: photo_canvas_garden_corridor,
+    focus: "60% 55%",
     prompt:
       "A lush vertical living wall of ferns and trailing plants against restored brick inside a converted industrial office atrium, soft daylight from a skylight, drip irrigation lines just visible.",
   }),
@@ -491,12 +595,12 @@ export const media = {
       "Standby generator enclosure in a clean yard beside an industrial building, rooftop solar panels visible above, clear sky, crisp light.",
   }),
   contactHero: shot({
-    title: "Contact · 35 Brickfield Road",
-    alt: "Brickfield Canvas, 35 Brickfield Road, Woodstock",
+    title: "Canvas · front desk",
+    alt: "The front desk at Brickfield Canvas, with the Canvas sign on the brick wall behind",
     aspect: "4/3",
     tone: "stone",
-    src: photo_canvas_exterior,
-    focus: "40% 62%",
+    src: photo_canvas_front_desk,
+    focus: "55% 50%",
     prompt:
       "Welcoming entrance to a converted industrial office campus, open steel-framed glass doors, planters either side, warm morning light.",
   }),
@@ -515,19 +619,16 @@ import si_23053cb2 from "@/assets/stand-in/23053cb2.webp";
 import si_29810c3b from "@/assets/stand-in/29810c3b.webp";
 import si_357f12aa from "@/assets/stand-in/357f12aa.webp";
 import si_5bc69ba9 from "@/assets/stand-in/5bc69ba9.webp";
-import si_66ae3f86 from "@/assets/stand-in/66ae3f86.webp";
 import si_711614b0 from "@/assets/stand-in/711614b0.webp";
 import si_97512505 from "@/assets/stand-in/97512505.webp";
 import si_9c720f5d from "@/assets/stand-in/9c720f5d.webp";
 import si_b23d9d70 from "@/assets/stand-in/b23d9d70.webp";
 import si_b772ec77 from "@/assets/stand-in/b772ec77.webp";
-import si_bdf2b160 from "@/assets/stand-in/bdf2b160.webp";
 import si_c7bb7a9e from "@/assets/stand-in/c7bb7a9e.webp";
 import si_c9344f4f from "@/assets/stand-in/c9344f4f.webp";
 import si_d1597a16 from "@/assets/stand-in/d1597a16.webp";
 import si_d53154cb from "@/assets/stand-in/d53154cb.webp";
 import si_f9854d80 from "@/assets/stand-in/f9854d80.webp";
-import si_fb1e5004 from "@/assets/stand-in/fb1e5004.webp";
 import si_ffbe175e from "@/assets/stand-in/ffbe175e.webp";
 
 import si_security_control from "@/assets/stand-in/security-control.webp";
@@ -539,9 +640,6 @@ export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> 
   cleaningDetail: { src: si_cleaning_detail, focus: "70% 50%" },
   securityTeam: { src: si_security_control, focus: "40% 70%" },
   securityControl: { src: si_security_control, focus: "35% 65%" },
-  canvasAfter: { src: si_66ae3f86, focus: "50% 60%" },
-  canvasCourtyard: { src: si_fb1e5004, focus: "35% 60%" },
-  canvasEvents: { src: si_bdf2b160, focus: "50% 50%" },
   canvasSolar: { src: si_b772ec77, focus: "50% 60%" },
   loopBefore: { src: si_b23d9d70, focus: "50% 55%" },
   loopPower: { src: si_08df4776, focus: "50% 55%" },
@@ -561,3 +659,7 @@ export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> 
   heritageDetail: { src: si_ffbe175e, focus: "62% 45%" },
   generator: { src: si_711614b0, focus: "50% 40%" },
 };
+
+/** True when a shot has a real or stand-in image (used to keep placeholders out of slideshows). */
+export const hasImage = (id: MediaId) =>
+  Boolean(("src" in media[id] && (media[id] as Shot).src) || standIns[id]);

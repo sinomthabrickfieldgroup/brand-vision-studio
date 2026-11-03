@@ -14,6 +14,7 @@ import {
   ActionLink,
 } from "@/components/editorial";
 import { Media } from "@/components/media";
+import { Legible, LegibleScrim } from "@/components/legible";
 import { properties, type Block, type Property } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -274,7 +275,7 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
         </section>
       );
     case "marquee":
-      return <Marquee items={block.items} className="border-y py-8" />;
+      return <Marquee items={block.items} />;
   }
 }
 
@@ -298,6 +299,11 @@ export function CaseStudy({ property }: { property: Property }) {
           )
         }
         media={property.hero}
+        slidesEyebrow={property.address}
+        slides={[
+          { id: property.hero, label: property.name },
+          ...(property.slides ?? []).map((id) => ({ id })),
+        ]}
         actions={
           <>
             <ActionLink to="/contact" search={{ property: property.slug }}>
@@ -323,7 +329,6 @@ export function CaseStudy({ property }: { property: Property }) {
           ...property.tenants,
           "Held for the long term",
         ]}
-        className="border-y py-6 text-muted-foreground"
       />
 
       {property.blocks.map((block, i) => (
@@ -355,26 +360,26 @@ export function CaseStudy({ property }: { property: Property }) {
         params={{ slug: next.slug }}
         className="group relative block overflow-hidden"
       >
-        <div className="relative h-[46vh] min-h-[320px]">
+        <Legible className="relative h-[46vh] min-h-[320px]">
           <Media id={next.hero} fill reveal={false} parallax={0.08} bare />
-          <div className="absolute inset-0 bg-gradient-to-t from-primary/85 via-primary/30 to-transparent transition-opacity duration-700 group-hover:opacity-80" />
+          <LegibleScrim />
           <div
             className={cn(
               wrap,
-              "absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 pb-10 text-primary-foreground",
+              "legible-text absolute inset-x-0 bottom-0 flex items-end justify-between gap-6 pb-10",
             )}
           >
             <div>
-              <p className="text-xs uppercase tracking-[0.22em] text-accent">Next property</p>
+              <p className="eyebrow-on-photo">Next property</p>
               <p className="mt-3 font-display text-5xl transition-transform duration-700 group-hover:translate-x-2 md:text-7xl">
                 {next.name}
               </p>
             </div>
-            <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-primary-foreground text-primary transition-transform duration-700 group-hover:rotate-45">
+            <span className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-primary-foreground !text-primary transition-transform duration-700 group-hover:rotate-45">
               <ArrowUpRight />
             </span>
           </div>
-        </div>
+        </Legible>
       </Link>
     </main>
   );

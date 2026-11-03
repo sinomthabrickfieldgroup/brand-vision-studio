@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { ActionLink, CtaPair, Eyebrow, PageHero, SectionIntro } from "@/components/editorial";
 import { Media } from "@/components/media";
+import { Legible, LegibleScrim } from "@/components/legible";
 import type { MediaId } from "@/lib/media";
 
 export const Route = createFileRoute("/about")({
@@ -89,6 +90,13 @@ function About() {
         }
         text="Backed by Firefly Capital, we have spent fifteen years buying and transforming underused buildings into productive precincts."
         media="aboutHero"
+        slidesEyebrow="Fifteen years in the making"
+        slides={[
+          { id: "aboutHero", label: "Woodstock and beyond" },
+          { id: "canvasHero", label: "Brickfield Canvas", slug: "brickfield-canvas" },
+          { id: "precinct", label: "Thinking in blocks" },
+          { id: "albertHero", label: "219 Albert Road", slug: "219-albert-road" },
+        ]}
         actions={
           <>
             <ActionLink to="/portfolio">Portfolio</ActionLink>
@@ -112,12 +120,12 @@ function About() {
           {timeline.map((t) => (
             <li
               key={t.year}
-              className="group relative bg-background py-8 pr-6 transition-colors duration-500 hover:bg-card lg:px-5"
+              className="group relative bg-background px-5 py-8 transition-colors duration-500 hover:bg-card sm:px-6"
               data-reveal-item
             >
               <span className="absolute left-0 top-0 h-0.5 w-0 bg-accent transition-all duration-700 group-hover:w-full" />
-              <p className="font-display text-4xl text-fern">{t.year}</p>
-              <h3 className="mt-6 font-display text-xl">{t.title}</h3>
+              <p className="timeline-year font-display text-fern">{t.year}</p>
+              <h3 className="mt-5 font-display text-lg sm:text-xl">{t.title}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{t.text}</p>
             </li>
           ))}
@@ -136,18 +144,18 @@ function About() {
           <div className="mt-16 grid gap-5 md:grid-cols-6 md:grid-rows-[auto_auto]">
             <Link
               to="/portfolio"
-              className="project-card group relative overflow-hidden bg-primary text-primary-foreground md:col-span-4 md:row-span-1"
+              className="project-card group relative overflow-hidden bg-primary md:col-span-4 md:row-span-1"
               data-reveal-item
             >
-              <div className="relative aspect-[16/9] md:aspect-auto md:h-[440px]">
+              <Legible className="relative aspect-[16/9] md:aspect-auto md:h-[440px]">
                 <Media id="precinct" fill reveal={false} bare />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 p-8 md:p-10">
-                  <p className="text-xs uppercase tracking-[0.22em] text-accent">Precinct</p>
+                <LegibleScrim />
+                <div className="legible-text absolute inset-x-0 bottom-0 p-8 md:p-10">
+                  <p className="eyebrow-on-photo">Precinct</p>
                   <h3 className="mt-3 max-w-md font-display text-3xl md:text-4xl">
                     We think in blocks, not buildings
                   </h3>
-                  <p className="mt-3 max-w-md text-primary-foreground/75">
+                  <p className="mt-3 max-w-md">
                     We acquire clusters of properties and improve the whole area, not just one
                     asset.
                   </p>
@@ -155,7 +163,7 @@ function About() {
                 <span className="card-arrow" aria-hidden="true">
                   <ArrowUpRight size={20} />
                 </span>
-              </div>
+              </Legible>
             </Link>
             <div
               className="flex flex-col justify-between gap-6 border bg-background p-8 md:col-span-2"
@@ -184,20 +192,23 @@ function About() {
               className="project-card group relative overflow-hidden md:col-span-4"
               data-reveal-item
             >
-              <div className="relative aspect-[16/9] md:aspect-auto md:h-full md:min-h-[300px]">
+              <Legible
+                region="left"
+                className="relative aspect-[16/9] md:aspect-auto md:h-full md:min-h-[300px]"
+              >
                 <Media id="cleaningTeam" fill reveal={false} bare />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/50 to-transparent" />
-                <div className="absolute inset-y-0 left-0 flex max-w-sm flex-col justify-end p-8 text-primary-foreground md:p-10">
-                  <p className="text-xs uppercase tracking-[0.22em] text-accent">Operations</p>
+                <LegibleScrim direction="right" />
+                <div className="legible-text absolute inset-y-0 left-0 flex max-w-sm flex-col justify-end p-8 md:p-10">
+                  <p className="eyebrow-on-photo">Operations</p>
                   <h3 className="mt-3 font-display text-3xl">In-house teams running since 2019</h3>
-                  <p className="mt-3 text-primary-foreground/75">
+                  <p className="mt-3">
                     Our cleaning and security businesses scale with the portfolio.
                   </p>
                 </div>
                 <span className="card-arrow" aria-hidden="true">
                   <ArrowUpRight size={20} />
                 </span>
-              </div>
+              </Legible>
             </Link>
           </div>
         </div>

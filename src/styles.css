@@ -1038,9 +1038,6 @@
   .pillar-card:focus-within .text-muted-foreground {
     color: oklch(1 0 0 / 0.72);
   }
-  .pillar-card:hover .pillar-num {
-    color: var(--accent);
-  }
 
   details.readmore summary {
     list-style: none;
@@ -1325,4 +1322,144 @@
   .footer-wordmark { display: flex; justify-content: center; padding: 3rem 1.5rem 2.5rem; font-size: 0; line-height: 0; color: oklch(1 0 0 / .07); margin: 0; }
   .footer-wordmark .wordmark { width: min(92vw, 1180px); height: auto; }
   .footer-wordmark .wordmark-group { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
+}
+
+/* ─── Progressive image loading ──────────────────────────────────────────── */
+@layer components {
+  .media-preview { position: absolute; inset: -8%; width: auto; height: auto; background-size: cover; filter: blur(22px) saturate(1.15); transform: scale(1.04); transition: opacity .9s ease .25s; }
+  .media-img { position: relative; transition: opacity .9s var(--ease-editorial), filter 1.1s var(--ease-editorial), transform 1.4s var(--ease-editorial); }
+  .media-frame.is-loading .media-img { opacity: 0; filter: blur(14px); transform: scale(1.03); }
+  .media-frame:not(.is-loading) .media-preview { opacity: 0; }
+  /* After a beat with nothing loaded, show a soft sweep so slow connections read as "loading", not "broken". */
+  .media-frame.is-loading::after {
+    content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(100deg, transparent 30%, oklch(1 0 0 / .22) 50%, transparent 70%) -150% 0 / 60% 100% no-repeat;
+    animation: media-sweep 1.6s ease-in-out .5s infinite;
+  }
+  @keyframes media-sweep { to { background-position: 250% 0; } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .media-frame.is-loading::after { display: none; }
+}
+
+/* ─── Legible text over photos (values set by useLegible) ────────────────── */
+@layer components {
+  .legible { --legible-scrim: 43 42 40; --legible-a: .82; --legible-text: rgb(248 245 239); }
+  .legible-scrim {
+    position: absolute; inset: 0; pointer-events: none; transition: background .6s ease;
+    background: linear-gradient(to top,
+      rgb(var(--legible-scrim) / var(--legible-a)) 0%,
+      rgb(var(--legible-scrim) / calc(var(--legible-a) * .92)) 38%,
+      rgb(var(--legible-scrim) / calc(var(--legible-a) * .55)) 62%,
+      rgb(var(--legible-scrim) / 0) 88%);
+  }
+  .legible-scrim-right {
+    background: linear-gradient(to right,
+      rgb(var(--legible-scrim) / var(--legible-a)) 0%,
+      rgb(var(--legible-scrim) / calc(var(--legible-a) * .9)) 45%,
+      rgb(var(--legible-scrim) / 0) 90%);
+  }
+  .legible-text { color: var(--legible-text); }
+  .legible .eyebrow-on-photo { display: inline-flex; align-items: center; gap: .6rem; font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--legible-text); }
+  .legible .eyebrow-on-photo::before { content: ""; width: 22px; height: 1px; background: currentColor; }
+}
+
+/* ─── Numbers that always fit their column ───────────────────────────────── */
+@layer components {
+  .stat { container-type: inline-size; min-width: 0; }
+  .stat-value { font-size: clamp(1.7rem, 19cqi, 3.75rem); white-space: nowrap; }
+  .stat-xl .stat-value { font-size: clamp(2.4rem, 26cqi, 6rem); }
+  .timeline-year { font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.5rem); line-height: 1; }
+}
+
+@layer components {
+  /* The drawer is portalled to <body> so the header's blur can't trap it. */
+  .mobile-menu { position: fixed; inset: 64px 0 0 0; z-index: 49; overflow-y: auto; background: var(--background); border-top: 1px solid var(--border); animation: menu-reveal .6s var(--ease-editorial) both; }
+}
+
+/* ─── Hero slideshow ─────────────────────────────────────────────────────── */
+@layer components {
+  .hero-show { position: absolute; inset: 0; overflow: hidden; background: var(--primary); }
+  .hero-slide { position: absolute; inset: 0; clip-path: inset(0 0 0 100%); transition: clip-path 1.4s cubic-bezier(.76, 0, .24, 1); }
+  .hero-slide.is-active { clip-path: inset(0 0 0 0); z-index: 2; }
+  .hero-slide.is-leaving { clip-path: inset(0 0 0 0); z-index: 1; transition: none; }
+  .hero-slide .media-img, .hero-slide .media-placeholder { transform-origin: 50% 50%; }
+  .hero-slide.is-active .media-img, .hero-slide.is-active .media-placeholder { animation: ken-burns 9s cubic-bezier(.2, .6, .3, 1) both; }
+  .hero-slide.is-leaving .media-img { transform: scale(1.02); filter: brightness(.85); transition: filter 1.4s; }
+  @keyframes ken-burns { from { transform: scale(1.16) translate(var(--kb-x, 2%), var(--kb-y, -1.5%)); } to { transform: scale(1.02) translate(0, 0); } }
+
+  .hero-show-ui { position: absolute; inset: auto 0 0 0; z-index: 4; display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; padding: 1.5rem calc(4vw + 1.25rem) 1.75rem; }
+  @media (max-width: 767px) { .hero-show-ui { flex-direction: column; align-items: flex-start; padding: 1.25rem 1.5rem 1.25rem; } }
+  .hero-show-caption { animation: rise .9s var(--ease-editorial) both .25s; }
+  .hero-show-title { display: inline-flex; align-items: center; gap: .6rem; margin-top: .6rem; font-family: var(--font-display); font-size: clamp(1.5rem, 1rem + 1.6vw, 2.4rem); line-height: 1.1; }
+  .hero-show-controls { display: flex; align-items: center; gap: 1rem; }
+  .hero-show-count { font-family: var(--font-display); font-size: 1.05rem; }
+  .hero-show-count span { opacity: .65; font-size: .85em; }
+  .hero-show-bars { display: flex; gap: 6px; }
+  .hero-show-bar { position: relative; width: 34px; height: 14px; padding: 6px 0; }
+  .hero-show-bar::before, .hero-show-bar span { content: ""; position: absolute; left: 0; right: 0; top: 6px; height: 2px; background: currentColor; opacity: .3; }
+  .hero-show-bar span { opacity: 1; transform-origin: left; transform: scaleX(0); }
+  .hero-show-bar.is-done span { transform: scaleX(1); }
+  .hero-show-bar.is-current span { animation: bar-fill linear forwards; }
+  @keyframes bar-fill { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .hero-show-btn { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 999px; border: 1px solid currentColor; transition: background-color .35s, color .35s, transform .4s var(--ease-editorial); }
+  .hero-show-btn:hover { background: var(--legible-text); color: rgb(var(--legible-scrim)); }
+  .hero-show-btn:active { transform: scale(.94); }
+  .hero-show.is-reduced .hero-slide { transition: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide.is-active .media-img { animation: none !important; }
+}
+
+/* ─── Editorial ticker ───────────────────────────────────────────────────── */
+@layer components {
+  .ticker { position: relative; border-block: 1px solid var(--border); overflow: hidden; }
+  .ticker-line { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+  .ticker-line-a { padding: clamp(1.1rem, 2.4vw, 1.8rem) 0 clamp(.8rem, 1.8vw, 1.3rem); }
+  .ticker-line-b { border-top: 1px solid var(--border); padding: .85rem 0; }
+  .ticker-track { display: flex; width: max-content; will-change: transform; }
+  .ticker-item { display: inline-flex; align-items: center; white-space: nowrap; }
+  .ticker-line-a .ticker-item { font-family: var(--font-display); font-weight: 300; font-size: clamp(1.9rem, 1.2rem + 3vw, 3.6rem); letter-spacing: -0.02em; line-height: 1.05; color: var(--foreground); gap: clamp(1.4rem, 3vw, 2.6rem); padding-right: clamp(1.4rem, 3vw, 2.6rem); }
+  .ticker-line-a .ticker-item.is-italic { font-style: italic; color: var(--fern); }
+  .ticker-line-b .ticker-item { font-size: .7rem; font-weight: 500; letter-spacing: .3em; text-transform: uppercase; color: var(--muted-foreground); gap: 1.6rem; padding-right: 1.6rem; }
+  .ticker-brick { display: inline-block; width: 18px; height: 8px; border-radius: 1.5px; background: var(--accent); transform: translateY(-.15em); }
+  .ticker-dot { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--accent); }
+  /* No JavaScript or reduced motion: a calm, wrapped list instead of a moving line. */
+  .ticker:not(.is-live) .ticker-track { width: auto; flex-wrap: wrap; justify-content: center; padding-inline: 1.5rem; }
+  .ticker:not(.is-live) .ticker-dup { display: none; }
+}
+
+/* ─── Button hovers: the circle spills (light, outline); solid goes fully charcoal ── */
+@layer components {
+  .action::before {
+    transform: none;
+    clip-path: circle(18px at calc(100% - 24.4px) 50%);
+    opacity: 0;
+    transition: clip-path .75s var(--ease-editorial), opacity .2s ease;
+  }
+  .action:hover::before, .action:focus-visible::before {
+    transform: none;
+    opacity: 1;
+    clip-path: circle(160% at calc(100% - 24.4px) 50%);
+  }
+  .action-light::before { background: var(--accent); }
+  .action-outline::before { background: var(--primary); }
+  .action-solid::before { display: none; }
+  .action-solid .action-icon { transition: background-color .45s ease, color .45s ease, transform .6s var(--ease-editorial); }
+  .action-solid:hover .action-icon, .action-solid:focus-visible .action-icon { background: var(--primary); color: var(--accent); }
+}
+@layer components {
+  .hero-show-caption { display: flex; flex-direction: column; align-items: flex-start; }
+  /* Heroes: keep the photo bright, only shade the strip the caption sits on. */
+  .hero-show .legible-scrim {
+    background: linear-gradient(to top,
+      rgb(var(--legible-scrim) / var(--legible-a)) 0%,
+      rgb(var(--legible-scrim) / calc(var(--legible-a) * .75)) 18%,
+      rgb(var(--legible-scrim) / 0) 42%);
+  }
+  .hero-show-count { white-space: nowrap; }
+  @media (max-width: 767px) {
+    .hero-show-bars { display: none; }
+    .hero-show-controls { width: 100%; justify-content: space-between; }
+  }
 }
