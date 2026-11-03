@@ -759,8 +759,8 @@ export const mailto = (subject: string, body?: string) =>
 
 export const CONTACT = {
   email: "info@brickfieldgroup.co.za",
-  phone: "021 830 7050", // CONFIRM: the current live footer shows 021 830 0750
-  tel: "tel:+27218307050",
+  phone: "021 830 0750",
+  tel: "tel:+27218300750",
   address: "35 Brickfield Road, Woodstock, Cape Town",
   maps: "https://www.google.com/maps/search/?api=1&query=35+Brickfield+Road+Woodstock+Cape+Town",
 };
