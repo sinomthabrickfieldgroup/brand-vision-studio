@@ -13,7 +13,7 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "In-house commercial cleaning and security teams, running since 2019 and available to third-party clients in Cape Town.",
+          "In-house commercial cleaning and security teams, running since 2020 and available to third-party clients in Cape Town.",
       },
       { property: "og:title", content: "Brickfield Services, Built to operate" },
       {
@@ -63,13 +63,13 @@ function Services() {
             Built to <em>operate</em>
           </>
         }
-        text="We don't just buy buildings. We run businesses inside them. Since 2019 our in-house cleaning and security teams have worked the ground at Brickfield Canvas and across the group, and they're available to third-party clients."
+        text="We don't just buy buildings. We run businesses inside them. Since 2020 our in-house cleaning and security teams have worked the ground at Brickfield Canvas and across the group, and they're available to third-party clients."
         media="cleaningTeam"
         slidesEyebrow="Brickfield Services"
         slides={[
           { id: "cleaningTeam", label: "Cleaning, run in-house" },
           { id: "securityControl", label: "Security, monitored around the clock" },
-          { id: "contactHero", label: "On the ground at Canvas since 2019" },
+          { id: "contactHero", label: "On the ground at Canvas since 2020" },
         ]}
         actions={
           <>
@@ -89,12 +89,12 @@ function Services() {
           <div>
             <SectionIntro
               eyebrow="Provenance"
-              title="Built on the property base, running since 2019"
+              title="Built on the property base, running since 2020"
               text="We opened Brickfield Canvas and put our own people on the ground. Cleaning and security aren't afterthoughts. They are businesses we built from nothing and run every day."
             />
             <ul className="mt-9 space-y-4">
               {[
-                "In-house operations since 2019",
+                "In-house operations since 2020",
                 "Not subcontracted, not outsourced",
                 "The team scales with the portfolio",
               ].map((b) => (
@@ -218,7 +218,7 @@ function Services() {
             <SectionIntro
               eyebrow="Security"
               title="Security you can hold accountable"
-              text="Our security team has protected Brickfield Canvas since 2019. We don't subcontract. We hire, train and manage every person on the ground, and the team scales with our clients."
+              text="Our security team has protected Brickfield Canvas since 2020. We don't subcontract. We hire, train and manage every person on the ground, and the team scales with our clients."
             />
             <div className="mt-9 divide-y border-y">
               {[
