@@ -226,8 +226,8 @@ export function Marquee({
       boost += (Math.max(-1600, Math.min(1600, v)) * 0.06 - boost) * 0.08;
       const wa = (rowA.current?.scrollWidth ?? 0) / 4;
       const wb = (rowB.current?.scrollWidth ?? 0) / 4;
-      xa -= (28 + Math.abs(boost)) * dt;
-      xb += (18 + Math.abs(boost) * 0.6) * dt;
+      xa -= (22 + Math.abs(boost) * 0.7) * dt;
+      xb += (14 + Math.abs(boost) * 0.4) * dt;
       if (wa) xa = ((xa % wa) - wa) % wa;
       if (wb) xb = ((xb % wb) - wb) % wb;
       if (rowA.current) rowA.current.style.transform = `translate3d(${xa.toFixed(2)}px,0,0)`;
@@ -634,18 +634,18 @@ export function PageHero({
 }) {
   return (
     <section className="relative">
-      <div className="mx-auto max-w-7xl px-6 pb-14 pt-16 md:px-10 md:pb-20 md:pt-24">
+      <div className="mx-auto max-w-7xl px-6 pb-8 pt-8 md:px-10 md:pb-20 md:pt-24">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <Eyebrow>{eyebrow}</Eyebrow>
           {badge}
         </div>
-        <div className="mt-7 grid items-end gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
-          <h1 className="hero-title text-balance font-display text-[3.2rem] leading-[0.98] tracking-[-0.02em] md:text-[5.6rem]">
+        <div className="mt-5 grid items-end gap-5 md:mt-7 md:gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
+          <h1 className="hero-title text-balance font-display text-[2.5rem] leading-[1] tracking-[-0.02em] sm:text-[3.2rem] md:text-[5.6rem]">
             {title}
           </h1>
           <div>
             {tags && (
-              <div className="mb-6 flex flex-wrap gap-2">
+              <div className="mb-4 hidden flex-wrap gap-2 sm:flex md:mb-6">
                 {tags.map((t) => (
                   <span key={t} className="tag">
                     {t}
@@ -653,8 +653,10 @@ export function PageHero({
                 ))}
               </div>
             )}
-            <p className="text-pretty text-lg leading-relaxed text-muted-foreground">{text}</p>
-            {actions && <div className="mt-8 flex flex-wrap gap-3">{actions}</div>}
+            <p className="text-pretty text-base leading-relaxed text-muted-foreground md:text-lg">
+              {text}
+            </p>
+            {actions && <div className="mt-5 flex flex-wrap gap-3 md:mt-8">{actions}</div>}
           </div>
         </div>
       </div>

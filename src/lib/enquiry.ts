@@ -2,8 +2,9 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
 export const ENQUIRY_TOPICS = [
+  "Register interest",
+  "Broker enquiry",
   "Leasing and space",
-  "Book a viewing",
   "Investment",
   "Cleaning services",
   "Security services",

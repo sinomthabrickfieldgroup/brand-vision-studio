@@ -54,6 +54,10 @@ export interface Shot {
   src?: string;
   /** CSS object-position for the crop, e.g. "50% 30%". */
   focus?: string;
+  /** Phones: zoom in on this point (e.g. "50% 70%") to trade sky for architecture. */
+  mobileFocus?: string;
+  /** Phones: how far to zoom in on mobileFocus (e.g. 1.35). */
+  mobileZoom?: number;
   /** Required credit shown over the image, e.g. for third-party imagery. */
   credit?: string;
   /** Optional muted, looping video (MP4/WebM). `src` is used as its poster. */
@@ -77,9 +81,11 @@ export const media = {
     aspect: "21/9",
     tone: "stone",
     src: photo_canvas_exterior,
-    focus: "50% 62%",
+    focus: "50% 74%",
     prompt:
       "Wide street-level view of a converted three-storey industrial brick building turned modern office campus, large steel-framed windows, a planted green living wall, clean paving and young trees, Table Mountain softly visible in the haze behind, low morning sun raking across the facade.",
+    mobileFocus: "46% 86%",
+    mobileZoom: 1.6,
   }),
   canvasBefore: shot({
     title: "Canvas · before, aerial",
@@ -98,9 +104,11 @@ export const media = {
     aspect: "16/9",
     tone: "stone",
     src: photo_canvas_exterior,
-    focus: "50% 62%",
+    focus: "50% 74%",
     prompt:
       "The same building AFTER redevelopment from an identical straight-on wide facade framing: restored brick, new black steel windows, a green living wall, landscaped forecourt with benches and trees, warm golden-hour light.",
+    mobileFocus: "46% 86%",
+    mobileZoom: 1.6,
   }),
   canvasCourtyard: shot({
     title: "Canvas · terrace",
@@ -273,6 +281,8 @@ export const media = {
     focus: "55% 55%",
     prompt:
       "Freshly refurbished industrial facility in Maitland, Cape Town: clean charcoal steel cladding, large roller doors, a two-storey office block with glazing, a concrete truck yard, clear blue sky, crisp midday light.",
+    mobileFocus: "55% 60%",
+    mobileZoom: 1.15,
   }),
   loopBefore: shot({
     title: "9 Loop Street · before, 2026",
@@ -344,9 +354,11 @@ export const media = {
     aspect: "21/9",
     tone: "brick",
     src: photo_call_centre_exterior,
-    focus: "40% 70%",
+    focus: "40% 78%",
     prompt:
       "Large purpose-built office building in Woodstock, Cape Town, set back from the main road, face-brick and long horizontal bands of glazing, an open parking area in front, a neighbouring converted brick campus visible beside it, warm late-afternoon light.",
+    mobileFocus: "38% 90%",
+    mobileZoom: 1.5,
   }),
   callFloor: shot({
     title: "Call Centre · open floor",

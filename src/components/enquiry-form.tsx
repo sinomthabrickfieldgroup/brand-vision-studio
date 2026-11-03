@@ -132,7 +132,7 @@ export function EnquiryForm({
           defaultTopic && (ENQUIRY_TOPICS as readonly string[]).includes(defaultTopic)
             ? defaultTopic
             : propertyName
-              ? "Leasing and space"
+              ? "Register interest"
               : ""
         }
       >

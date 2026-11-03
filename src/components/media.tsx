@@ -56,6 +56,13 @@ export function Media({
   const src = ("src" in shot ? (shot.src as string | undefined) : undefined) ?? stand?.src;
   const video = "video" in shot ? (shot.video as string | undefined) : undefined;
   const focus = ("focus" in shot ? (shot.focus as string | undefined) : undefined) ?? stand?.focus;
+  const mobileFocus = "mobileFocus" in shot ? (shot.mobileFocus as string | undefined) : undefined;
+  const mobileZoom = "mobileZoom" in shot ? (shot.mobileZoom as number | undefined) : undefined;
+  const frameVars = {
+    ...(focus ? { ["--focus" as string]: focus } : {}),
+    ...(mobileFocus ? { ["--focus-m" as string]: mobileFocus } : {}),
+    ...(mobileZoom ? { ["--zoom-m" as string]: String(mobileZoom) } : {}),
+  };
   const preview = lqipFor(src);
   const showImage = src && !failed;
 
@@ -77,6 +84,7 @@ export function Media({
       )}
       style={{
         ...(fill || /\baspect-/.test(className ?? "") ? {} : { aspectRatio: shot.aspect }),
+        ...frameVars,
         ...style,
       }}
       data-reveal={reveal ? "frame" : undefined}
@@ -88,7 +96,7 @@ export function Media({
               <span
                 className="media-preview"
                 aria-hidden="true"
-                style={{ backgroundImage: `url(${preview})`, backgroundPosition: focus }}
+                style={{ backgroundImage: `url(${preview})` }}
               />
             )}
             {video ? (
@@ -102,7 +110,6 @@ export function Media({
                 playsInline
                 aria-label={shot.alt}
                 onLoadedData={() => setLoaded(true)}
-                style={{ objectPosition: focus }}
               />
             ) : (
               <img
@@ -115,7 +122,6 @@ export function Media({
                 onLoad={() => setLoaded(true)}
                 onError={() => setFailed(true)}
                 className="media-img h-full w-full object-cover"
-                style={{ objectPosition: focus }}
               />
             )}
           </>
