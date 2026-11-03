@@ -71,7 +71,7 @@ const team: { name: string; role: string; text: string; media: MediaId }[] = [
     media: "portraitRowan",
   },
   {
-    name: "Timothy",
+    name: "Timothy Manners-Wood",
     role: "COO",
     text: "Timothy runs the in-house operations, making sure our buildings perform for tenants every day.",
     media: "portraitTimothy",

@@ -88,18 +88,18 @@ const systems: {
       { icon: Landmark, title: "Less municipal draw", text: "Lower dependence, lower risk." },
     ],
   },
-  {
-    key: "comms",
-    icon: Wifi,
-    eyebrow: "Comms",
-    title: "Fibre that keeps the work moving",
-    text: "Fibre runs through the buildings with a backup ISP ready. The connection doesn't die when the primary line fails.",
-    media: "fibre",
-    points: [
-      { icon: Wifi, title: "Fibre throughout", text: "Every floor, every tenant." },
-      { icon: ShieldCheck, title: "Backup provider", text: "Automatic failover when lines fail." },
-    ],
-  },
+  // {
+  //   key: "comms",
+  //   icon: Wifi,
+  //   eyebrow: "Comms",
+  //   title: "Fibre that keeps the work moving",
+  //   text: "Fibre runs through the buildings with a backup ISP ready. The connection doesn't die when the primary line fails.",
+  //   media: "fibre",
+  //   points: [
+  //     { icon: Wifi, title: "Fibre throughout", text: "Every floor, every tenant." },
+  //     { icon: ShieldCheck, title: "Backup provider", text: "Automatic failover when lines fail." },
+  //   ],
+  // },
 ];
 
 function Sustainability() {
