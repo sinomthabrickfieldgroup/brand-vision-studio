@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "@/components/site-shell";
 import { EditorialMotion } from "@/components/editorial-motion";
+import { LOADER_SCRIPT, SiteLoader } from "@/components/site-loader";
 
 function NotFoundComponent() {
   return (
@@ -80,6 +81,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "theme-color", content: "#f8f5ef", media: "(prefers-color-scheme: light)" },
+      { name: "theme-color", content: "#252526", media: "(prefers-color-scheme: dark)" },
       { title: "Brickfield Group" },
       { name: "description", content: "Patient capital and adaptive reuse in Cape Town and Johannesburg." },
       { property: "og:title", content: "Brickfield Group" },
@@ -95,7 +98,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      // Provisional B monogram (not yet approved) on a tile. The SVG tile is charcoal on light browser themes and paper on dark ones;
+      // the .ico and PNGs sit on a charcoal tile so they stay readable anywhere.
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
     ],
   }),
   shellComponent: RootShell,
@@ -106,8 +114,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: LOADER_SCRIPT }} />
+        <noscript>
+          <style>{".site-loader{display:none!important}"}</style>
+        </noscript>
         <HeadContent />
       </head>
       <body>
@@ -123,6 +135,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <SiteLoader />
       <SiteHeader />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <EditorialMotion><Outlet /></EditorialMotion>

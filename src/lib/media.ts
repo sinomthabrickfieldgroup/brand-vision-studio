@@ -1,0 +1,665 @@
+/**
+ * SHOT LIST — every image on the site comes from this file.
+ *
+ * Until the real photoshoot images are selected, slots without a `src` render an
+ * art-directed placeholder frame (tone + grain + shot title). To fill a slot:
+ *   1. Generate an image from its `prompt` (or pick the matching photo from the shoot),
+ *   2. add it to src/assets (or upload via Lovable),
+ *   3. set `src` on the slot below.
+ *
+ * AI-generated images are stand-ins for layout review only. Replace every one with real
+ * photography before launch: this is a property site and buyers, lenders and tenants
+ * will assume the buildings shown are the real ones.
+ */
+
+// Real photography from the shoot and existing Brickfield libraries.
+import photo_canvas_cafe from "@/assets/photos/canvas-cafe.webp";
+import photo_canvas_before_aerial from "@/assets/photos/canvas-before-aerial.webp";
+import photo_canvas_upper_lobby from "@/assets/photos/canvas-upper-lobby.webp";
+import photo_canvas_gym_detail from "@/assets/photos/canvas-gym-detail.webp";
+import photo_canvas_barista from "@/assets/photos/canvas-barista.webp";
+import photo_canvas_lobby_desk from "@/assets/photos/canvas-lobby-desk.webp";
+import photo_canvas_coworking_people from "@/assets/photos/canvas-coworking-people.webp";
+import photo_canvas_breakout from "@/assets/photos/canvas-breakout.webp";
+import photo_canvas_desks_detail from "@/assets/photos/canvas-desks-detail.webp";
+import photo_canvas_gym from "@/assets/photos/canvas-gym.webp";
+import photo_canvas_terrace from "@/assets/photos/canvas-terrace.webp";
+import photo_canvas_presentation from "@/assets/photos/canvas-presentation.webp";
+import photo_canvas_meeting_room from "@/assets/photos/canvas-meeting-room.webp";
+import photo_canvas_garden_corridor from "@/assets/photos/canvas-garden-corridor.webp";
+import photo_canvas_atrium from "@/assets/photos/canvas-atrium.webp";
+import photo_canvas_open_floor from "@/assets/photos/canvas-open-floor.webp";
+import photo_canvas_front_desk from "@/assets/photos/canvas-front-desk.webp";
+import photo_canvas_reading_nook from "@/assets/photos/canvas-reading-nook.webp";
+import photo_canvas_exterior from "@/assets/photos/canvas-exterior-hd.webp";
+import photo_call_centre_exterior from "@/assets/photos/call-centre-exterior.webp";
+import photo_loop_aerial from "@/assets/photos/loop-aerial.webp";
+import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
+import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
+import photo_loop_yard from "@/assets/photos/loop-yard.webp";
+import photo_loop_top_down from "@/assets/photos/loop-top-down.webp";
+import photo_trevor_jacobs from "@/assets/photos/trevor-jacobs.webp";
+import photo_rowan_gordon from "@/assets/photos/rowan-gordon.webp";
+import photo_timothy from "@/assets/photos/timothy.webp";
+
+export type Tone = "stone" | "dusk" | "concrete" | "sage" | "brick" | "night";
+export type Aspect = "21/9" | "16/9" | "3/2" | "4/3" | "4/5" | "1/1" | "3/4";
+
+export interface Shot {
+  title: string;
+  alt: string;
+  aspect: Aspect;
+  tone: Tone;
+  prompt: string;
+  src?: string;
+  /** CSS object-position for the crop, e.g. "50% 30%". */
+  focus?: string;
+  /** Required credit shown over the image, e.g. for third-party imagery. */
+  credit?: string;
+  /** Optional muted, looping video (MP4/WebM). `src` is used as its poster. */
+  video?: string;
+}
+
+/** Shared art direction appended to every prompt so the set reads as one shoot. */
+export const HOUSE_STYLE =
+  "Photorealistic architectural editorial photograph for a property investment company in Cape Town, South Africa. " +
+  "Light, airy, warm-neutral colour grade with soft ochre and terracotta accents, natural light, gentle contrast, " +
+  "medium-format camera, subtle film grain, calm and confident mood, magazine quality. " +
+  "Any people are incidental, candid and out of focus. No text, no signage lettering, no logos, no watermark.";
+
+const shot = (s: Shot) => s;
+
+export const media = {
+  // ── Brickfield Canvas (35 Brickfield Road, Woodstock) ──────────────────────
+  canvasHero: shot({
+    title: "Canvas · exterior, morning",
+    alt: "Brickfield Canvas at 35 Brickfield Road, Woodstock, with Devil's Peak behind",
+    aspect: "21/9",
+    tone: "stone",
+    src: photo_canvas_exterior,
+    focus: "50% 62%",
+    prompt:
+      "Wide street-level view of a converted three-storey industrial brick building turned modern office campus, large steel-framed windows, a planted green living wall, clean paving and young trees, Table Mountain softly visible in the haze behind, low morning sun raking across the facade.",
+  }),
+  canvasBefore: shot({
+    title: "Canvas · before, aerial",
+    alt: "35 Brickfield Road before redevelopment: a general industrial building, seen from above",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_canvas_before_aerial,
+    focus: "50% 55%",
+    credit: "Imagery © Google",
+    prompt:
+      "The same converted industrial building BEFORE redevelopment: a tired 1970s brick-and-concrete warehouse, faded paint, rusted roller doors, cracked yard, overcast flat light, documentary style, identical framing to a straight-on wide facade shot.",
+  }),
+  canvasAfter: shot({
+    title: "Canvas · today",
+    alt: "Brickfield Canvas today: restored brick, new glazing and landscaped parking",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_canvas_exterior,
+    focus: "50% 62%",
+    prompt:
+      "The same building AFTER redevelopment from an identical straight-on wide facade framing: restored brick, new black steel windows, a green living wall, landscaped forecourt with benches and trees, warm golden-hour light.",
+  }),
+  canvasCourtyard: shot({
+    title: "Canvas · terrace",
+    alt: "The covered terrace at Brickfield Canvas, with white umbrellas, planters and high tables",
+    aspect: "4/5",
+    tone: "sage",
+    src: photo_canvas_terrace,
+    focus: "50% 55%",
+    prompt:
+      "Inner courtyard of a converted industrial office campus, exposed brick, steel walkways, potted olive trees and timber benches, two people chatting out of focus, dappled late-afternoon light.",
+  }),
+  canvasCafe: shot({
+    title: "Canvas · café",
+    alt: "The café and lounge at Brickfield Canvas: exposed concrete, red sprinkler lines and a timber-clad counter",
+    aspect: "4/3",
+    tone: "brick",
+    src: photo_canvas_cafe,
+    focus: "50% 55%",
+    prompt:
+      "Bright community café inside a converted warehouse, polished concrete floor, long timber counter, pendant lights, espresso machine, people working on laptops in soft focus, morning light through tall steel windows.",
+  }),
+  canvasBarista: shot({
+    title: "Canvas · barista",
+    alt: "Coffee being made at the Canvas café",
+    aspect: "4/3",
+    tone: "night",
+    src: photo_canvas_barista,
+    focus: "55% 50%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasLobby: shot({
+    title: "Canvas · upper lobby",
+    alt: "The upper lobby at Brickfield Canvas: a slatted timber desk, leather chairs and glazing over the atrium",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_canvas_upper_lobby,
+    focus: "50% 55%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasLobbyDesk: shot({
+    title: "Canvas · lobby desk",
+    alt: "The slatted timber lobby desk at Brickfield Canvas",
+    aspect: "4/5",
+    tone: "stone",
+    src: photo_canvas_lobby_desk,
+    focus: "40% 50%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasBreakout: shot({
+    title: "Canvas · breakout",
+    alt: "A breakout lounge at Brickfield Canvas with patchwork beanbags and a brick screen wall",
+    aspect: "16/9",
+    tone: "brick",
+    src: photo_canvas_breakout,
+    focus: "55% 55%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasDesks: shot({
+    title: "Canvas · desks",
+    alt: "Desks and chairs in a Canvas office",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_canvas_desks_detail,
+    focus: "50% 60%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasAtrium: shot({
+    title: "Canvas · atrium",
+    alt: "Looking up through the glazed atrium at Brickfield Canvas",
+    aspect: "3/4",
+    tone: "sage",
+    src: photo_canvas_atrium,
+    focus: "50% 40%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasNook: shot({
+    title: "Canvas · reading nook",
+    alt: "A quiet corner at Brickfield Canvas with floor cushions and colourful plywood shelving",
+    aspect: "3/4",
+    tone: "sage",
+    src: photo_canvas_reading_nook,
+    focus: "50% 50%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasGymDetail: shot({
+    title: "Canvas · training",
+    alt: "Training with dumbbells at the Canvas gym",
+    aspect: "4/3",
+    tone: "night",
+    src: photo_canvas_gym_detail,
+    focus: "50% 40%",
+    prompt: "Real photograph from the Brickfield Canvas library.",
+  }),
+  canvasCowork: shot({
+    title: "Canvas · co-working",
+    alt: "Two people working together at a standing desk in the Canvas co-working space",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_canvas_coworking_people,
+    focus: "50% 40%",
+    prompt:
+      "Calm co-working floor in a converted industrial building, long oak desks, exposed concrete soffit and services, indoor plants, large windows, soft daylight, a few people focused on work, out of focus.",
+  }),
+  canvasMeeting: shot({
+    title: "Canvas · meeting room",
+    alt: "A meeting room at Brickfield Canvas: dark table, tan leather chairs and a wall-mounted screen",
+    aspect: "4/3",
+    tone: "concrete",
+    src: photo_canvas_meeting_room,
+    focus: "50% 60%",
+    prompt:
+      "Glass-walled meeting room with a large timber table and black chairs, exposed brick wall, a screen on the wall turned off, soft daylight, empty and ready for use.",
+  }),
+  canvasGym: shot({
+    title: "Canvas · gym",
+    alt: "The on-site gym at Brickfield Canvas, with a forest mural and herringbone floor",
+    aspect: "4/3",
+    tone: "night",
+    src: photo_canvas_gym,
+    focus: "55% 50%",
+    prompt:
+      "Small boutique gym in a converted warehouse, rubber floor, timber wall slats, racks of dumbbells and two rowing machines, warm accent lighting, empty, early evening.",
+  }),
+  canvasEvents: shot({
+    title: "Canvas · in session",
+    alt: "A presentation in a Canvas meeting space",
+    aspect: "4/3",
+    tone: "dusk",
+    src: photo_canvas_presentation,
+    focus: "40% 45%",
+    prompt:
+      "Evening community event in a brick courtyard, festoon string lights, people standing in small groups holding drinks, all slightly out of focus, warm dusk sky.",
+  }),
+  canvasOffices: shot({
+    title: "Canvas · open floor",
+    alt: "An open A-Grade floor at Brickfield Canvas: polished concrete, exposed steel trusses and a glazed core",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_canvas_open_floor,
+    focus: "50% 55%",
+    prompt:
+      "A-grade private office suite inside a heritage industrial conversion, oak floors, white walls, black steel window frames, plants, ergonomic desks, bright clean daylight.",
+  }),
+  canvasLivingWall: shot({
+    title: "Canvas · garden corridor",
+    alt: "A corridor at Brickfield Canvas looking onto a planted internal garden and timber deck",
+    aspect: "4/3",
+    tone: "sage",
+    src: photo_canvas_garden_corridor,
+    focus: "60% 55%",
+    prompt:
+      "A lush vertical living wall of ferns and trailing plants against restored brick inside a converted industrial office atrium, soft daylight from a skylight, drip irrigation lines just visible.",
+  }),
+  canvasSolar: shot({
+    title: "Canvas · rooftop solar",
+    alt: "Rooftop solar array at Brickfield Canvas",
+    aspect: "16/9",
+    tone: "stone",
+    prompt:
+      "Aerial drone view of rows of solar PV panels on an industrial building roof in Woodstock, Cape Town, city grid and Table Mountain in the background, crisp clear afternoon light.",
+  }),
+
+  // ── 9 Loop Street (Maitland) ───────────────────────────────────────────────
+  loopHero: shot({
+    title: "9 Loop Street · from above",
+    alt: "9 Loop Street from the air after its 2026 refurbishment, with new charcoal roof sheeting and a surfaced yard",
+    aspect: "21/9",
+    tone: "concrete",
+    src: photo_loop_aerial,
+    focus: "55% 55%",
+    prompt:
+      "Freshly refurbished industrial facility in Maitland, Cape Town: clean charcoal steel cladding, large roller doors, a two-storey office block with glazing, a concrete truck yard, clear blue sky, crisp midday light.",
+  }),
+  loopBefore: shot({
+    title: "9 Loop Street · before, 2026",
+    alt: "9 Loop Street as a logistics depot before refurbishment",
+    aspect: "21/9",
+    tone: "concrete",
+    prompt:
+      "The same industrial facility BEFORE refurbishment, identical framing: a tired conventional warehouse and logistics depot, faded cladding, rusted roller doors, potholed yard, overcast flat light, documentary style. Use a progress photo from the refurbishment if one exists.",
+  }),
+  loopWarehouse: shot({
+    title: "9 Loop Street · warehouse floor",
+    alt: "The column-efficient warehouse floor and mezzanine at 9 Loop Street",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_warehouse,
+    focus: "50% 55%",
+    prompt:
+      "Interior of a large, clean, column-efficient steel-portal warehouse, epoxy-coated concrete floor, high-bay LED lights, roof sheeting with translucent panels, an overhead crane rail, empty, cool even light.",
+  }),
+  loopYard: shot({
+    title: "9 Loop Street · yard",
+    alt: "The surfaced yard and side access at 9 Loop Street, looking towards the mountains",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_loop_yard,
+    focus: "60% 60%",
+    prompt:
+      "Wide concrete truck yard beside a refurbished industrial building, a delivery truck reversing to a loading door, painted bay lines, palisade fence, afternoon sun.",
+  }),
+  loopOffice: shot({
+    title: "9 Loop Street · mezzanine",
+    alt: "The 302m² steel mezzanine above the roller doors at 9 Loop Street",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_loop_mezzanine,
+    focus: "50% 45%",
+    prompt:
+      "Modern office and canteen block attached to a warehouse, glazed facade, simple timber and steel interior visible, neat landscaping strip, soft afternoon light.",
+  }),
+  loopTopDown: shot({
+    title: "9 Loop Street · plan view",
+    alt: "9 Loop Street from directly above: the long roof, skylights and the yard along its length",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_top_down,
+    prompt: "Top-down drone view of the refurbished building and its yard.",
+  }),
+  loopPower: shot({
+    title: "9 Loop Street · 400A supply",
+    alt: "Upgraded three-phase power distribution at 9 Loop Street",
+    aspect: "4/3",
+    tone: "night",
+    prompt:
+      "Close-up of a new industrial three-phase electrical distribution board in a clean plant room, neatly labelled cable trays, steel cabinets, cool directional light, sharp detail.",
+  }),
+  loopFabrication: shot({
+    title: "9 Loop Street · in operation",
+    alt: "Steel fabrication work under way inside 9 Loop Street",
+    aspect: "4/5",
+    tone: "dusk",
+    prompt:
+      "Steel fabrication workshop in operation, sparks from a welder in the mid-ground, steel beams on trestles, warm glow against a cool warehouse interior, worker unrecognisable behind a welding mask.",
+  }),
+
+  // ── Brickfield Call Centre (33 Brickfield Road, Woodstock) ────────────────
+  callHero: shot({
+    title: "Call Centre · entrance",
+    alt: "The entrance canopy and parking at Brickfield Call Centre, 33 Brickfield Road",
+    aspect: "21/9",
+    tone: "brick",
+    src: photo_call_centre_exterior,
+    focus: "40% 70%",
+    prompt:
+      "Large purpose-built office building in Woodstock, Cape Town, set back from the main road, face-brick and long horizontal bands of glazing, an open parking area in front, a neighbouring converted brick campus visible beside it, warm late-afternoon light.",
+  }),
+  callFloor: shot({
+    title: "Call Centre · open floor",
+    alt: "High-density open-plan floor at Brickfield Call Centre",
+    aspect: "16/9",
+    tone: "stone",
+    prompt:
+      "Large high-density open-plan office floor with rows of workstations, acoustic ceiling baffles, carpet tiles, daylight from long windows, people working in soft focus.",
+  }),
+  callBreakout: shot({
+    title: "Call Centre · breakout",
+    alt: "Staff breakout area at Brickfield Call Centre",
+    aspect: "4/3",
+    tone: "sage",
+    prompt:
+      "Bright staff breakout and canteen area in an office building, long tables, plants, a kitchen counter, warm natural light, a few people on a break out of focus.",
+  }),
+  callPlant: shot({
+    title: "Call Centre · backup power",
+    alt: "Backup generator and UPS plant serving Brickfield Call Centre",
+    aspect: "4/3",
+    tone: "night",
+    prompt:
+      "Clean plant room with a large standby diesel generator and UPS cabinets, painted floor, cable trays, cool directional light, sharp detail.",
+  }),
+  callEntrance: shot({
+    title: "Call Centre · reception",
+    alt: "Secure reception at Brickfield Call Centre",
+    aspect: "4/5",
+    tone: "stone",
+    prompt:
+      "Secure office reception with access turnstiles, a timber reception desk, a security officer in a neat uniform standing out of focus, polished floor, daylight.",
+  }),
+
+  // ── 66/68 Wierda (Wierda Valley, Sandton) ──────────────────────────────────
+  wierdaHero: shot({
+    title: "66/68 Wierda · the pair",
+    alt: "66/68 Wierda office building in Wierda Valley, Sandton",
+    aspect: "21/9",
+    tone: "dusk",
+    prompt:
+      "Two neighbouring contemporary A-grade office buildings side by side in Wierda Valley, Sandton, Johannesburg, pale stone and glass facades, basement parking ramp, mature trees, Highveld golden-hour light, clear sky.",
+  }),
+  wierdaLobby: shot({
+    title: "66/68 Wierda · lobby",
+    alt: "Lobby at 66/68 Wierda",
+    aspect: "4/3",
+    tone: "stone",
+    prompt:
+      "Calm double-volume office lobby, stone floor, timber slat wall, sculptural pendant light, a large plant, warm daylight, empty.",
+  }),
+  wierdaFloor: shot({
+    title: "66/68 Wierda · office floor",
+    alt: "Office floor at 66/68 Wierda",
+    aspect: "4/3",
+    tone: "stone",
+    prompt:
+      "Single-tenant corporate office floor, glass meeting rooms along one side, workstations, city views of Sandton through floor-to-ceiling glazing, soft afternoon light.",
+  }),
+  wierdaStreet: shot({
+    title: "66/68 Wierda · precinct",
+    alt: "The Wierda Valley precinct around 66/68 Wierda",
+    aspect: "4/3",
+    tone: "sage",
+    prompt:
+      "Leafy Sandton office precinct street, pavements under trees, low-rise office buildings, a few pedestrians in business attire out of focus, golden light.",
+  }),
+
+  // ── 24 Montague Drive (Montague Gardens) ──────────────────────────────────
+  montagueHero: shot({
+    title: "24 Montague · the park",
+    alt: "24 Montague Drive industrial building",
+    aspect: "21/9",
+    tone: "concrete",
+    prompt:
+      "Well-kept multi-tenant industrial park in Montague Gardens, Cape Town: two adjoining warehouse units with light grey cladding and roller doors, a shared yard with two access gates, parking bays, mountains faint on the horizon, clean even midday light.",
+  }),
+  montagueYard: shot({
+    title: "24 Montague · loading",
+    alt: "Direct street loading at 24 Montague Drive",
+    aspect: "4/3",
+    tone: "stone",
+    prompt:
+      "Truck backed up to a roller-door loading bay at an industrial warehouse, wide turning area, painted lines, clear afternoon light.",
+  }),
+  montagueInterior: shot({
+    title: "24 Montague · floor plate",
+    alt: "Open, column-free floor plate at 24 Montague Drive",
+    aspect: "4/3",
+    tone: "concrete",
+    prompt:
+      "Open column-free warehouse interior with pallet racking along one wall, clean concrete floor, high-bay lights, roof skylights, empty, even light.",
+  }),
+  montagueStreet: shot({
+    title: "24 Montague · the street",
+    alt: "The industrial street around 24 Montague Drive",
+    aspect: "4/3",
+    tone: "stone",
+    prompt:
+      "Broad industrial-park street lined with warehouses and palm trees, a truck in the distance, clear blue sky, crisp midday light.",
+  }),
+
+  // ── 219/237 Albert Road (Woodstock) ───────────────────────────────────────
+  albertHero: shot({
+    title: "219 Albert Road · exterior",
+    alt: "219/237 Albert Road industrial building in Woodstock",
+    aspect: "21/9",
+    tone: "brick",
+    prompt:
+      "Heritage red-brick industrial building on Albert Road, Woodstock, Cape Town, tall arched windows, painted steel doors, a building between 7.5 and 13 metres high, creative-district street life out of focus, late-afternoon light.",
+  }),
+  albertInterior: shot({
+    title: "219 Albert Road · interior",
+    alt: "Warehouse interior at 219 Albert Road",
+    aspect: "4/3",
+    tone: "concrete",
+    prompt:
+      "High-ceiling heritage brick interior with steel roof trusses, a large-format print operation and maker workbenches in soft focus, clean concrete floor, daylight through tall windows.",
+  }),
+  albertLoading: shot({
+    title: "219 Albert Road · loading",
+    alt: "Street loading access at 219 Albert Road",
+    aspect: "4/3",
+    tone: "stone",
+    prompt:
+      "Street-level loading door on a brick industrial building, a small delivery truck at the kerb, Woodstock street life out of focus, warm light.",
+  }),
+  albertStreet: shot({
+    title: "219 Albert Road · Woodstock",
+    alt: "Albert Road, Woodstock",
+    aspect: "4/3",
+    tone: "dusk",
+    prompt:
+      "Albert Road in Woodstock, Cape Town at dusk, a mix of old industrial buildings and creative studios, street lights coming on, Devil's Peak in the background.",
+  }),
+
+  // ── Group, people and operations ──────────────────────────────────────────
+  aboutHero: shot({
+    title: "Woodstock · from above",
+    alt: "Aerial view over Woodstock towards Table Mountain",
+    aspect: "21/9",
+    tone: "stone",
+    prompt:
+      "Aerial view over the Woodstock and Salt River industrial district of Cape Town, a mix of old warehouses and converted buildings, Table Mountain and Devil's Peak behind, soft morning haze.",
+  }),
+  precinct: shot({
+    title: "Precinct · a city block",
+    alt: "A Woodstock city block of adjacent industrial buildings",
+    aspect: "4/3",
+    tone: "brick",
+    prompt:
+      "Elevated view of a single Woodstock city block where several adjacent industrial buildings are being upgraded together, new roofs and solar panels on some, scaffolding on one, golden light.",
+  }),
+  heritageDetail: shot({
+    title: "Detail · restored brick and steel",
+    alt: "Detail of restored brick and new steel windows",
+    aspect: "4/5",
+    tone: "brick",
+    prompt:
+      "Close architectural detail of restored century-old red brick meeting a new black steel window frame, texture sharp, raking warm side light.",
+  }),
+  portraitTrevor: shot({
+    title: "Trevor Jacobs",
+    alt: "Trevor Jacobs, CEO and Director of Brickfield Group",
+    aspect: "3/4",
+    tone: "stone",
+    src: photo_trevor_jacobs,
+    focus: "40% 30%",
+    prompt:
+      "Placeholder only — use the real headshot from the shoot. Environmental portrait setting: exposed brick wall, soft window light.",
+  }),
+  portraitRowan: shot({
+    title: "Rowan Gordon",
+    alt: "Rowan Gordon, Director of Brickfield Group",
+    aspect: "3/4",
+    tone: "concrete",
+    src: photo_rowan_gordon,
+    focus: "50% 35%",
+    prompt:
+      "Placeholder only — use the real headshot from the shoot. Environmental portrait setting: steel-framed window, soft daylight.",
+  }),
+  portraitTimothy: shot({
+    title: "Timothy",
+    alt: "Timothy, COO of Brickfield Group",
+    aspect: "3/4",
+    tone: "sage",
+    src: photo_timothy,
+    focus: "50% 25%",
+    prompt:
+      "Placeholder only — use the real headshot from the shoot. Environmental portrait setting: Canvas courtyard, open shade.",
+  }),
+  cleaningTeam: shot({
+    title: "Services · cleaning team",
+    alt: "Brickfield's in-house cleaning team at work",
+    aspect: "4/5",
+    tone: "sage",
+    prompt:
+      "Commercial cleaning team in neat matching charcoal uniforms polishing a concrete floor in a bright office lobby, faces turned away or out of focus, morning light, sense of pride and care.",
+  }),
+  cleaningDetail: shot({
+    title: "Services · cleaning detail",
+    alt: "Detail of commercial cleaning work",
+    aspect: "4/3",
+    tone: "stone",
+    prompt:
+      "Close detail of a gloved hand wiping a glass partition with a microfibre cloth, reflections of an office interior, crisp clean light.",
+  }),
+  securityTeam: shot({
+    title: "Services · security team",
+    alt: "Brickfield's in-house security officer on patrol",
+    aspect: "4/5",
+    tone: "night",
+    prompt:
+      "Uniformed security officer walking a well-lit brick courtyard of an office campus at blue hour, radio on shoulder, seen from behind and slightly side-on, calm and professional.",
+  }),
+  securityControl: shot({
+    title: "Services · control room",
+    alt: "Security control room",
+    aspect: "4/3",
+    tone: "night",
+    prompt:
+      "Compact security control room with a wall of CCTV monitors showing building exteriors, an officer's silhouette at the desk, cool screen glow.",
+  }),
+  borehole: shot({
+    title: "Sustainability · borehole and tanks",
+    alt: "Borehole and water storage tanks",
+    aspect: "4/3",
+    tone: "sage",
+    prompt:
+      "Neat installation of green water storage tanks, borehole pump head and filtration equipment beside a brick industrial building, landscaping around it, clear daylight.",
+  }),
+  fibre: shot({
+    title: "Sustainability · fibre and comms",
+    alt: "Fibre and network room",
+    aspect: "4/3",
+    tone: "night",
+    prompt:
+      "Tidy comms room with a network rack, fibre patch panels with yellow and blue fibre leads, small status LEDs glowing, cool light.",
+  }),
+  generator: shot({
+    title: "Sustainability · generator and solar",
+    alt: "Standby generator running alongside solar infrastructure",
+    aspect: "4/3",
+    tone: "concrete",
+    prompt:
+      "Standby generator enclosure in a clean yard beside an industrial building, rooftop solar panels visible above, clear sky, crisp light.",
+  }),
+  contactHero: shot({
+    title: "Canvas · front desk",
+    alt: "The front desk at Brickfield Canvas, with the Canvas sign on the brick wall behind",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_canvas_front_desk,
+    focus: "55% 50%",
+    prompt:
+      "Welcoming entrance to a converted industrial office campus, open steel-framed glass doors, planters either side, warm morning light.",
+  }),
+} as const satisfies Record<string, Shot>;
+
+export type MediaId = keyof typeof media;
+
+/**
+ * STAND-INS — Unsplash photos used to plan the photoshoot selection. They show the kind of
+ * shot each slot wants; they are not Brickfield buildings. Replace each with a real photo
+ * (set `src` on the shot above and delete its line here) before launch.
+ */
+import si_08df4776 from "@/assets/stand-in/08df4776.webp";
+import si_1aafbb24 from "@/assets/stand-in/1aafbb24.webp";
+import si_23053cb2 from "@/assets/stand-in/23053cb2.webp";
+import si_29810c3b from "@/assets/stand-in/29810c3b.webp";
+import si_357f12aa from "@/assets/stand-in/357f12aa.webp";
+import si_5bc69ba9 from "@/assets/stand-in/5bc69ba9.webp";
+import si_711614b0 from "@/assets/stand-in/711614b0.webp";
+import si_97512505 from "@/assets/stand-in/97512505.webp";
+import si_9c720f5d from "@/assets/stand-in/9c720f5d.webp";
+import si_b23d9d70 from "@/assets/stand-in/b23d9d70.webp";
+import si_b772ec77 from "@/assets/stand-in/b772ec77.webp";
+import si_c7bb7a9e from "@/assets/stand-in/c7bb7a9e.webp";
+import si_c9344f4f from "@/assets/stand-in/c9344f4f.webp";
+import si_d1597a16 from "@/assets/stand-in/d1597a16.webp";
+import si_d53154cb from "@/assets/stand-in/d53154cb.webp";
+import si_f9854d80 from "@/assets/stand-in/f9854d80.webp";
+import si_ffbe175e from "@/assets/stand-in/ffbe175e.webp";
+
+import si_security_control from "@/assets/stand-in/security-control.webp";
+import si_cleaning_team from "@/assets/stand-in/cleaning-team.webp";
+import si_cleaning_detail from "@/assets/stand-in/cleaning-detail.webp";
+
+export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> = {
+  cleaningTeam: { src: si_cleaning_team, focus: "55% 55%" },
+  cleaningDetail: { src: si_cleaning_detail, focus: "70% 50%" },
+  securityTeam: { src: si_security_control, focus: "40% 70%" },
+  securityControl: { src: si_security_control, focus: "35% 65%" },
+  canvasSolar: { src: si_b772ec77, focus: "50% 60%" },
+  loopBefore: { src: si_b23d9d70, focus: "50% 55%" },
+  loopPower: { src: si_08df4776, focus: "50% 55%" },
+  loopFabrication: { src: si_357f12aa, focus: "50% 55%" },
+  callPlant: { src: si_f9854d80, focus: "50% 45%" },
+  wierdaHero: { src: si_23053cb2, focus: "50% 40%" },
+  wierdaStreet: { src: si_c7bb7a9e, focus: "50% 55%" },
+  montagueHero: { src: si_5bc69ba9, focus: "70% 60%" },
+  montagueYard: { src: si_97512505, focus: "50% 70%" },
+  montagueInterior: { src: si_d53154cb, focus: "50% 50%" },
+  montagueStreet: { src: si_d1597a16, focus: "50% 50%" },
+  albertHero: { src: si_ffbe175e, focus: "50% 50%" },
+  albertInterior: { src: si_1aafbb24, focus: "50% 40%" },
+  albertLoading: { src: si_29810c3b, focus: "45% 60%" },
+  aboutHero: { src: si_c9344f4f, focus: "50% 55%" },
+  precinct: { src: si_9c720f5d, focus: "50% 50%" },
+  heritageDetail: { src: si_ffbe175e, focus: "62% 45%" },
+  generator: { src: si_711614b0, focus: "50% 40%" },
+};
+
+/** True when a shot has a real or stand-in image (used to keep placeholders out of slideshows). */
+export const hasImage = (id: MediaId) =>
+  Boolean(("src" in media[id] && (media[id] as Shot).src) || standIns[id]);

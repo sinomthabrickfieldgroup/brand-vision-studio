@@ -14,6 +14,10 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as BrickfieldCanvasRouteImport } from './routes/brickfield-canvas'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as LoopStreetRouteImport } from './routes/loop-street'
+import { Route as ServicesRouteImport } from './routes/services'
+import { Route as SustainabilityRouteImport } from './routes/sustainability'
+import { Route as PortfolioIndexRouteImport } from './routes/portfolio/index'
+import { Route as PortfolioSlugRouteImport } from './routes/portfolio/$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +44,26 @@ const LoopStreetRoute = LoopStreetRouteImport.update({
   path: '/loop-street',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesRoute = ServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SustainabilityRoute = SustainabilityRouteImport.update({
+  id: '/sustainability',
+  path: '/sustainability',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioIndexRoute = PortfolioIndexRouteImport.update({
+  id: '/portfolio/',
+  path: '/portfolio/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PortfolioSlugRoute = PortfolioSlugRouteImport.update({
+  id: '/portfolio/$slug',
+  path: '/portfolio/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +71,10 @@ export interface FileRoutesByFullPath {
   '/brickfield-canvas': typeof BrickfieldCanvasRoute
   '/contact': typeof ContactRoute
   '/loop-street': typeof LoopStreetRoute
+  '/services': typeof ServicesRoute
+  '/sustainability': typeof SustainabilityRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/portfolio/': typeof PortfolioIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +82,10 @@ export interface FileRoutesByTo {
   '/brickfield-canvas': typeof BrickfieldCanvasRoute
   '/contact': typeof ContactRoute
   '/loop-street': typeof LoopStreetRoute
+  '/services': typeof ServicesRoute
+  '/sustainability': typeof SustainabilityRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/portfolio': typeof PortfolioIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,12 +94,34 @@ export interface FileRoutesById {
   '/brickfield-canvas': typeof BrickfieldCanvasRoute
   '/contact': typeof ContactRoute
   '/loop-street': typeof LoopStreetRoute
+  '/services': typeof ServicesRoute
+  '/sustainability': typeof SustainabilityRoute
+  '/portfolio/$slug': typeof PortfolioSlugRoute
+  '/portfolio/': typeof PortfolioIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/brickfield-canvas' | '/contact' | '/loop-street'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/brickfield-canvas'
+    | '/contact'
+    | '/loop-street'
+    | '/services'
+    | '/sustainability'
+    | '/portfolio/$slug'
+    | '/portfolio/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/brickfield-canvas' | '/contact' | '/loop-street'
+  to:
+    | '/'
+    | '/about'
+    | '/brickfield-canvas'
+    | '/contact'
+    | '/loop-street'
+    | '/services'
+    | '/sustainability'
+    | '/portfolio/$slug'
+    | '/portfolio'
   id:
     | '__root__'
     | '/'
@@ -75,6 +129,10 @@ export interface FileRouteTypes {
     | '/brickfield-canvas'
     | '/contact'
     | '/loop-street'
+    | '/services'
+    | '/sustainability'
+    | '/portfolio/$slug'
+    | '/portfolio/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -83,6 +141,10 @@ export interface RootRouteChildren {
   BrickfieldCanvasRoute: typeof BrickfieldCanvasRoute
   ContactRoute: typeof ContactRoute
   LoopStreetRoute: typeof LoopStreetRoute
+  ServicesRoute: typeof ServicesRoute
+  SustainabilityRoute: typeof SustainabilityRoute
+  PortfolioSlugRoute: typeof PortfolioSlugRoute
+  PortfolioIndexRoute: typeof PortfolioIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -122,6 +184,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoopStreetRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sustainability': {
+      id: '/sustainability'
+      path: '/sustainability'
+      fullPath: '/sustainability'
+      preLoaderRoute: typeof SustainabilityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/': {
+      id: '/portfolio/'
+      path: '/portfolio'
+      fullPath: '/portfolio/'
+      preLoaderRoute: typeof PortfolioIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/portfolio/$slug': {
+      id: '/portfolio/$slug'
+      path: '/portfolio/$slug'
+      fullPath: '/portfolio/$slug'
+      preLoaderRoute: typeof PortfolioSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -131,6 +221,10 @@ const rootRouteChildren: RootRouteChildren = {
   BrickfieldCanvasRoute: BrickfieldCanvasRoute,
   ContactRoute: ContactRoute,
   LoopStreetRoute: LoopStreetRoute,
+  ServicesRoute: ServicesRoute,
+  SustainabilityRoute: SustainabilityRoute,
+  PortfolioSlugRoute: PortfolioSlugRoute,
+  PortfolioIndexRoute: PortfolioIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
