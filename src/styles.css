@@ -1292,45 +1292,32 @@
   .d-label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; fill: var(--foreground); font-weight: 500; }
   .d-note { font-size: 10px; letter-spacing: .08em; fill: var(--muted-foreground); }
 
-  /* comms */
-  .c-status-box { fill: var(--background); stroke: var(--border); }
-  .c-dot { fill: var(--fern); }
-  .c-node { fill: var(--accent); stroke: var(--background); stroke-width: 2; transform-box: fill-box; transform-origin: center; }
-  .c-break { opacity: 0; }
-  .c-break circle { fill: var(--background); stroke: var(--destructive); stroke-width: 1.5; }
-  .c-break path { stroke: var(--destructive); stroke-width: 2; stroke-linecap: round; }
-  .c-backup-flow { opacity: 0; }
-  .c-on-backup { opacity: 0; }
-
+  /* comms network */
+  .n-hub { fill: var(--primary); }
+  .n-halo { fill: none; stroke: var(--accent); stroke-width: 1.5; opacity: .5; transform-box: fill-box; transform-origin: center; }
+  .n-device { fill: var(--background); stroke: var(--foreground); stroke-width: 1.5; transform-box: fill-box; transform-origin: center; }
+  .n-icon { color: var(--foreground); }
+  .n-icon-hub { color: var(--accent); }
+  .n-link { opacity: .25; }
   /* animation (only while on screen) */
   .diagram.is-playing .d-flow { animation: d-flow 1.1s linear infinite; }
   .diagram.is-playing .d-rain line { animation: d-rain 1.15s linear infinite; }
   .diagram.is-playing .d-water { animation: d-level 9s ease-in-out infinite; }
-  .diagram.is-playing .c-node { animation: c-pulse 2.4s ease-in-out infinite; }
-  .diagram.is-playing .c-dot { animation: c-blink 2.4s ease-in-out infinite; }
-  .diagram.is-playing .c-primary-flow { animation: d-flow 1.1s linear infinite, c-primary 10s ease infinite; }
-  .diagram.is-playing .c-backup-flow { animation: d-flow 1.1s linear infinite, c-backup 10s ease infinite; }
-  .diagram.is-playing .c-break { animation: c-break 10s ease infinite; }
-  .diagram.is-playing .c-on-primary { animation: c-primary 10s ease infinite; }
-  .diagram.is-playing .c-on-backup { animation: c-backup 10s ease infinite; }
   @keyframes d-flow { to { stroke-dashoffset: -30; } }
   @keyframes d-rain { 0% { opacity: 0; transform: translateY(-10px); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(70px); } }
   @keyframes d-level { 0%, 100% { transform: scaleY(.55); } 50% { transform: scaleY(.78); } }
-  @keyframes c-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.35); } }
-  @keyframes c-blink { 0%, 100% { opacity: 1; } 50% { opacity: .45; } }
-  @keyframes c-primary { 0%, 44% { opacity: 1; } 48%, 90% { opacity: 0; } 95%, 100% { opacity: 1; } }
-  @keyframes c-backup { 0%, 46% { opacity: 0; } 50%, 90% { opacity: 1; } 94%, 100% { opacity: 0; } }
-  @keyframes c-break { 0%, 44% { opacity: 0; transform: translate(112px, 338px) scale(.6); } 47%, 90% { opacity: 1; transform: translate(112px, 338px) scale(1); } 94%, 100% { opacity: 0; transform: translate(112px, 338px) scale(.6); } }
+  .diagram.is-playing .n-halo { animation: n-halo 2.6s ease-out infinite; }
+  .diagram.is-playing .n-device { animation: n-ping 2.8s ease-in-out infinite; }
+  @keyframes n-halo { 0% { transform: scale(.8); opacity: .7; } 100% { transform: scale(1.5); opacity: 0; } }
+  @keyframes n-ping { 0%, 100% { stroke: var(--foreground); } 50% { stroke: var(--accent); } }
 
   /* legend highlight: dim everything except the chosen part */
   .diagram[data-active] [data-part] { opacity: .15; transition: opacity .35s; }
   .diagram[data-active="rain"] [data-part="rain"], .diagram[data-active="bore"] [data-part="bore"], .diagram[data-active="supply"] [data-part="supply"],
   .diagram[data-active="muni"] [data-part="muni"], .diagram[data-active="primary"] [data-part="primary"], .diagram[data-active="backup"] [data-part="backup"],
-  .diagram[data-active="riser"] [data-part="riser"] { opacity: 1; }
-  .diagram[data-active="backup"] .c-backup-flow { animation-name: d-flow; opacity: 1; }
+  .diagram[data-active="devices"] [data-part="devices"] { opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .c-backup-flow { opacity: .5 !important; }
   .d-rain line { opacity: .6 !important; }
 }
 

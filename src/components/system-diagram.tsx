@@ -1,3 +1,4 @@
+import { Cctv, KeyRound, Laptop, Router, Smartphone, Tv } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -67,8 +68,8 @@ const WATER_LEGEND = [
 
 const COMMS_LEGEND = [
   { key: "primary", label: "Primary fibre", swatch: "flow" },
-  { key: "backup", label: "Backup line, automatic failover", swatch: "dotted" },
-  { key: "riser", label: "Every floor, always online", swatch: "solid" },
+  { key: "backup", label: "Backup line on standby", swatch: "dotted" },
+  { key: "devices", label: "Everything on the network", swatch: "solid" },
 ];
 
 function WaterSvg() {
@@ -187,106 +188,67 @@ function WaterSvg() {
   );
 }
 
+const DEVICES = [
+  { x: 62, y: 262, label: "Laptops", Icon: Laptop },
+  { x: 96, y: 392, label: "Phones", Icon: Smartphone },
+  { x: 200, y: 440, label: "Meeting rooms", Icon: Tv },
+  { x: 304, y: 392, label: "Access control", Icon: KeyRound },
+  { x: 338, y: 262, label: "CCTV", Icon: Cctv },
+];
+const HUB = { x: 200, y: 250 };
+
 function CommsSvg() {
-  const floors = [160, 235, 310];
   return (
     <svg viewBox="0 0 400 500" role="img" aria-labelledby="comms-title comms-desc">
       <title id="comms-title">How the building stays connected</title>
       <desc id="comms-desc">
-        A primary fibre line feeds the comms room and a riser to every floor. When the primary line
-        fails, a backup line takes over automatically and every floor stays online.
+        Fibre feeds the building network, with a backup line on standby. Laptops, phones, meeting
+        rooms, access control and CCTV all connect through it.
       </desc>
 
-      {/* status */}
-      <g className="c-status">
-        <rect x="16" y="20" width="230" height="56" rx="10" className="c-status-box" />
-        <circle cx="34" cy="38" r="4" className="c-dot" />
-        <text x="46" y="42" className="d-label">
-          All floors online
-        </text>
-        <text x="34" y="64" className="d-note c-on-primary">
-          Running on primary fibre
-        </text>
-        <text x="34" y="64" className="d-note c-on-backup">
-          Primary down · backup took over
-        </text>
-      </g>
-
-      {/* building */}
-      <g className="d-building">
-        <path d="M210 420 V120 H372 V420" />
-        <line x1="202" y1="120" x2="380" y2="120" className="d-roof" />
-        {[195, 270, 345].map((y) => (
-          <line key={y} x1="210" y1={y} x2="372" y2={y} className="d-floor" />
-        ))}
-        {floors.map((y) =>
-          [280, 305, 330, 355].map((x) => (
-            <rect
-              key={`${x}-${y}`}
-              x={x - 9}
-              y={y - 6}
-              width="16"
-              height="12"
-              rx="1"
-              className="d-window"
-            />
-          )),
-        )}
-      </g>
-      <line x1="0" y1="420" x2="400" y2="420" className="d-ground" />
-
-      {/* comms room */}
-      <rect x="222" y="362" width="50" height="46" rx="4" className="c-room" />
-      <text x="247" y="438" className="d-note" textAnchor="middle">
-        Comms room
+      {/* upstream: primary fibre and backup line */}
+      <path d="M130 0 C 130 120, 170 160, 188 220" className="d-pipe" data-part="primary" />
+      <path d="M130 0 C 130 120, 170 160, 188 220" className="d-flow" data-part="primary" />
+      <text x="140" y="40" className="d-label">
+        Primary fibre
+      </text>
+      <path d="M290 0 C 290 120, 230 160, 212 220" className="d-muni" data-part="backup" />
+      <text x="282" y="70" className="d-note" textAnchor="end">
+        Backup line · standby
       </text>
 
-      {/* riser to every floor */}
-      <path d="M247 362 V160" className="d-supply" data-part="riser" />
-      <path d="M247 362 V160" className="d-flow" data-part="riser" />
-      {floors.map((y, i) => (
-        <g key={y} data-part="riser">
-          <line x1="247" y1={y} x2="262" y2={y} className="d-supply" />
-          <circle
-            cx="247"
-            cy={y}
-            r="5"
-            className="c-node"
-            style={{ animationDelay: `${i * 0.4}s` }}
-          />
+      {/* hub to devices */}
+      {DEVICES.map((d) => (
+        <g key={d.label} data-part="devices">
+          <line x1={HUB.x} y1={HUB.y} x2={d.x} y2={d.y} className="d-supply n-link" />
+          <line x1={HUB.x} y1={HUB.y} x2={d.x} y2={d.y} className="d-flow" />
         </g>
       ))}
 
-      {/* primary fibre */}
-      <path
-        id="c-primary"
-        d="M0 300 C 90 300, 130 378, 222 378"
-        className="d-pipe"
-        data-part="primary"
-      />
-      <path
-        d="M0 300 C 90 300, 130 378, 222 378"
-        className="d-flow c-primary-flow"
-        data-part="primary"
-      />
-      <text x="8" y="288" className="d-label">
-        Primary fibre
+      {/* hub */}
+      <circle cx={HUB.x} cy={HUB.y} r="44" className="n-halo" />
+      <circle cx={HUB.x} cy={HUB.y} r="32" className="n-hub" />
+      <Router x={HUB.x - 13} y={HUB.y - 13} width={26} height={26} className="n-icon n-icon-hub" />
+      <text x={HUB.x} y={HUB.y - 54} className="d-note" textAnchor="middle">
+        Building network
       </text>
-      <g className="c-break" transform="translate(112 338)">
-        <circle r="11" />
-        <path d="M-5 -5 L5 5 M5 -5 L-5 5" />
-      </g>
 
-      {/* backup line */}
-      <path d="M0 468 C 100 468, 140 396, 222 396" className="d-muni" data-part="backup" />
-      <path
-        d="M0 468 C 100 468, 140 396, 222 396"
-        className="d-flow c-backup-flow"
-        data-part="backup"
-      />
-      <text x="8" y="490" className="d-label">
-        Backup line
-      </text>
+      {/* devices */}
+      {DEVICES.map((d, i) => (
+        <g key={d.label} data-part="devices">
+          <circle
+            cx={d.x}
+            cy={d.y}
+            r="25"
+            className="n-device"
+            style={{ animationDelay: `${i * 0.35}s` }}
+          />
+          <d.Icon x={d.x - 11} y={d.y - 11} width={22} height={22} className="n-icon" />
+          <text x={d.x} y={d.y + 44} className="d-note" textAnchor="middle">
+            {d.label}
+          </text>
+        </g>
+      ))}
     </svg>
   );
 }

@@ -530,7 +530,15 @@ import si_f9854d80 from "@/assets/stand-in/f9854d80.webp";
 import si_fb1e5004 from "@/assets/stand-in/fb1e5004.webp";
 import si_ffbe175e from "@/assets/stand-in/ffbe175e.webp";
 
+import si_security_control from "@/assets/stand-in/security-control.webp";
+import si_cleaning_team from "@/assets/stand-in/cleaning-team.webp";
+import si_cleaning_detail from "@/assets/stand-in/cleaning-detail.webp";
+
 export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> = {
+  cleaningTeam: { src: si_cleaning_team, focus: "55% 55%" },
+  cleaningDetail: { src: si_cleaning_detail, focus: "70% 50%" },
+  securityTeam: { src: si_security_control, focus: "40% 70%" },
+  securityControl: { src: si_security_control, focus: "35% 65%" },
   canvasAfter: { src: si_66ae3f86, focus: "50% 60%" },
   canvasCourtyard: { src: si_fb1e5004, focus: "35% 60%" },
   canvasEvents: { src: si_bdf2b160, focus: "50% 50%" },
