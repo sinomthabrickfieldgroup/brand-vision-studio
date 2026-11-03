@@ -9,13 +9,13 @@ import { CONTACT, mailto } from "@/lib/portfolio";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — Commercial cleaning and security | Brickfield Group" },
+      { title: "Services: Commercial cleaning and security | Brickfield Group" },
       {
         name: "description",
         content:
           "In-house commercial cleaning and security teams, running since 2019 and available to third-party clients in Cape Town.",
       },
-      { property: "og:title", content: "Brickfield Services — Built to operate" },
+      { property: "og:title", content: "Brickfield Services, Built to operate" },
       {
         property: "og:description",
         content: "Cleaning and security run by the people who own the building.",

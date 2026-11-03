@@ -8,7 +8,7 @@ import type { MediaId } from "@/lib/media";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Brickfield Group" },
+      { title: "About Brickfield Group" },
       {
         name: "description",
         content:

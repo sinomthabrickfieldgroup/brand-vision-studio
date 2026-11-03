@@ -8,7 +8,7 @@ import { CONTACT } from "@/lib/portfolio";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Brickfield Group" },
+      { title: "Contact Brickfield Group" },
       {
         name: "description",
         content:

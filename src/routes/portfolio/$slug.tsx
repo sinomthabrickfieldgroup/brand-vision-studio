@@ -11,14 +11,14 @@ export const Route = createFileRoute("/portfolio/$slug")({
   },
   head: ({ loaderData }) => {
     const p = loaderData?.property;
-    if (!p) return { meta: [{ title: "Property — Brickfield Group" }] };
+    if (!p) return { meta: [{ title: "Property, Brickfield Group" }] };
     const hero = media[p.hero];
     const image = "src" in hero ? hero.src : undefined;
     return {
       meta: [
-        { title: `${p.name} — ${p.type} property in ${p.area} | Brickfield Group` },
+        { title: `${p.name}, ${p.type} property in ${p.area} | Brickfield Group` },
         { name: "description", content: p.summary },
-        { property: "og:title", content: `${p.name} — Brickfield Group` },
+        { property: "og:title", content: `${p.name}, ${p.type} property in ${p.area} | Brickfield Group` },
         { property: "og:description", content: p.summary },
         { property: "og:type", content: "website" },
         ...(image ? [{ property: "og:image", content: image }] : []),

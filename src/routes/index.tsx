@@ -18,7 +18,7 @@ import { portfolioTotals, properties } from "@/lib/portfolio";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Brickfield Group — Patient capital, adaptive reuse" },
+      { title: "Brickfield Group, Patient capital and adaptive reuse" },
       {
         name: "description",
         content:

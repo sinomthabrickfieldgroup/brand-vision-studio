@@ -26,13 +26,13 @@ import type { MediaId } from "@/lib/media";
 export const Route = createFileRoute("/sustainability")({
   head: () => ({
     meta: [
-      { title: "Sustainability — Brickfield Group" },
+      { title: "Sustainability, Brickfield Group" },
       {
         name: "description",
         content:
           "Solar and standby power, borehole water and redundant fibre. Infrastructure that works for decades, not for a quarterly report.",
       },
-      { property: "og:title", content: "Built to endure — Brickfield Group" },
+      { property: "og:title", content: "Built to endure | Brickfield Group" },
       {
         property: "og:description",
         content: "Infrastructure investment that keeps tenants running and protects returns.",
