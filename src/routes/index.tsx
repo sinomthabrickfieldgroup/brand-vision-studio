@@ -82,13 +82,13 @@ function Index() {
     <main>
       {/* Hero */}
       <section className="relative">
-        <div className="mx-auto max-w-7xl px-6 pb-12 pt-14 md:px-10 md:pb-16 md:pt-20">
+        <div className="mx-auto max-w-7xl px-6 pb-8 pt-8 md:px-10 md:pb-16 md:pt-20">
           <Eyebrow>Patient capital · Cape Town & Johannesburg</Eyebrow>
-          <h1 className="hero-title mt-7 max-w-6xl text-balance font-display text-[3.1rem] leading-[0.98] tracking-[-0.025em] md:text-[6.4rem]">
+          <h1 className="hero-title mt-5 max-w-6xl text-balance font-display text-[2.35rem] leading-[1] tracking-[-0.025em] sm:text-[3.1rem] md:mt-7 md:text-[6.4rem]">
             15+ years of disciplined <em>adaptive reuse</em> and precinct development
           </h1>
-          <div className="mt-10 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <p className="max-w-md text-lg leading-relaxed text-muted-foreground">
+          <div className="mt-5 flex flex-col justify-between gap-5 md:mt-10 md:flex-row md:items-end md:gap-8">
+            <p className="max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
               We are a property holding company backed by patient capital. We build and hold spaces
               that work for the long term.
             </p>

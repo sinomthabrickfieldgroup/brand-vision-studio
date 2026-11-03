@@ -122,11 +122,7 @@ function Portfolio() {
 
       <section className="bg-card py-24 md:py-32">
         <div className="mx-auto max-w-7xl px-6 md:px-10">
-          <SectionIntro
-            eyebrow="Index"
-            title="The portfolio at a glance"
-            text=""
-          />
+          <SectionIntro eyebrow="Index" title="The portfolio at a glance" text="" />
           <div className="mt-14">
             <PortfolioIndex items={properties} />
           </div>
@@ -137,18 +133,21 @@ function Portfolio() {
         media="canvasHero"
         ctas={[
           {
-            title: "Talk to us",
-            text: "We can walk you through the portfolio and arrange viewings for qualified tenants and brokers.",
-            actions: [{ label: "Contact", to: "/contact" }],
-          },
-          {
-            title: "See it",
-            text: "The numbers tell one story. The buildings tell another. Come and see them for yourself.",
+            title: "Register interest",
+            text: "The portfolio is fully let. Tell us what you need and we'll come to you first when space opens up.",
             actions: [
               {
-                label: "Book a viewing",
-                href: "mailto:info@brickfieldgroup.co.za?subject=Viewing%20request",
+                label: "Register interest",
+                to: "/contact",
+                search: { topic: "Register interest" },
               },
+            ],
+          },
+          {
+            title: "Brokers and investors",
+            text: "Ask for specifications, tenancy profiles and our track record across the portfolio.",
+            actions: [
+              { label: "Broker enquiry", to: "/contact", search: { topic: "Broker enquiry" } },
             ],
           },
         ]}

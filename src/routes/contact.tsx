@@ -62,7 +62,7 @@ function Contact() {
       <section className="mx-auto max-w-7xl px-6 pb-16 pt-16 md:px-10 md:pb-24 md:pt-24">
         <Eyebrow>Contact</Eyebrow>
         <div className="mt-7 grid items-end gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
-          <h1 className="hero-title font-display text-[3.4rem] leading-[0.95] tracking-[-0.025em] md:text-[7rem]">
+          <h1 className="hero-title font-display text-[2.8rem] leading-[0.95] sm:text-[3.4rem] tracking-[-0.025em] md:text-[7rem]">
             Talk to <em>us</em>
           </h1>
           <div>
@@ -128,7 +128,7 @@ function Contact() {
             <SectionIntro
               eyebrow="Send a message"
               title="Tell us what you need"
-              text="Leasing, viewings, investment or our services. A person on our team reads every message and replies, usually within one business day."
+              text="Space in the portfolio, investment or our services. A person on our team reads every message and replies, usually within one business day."
             />
           </div>
           <div id="enquiry" className="scroll-mt-28">

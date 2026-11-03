@@ -91,7 +91,35 @@ export interface Property {
   highlights: string[];
   external?: { label: string; href: string }[];
   blocks: Block[];
-  ctas: [Item & { label: string; subject: string }, Item & { label: string; subject: string }];
+  ctas: [PropertyCta, PropertyCta];
+}
+
+export interface PropertyCta extends Item {
+  label: string;
+  /** Pre-selected topic on the enquiry form. */
+  topic: "Register interest" | "Broker enquiry";
+}
+
+/**
+ * Every property is currently 100% let, so we don't offer viewings (that would read as
+ * vacancy). Prospective tenants register interest; brokers ask for the numbers.
+ * Give a property its own ctas when it has space to let.
+ */
+function fullyLetCtas(): [PropertyCta, PropertyCta] {
+  return [
+    {
+      title: "Register interest",
+      text: "This building is fully let. Tell us what you need and we'll let you know first when space opens up, here or elsewhere in the portfolio.",
+      label: "Register interest",
+      topic: "Register interest",
+    },
+    {
+      title: "Broker enquiries",
+      text: "Ask for the specification, tenancy profile and track record. We reply within one business day.",
+      label: "Broker enquiry",
+      topic: "Broker enquiry",
+    },
+  ];
 }
 
 export const properties: Property[] = [
@@ -277,20 +305,7 @@ export const properties: Property[] = [
         ],
       },
     ],
-    ctas: [
-      {
-        title: "See it yourself",
-        text: "Walk the floors and see why tenants stay. We'll show you around.",
-        label: "Book a viewing",
-        subject: "Viewing request — Brickfield Canvas",
-      },
-      {
-        title: "Broker enquiries",
-        text: "Get the full specification and current availability.",
-        label: "Enquire",
-        subject: "Broker enquiry — Brickfield Canvas",
-      },
-    ],
+    ctas: fullyLetCtas(),
   },
   {
     slug: "9-loop-street",
@@ -384,20 +399,7 @@ export const properties: Property[] = [
         ],
       },
     ],
-    ctas: [
-      {
-        title: "Talk to us",
-        text: "Brokers and tenants can reach the people who run the building directly.",
-        label: "Contact",
-        subject: "Enquiry — 9 Loop Street",
-      },
-      {
-        title: "See it",
-        text: "Walk the floor and see the bones of the building for yourself.",
-        label: "Book a viewing",
-        subject: "Viewing request — 9 Loop Street",
-      },
-    ],
+    ctas: fullyLetCtas(),
   },
   {
     slug: "brickfield-call-centre",
@@ -467,20 +469,7 @@ export const properties: Property[] = [
         media: "callEntrance",
       },
     ],
-    ctas: [
-      {
-        title: "For brokers",
-        text: "Request details on this asset and the wider Woodstock precinct.",
-        label: "Enquire",
-        subject: "Broker enquiry — Brickfield Call Centre",
-      },
-      {
-        title: "For tenants",
-        text: "Talk to us about office space in the Brickfield precinct.",
-        label: "Contact",
-        subject: "Tenant enquiry — Brickfield Call Centre",
-      },
-    ],
+    ctas: fullyLetCtas(),
   },
   {
     slug: "66-68-wierda",
@@ -571,20 +560,7 @@ export const properties: Property[] = [
         media: "wierdaStreet",
       },
     ],
-    ctas: [
-      {
-        title: "Leasing enquiries",
-        text: "Speak to us about office space in Wierda Valley.",
-        label: "Contact",
-        subject: "Leasing enquiry — 66/68 Wierda",
-      },
-      {
-        title: "Broker enquiries",
-        text: "Request details on this Sandton holding.",
-        label: "Enquire",
-        subject: "Broker enquiry — 66/68 Wierda",
-      },
-    ],
+    ctas: fullyLetCtas(),
   },
   {
     slug: "24-montague",
@@ -649,20 +625,7 @@ export const properties: Property[] = [
         media: "montagueInterior",
       },
     ],
-    ctas: [
-      {
-        title: "Talk to us",
-        text: "We know the park and we know the numbers. Ask us anything.",
-        label: "Contact",
-        subject: "Enquiry — 24 Montague",
-      },
-      {
-        title: "See it",
-        text: "Walk the units and the yard. A site visit tells the truth.",
-        label: "Book a viewing",
-        subject: "Viewing request — 24 Montague",
-      },
-    ],
+    ctas: fullyLetCtas(),
   },
   {
     slug: "219-albert-road",
@@ -727,20 +690,7 @@ export const properties: Property[] = [
         media: "albertLoading",
       },
     ],
-    ctas: [
-      {
-        title: "Enquire now",
-        text: "Talk to us about space at 219 Albert Road.",
-        label: "Contact",
-        subject: "Enquiry — 219 Albert Road",
-      },
-      {
-        title: "Visit us",
-        text: "Find us at 35 Brickfield Road in Woodstock, around the corner.",
-        label: "Book a visit",
-        subject: "Visit request — 219 Albert Road",
-      },
-    ],
+    ctas: fullyLetCtas(),
   },
 ];
 

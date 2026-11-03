@@ -92,8 +92,12 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
                 </div>
               )}
               <div className="mt-10 flex flex-wrap gap-3">
-                <ActionLink to="/contact" search={{ property: property.slug }} variant="outline">
-                  Enquire
+                <ActionLink
+                  to="/contact"
+                  search={{ property: property.slug, topic: "Register interest" }}
+                  variant="outline"
+                >
+                  Register interest
                 </ActionLink>
                 <ActionLink to="/contact" variant="text">
                   Contact
@@ -306,8 +310,11 @@ export function CaseStudy({ property }: { property: Property }) {
         ]}
         actions={
           <>
-            <ActionLink to="/contact" search={{ property: property.slug }}>
-              Enquire
+            <ActionLink
+              to="/contact"
+              search={{ property: property.slug, topic: "Register interest" }}
+            >
+              Register interest
             </ActionLink>
             <ActionLink to="/portfolio" variant="text">
               All properties
@@ -345,9 +352,7 @@ export function CaseStudy({ property }: { property: Property }) {
               {
                 label: c.label,
                 to: "/contact" as const,
-                search: /viewing|visit/i.test(c.label)
-                  ? { property: property.slug, topic: "Book a viewing" }
-                  : { property: property.slug },
+                search: { property: property.slug, topic: c.topic },
               },
               { label: "Portfolio", to: "/portfolio" as const },
             ],
