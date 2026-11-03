@@ -173,7 +173,7 @@ function About() {
               <div>
                 <h3 className="font-display text-2xl">Patient capital</h3>
                 <p className="mt-2 text-muted-foreground">
-                  No quarterly pressure. Only long-term value.
+                  We buy to hold, and measure value in decades.
                 </p>
               </div>
             </div>

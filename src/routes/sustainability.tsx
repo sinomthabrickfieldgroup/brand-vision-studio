@@ -30,7 +30,7 @@ export const Route = createFileRoute("/sustainability")({
       {
         name: "description",
         content:
-          "Solar and standby power, borehole water and redundant fibre. Infrastructure that works for decades, not for a quarterly report.",
+          "Solar and standby power, and borehole water. Infrastructure that works for decades.",
       },
       { property: "og:title", content: "Built to endure | Brickfield Group" },
       {
@@ -112,7 +112,7 @@ function Sustainability() {
             Built to <em>endure</em>
           </>
         }
-        text="We invest in infrastructure that works for decades. Not for a quarterly report."
+        text="We invest in infrastructure that works for decades."
         media="canvasSolar"
         slidesEyebrow="Built to endure"
         slides={[
