@@ -1023,22 +1023,18 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, oklch(0.24 0.005 60 / 0.92), oklch(0.24 0.005 60 / 0.45));
+    background: linear-gradient(to top, oklch(0.24 0.005 60 / 0.92), oklch(0.24 0.005 60 / 0.78));
   }
   .pillar-card:hover .pillar-media,
-  .pillar-card:focus-within .pillar-media {
+  .pillar-card:focus-visible .pillar-media {
     opacity: 1;
   }
   .pillar-card {
     transition: color 0.6s var(--ease-editorial);
   }
   .pillar-card:hover,
-  .pillar-card:focus-within {
+  .pillar-card:focus-visible {
     color: var(--primary-foreground);
-  }
-  .pillar-card:hover .text-muted-foreground,
-  .pillar-card:focus-within .text-muted-foreground {
-    color: oklch(1 0 0 / 0.72);
   }
 
   details.readmore summary {

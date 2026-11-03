@@ -216,20 +216,22 @@ function Index() {
             <Link
               key={p.title}
               to={p.to}
-              className="pillar-card flex flex-col bg-background p-6 md:p-8"
+              className="pillar-card group flex flex-col bg-background p-6 md:p-8"
               data-reveal-item
             >
               <div className="pillar-media" aria-hidden="true">
                 <Media id={p.media} fill reveal={false} bare />
               </div>
               <div className="flex items-center justify-between">
-                <span className="pillar-num font-display text-sm text-fern transition-colors">
+                <span className="pillar-num font-display text-sm text-fern transition-colors group-hover:text-accent group-focus-visible:text-accent">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </div>
               <Media id={p.media} className="mt-6 aspect-[4/3]" />
               <h3 className="mt-8 font-display text-3xl leading-tight">{p.title}</h3>
-              <p className="mt-4 text-muted-foreground transition-colors">{p.text}</p>
+              <p className="mt-4 text-muted-foreground transition-colors group-hover:text-primary-foreground/85 group-focus-visible:text-primary-foreground/85">
+                {p.text}
+              </p>
               <span className="mt-8 inline-flex items-center gap-2 text-sm">
                 {p.label} <ArrowUpRight size={16} />
               </span>
