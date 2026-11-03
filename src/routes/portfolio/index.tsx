@@ -125,7 +125,7 @@ function Portfolio() {
           <SectionIntro
             eyebrow="Index"
             title="The portfolio at a glance"
-            text="Hover a row for a look at the building."
+            text="Six properties across Cape Town and Johannesburg, each held for the long term."
           />
           <div className="mt-14">
             <PortfolioIndex items={properties} />
