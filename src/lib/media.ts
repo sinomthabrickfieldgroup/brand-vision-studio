@@ -118,6 +118,14 @@ export const media = {
     prompt:
       "A-grade private office suite inside a heritage industrial conversion, oak floors, white walls, black steel window frames, plants, ergonomic desks, bright clean daylight.",
   }),
+  canvasLivingWall: shot({
+    title: "Canvas · living wall",
+    alt: "Living wall at Brickfield Canvas",
+    aspect: "4/3",
+    tone: "sage",
+    prompt:
+      "A lush vertical living wall of ferns and trailing plants against restored brick inside a converted industrial office atrium, soft daylight from a skylight, drip irrigation lines just visible.",
+  }),
   canvasSolar: shot({
     title: "Canvas · rooftop solar",
     alt: "Rooftop solar array at Brickfield Canvas",
@@ -136,6 +144,14 @@ export const media = {
     src: loopPhoto.url,
     prompt:
       "Freshly refurbished industrial facility in Maitland, Cape Town: clean charcoal steel cladding, large roller doors, a two-storey office block with glazing, a concrete truck yard, clear blue sky, crisp midday light.",
+  }),
+  loopBefore: shot({
+    title: "9 Loop Street · before, 2026",
+    alt: "9 Loop Street as a logistics depot before refurbishment",
+    aspect: "21/9",
+    tone: "concrete",
+    prompt:
+      "The same industrial facility BEFORE refurbishment, identical framing: a tired conventional warehouse and logistics depot, faded cladding, rusted roller doors, potholed yard, overcast flat light, documentary style. Use a progress photo from the refurbishment if one exists.",
   }),
   loopWarehouse: shot({
     title: "9 Loop Street · warehouse floor",
@@ -185,7 +201,7 @@ export const media = {
     aspect: "21/9",
     tone: "brick",
     prompt:
-      "Purpose-built three-storey office building in Woodstock, Cape Town, red face-brick with long horizontal bands of glazing, a neat entrance canopy, street trees, warm late-afternoon light.",
+      "Large purpose-built office building in Woodstock, Cape Town, set back from the main road, face-brick and long horizontal bands of glazing, an open parking area in front, a neighbouring converted brick campus visible beside it, warm late-afternoon light.",
   }),
   callFloor: shot({
     title: "Call Centre · open floor",
@@ -222,12 +238,12 @@ export const media = {
 
   // ── 66/68 Wierda (Wierda Valley, Sandton) ──────────────────────────────────
   wierdaHero: shot({
-    title: "66/68 Wierda · exterior",
+    title: "66/68 Wierda · the pair",
     alt: "66/68 Wierda office building in Wierda Valley, Sandton",
     aspect: "21/9",
     tone: "dusk",
     prompt:
-      "Contemporary four-storey office building in Wierda Valley, Sandton, Johannesburg, pale stone and glass facade, mature jacaranda trees, Highveld golden-hour light, clear sky.",
+      "Two neighbouring contemporary A-grade office buildings side by side in Wierda Valley, Sandton, Johannesburg, pale stone and glass facades, basement parking ramp, mature trees, Highveld golden-hour light, clear sky.",
   }),
   wierdaLobby: shot({
     title: "66/68 Wierda · lobby",
@@ -256,12 +272,12 @@ export const media = {
 
   // ── 24 Montague Drive (Montague Gardens) ──────────────────────────────────
   montagueHero: shot({
-    title: "24 Montague · exterior",
+    title: "24 Montague · the park",
     alt: "24 Montague Drive industrial building",
     aspect: "21/9",
     tone: "concrete",
     prompt:
-      "Well-kept mid-size industrial warehouse in Montague Gardens, Cape Town, light grey cladding, a row of roller doors, a staff parking area, mountains faint on the horizon, clean even midday light.",
+      "Well-kept multi-tenant industrial park in Montague Gardens, Cape Town: two adjoining warehouse units with light grey cladding and roller doors, a shared yard with two access gates, parking bays, mountains faint on the horizon, clean even midday light.",
   }),
   montagueYard: shot({
     title: "24 Montague · loading",
@@ -295,7 +311,7 @@ export const media = {
     aspect: "21/9",
     tone: "brick",
     prompt:
-      "Older but well-maintained red-brick industrial building on a busy Woodstock street, painted steel roller doors, a neat pavement, traditional Cape Town terrace houses nearby, late-afternoon light.",
+      "Heritage red-brick industrial building on Albert Road, Woodstock, Cape Town, tall arched windows, painted steel doors, a building between 7.5 and 13 metres high, creative-district street life out of focus, late-afternoon light.",
   }),
   albertInterior: shot({
     title: "219 Albert Road · interior",
@@ -303,7 +319,7 @@ export const media = {
     aspect: "4/3",
     tone: "concrete",
     prompt:
-      "High-ceiling brick warehouse interior with steel roof trusses, pallet racking for vertical storage, clean concrete floor, daylight through high windows.",
+      "High-ceiling heritage brick interior with steel roof trusses, a large-format print operation and maker workbenches in soft focus, clean concrete floor, daylight through tall windows.",
   }),
   albertLoading: shot({
     title: "219 Albert Road · loading",

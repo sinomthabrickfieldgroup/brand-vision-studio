@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowUpRight, Check, Plus, Quote } from "lucide-react";
+import { ArrowUpRight, Check, Sparkles } from "lucide-react";
 import {
   BeforeAfter,
   CtaPair,
@@ -14,7 +14,7 @@ import {
   ActionLink,
 } from "@/components/editorial";
 import { Media } from "@/components/media";
-import { mailto, properties, type Block, type Property } from "@/lib/portfolio";
+import { properties, type Block, type Property } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
 const wrap = "mx-auto max-w-7xl px-6 md:px-10";
@@ -91,7 +91,7 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
                 </div>
               )}
               <div className="mt-10 flex flex-wrap gap-3">
-                <ActionLink href={mailto(property.ctas[1].subject)} variant="outline">
+                <ActionLink to="/contact" search={{ property: property.slug }} variant="outline">
                   Enquire
                 </ActionLink>
                 <ActionLink to="/contact" variant="text">
@@ -103,7 +103,7 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
         </section>
       );
     case "tabs": {
-      const dark = block.eyebrow === "Infrastructure";
+      const dark = !!block.dark;
       return (
         <section
           className={cn(dark ? "bg-primary text-primary-foreground" : "bg-card", "py-24 md:py-32")}
@@ -169,56 +169,108 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
           <StatRow stats={block.stats} className="mt-14" />
         </section>
       );
-    case "longform":
+    case "specs":
       return (
         <section className={cn(wrap, "py-24 md:py-32")}>
           <div className="grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-20">
-            <div>
-              <Eyebrow>{block.eyebrow}</Eyebrow>
-              <h2 className="mt-5 font-display text-4xl leading-[1.05] md:text-5xl">
-                {block.title}
-              </h2>
-              {block.media && (
-                <Media id={block.media} className="mt-10 aspect-[4/5]" parallax={0.05} />
-              )}
+            <div className="md:sticky md:top-24 md:self-start">
+              <SectionIntro eyebrow={block.eyebrow} title={block.title} text={block.text} />
+              <Media
+                id={block.media}
+                className="mt-10 hidden aspect-[4/5] md:block"
+                parallax={0.05}
+              />
             </div>
-            <div className="md:pt-16">
-              <p className="text-pretty font-display text-2xl leading-snug md:text-3xl">
-                {block.lead}
-              </p>
-              <details className="readmore mt-10 border-t">
-                <summary className="flex items-center justify-between py-5 text-sm font-medium">
-                  Read the full specification
-                  <span className="readmore-plus grid h-9 w-9 place-items-center rounded-full border">
-                    <Plus size={16} />
-                  </span>
-                </summary>
-                <div className="space-y-5 pb-4 text-lg leading-relaxed text-muted-foreground">
-                  {block.paragraphs.map((p) => (
-                    <p key={p}>{p}</p>
+            <div>
+              <dl className="spec-sheet">
+                {property.specs.map((s) => (
+                  <div key={s.label} className="spec-row" data-reveal-item>
+                    <dt>{s.label}</dt>
+                    <dd>
+                      {s.href ? (
+                        <a
+                          href={s.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 text-fern link-gold"
+                        >
+                          {s.value} <ArrowUpRight size={14} />
+                        </a>
+                      ) : (
+                        s.value
+                      )}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+              {property.highlights.length > 0 && (
+                <div className="mt-14">
+                  <Eyebrow>Highlights</Eyebrow>
+                  <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                    {property.highlights.map((h) => (
+                      <li
+                        key={h}
+                        data-reveal-item
+                        className="flex items-start gap-3 rounded-sm bg-card p-4 text-sm leading-relaxed"
+                      >
+                        <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-accent/30 text-fern">
+                          <Check size={12} />
+                        </span>
+                        {h}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {property.tenants.length > 0 && (
+                <div className="mt-14">
+                  <Eyebrow>{property.tenants.length === 1 ? "Tenant" : "Tenants"}</Eyebrow>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    {property.tenants.map((t) => (
+                      <span key={t} className="tenant-chip">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+              {property.external && (
+                <div className="mt-14 flex flex-wrap gap-3">
+                  {property.external.map((e, i) => (
+                    <ActionLink key={e.href} href={e.href} variant={i === 0 ? "solid" : "text"}>
+                      {e.label}
+                    </ActionLink>
                   ))}
                 </div>
-              </details>
+              )}
             </div>
           </div>
         </section>
       );
-    case "quote":
+    case "compare":
       return (
-        <section className="relative isolate overflow-hidden py-28 md:py-40">
-          <div className="absolute inset-0 -z-10">
-            <Media id={block.media} fill reveal={false} parallax={0.1} bare />
-            <div className="absolute inset-0 bg-background/85" />
+        <section className="bg-card py-24 md:py-32">
+          <div className={wrap}>
+            <SectionIntro eyebrow={block.eyebrow} title={block.title} text={block.text} center />
+            <div className="mt-16 grid gap-6 md:grid-cols-2">
+              {block.columns.map((c) => (
+                <div key={c.name} className="group bg-background p-6 md:p-8" data-reveal-item>
+                  <div className="overflow-hidden">
+                    <Media
+                      id={c.media}
+                      className="aspect-[16/10] transition-transform duration-[1.4s] group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <h3 className="mt-8 font-display text-3xl">{c.name}</h3>
+                  <div className="mt-6 grid grid-cols-2 gap-6">
+                    {c.stats.map((st) => (
+                      <StatFigure key={st.label} stat={st} className="border-t pt-5" />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-          <figure className={cn(wrap, "max-w-4xl text-center")}>
-            <Quote className="mx-auto text-accent" size={40} />
-            <blockquote className="mt-8 text-balance font-display text-3xl leading-snug md:text-5xl">
-              “{block.quote}”
-            </blockquote>
-            <figcaption className="mt-8 text-sm text-muted-foreground">
-              <span className="font-medium text-foreground">{block.by}</span> · {block.role}
-            </figcaption>
-          </figure>
         </section>
       );
     case "marquee":
@@ -236,11 +288,21 @@ export function CaseStudy({ property }: { property: Property }) {
         eyebrow={`${property.address} · ${property.area}`}
         title={property.name}
         text={property.summary}
-        tags={property.tags}
+        tags={[property.typeLabel, property.area, property.city]}
+        badge={
+          property.status === "Active" ? undefined : (
+            <span className="status-badge">
+              {property.status === "Just completed" && <Sparkles size={12} />}
+              {property.status === "Just completed" ? "New · Just completed" : property.status}
+            </span>
+          )
+        }
         media={property.hero}
         actions={
           <>
-            <ActionLink href={mailto(property.ctas[1].subject)}>Enquire</ActionLink>
+            <ActionLink to="/contact" search={{ property: property.slug }}>
+              Enquire
+            </ActionLink>
             <ActionLink to="/portfolio" variant="text">
               All properties
             </ActionLink>
@@ -254,12 +316,12 @@ export function CaseStudy({ property }: { property: Property }) {
 
       <Marquee
         items={[
-          property.type,
+          property.typeLabel,
+          property.address,
           property.area,
-          property.city,
-          ...property.tags.slice(2),
+          `Acquired ${property.acquired}`,
+          ...property.tenants,
           "Held for the long term",
-          "Operated in-house",
         ]}
         className="border-y py-6 text-muted-foreground"
       />
@@ -275,7 +337,13 @@ export function CaseStudy({ property }: { property: Property }) {
             title: c.title,
             text: c.text,
             actions: [
-              { label: c.label, href: mailto(c.subject) },
+              {
+                label: c.label,
+                to: "/contact" as const,
+                search: /viewing|visit/i.test(c.label)
+                  ? { property: property.slug, topic: "Book a viewing" }
+                  : { property: property.slug },
+              },
               { label: "Portfolio", to: "/portfolio" as const },
             ],
           })) as never

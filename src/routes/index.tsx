@@ -12,7 +12,7 @@ import {
 import { Media } from "@/components/media";
 import { PortfolioReel } from "@/components/portfolio-views";
 import type { MediaId } from "@/lib/media";
-import { properties } from "@/lib/portfolio";
+import { portfolioTotals, properties } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -151,7 +151,7 @@ function Index() {
               {
                 value: "100%",
                 label: "Occupancy rate",
-                text: "Canvas fully tenanted since June 2022.",
+                text: "Across the portfolio.",
               },
               {
                 value: "15+",
@@ -159,7 +159,7 @@ function Index() {
                 text: "Disciplined acquisition and management since the beginning.",
               },
               {
-                value: "30K+",
+                value: `${Math.floor(portfolioTotals.gla / 1000)}K+`,
                 label: "Square metres held",
                 text: "Across six properties in two cities.",
               },

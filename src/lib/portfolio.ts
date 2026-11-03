@@ -13,6 +13,12 @@ export interface Item {
   text: string;
 }
 
+export interface Spec {
+  label: string;
+  value: string;
+  href?: string;
+}
+
 export type Block =
   | {
       type: "beforeAfter";
@@ -39,6 +45,7 @@ export type Block =
       eyebrow: string;
       title: string;
       text?: string;
+      dark?: boolean;
       tabs: (Item & { label: string; media: MediaId })[];
     }
   | {
@@ -51,270 +58,324 @@ export type Block =
     }
   | { type: "statGrid"; eyebrow: string; title: string; text: string; stats: Stat[] }
   | {
-      type: "longform";
+      type: "compare";
       eyebrow: string;
       title: string;
-      lead: string;
-      paragraphs: string[];
-      media?: MediaId;
+      text: string;
+      columns: { name: string; media: MediaId; stats: Stat[] }[];
     }
-  | { type: "quote"; quote: string; by: string; role: string; media: MediaId }
+  /** Specification sheet: renders the property's specs, highlights and tenants. */
+  | { type: "specs"; eyebrow: string; title: string; text?: string; media: MediaId }
   | { type: "marquee"; items: string[] };
 
 export interface Property {
   slug: string;
   name: string;
-  shortName: string;
   address: string;
   area: string;
   city: "Cape Town" | "Johannesburg";
   type: PropertyType;
-  tags: string[];
+  /** Label shown on the page, e.g. "Mixed-use flagship". */
+  typeLabel: string;
+  status: "Flagship" | "Active" | "New acquisition" | "Just completed";
+  acquired: string;
+  tenants: string[];
+  headline: string;
   summary: string;
   hero: MediaId;
   card: MediaId;
   facts: Stat[];
+  specs: Spec[];
+  highlights: string[];
+  external?: { label: string; href: string }[];
   blocks: Block[];
   ctas: [Item & { label: string; subject: string }, Item & { label: string; subject: string }];
 }
 
-/*
- * FACT-CHECK before launch — the wireframes and the current live copy disagree on a few
- * numbers. Each is marked "CONFIRM" next to where it is used.
- */
 export const properties: Property[] = [
   {
     slug: "brickfield-canvas",
     name: "Brickfield Canvas",
-    shortName: "Canvas",
     address: "35 Brickfield Road",
     area: "Woodstock",
     city: "Cape Town",
     type: "Mixed-use",
-    tags: ["Mixed-use", "Woodstock", "Fully tenanted"],
+    typeLabel: "Mixed-use flagship",
+    status: "Flagship",
+    acquired: "2016",
+    tenants: [],
+    headline: "Redeveloped. Reimagined. Fully tenanted.",
     summary:
-      "An industrial shell turned into a living, working precinct. Fully tenanted since June 2022.",
+      "10,400m² of A-Grade workspace in Woodstock, home to 20+ businesses across tech, health, finance and the sciences. Built green, fully tenanted since 2022.",
     hero: "canvasHero",
     card: "canvasCourtyard",
     facts: [
-      { value: "15,000m²", label: "Gross lettable area" }, // CONFIRM: live site says 10,400m²
-      { value: "100%", label: "Occupied since June 2022" },
-      { value: "20+", label: "Businesses on site" },
-      { value: "R150m+", label: "Infrastructure invested" },
+      { value: "10,400m²", label: "Gross lettable area" },
+      { value: "100%", label: "Tenanted since 2022" },
+      { value: "20+", label: "Businesses on campus" },
+      { value: "2019", label: "Completed" },
+    ],
+    specs: [
+      { label: "Address", value: "35 Brickfield Road, Woodstock" },
+      { label: "GLA", value: "10,400m²" },
+      { label: "Erf size", value: "17,527m²" },
+      { label: "Uses", value: "Co-working, café, studios, event space" },
+      { label: "Parking", value: "148 single + 21 tandem bays" },
+      {
+        label: "Tenants",
+        value: "Meet the tenants",
+        href: "https://brickfieldcanvas.com/community#tenants",
+      },
+      { label: "Acquired", value: "2016" },
+      { label: "Completed", value: "2019" },
+    ],
+    highlights: [
+      "A-Grade workspace in the heart of Woodstock",
+      "Green-tech infrastructure: solar, borehole, in-slab heating and living walls",
+      "Home to 20+ businesses across tech, health, biotech, finance and consulting",
+      "50% HVAC efficiency above baseline",
+      "24/7 generator-backed power with automatic failover",
+      "148 single + 21 tandem parking bays on site",
+      "Walk score 92. 10 minutes to the CBD",
+    ],
+    external: [
+      { label: "Visit Brickfield Canvas", href: "https://brickfieldcanvas.com" },
+      { label: "Meet the tenants", href: "https://brickfieldcanvas.com/community#tenants" },
     ],
     blocks: [
       {
         type: "beforeAfter",
         eyebrow: "The transformation",
-        title: "From industrial shell to a living, working precinct",
-        text: "Drag to see 35 Brickfield Road before and after. Same building, same street, a completely different future.",
+        title: "From general industrial to a campus for Africa's next decade",
+        text: "In 2016 we acquired a general industrial property at 35 Brickfield Road. Over three years it was stripped back and rebuilt. Drag to see the difference.",
         before: "canvasBefore",
         after: "canvasAfter",
       },
       {
-        type: "split",
+        type: "specs",
         eyebrow: "Specifications",
         title: "The numbers behind disciplined adaptive reuse",
-        text: "Built on patient capital and held for the long term. Every square metre works for its tenants.",
+        text: "Canvas sits alongside the Brickfield Call Centre on a combined 21,000m² land parcel, with circa 14,000m² of office space in total.",
         media: "canvasOffices",
-        bullets: [
-          "15,000 square metres of gross lettable area",
-          "100 percent occupancy since June 2022",
-          "Secure parking, fibre and backup power",
-        ],
       },
       {
         type: "tabs",
-        eyebrow: "Features",
+        eyebrow: "On campus",
         title: "Everything Canvas is built to offer",
-        text: "A rich network of tenants, plus the café, gym and spaces that make people want to come in.",
+        text: "A-Grade offices with the amenities that make people want to come in.",
         tabs: [
           {
             label: "Community",
-            title: "20+ businesses across nine verticals",
-            text: "No single tenant carries the building's performance. The mix is broad by design.",
+            title: "20+ businesses, one campus",
+            text: "Tech, health, biotech, finance and consulting, working side by side.",
             media: "canvasCourtyard",
           },
           {
             label: "Café",
-            title: "The heart of the precinct",
-            text: "Coffee in the morning, lunch meetings at noon. The café is where tenants meet each other.",
+            title: "The community café",
+            text: "Where tenants meet each other, from the first coffee to the last meeting.",
             media: "canvasCafe",
           },
           {
             label: "Meeting rooms",
-            title: "Rooms you can book by the hour",
-            text: "Glass-walled boardrooms and huddle spaces, available to every tenant.",
+            title: "10 meeting rooms",
+            text: "Bookable rooms for every size of conversation, available to every tenant.",
             media: "canvasMeeting",
           },
           {
-            label: "Events",
-            title: "A calendar that keeps people coming in",
-            text: "Talks, socials and launches in the courtyard turn neighbours into a network.",
-            media: "canvasEvents",
-          },
-          {
             label: "Co-working",
-            title: "Flexible desks for growing teams",
-            text: "Start with a desk, grow into a suite. Teams can scale without leaving the building.",
+            title: "Co-working and studios",
+            text: "Room to start small and grow without leaving the building.",
             media: "canvasCowork",
           },
           {
+            label: "Events",
+            title: "Event space",
+            text: "Talks, launches and socials that turn neighbours into a network.",
+            media: "canvasEvents",
+          },
+          {
             label: "Gym",
-            title: "Wellness on site",
-            text: "An on-site gym means no detour before or after work.",
+            title: "An on-site gym",
+            text: "Wellness on campus, no detour before or after work.",
             media: "canvasGym",
           },
         ],
       },
       {
-        type: "split",
-        eyebrow: "Tenancy",
-        title: "Opened in a lockdown. Fully tenanted by 2022.",
-        text: "Canvas opened its doors in March 2020, the same week South Africa went into lockdown. Two years of patient, methodical leasing followed, and by June 2022 the building was full.", // CONFIRM: live site says the campus emerged in 2019
-        media: "canvasCowork",
-        reverse: true,
-        stats: [
-          { value: "Mar 2020", label: "Doors opened" },
-          { value: "Jun 2022", label: "Fully tenanted" },
-        ],
-      },
-      {
         type: "verticals",
         eyebrow: "Who's here",
-        title: "Nine verticals under one roof",
-        text: "FinTech, health, legal, consulting and more. Businesses that grow here tend to stay here.",
+        title: "The businesses shaping what comes next",
+        text: "Completed in 2019 and fully tenanted since 2022. The mix is broad by design.",
         media: "canvasCafe",
         items: [
-          { title: "FinTech", text: "Digital platforms and payment systems." },
-          { title: "Health", text: "Medical practices and wellness providers." },
-          { title: "Legal", text: "Law firms and advisory practices." },
-          { title: "Consulting", text: "Professional services teams." },
-          { title: "Technology", text: "Software and product studios." },
-          { title: "Science", text: "Research and lab-adjacent businesses." },
+          { title: "Tech", text: "Software, platforms and product teams." },
+          { title: "Health", text: "Medical and wellness practices." },
+          { title: "Biotech", text: "Life-science and research businesses." },
+          { title: "Finance", text: "Financial services and fintech." },
+          { title: "Consulting", text: "Advisory and professional services." },
+          { title: "The sciences", text: "Specialists who need A-Grade space." },
         ],
       },
       {
         type: "tabs",
         eyebrow: "Infrastructure",
-        title: "Built to endure",
-        text: "Over R150 million went into the transformation. The HVAC system runs 50 percent above baseline efficiency.",
+        title: "Green infrastructure, running quietly in the background",
+        text: "Built green from the start, so tenants never have to think about it.",
+        dark: true,
         tabs: [
           {
             label: "Power",
-            title: "Generator and solar keep the precinct running",
-            text: "Solar and standby generation run in parallel, so load-shedding doesn't stop the work.",
+            title: "24/7 power with automatic failover",
+            text: "Rooftop solar carries daytime load, with generator backup that switches over on its own.",
             media: "canvasSolar",
           },
           {
             label: "Water",
-            title: "Water independence built into the ground",
-            text: "A borehole and rainwater harvesting reduce reliance on the municipal supply.",
+            title: "A borehole on site",
+            text: "Water independence built into the ground, not left to the municipal supply.",
             media: "borehole",
           },
           {
-            label: "Comms",
-            title: "Fibre with a backup line",
-            text: "Fibre runs through the building with a second ISP ready if the primary line fails.",
-            media: "fibre",
+            label: "Climate",
+            title: "50% HVAC efficiency above baseline",
+            text: "In-slab heating and living walls keep the building comfortable and efficient.",
+            media: "canvasLivingWall",
           },
+        ],
+      },
+      {
+        type: "split",
+        eyebrow: "Location",
+        title: "In the heart of Woodstock, ten minutes from the CBD",
+        text: "Easy to walk to, easy to drive to and easy to park at.",
+        media: "canvasCourtyard",
+        reverse: true,
+        stats: [
+          { value: "92", label: "Walk score" },
+          { value: "10 min", label: "To the CBD" },
+          { value: "169", label: "Parking bays on site" },
+          { value: "21,000m²", label: "Combined land parcel" },
         ],
       },
       {
         type: "gallery",
         eyebrow: "Gallery",
-        title: "Walk the precinct",
+        title: "Walk the campus",
         media: [
-          "canvasAfter",
+          "canvasOffices",
           "canvasCourtyard",
           "canvasCafe",
-          "canvasOffices",
-          "canvasEvents",
+          "canvasMeeting",
           "canvasGym",
+          "canvasHero",
         ],
       },
     ],
     ctas: [
       {
         title: "See it yourself",
-        text: "Walk the floors and see why tenants stay. We'll show you the spaces.",
+        text: "Walk the floors and see why tenants stay. We'll show you around.",
         label: "Book a viewing",
         subject: "Viewing request — Brickfield Canvas",
       },
       {
         title: "Broker enquiries",
-        text: "Get the full specification and current availability. We reply within one business day.",
+        text: "Get the full specification and current availability.",
         label: "Enquire",
         subject: "Broker enquiry — Brickfield Canvas",
       },
     ],
   },
   {
-    slug: "loop-street",
+    slug: "9-loop-street",
     name: "9 Loop Street",
-    shortName: "Loop Street",
     address: "9 Loop Street",
-    area: "Maitland", // CONFIRM: wireframe says Woodstock
+    area: "Maitland",
     city: "Cape Town",
     type: "Industrial",
-    tags: ["Industrial", "Maitland", "Fully tenanted"],
+    typeLabel: "Industrial",
+    status: "Just completed",
+    acquired: "March 2026",
+    tenants: ["AMD Engineering"],
+    headline: "Refurbished from the ground up.",
     summary:
-      "Refurbished from the ground up for serious industry. Strong bones, clean lines and a tenant that stays.",
+      "A newly refurbished premium industrial facility in Maitland: 2,362m² GLA, 400A three-phase power and dual yard access, occupied by AMD Engineering.",
     hero: "loopHero",
     card: "loopWarehouse",
     facts: [
-      { value: "2,362m²", label: "Facility size" },
-      { value: "5 mo", label: "Full refurbishment" },
-      { value: "400A", label: "Three-phase supply" },
-      { value: "100%", label: "Tenanted" },
+      { value: "2,362m²", label: "Gross lettable area" },
+      { value: "400A", label: "Three-phase power" },
+      { value: "925m²", label: "Surfaced yard" },
+      { value: "100%", label: "Occupied" },
+    ],
+    specs: [
+      { label: "Address", value: "9 Loop Street, Maitland" },
+      { label: "GLA", value: "2,362m²" },
+      { label: "Erf size", value: "3,287m²" },
+      { label: "Zoning", value: "General Industrial" },
+      { label: "Warehouse", value: "1,770m² column-efficient floor plate" },
+      { label: "Mezzanine", value: "302m²" },
+      { label: "Office block", value: "290m² admin and reception" },
+      { label: "Yard", value: "925m² surfaced, container and truck handling" },
+      { label: "Power supply", value: "400A three-phase" },
+      { label: "Security", value: "24hr manned + armed response" },
+      { label: "Acquired", value: "March 2026" },
+      { label: "Completed", value: "August 2026" },
+    ],
+    highlights: [
+      "Dual yard access via Loop Street and Norway Street",
+      "400A three-phase power suited to heavy engineering and fabrication",
+      "Comprehensively refurbished in 2026, 100% occupied",
+      "Home to AMD Engineering, a specialist steel fabrication firm established in 1993",
     ],
     blocks: [
       {
+        type: "beforeAfter",
+        eyebrow: "Newly completed · August 2026",
+        title: "Five months from depot to premium facility",
+        text: "Before the refurbishment, 9 Loop Street was a conventional industrial warehouse and logistics depot. Now it has upgraded power, modern offices and yard access built for heavy link trucks.",
+        before: "loopBefore",
+        after: "loopHero",
+      },
+      {
         type: "split",
-        eyebrow: "The specification",
+        eyebrow: "The facility",
         title: "Designed around the way industry works",
-        text: "Acquired in March 2026 and completed in August 2026, a conventional warehouse became a premium facility tailored to manufacturing and fabrication.",
+        text: "A column-efficient warehouse floor with a modern office and canteen block, and a yard that trucks can actually use.",
         media: "loopWarehouse",
         items: [
           {
-            title: "Column-efficient warehouse",
-            text: "Clear floor for production lines and overhead handling.",
+            title: "1,770m² warehouse",
+            text: "A column-efficient floor plate, plus a 302m² mezzanine.",
           },
           { title: "Dual yard access", text: "Trucks enter from Loop Street and Norway Street." },
-          {
-            title: "Office and canteen block",
-            text: "A proper home for the team, not an afterthought.",
-          },
+          { title: "290m² office block", text: "Admin, reception and canteen for the team." },
         ],
       },
       {
+        type: "specs",
+        eyebrow: "Specifications",
+        title: "Built for heavy engineering",
+        media: "loopPower",
+      },
+      {
         type: "gallery",
-        eyebrow: "The gallery",
-        title: "A working building with clean lines and strong bones",
+        eyebrow: "Gallery",
+        title: "Strong bones, clean lines",
         media: ["loopHero", "loopWarehouse", "loopYard", "loopOffice", "loopPower"],
       },
       {
         type: "split",
-        eyebrow: "Tenancy",
-        title: "A tenant that stays is the only metric that matters",
-        text: "The first tenant is AMD Engineering, a specialist steel fabrication business established in 1993. The power and layout were suited to how they work.",
+        eyebrow: "Tenant",
+        title: "Purpose-suited to AMD Engineering",
+        text: "The first tenant is AMD Engineering, a Maitland-based specialist in steel fabrication and manufacturing, established in 1993. The 400A supply and column-efficient floor were suited to how they work.",
         media: "loopFabrication",
         reverse: true,
-        items: [
-          { title: "Long lease", text: "The tenant signed for the long haul." },
-          { title: "Single covenant", text: "One tenant, one lease, one relationship." },
-          {
-            title: "In-house care",
-            text: "Our own maintenance team has kept the building sharp since day one.",
-          },
+        stats: [
+          { value: "1993", label: "AMD Engineering established" },
+          { value: "100%", label: "Occupied on completion" },
         ],
-      },
-      {
-        type: "split",
-        eyebrow: "Power with a purpose",
-        title: "400A three-phase, ready for heavy engineering",
-        text: "The upgraded supply supports the demands of fabrication without compromise. We spend where the occupier needs it.",
-        media: "loopPower",
       },
     ],
     ctas: [
@@ -335,293 +396,331 @@ export const properties: Property[] = [
   {
     slug: "brickfield-call-centre",
     name: "Brickfield Call Centre",
-    shortName: "Call Centre",
     address: "33 Brickfield Road",
     area: "Woodstock",
     city: "Cape Town",
     type: "Office",
-    tags: ["Office", "Woodstock", "Fully tenanted"],
+    typeLabel: "Office",
+    status: "Active",
+    acquired: "2009",
+    tenants: ["Nimble Group"],
+    headline: "Single covenant. Long term.",
     summary:
-      "A purpose-built office asset in the heart of Woodstock, with long-term single-covenant tenancy.",
+      "6,101m² of purpose-built office space in Woodstock, fully occupied by Nimble Group, next door to Brickfield Canvas.",
     hero: "callHero",
     card: "callFloor",
     facts: [
-      { value: "100%", label: "Occupied since completion" },
-      { value: "1", label: "Long-term covenant" },
-      { value: "24/7", label: "Redundant power" },
-      { value: "2019", label: "In-house ops since" },
+      { value: "6,101m²", label: "Contiguous office space" },
+      { value: "68", label: "Parking bays" },
+      { value: "100%", label: "Occupied" },
+      { value: "2009", label: "Acquired" },
+    ],
+    specs: [
+      { label: "Address", value: "33 Brickfield Road, Woodstock" },
+      { label: "GLA", value: "6,101m²" },
+      { label: "Erf size", value: "7,362m²" },
+      { label: "Zoning", value: "General Industrial" },
+      { label: "Parking", value: "68 open bays (expandable)" },
+      { label: "Tenant", value: "Nimble Group" },
+      { label: "Acquired", value: "2009" },
+    ],
+    highlights: [
+      "6,101m² of contiguous office space, rare in the Woodstock node",
+      "68 parking bays with the option to expand on and off site",
+      "Direct access to Brickfield Canvas: café, gym, function space and meeting rooms",
+      "Fully occupied, single long-term covenant with Nimble Group",
     ],
     blocks: [
       {
         type: "split",
         eyebrow: "Purpose-built",
-        title: "Built for continuous operation and high-density use",
-        text: "Redundant power, fibre connectivity and secure access are standard here. The building carries the infrastructure a modern operations tenant demands.",
+        title: "Built around one tenant's operations",
+        text: "Tucked away from the main road but well connected for commutes, 33 Brickfield Road was purpose-built for Nimble Group's operational needs. Six thousand square metres of contiguous office space in the Woodstock node is rare, and Nimble Group's continued occupation speaks to that.",
         media: "callFloor",
-        bullets: [
-          "Generator and UPS backup",
-          "Fibre with a second provider",
-          "Controlled access and on-site security",
-        ],
       },
       {
         type: "gallery",
         eyebrow: "Gallery",
         title: "Exterior, workspaces and common areas",
-        media: ["callHero", "callFloor", "callBreakout", "callEntrance", "callPlant"],
+        media: ["callHero", "callFloor", "callBreakout", "callEntrance"],
       },
       {
         type: "split",
-        eyebrow: "Tenancy",
-        title: "A long-term covenant that proves the asset",
-        text: "Fully tenanted since completion. The tenant stays because the building works for them.",
-        media: "callBreakout",
+        eyebrow: "Next door",
+        title: "Canvas amenities, on tap",
+        text: "The building has direct access to Brickfield Canvas next door, on a combined 21,000m² land parcel.",
+        media: "canvasCafe",
         reverse: true,
-        items: [
-          {
-            title: "Lease track record",
-            text: "Long-term, single-covenant tenancy with no churn.",
-          },
-          { title: "Current occupancy", text: "Fully let to a covenant that values stability." },
-          {
-            title: "Space configuration",
-            text: "Open floor plates designed for high-density operations.",
-          },
-        ],
+        bullets: ["Community café", "Gym", "Function space", "Meeting rooms"],
       },
       {
-        type: "split",
-        eyebrow: "Operated in-house",
-        title: "We don't hand the keys to a third party",
-        text: "Brickfield Services has run cleaning and security for this building since it opened. The teams know the asset. They know the tenant. For a broker, that means one point of accountability.",
+        type: "specs",
+        eyebrow: "Specifications",
+        title: "The asset at a glance",
         media: "callEntrance",
       },
     ],
     ctas: [
       {
         title: "For brokers",
-        text: "Request yield details and current leasing information for this asset.",
+        text: "Request details on this asset and the wider Woodstock precinct.",
         label: "Enquire",
         subject: "Broker enquiry — Brickfield Call Centre",
       },
       {
         title: "For tenants",
-        text: "Arrange a viewing and see how this building could work for your team.",
-        label: "Book a viewing",
-        subject: "Viewing request — Brickfield Call Centre",
+        text: "Talk to us about office space in the Brickfield precinct.",
+        label: "Contact",
+        subject: "Tenant enquiry — Brickfield Call Centre",
       },
     ],
   },
   {
-    slug: "wierda",
+    slug: "66-68-wierda",
     name: "66/68 Wierda",
-    shortName: "Wierda",
-    address: "66/68 Wierda Road",
+    address: "66 & 68 Wierda Road East",
     area: "Wierda Valley, Sandton",
     city: "Johannesburg",
     type: "Office",
-    tags: ["Office", "Sandton", "Long-term tenancy"],
+    typeLabel: "Office",
+    status: "Active",
+    acquired: "2014",
+    tenants: ["Nimble Group"],
+    headline: "Two buildings. One covenant.",
     summary:
-      "A purpose-built office holding in Johannesburg, held for long-term single-covenant tenancy and steady yield.",
+      "Two A-Grade office buildings in Wierda Valley, Sandton: 5,636m² GLA combined, fully let to Nimble Group on a long-term basis.",
     hero: "wierdaHero",
     card: "wierdaLobby",
     facts: [
-      { value: "100%", label: "Occupancy" },
-      { value: "1", label: "Single covenant" },
-      { value: "9%", label: "Group yield track record" },
-      { value: "0", label: "Vacancy churn" },
+      { value: "5,636m²", label: "Combined GLA" },
+      { value: "2", label: "A-Grade buildings" },
+      { value: "195", label: "Parking bays" },
+      { value: "100%", label: "Let to Nimble Group" },
+    ],
+    specs: [
+      { label: "Address", value: "66 & 68 Wierda Road East, Wierda Valley" },
+      { label: "Combined GLA", value: "5,636m²" },
+      { label: "66 Wierda GLA", value: "1,806m²" },
+      { label: "68 Wierda GLA", value: "3,830m²" },
+      { label: "66 Wierda erf size", value: "5,800m²" },
+      { label: "Parking, 66 Wierda", value: "18 basement + 39 undercover" },
+      { label: "Parking, 68 Wierda", value: "63 basement + 41 undercover + 34 open" },
+      { label: "Total parking", value: "195 bays" },
+      { label: "Tenant", value: "Nimble Group" },
+      { label: "Acquired", value: "2014" },
+    ],
+    highlights: [
+      "5,636m² combined GLA across two A-Grade buildings",
+      "Fully let to Nimble Group, a single long-term covenant",
+      "195 parking bays across basement, undercover and open",
     ],
     blocks: [
       {
-        type: "longform",
+        type: "split",
         eyebrow: "The holding",
-        title: "A steady office holding",
-        lead: "66/68 Wierda was acquired with one clear objective: stable, long-term space for a tenant that values continuity.",
-        paragraphs: [
-          "The property offers functional office accommodation with a layout that supports a single tenant. It is not a speculative development.",
-          "For brokers, the metrics are straightforward. The property carries a strong occupancy record and contributes to the group's 9% yield track record. It is clean, well maintained and free of vacancy churn.",
-          "The building forms part of a wider strategy. Brickfield Group does not trade properties on short cycles. We hold, improve and operate. That is the difference.",
-        ],
+        title: "Acquired separately. Operated as one.",
+        text: "66 and 68 Wierda Road East are neighbouring A-Grade office properties in Wierda Valley, Sandton. Together they are fully let to Nimble Group.",
         media: "wierdaLobby",
+      },
+      {
+        type: "compare",
+        eyebrow: "Side by side",
+        title: "Two buildings, one asset",
+        text: "How the space and parking split across the pair.",
+        columns: [
+          {
+            name: "66 Wierda",
+            media: "wierdaFloor",
+            stats: [
+              { value: "1,806m²", label: "GLA" },
+              { value: "57", label: "Parking bays", text: "18 basement + 39 undercover" },
+            ],
+          },
+          {
+            name: "68 Wierda",
+            media: "wierdaHero",
+            stats: [
+              { value: "3,830m²", label: "GLA" },
+              {
+                value: "138",
+                label: "Parking bays",
+                text: "63 basement + 41 undercover + 34 open",
+              },
+            ],
+          },
+        ],
       },
       {
         type: "gallery",
         eyebrow: "Gallery",
-        title: "The space and the precinct",
+        title: "The buildings and the precinct",
         media: ["wierdaHero", "wierdaLobby", "wierdaFloor", "wierdaStreet"],
       },
       {
-        type: "split",
-        eyebrow: "Tenancy",
-        title: "Built for a tenant that stays",
-        text: "This is not a building designed for turnover. It is designed for a tenant that wants to remain.",
-        media: "wierdaFloor",
-        items: [
-          {
-            title: "Purpose-built office space",
-            text: "The layout works for a single covenant. No retrofitting, no compromises.",
-          },
-          {
-            title: "Long-term lease track record",
-            text: "Tenants stay because the landlord doesn't churn properties or leases.",
-          },
-          {
-            title: "Operational stability",
-            text: "Services are managed directly, not subcontracted to strangers.",
-          },
-        ],
-      },
-      {
-        type: "quote",
-        quote: "The landlord actually answers the phone. That matters more than people think.",
-        by: "Tenant representative",
-        role: "Office tenant, 66/68 Wierda",
+        type: "specs",
+        eyebrow: "Specifications",
+        title: "The asset at a glance",
         media: "wierdaStreet",
-      }, // CONFIRM: placeholder testimonial from wireframe — get a real, approved quote
+      },
     ],
     ctas: [
       {
         title: "Leasing enquiries",
-        text: "Speak to us about long-term office space at 66/68 Wierda.",
+        text: "Speak to us about office space in Wierda Valley.",
         label: "Contact",
         subject: "Leasing enquiry — 66/68 Wierda",
       },
       {
-        title: "Viewing requests",
-        text: "Arrange a walkthrough of the building and surrounding precinct.",
-        label: "Book a viewing",
-        subject: "Viewing request — 66/68 Wierda",
+        title: "Broker enquiries",
+        text: "Request details on this Sandton holding.",
+        label: "Enquire",
+        subject: "Broker enquiry — 66/68 Wierda",
       },
     ],
   },
   {
-    slug: "montague",
+    slug: "24-montague",
     name: "24 Montague",
-    shortName: "Montague",
     address: "24 Montague Drive",
-    area: "Montague Gardens", // CONFIRM: wireframe says Woodstock
+    area: "Montague Gardens",
     city: "Cape Town",
     type: "Industrial",
-    tags: ["Industrial", "Montague Gardens", "Long-term tenancy"],
+    typeLabel: "Industrial",
+    status: "Active",
+    acquired: "2012",
+    tenants: ["Wispeco", "Rich Home"],
+    headline: "Two businesses. One well-run park.",
     summary:
-      "A disciplined industrial holding built for tenants who need certainty and brokers who value yield.",
+      "A multi-tenant industrial park in Montague Gardens: a 7,362m² General Industrial site with dual access, 35 parking bays and room to load.",
     hero: "montagueHero",
     card: "montagueInterior",
     facts: [
-      { value: "100%", label: "Occupancy", text: "Fully let to a long-term single covenant." },
-      { value: "3,500m²", label: "GLA", text: "Functional space that works hard for the tenant." },
-      {
-        value: "Industrial",
-        label: "Property type",
-        text: "Purpose-built for operational certainty.",
-      },
-      { value: "9%", label: "Yield context", text: "Consistent with the group track record." },
+      { value: "4,232m²", label: "Gross lettable area" },
+      { value: "7,362m²", label: "Erf size" },
+      { value: "2", label: "Established tenants" },
+      { value: "2012", label: "Acquired" },
+    ],
+    specs: [
+      { label: "Address", value: "24 Montague Drive, Montague Gardens" },
+      { label: "GLA", value: "4,232m²" },
+      { label: "Erf size", value: "7,362m²" },
+      { label: "Zoning", value: "General Industrial" },
+      { label: "Parking", value: "35 bays + 10 visitor bays" },
+      { label: "Tenants", value: "Wispeco, Rich Home" },
+      { label: "Acquired", value: "2012" },
+    ],
+    highlights: [
+      "7,362m² General Industrial erf in Montague Gardens",
+      "35 parking bays + 10 visitor bays on site",
+      "Dual access, suited to logistics and manufacturing operations",
     ],
     blocks: [
       {
+        type: "split",
+        eyebrow: "The park",
+        title: "Managed to a standard that keeps serious operators",
+        text: "Acquired in 2012, 24 Montague is home to two established businesses, Wispeco and Rich Home. The park offers dual access, ample parking and loading facilities.",
+        media: "montagueYard",
+        items: [
+          { title: "Dual access", text: "Suited to logistics and manufacturing." },
+          { title: "Parking and loading", text: "35 bays plus 10 for visitors." },
+          { title: "General Industrial", text: "Zoned for the work that happens here." },
+        ],
+      },
+      {
         type: "gallery",
-        eyebrow: "Image gallery",
-        title: "The building, the yard and the street it works on",
+        eyebrow: "Gallery",
+        title: "The park, the yard and the street it works on",
         media: ["montagueHero", "montagueYard", "montagueInterior", "montagueStreet"],
       },
       {
-        type: "longform",
+        type: "specs",
         eyebrow: "Specifications",
-        title: "Specifications that hold up under inspection",
-        lead: "A clean, open floor plate with direct street loading. A truck can get in, turn and get out without a problem.",
-        paragraphs: [
-          "The location gives a tenant quick access to the city and the N1 without the congestion of the central business district. It is a working building in a working precinct.",
-          "There are no columns in the way of a production line or a racking system. The zoning is industrial, parking is adequate for staff and visitors, and the power supply is stable.",
-          "Water is secure and the fibre is in. These are not luxuries. They are the basics done properly.",
-        ],
+        title: "The asset at a glance",
         media: "montagueInterior",
-      },
-      {
-        type: "split",
-        eyebrow: "Tenant",
-        title: "A landlord who stays out of the way",
-        text: "We don't churn tenants. We keep them. A long-term lease is better for everyone.",
-        media: "montagueYard",
-        reverse: true,
-        items: [
-          { title: "Stability", text: "One covenant tenant. One lease. No churn." },
-          {
-            title: "Purpose-built",
-            text: "The space was designed for industrial operations from day one.",
-          },
-        ],
       },
     ],
     ctas: [
       {
         title: "Talk to us",
-        text: "We know the building and we know the numbers. Ask us anything.",
+        text: "We know the park and we know the numbers. Ask us anything.",
         label: "Contact",
         subject: "Enquiry — 24 Montague",
       },
       {
         title: "See it",
-        text: "Walk the floor and the yard. A site visit tells the truth.",
+        text: "Walk the units and the yard. A site visit tells the truth.",
         label: "Book a viewing",
         subject: "Viewing request — 24 Montague",
       },
     ],
   },
   {
-    slug: "albert-road",
+    slug: "219-albert-road",
     name: "219 Albert Road",
-    shortName: "Albert Road",
-    address: "219/237 Albert Road",
+    address: "219 Albert Road",
     area: "Woodstock",
     city: "Cape Town",
     type: "Industrial",
-    tags: ["Industrial", "Woodstock", "Long-term tenancy"],
+    typeLabel: "Industrial",
+    status: "New acquisition",
+    acquired: "October 2025",
+    tenants: ["Jambo", "Digital Express"],
+    headline: "Heritage bones. Modern tenants.",
     summary:
-      "A working industrial asset on a street that has always worked for a living. Space that works, and a landlord who stays.",
+      "A heritage industrial building on Albert Road, Woodstock, home to a mix of makers and print operations.",
     hero: "albertHero",
     card: "albertInterior",
     facts: [
-      { value: "100%", label: "Occupancy rate" },
-      { value: "1", label: "Long-term tenant" },
-      { value: "9%", label: "Yield track record" },
-      { value: "15+", label: "Years operating" },
+      { value: "5,200m²", label: "Gross lettable area" },
+      { value: "13m", label: "Maximum height" },
+      { value: "300A", label: "Power supply" },
+      { value: "2025", label: "Acquired" },
+    ],
+    specs: [
+      { label: "Address", value: "219 Albert Road, Woodstock" },
+      { label: "GLA", value: "5,200m²" },
+      { label: "Erf size", value: "5,769m²" },
+      { label: "Zoning", value: "Mixed-use" },
+      { label: "Height", value: "7.5m to 13m" },
+      { label: "Power supply", value: "300A" },
+      { label: "Tenants", value: "Jambo, Digital Express" },
+      { label: "Acquired", value: "October 2025" },
+    ],
+    highlights: [
+      "Heritage industrial building in Woodstock",
+      "A tenant mix of makers and print operations",
+      "Acquired October 2025",
     ],
     blocks: [
       {
+        type: "split",
+        eyebrow: "Heritage",
+        title: "Character preserved, spaces made ready",
+        text: "Acquired in October 2025, 219 Albert Road sits on the edge of Woodstock, one of Cape Town's most active creative and light-industrial corridors. Its spaces have been made ready for a new generation of makers, printers and fabricators.",
+        media: "heritageDetail",
+        stats: [
+          { value: "7.5–13m", label: "Ceiling heights" },
+          { value: "5,769m²", label: "Erf size" },
+        ],
+      },
+      {
         type: "gallery",
-        eyebrow: "The property",
-        title: "A working asset in a working neighbourhood",
+        eyebrow: "Gallery",
+        title: "A working building in a working neighbourhood",
         media: ["albertHero", "albertInterior", "albertLoading", "albertStreet"],
       },
       {
-        type: "longform",
+        type: "specs",
         eyebrow: "Specifications",
-        title: "Nothing clever about it. That is the point.",
-        lead: "Industrial zoning, a straightforward layout, direct street loading and ceiling heights that allow for racking and vertical storage.",
-        paragraphs: [
-          "Floor plates are open and column-free where it matters. Power supply is stable, with backup in place.",
-          "The infrastructure is not new, but it is maintained. Brickfield has run its own operations since 2019. We know what breaks and we fix it before it does.",
-          "The roof is sound. The drainage works. The security is in-house.",
-        ],
+        title: "The asset at a glance",
         media: "albertLoading",
-      },
-      {
-        type: "split",
-        eyebrow: "Tenancy",
-        title: "A tenant who stays because the building works",
-        text: "The current occupier has been here long enough to know every corner of the building. They stay because the space does what it should.",
-        media: "albertInterior",
-        reverse: true,
-        stats: [
-          { value: "100%", label: "Occupancy since the current covenant signed" },
-          { value: "0", label: "Months of vacancy in the last five years" },
-        ],
       },
     ],
     ctas: [
       {
         title: "Enquire now",
-        text: "Talk to us about available space at 219 Albert Road.",
+        text: "Talk to us about space at 219 Albert Road.",
         label: "Contact",
         subject: "Enquiry — 219 Albert Road",
       },
@@ -639,12 +738,28 @@ export const propertyTypes: PropertyType[] = ["Mixed-use", "Office", "Industrial
 
 export const getProperty = (slug: string) => properties.find((p) => p.slug === slug);
 
+/** Portfolio-wide totals, computed so they stay right as properties change. */
+export const portfolioTotals = (() => {
+  const gla = properties.reduce(
+    (sum, p) =>
+      sum +
+      Number(
+        (p.facts.find((f) => /GLA|lettable|office space/i.test(f.label))?.value ?? "0").replace(
+          /[^\d]/g,
+          "",
+        ),
+      ),
+    0,
+  );
+  return { gla, count: properties.length, cities: new Set(properties.map((p) => p.city)).size };
+})();
+
 export const mailto = (subject: string, body?: string) =>
   `mailto:info@brickfieldgroup.co.za?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ""}`;
 
 export const CONTACT = {
   email: "info@brickfieldgroup.co.za",
-  phone: "021 830 7050",
+  phone: "021 830 7050", // CONFIRM: the current live footer shows 021 830 0750
   tel: "tel:+27218307050",
   address: "35 Brickfield Road, Woodstock, Cape Town",
   maps: "https://www.google.com/maps/search/?api=1&query=35+Brickfield+Road+Woodstock+Cape+Town",

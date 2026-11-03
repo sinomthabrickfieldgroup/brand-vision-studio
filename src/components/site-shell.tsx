@@ -11,24 +11,28 @@ const navigation = [
   { label: "Services", to: "/services" },
 ] as const;
 
+/** The Brickfield Group lockup: a charcoal BRICKFIELD block beside a gold GROUP block. */
+export function LogoMark({
+  light,
+  className,
+}: {
+  light?: boolean | undefined;
+  className?: string | undefined;
+}) {
+  return (
+    <span className={cn("logo-mark", light && "logo-mark-light", className)}>
+      <span className="logo-mark-brick">
+        <span className="logo-mark-initial">B</span>rickfield
+      </span>
+      <span className="logo-mark-group">Group</span>
+    </span>
+  );
+}
+
 export function Logo({ light }: { light?: boolean }) {
   return (
-    <Link
-      to="/"
-      aria-label="Brickfield Group home"
-      className="brand-link flex flex-wrap items-baseline gap-x-2 leading-none"
-    >
-      <span
-        className={cn(
-          "font-sans text-[17px] font-semibold tracking-[0.18em]",
-          light && "text-primary-foreground",
-        )}
-      >
-        BRICKFIELD
-      </span>
-      <span className="font-sans text-[17px] font-semibold tracking-[0.18em] text-accent">
-        GROUP
-      </span>
+    <Link to="/" aria-label="Brickfield Group home" className="brand-link inline-flex">
+      <LogoMark light={light} />
     </Link>
   );
 }
@@ -316,6 +320,14 @@ export function SiteFooter() {
         </div>
         <div className="mt-16 flex flex-col justify-between gap-3 border-t border-primary-foreground/15 py-6 text-xs text-primary-foreground/50 sm:flex-row">
           <p>© {new Date().getFullYear()} Brickfield Group. All rights reserved.</p>
+          <a
+            href="https://fireflycapital.co.za"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-gold w-fit"
+          >
+            A subsidiary of Firefly Capital ↗
+          </a>
           <p>Cape Town · Johannesburg</p>
         </div>
       </div>

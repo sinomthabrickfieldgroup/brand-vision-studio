@@ -66,7 +66,9 @@ function Services() {
         media="cleaningTeam"
         actions={
           <>
-            <ActionLink href={mailto("Services enquiry")}>Enquire</ActionLink>
+            <ActionLink to="/contact" search={{ topic: "Cleaning services" }}>
+              Enquire
+            </ActionLink>
             <ActionLink to="/portfolio" variant="text">
               Portfolio
             </ActionLink>
@@ -177,7 +179,9 @@ function Services() {
               ))}
             </div>
             <div className="mt-10 flex flex-wrap gap-3">
-              <ActionLink href={mailto("Cleaning enquiry")}>Enquire about cleaning</ActionLink>
+              <ActionLink to="/contact" search={{ topic: "Cleaning services" }}>
+                Enquire about cleaning
+              </ActionLink>
             </div>
           </div>
         </div>
@@ -229,7 +233,9 @@ function Services() {
               ))}
             </div>
             <div className="mt-10 flex flex-wrap gap-3">
-              <ActionLink href={mailto("Security enquiry")}>Enquire about security</ActionLink>
+              <ActionLink to="/contact" search={{ topic: "Security services" }}>
+                Enquire about security
+              </ActionLink>
             </div>
           </div>
         </div>
@@ -291,7 +297,7 @@ function Services() {
             title: "Cleaning enquiries",
             text: "Tell us what your building needs. We'll tell you if we can do it well.",
             actions: [
-              { label: "Enquire", href: mailto("Cleaning enquiry") },
+              { label: "Enquire", to: "/contact", search: { topic: "Cleaning services" } },
               { label: "Portfolio", to: "/portfolio" },
             ],
           },
@@ -299,7 +305,7 @@ function Services() {
             title: "Security enquiries",
             text: "A safe building is a productive building. We run our own teams.",
             actions: [
-              { label: "Enquire", href: mailto("Security enquiry") },
+              { label: "Enquire", to: "/contact", search: { topic: "Security services" } },
               { label: "Portfolio", to: "/portfolio" },
             ],
           },

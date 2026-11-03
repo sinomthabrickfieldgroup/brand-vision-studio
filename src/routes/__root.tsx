@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "@/components/site-shell";
 import { EditorialMotion } from "@/components/editorial-motion";
+import { LOADER_SCRIPT, SiteLoader } from "@/components/site-loader";
 
 function NotFoundComponent() {
   return (
@@ -106,8 +107,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: LOADER_SCRIPT }} />
+        <noscript>
+          <style>{".site-loader{display:none!important}"}</style>
+        </noscript>
         <HeadContent />
       </head>
       <body>
@@ -123,6 +128,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <SiteLoader />
       <SiteHeader />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <EditorialMotion><Outlet /></EditorialMotion>

@@ -1,5 +1,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { useLocation } from "@tanstack/react-router";
+import { LOADER_EVENT } from "@/components/site-loader";
 
 const EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
 
@@ -38,12 +39,18 @@ export function EditorialMotion({ children }: { children: ReactNode }) {
     // Wait for the page to finish hydrating before touching inline styles.
     let cleanup = () => {};
     let cancelled = false;
-    const start = window.setTimeout(() => {
+    const begin = () => {
       if (!cancelled) cleanup = setup(root);
-    }, 60);
+    };
+    let start = 0;
+    // On a first visit the loading screen covers the page; start motion as it lifts.
+    const waiting = document.documentElement.dataset["loader"] === "active";
+    if (waiting) window.addEventListener(LOADER_EVENT, begin, { once: true });
+    else start = window.setTimeout(begin, 60);
     return () => {
       cancelled = true;
       window.clearTimeout(start);
+      window.removeEventListener(LOADER_EVENT, begin);
       cleanup();
     };
   }, [pathname]);

@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ActionLink, CtaPair, PageHero, SectionIntro, StatFigure } from "@/components/editorial";
 import { PortfolioIndex, ProjectCard } from "@/components/portfolio-views";
-import { properties, propertyTypes, type PropertyType } from "@/lib/portfolio";
+import { portfolioTotals, properties, propertyTypes, type PropertyType } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/portfolio/")({
@@ -60,12 +60,11 @@ function Portfolio() {
             text="We hold property for the long term. The data reflects that discipline."
           />
           <div className="grid grid-cols-2 gap-x-8 gap-y-12">
-            {/* CONFIRM: occupancy shows 98% here (wireframe) vs 100% on the home page */}
             {[
-              { value: "30K+", label: "Total GLA, square metres" },
-              { value: "6", label: "Properties in the portfolio" },
-              { value: "2", label: "Cities where we operate" },
-              { value: "98%", label: "Occupancy across the portfolio" },
+              { value: `${portfolioTotals.gla.toLocaleString("en-US")}m²`, label: "Total GLA" },
+              { value: String(portfolioTotals.count), label: "Properties in the portfolio" },
+              { value: String(portfolioTotals.cities), label: "Cities where we operate" },
+              { value: "100%", label: "Occupancy across the portfolio" },
             ].map((s) => (
               <StatFigure key={s.label} stat={s} className="border-t pt-6" />
             ))}

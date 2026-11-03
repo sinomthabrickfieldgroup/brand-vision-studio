@@ -1,10 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
-import { useState, type FormEvent } from "react";
 import { ActionLink, CtaPair, Eyebrow, SectionIntro } from "@/components/editorial";
 import { Media } from "@/components/media";
-import { CONTACT, mailto } from "@/lib/portfolio";
-import { cn } from "@/lib/utils";
+import { EnquiryForm } from "@/components/enquiry-form";
+import { CONTACT } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -24,17 +23,12 @@ export const Route = createFileRoute("/contact")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>): { property?: string; topic?: string } => ({
+    ...(typeof search["property"] === "string" ? { property: search["property"] } : {}),
+    ...(typeof search["topic"] === "string" ? { topic: search["topic"] } : {}),
+  }),
   component: Contact,
 });
-
-const topics = [
-  "Leasing and space",
-  "Investment",
-  "Cleaning services",
-  "Security services",
-  "Something else",
-];
-const roles = ["Broker", "Tenant", "Investor", "Bank", "Service provider", "Other"];
 
 const channels = [
   {
@@ -61,28 +55,7 @@ const channels = [
 ];
 
 function Contact() {
-  const [role, setRole] = useState("");
-
-  // No message delivery service is connected, so the form composes an email in the
-  // visitor's own mail app rather than pretending to submit.
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
-    const get = (k: string) => String(data.get(k) ?? "").trim();
-    const name = `${get("first")} ${get("last")}`.trim();
-    const body = [
-      get("message"),
-      "",
-      "—",
-      name,
-      get("email"),
-      get("phone"),
-      role && `I am a: ${role}`,
-    ]
-      .filter((l): l is string => typeof l === "string")
-      .join("\n");
-    window.location.href = mailto(`${get("topic") || "Enquiry"}${name ? ` — ${name}` : ""}`, body);
-  };
+  const search = Route.useSearch();
 
   return (
     <main>
@@ -98,7 +71,7 @@ function Contact() {
               who run the buildings.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <ActionLink href={`mailto:${CONTACT.email}`}>Email us</ActionLink>
+              <ActionLink href="#enquiry">Send a message</ActionLink>
               <ActionLink href="#map" variant="text">
                 Map
               </ActionLink>
@@ -155,63 +128,12 @@ function Contact() {
             <SectionIntro
               eyebrow="Send a message"
               title="Tell us what you need"
-              text="Fill this in and we'll open a ready-to-send email in your mail app. We'll get back to you within one business day."
+              text="Leasing, viewings, investment or our services. A person on our team reads every message and replies, usually within one business day."
             />
           </div>
-          <form onSubmit={onSubmit} className="grid gap-x-6 gap-y-8 sm:grid-cols-2">
-            <Field label="First name" name="first" autoComplete="given-name" required />
-            <Field label="Last name" name="last" autoComplete="family-name" />
-            <Field label="Email" name="email" type="email" autoComplete="email" required />
-            <Field label="Phone number" name="phone" type="tel" autoComplete="tel" />
-            <label className="sm:col-span-2">
-              <span className="field-label">Choose a topic</span>
-              <select name="topic" className="field-input" defaultValue="">
-                <option value="" disabled>
-                  Select one…
-                </option>
-                {topics.map((t) => (
-                  <option key={t}>{t}</option>
-                ))}
-              </select>
-            </label>
-            <fieldset className="sm:col-span-2">
-              <legend className="field-label">Which best describes you?</legend>
-              <div className="mt-3 flex flex-wrap gap-2">
-                {roles.map((r) => (
-                  <button
-                    key={r}
-                    type="button"
-                    aria-pressed={role === r}
-                    onClick={() => setRole(role === r ? "" : r)}
-                    className={cn("tab-chip bg-background", role === r && "is-active")}
-                  >
-                    {r}
-                  </button>
-                ))}
-              </div>
-            </fieldset>
-            <label className="sm:col-span-2">
-              <span className="field-label">Message</span>
-              <textarea
-                name="message"
-                rows={5}
-                required
-                placeholder="Type your message…"
-                className="field-input resize-y"
-              />
-            </label>
-            <div className="flex flex-col items-start gap-4 sm:col-span-2 sm:flex-row sm:items-center sm:justify-between">
-              <p className="text-sm text-muted-foreground">
-                Opens your email app. Nothing is sent until you press send there.
-              </p>
-              <button type="submit" className="action action-solid">
-                <span className="action-label">Compose email</span>
-                <span className="action-icon" aria-hidden="true">
-                  <ArrowUpRight size={16} />
-                </span>
-              </button>
-            </div>
-          </form>
+          <div id="enquiry" className="scroll-mt-28">
+            <EnquiryForm defaultProperty={search.property} defaultTopic={search.topic} />
+          </div>
         </div>
       </section>
 
@@ -249,20 +171,5 @@ function Contact() {
         ]}
       />
     </main>
-  );
-}
-
-function Field({
-  label,
-  ...props
-}: { label: string } & React.InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <label>
-      <span className="field-label">
-        {label}
-        {props.required && <span className="text-fern"> *</span>}
-      </span>
-      <input className="field-input" {...props} />
-    </label>
   );
 }

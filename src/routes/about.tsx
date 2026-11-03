@@ -25,33 +25,34 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
-// CONFIRM: milestone years. Canvas acquisition (2016) is from the current site; first acquisition year is inferred from "15+ years".
 const timeline = [
   {
-    year: "2010",
-    title: "The first acquisition",
-    text: "Good buildings in good locations, held for the long term.",
+    year: "2009",
+    title: "33 Brickfield Road",
+    text: "The first acquisition, in Woodstock. Still held today.",
   },
+  {
+    year: "2012",
+    title: "24 Montague",
+    text: "A multi-tenant industrial park in Montague Gardens.",
+  },
+  { year: "2014", title: "66/68 Wierda", text: "Two A-Grade office buildings in Sandton." },
   {
     year: "2016",
     title: "35 Brickfield Road",
-    text: "An industrial shell in Woodstock becomes the Canvas project.",
+    text: "A general industrial property becomes the Canvas project.",
   },
   {
     year: "2019",
-    title: "Operations in-house",
-    text: "Our own cleaning and security teams go to work.",
+    title: "Canvas completed",
+    text: "10,400m² of A-Grade space, with our own operations teams on the ground.",
   },
-  {
-    year: "2020",
-    title: "Canvas opens",
-    text: "Doors open the same week as the national lockdown.",
-  },
-  { year: "2022", title: "Fully tenanted", text: "Canvas reaches 100% occupancy and stays there." },
+  { year: "2022", title: "Fully tenanted", text: "Canvas reaches 100% occupancy." },
+  { year: "2025", title: "219 Albert Road", text: "A heritage industrial building in Woodstock." },
   {
     year: "2026",
     title: "9 Loop Street",
-    text: "A Maitland warehouse rebuilt for heavy industry in five months.",
+    text: "A Maitland depot rebuilt for heavy industry in five months.",
   },
 ];
 
@@ -107,7 +108,7 @@ function About() {
             idea, applied patiently.
           </p>
         </div>
-        <ol className="mt-16 grid gap-px overflow-hidden border-y bg-border sm:grid-cols-2 lg:grid-cols-6">
+        <ol className="mt-16 grid gap-px overflow-hidden border-y bg-border sm:grid-cols-2 lg:grid-cols-4">
           {timeline.map((t) => (
             <li
               key={t.year}

@@ -133,7 +133,7 @@ function Sustainability() {
             {[
               { value: "50%", label: "HVAC efficiency above baseline" },
               { value: "R150m+", label: "Infrastructure investment at Canvas" },
-              { value: "100%", label: "Occupancy since June 2022" },
+              { value: "100%", label: "Canvas occupancy since 2022" },
             ].map((s) => (
               <StatFigure
                 key={s.label}

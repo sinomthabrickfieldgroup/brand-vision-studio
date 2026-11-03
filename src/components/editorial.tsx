@@ -57,8 +57,13 @@ export function SectionIntro({
 /* ─── Links & buttons ───────────────────────────────────────────────────── */
 
 type Target =
-  | { to: LinkProps["to"]; params?: LinkProps["params"]; href?: never }
-  | { href: string; to?: never; params?: never };
+  | {
+      to: LinkProps["to"];
+      params?: LinkProps["params"];
+      search?: Record<string, string> | undefined;
+      href?: never;
+    }
+  | { href: string; to?: never; params?: never; search?: never };
 
 export function ActionLink({
   children,
@@ -92,7 +97,12 @@ export function ActionLink({
     );
   }
   return (
-    <Link to={target.to!} params={target.params as never} className={classes}>
+    <Link
+      to={target.to!}
+      params={target.params as never}
+      search={target.search as never}
+      className={classes}
+    >
       {inner}
     </Link>
   );
@@ -458,7 +468,12 @@ export function TabShowcase({
 export interface Cta {
   title: string;
   text: string;
-  actions: { label: string; to?: LinkProps["to"]; href?: string }[];
+  actions: {
+    label: string;
+    to?: LinkProps["to"];
+    href?: string;
+    search?: Record<string, string>;
+  }[];
 }
 
 export function CtaPair({ ctas, media }: { ctas: [Cta, Cta]; media?: MediaId }) {
@@ -499,6 +514,7 @@ export function CtaPair({ ctas, media }: { ctas: [Cta, Cta]; media?: MediaId }) 
                   <ActionLink
                     key={a.label}
                     to={a.to!}
+                    search={a.search}
                     variant={j === 0 ? "light" : "text"}
                     className={j === 1 ? "text-primary-foreground" : undefined}
                   >
@@ -523,6 +539,7 @@ export function PageHero({
   media,
   actions,
   tags,
+  badge,
 }: {
   eyebrow: string;
   title: ReactNode;
@@ -530,11 +547,15 @@ export function PageHero({
   media: MediaId;
   actions?: ReactNode;
   tags?: string[];
+  badge?: ReactNode;
 }) {
   return (
     <section className="relative">
       <div className="mx-auto max-w-7xl px-6 pb-14 pt-16 md:px-10 md:pb-20 md:pt-24">
-        <Eyebrow>{eyebrow}</Eyebrow>
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <Eyebrow>{eyebrow}</Eyebrow>
+          {badge}
+        </div>
         <div className="mt-7 grid items-end gap-8 lg:grid-cols-[minmax(0,7fr)_minmax(0,4fr)] lg:gap-16">
           <h1 className="hero-title text-balance font-display text-[3.2rem] leading-[0.98] tracking-[-0.02em] md:text-[5.6rem]">
             {title}

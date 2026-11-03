@@ -29,9 +29,16 @@ export function ProjectCard({
         <span className="card-arrow" aria-hidden="true">
           <ArrowUpRight size={20} />
         </span>
-        <span className="tag absolute left-4 top-4 z-[3] border-transparent bg-background/85 text-foreground">
-          {property.type}
-        </span>
+        <div className="absolute left-4 top-4 z-[3] flex flex-wrap gap-2">
+          <span className="tag border-transparent bg-background/85 text-foreground">
+            {property.typeLabel}
+          </span>
+          {property.status !== "Active" && (
+            <span className="status-badge bg-accent">
+              {property.status === "Just completed" ? "New" : property.status}
+            </span>
+          )}
+        </div>
       </div>
       <div className="mt-5 flex items-baseline justify-between gap-4 border-t pt-4">
         <h3 className="font-display text-2xl">{property.name}</h3>
