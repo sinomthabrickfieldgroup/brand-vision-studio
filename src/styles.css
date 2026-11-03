@@ -1463,3 +1463,17 @@
     .hero-show-controls { width: 100%; justify-content: space-between; }
   }
 }
+
+/* Titles over photos keep their measured, accessible colour on hover; the hover cue is an
+   underline that draws in instead of a colour change (fern fails contrast on dark photos). */
+@layer components {
+  .project-card:hover .legible-text h3,
+  .project-card:focus-visible .legible-text h3 { color: var(--legible-text); }
+  .legible-text h3 {
+    text-decoration: underline 1px transparent;
+    text-underline-offset: .2em;
+    transition: text-decoration-color .5s ease, text-underline-offset .6s var(--ease-editorial);
+  }
+  .project-card:hover .legible-text h3,
+  .project-card:focus-visible .legible-text h3 { text-decoration-color: currentColor; text-underline-offset: .14em; }
+}
