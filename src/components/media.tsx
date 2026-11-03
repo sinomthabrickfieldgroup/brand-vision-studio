@@ -64,7 +64,11 @@ export function Media({
             decoding="async"
             onError={() => setFailed(true)}
             className="h-full w-full object-cover"
-            style={stand && !("src" in shot) ? { objectPosition: stand.focus } : undefined}
+            style={{
+              objectPosition:
+                ("focus" in shot ? (shot.focus as string) : undefined) ??
+                (stand && !("src" in shot) ? stand.focus : undefined),
+            }}
           />
         ) : (
           <div
@@ -80,6 +84,9 @@ export function Media({
           <span className="media-slate-dot" />
           {shot.title}
         </span>
+      )}
+      {showImage && "credit" in shot && (
+        <span className="media-credit">{shot.credit as string}</span>
       )}
       {caption && <figcaption className="media-caption">{shot.title}</figcaption>}
     </figure>

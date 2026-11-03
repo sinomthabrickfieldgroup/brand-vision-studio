@@ -214,7 +214,7 @@ function Sustainability() {
                   label: "Tenants",
                   title: "Tenants get certainty",
                   text: "Power, water and comms stay on. Work doesn't stop.",
-                  media: "canvasCowork",
+                  media: "canvasCafe",
                 },
                 {
                   label: "Investors",

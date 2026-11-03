@@ -11,8 +11,20 @@
  * photography before launch: this is a property site and buyers, lenders and tenants
  * will assume the buildings shown are the real ones.
  */
-import canvasPhoto from "@/assets/brickfield-canvas.asset.json";
-import loopPhoto from "@/assets/loop-street-photo.asset.json";
+
+// Real photography from the shoot and existing Brickfield libraries.
+import photo_canvas_cafe from "@/assets/photos/canvas-cafe.webp";
+import photo_canvas_before_aerial from "@/assets/photos/canvas-before-aerial.webp";
+import photo_canvas_exterior from "@/assets/photos/canvas-exterior.webp";
+import photo_call_centre_exterior from "@/assets/photos/call-centre-exterior.webp";
+import photo_loop_aerial from "@/assets/photos/loop-aerial.webp";
+import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
+import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
+import photo_loop_yard from "@/assets/photos/loop-yard.webp";
+import photo_loop_top_down from "@/assets/photos/loop-top-down.webp";
+import photo_trevor_jacobs from "@/assets/photos/trevor-jacobs.webp";
+import photo_rowan_gordon from "@/assets/photos/rowan-gordon.webp";
+import photo_timothy from "@/assets/photos/timothy.webp";
 
 export type Tone = "stone" | "dusk" | "concrete" | "sage" | "brick" | "night";
 export type Aspect = "21/9" | "16/9" | "3/2" | "4/3" | "4/5" | "1/1" | "3/4";
@@ -24,6 +36,10 @@ export interface Shot {
   tone: Tone;
   prompt: string;
   src?: string;
+  /** CSS object-position for the crop, e.g. "50% 30%". */
+  focus?: string;
+  /** Required credit shown over the image, e.g. for third-party imagery. */
+  credit?: string;
 }
 
 /** Shared art direction appended to every prompt so the set reads as one shoot. */
@@ -39,26 +55,32 @@ export const media = {
   // ── Brickfield Canvas (35 Brickfield Road, Woodstock) ──────────────────────
   canvasHero: shot({
     title: "Canvas · exterior, morning",
-    alt: "Brickfield Canvas exterior in Woodstock, Cape Town",
+    alt: "Brickfield Canvas at 35 Brickfield Road, Woodstock, with Devil's Peak behind",
     aspect: "21/9",
     tone: "stone",
-    src: canvasPhoto.url,
+    src: photo_canvas_exterior,
+    focus: "50% 62%",
     prompt:
       "Wide street-level view of a converted three-storey industrial brick building turned modern office campus, large steel-framed windows, a planted green living wall, clean paving and young trees, Table Mountain softly visible in the haze behind, low morning sun raking across the facade.",
   }),
   canvasBefore: shot({
-    title: "Canvas · before, 2016",
-    alt: "The industrial shell at 35 Brickfield Road before redevelopment",
+    title: "Canvas · before, aerial",
+    alt: "35 Brickfield Road before redevelopment: a general industrial building, seen from above",
     aspect: "16/9",
     tone: "concrete",
+    src: photo_canvas_before_aerial,
+    focus: "50% 55%",
+    credit: "Imagery © Google",
     prompt:
       "The same converted industrial building BEFORE redevelopment: a tired 1970s brick-and-concrete warehouse, faded paint, rusted roller doors, cracked yard, overcast flat light, documentary style, identical framing to a straight-on wide facade shot.",
   }),
   canvasAfter: shot({
-    title: "Canvas · after, today",
-    alt: "Brickfield Canvas after its transformation into a mixed-use precinct",
+    title: "Canvas · today",
+    alt: "Brickfield Canvas today: restored brick, new glazing and landscaped parking",
     aspect: "16/9",
     tone: "stone",
+    src: photo_canvas_exterior,
+    focus: "50% 62%",
     prompt:
       "The same building AFTER redevelopment from an identical straight-on wide facade framing: restored brick, new black steel windows, a green living wall, landscaped forecourt with benches and trees, warm golden-hour light.",
   }),
@@ -72,9 +94,11 @@ export const media = {
   }),
   canvasCafe: shot({
     title: "Canvas · café",
-    alt: "The community café at Brickfield Canvas",
+    alt: "The café and lounge at Brickfield Canvas: exposed concrete, red sprinkler lines and a timber-clad counter",
     aspect: "4/3",
     tone: "brick",
+    src: photo_canvas_cafe,
+    focus: "50% 55%",
     prompt:
       "Bright community café inside a converted warehouse, polished concrete floor, long timber counter, pendant lights, espresso machine, people working on laptops in soft focus, morning light through tall steel windows.",
   }),
@@ -137,11 +161,12 @@ export const media = {
 
   // ── 9 Loop Street (Maitland) ───────────────────────────────────────────────
   loopHero: shot({
-    title: "9 Loop Street · facade",
-    alt: "9 Loop Street industrial facility in Maitland",
+    title: "9 Loop Street · from above",
+    alt: "9 Loop Street from the air after its 2026 refurbishment, with new charcoal roof sheeting and a surfaced yard",
     aspect: "21/9",
     tone: "concrete",
-    src: loopPhoto.url,
+    src: photo_loop_aerial,
+    focus: "55% 55%",
     prompt:
       "Freshly refurbished industrial facility in Maitland, Cape Town: clean charcoal steel cladding, large roller doors, a two-storey office block with glazing, a concrete truck yard, clear blue sky, crisp midday light.",
   }),
@@ -155,27 +180,41 @@ export const media = {
   }),
   loopWarehouse: shot({
     title: "9 Loop Street · warehouse floor",
-    alt: "Column-efficient warehouse floor at 9 Loop Street",
+    alt: "The column-efficient warehouse floor and mezzanine at 9 Loop Street",
     aspect: "16/9",
     tone: "concrete",
+    src: photo_loop_warehouse,
+    focus: "50% 55%",
     prompt:
       "Interior of a large, clean, column-efficient steel-portal warehouse, epoxy-coated concrete floor, high-bay LED lights, roof sheeting with translucent panels, an overhead crane rail, empty, cool even light.",
   }),
   loopYard: shot({
-    title: "9 Loop Street · truck yard",
-    alt: "Yard access at 9 Loop Street",
+    title: "9 Loop Street · yard",
+    alt: "The surfaced yard and side access at 9 Loop Street, looking towards the mountains",
     aspect: "4/3",
     tone: "stone",
+    src: photo_loop_yard,
+    focus: "60% 60%",
     prompt:
       "Wide concrete truck yard beside a refurbished industrial building, a delivery truck reversing to a loading door, painted bay lines, palisade fence, afternoon sun.",
   }),
   loopOffice: shot({
-    title: "9 Loop Street · office block",
-    alt: "Office and canteen block at 9 Loop Street",
+    title: "9 Loop Street · mezzanine",
+    alt: "The 302m² steel mezzanine above the roller doors at 9 Loop Street",
     aspect: "4/3",
     tone: "stone",
+    src: photo_loop_mezzanine,
+    focus: "50% 45%",
     prompt:
       "Modern office and canteen block attached to a warehouse, glazed facade, simple timber and steel interior visible, neat landscaping strip, soft afternoon light.",
+  }),
+  loopTopDown: shot({
+    title: "9 Loop Street · plan view",
+    alt: "9 Loop Street from directly above: the long roof, skylights and the yard along its length",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_top_down,
+    prompt: "Top-down drone view of the refurbished building and its yard.",
   }),
   loopPower: shot({
     title: "9 Loop Street · 400A supply",
@@ -196,10 +235,12 @@ export const media = {
 
   // ── Brickfield Call Centre (33 Brickfield Road, Woodstock) ────────────────
   callHero: shot({
-    title: "Call Centre · exterior",
-    alt: "Brickfield Call Centre office building in Woodstock",
+    title: "Call Centre · entrance",
+    alt: "The entrance canopy and parking at Brickfield Call Centre, 33 Brickfield Road",
     aspect: "21/9",
     tone: "brick",
+    src: photo_call_centre_exterior,
+    focus: "40% 70%",
     prompt:
       "Large purpose-built office building in Woodstock, Cape Town, set back from the main road, face-brick and long horizontal bands of glazing, an open parking area in front, a neighbouring converted brick campus visible beside it, warm late-afternoon light.",
   }),
@@ -364,26 +405,32 @@ export const media = {
       "Close architectural detail of restored century-old red brick meeting a new black steel window frame, texture sharp, raking warm side light.",
   }),
   portraitTrevor: shot({
-    title: "Portrait · CEO",
-    alt: "Portrait of the CEO of Brickfield Group",
+    title: "Trevor Jacobs",
+    alt: "Trevor Jacobs, CEO and Director of Brickfield Group",
     aspect: "3/4",
     tone: "stone",
+    src: photo_trevor_jacobs,
+    focus: "40% 30%",
     prompt:
       "Placeholder only — use the real headshot from the shoot. Environmental portrait setting: exposed brick wall, soft window light.",
   }),
   portraitRowan: shot({
-    title: "Portrait · Director",
-    alt: "Portrait of a director of Brickfield Group",
+    title: "Rowan Gordon",
+    alt: "Rowan Gordon, Director of Brickfield Group",
     aspect: "3/4",
     tone: "concrete",
+    src: photo_rowan_gordon,
+    focus: "50% 35%",
     prompt:
       "Placeholder only — use the real headshot from the shoot. Environmental portrait setting: steel-framed window, soft daylight.",
   }),
   portraitTimothy: shot({
-    title: "Portrait · COO",
-    alt: "Portrait of the COO of Brickfield Group",
+    title: "Timothy",
+    alt: "Timothy, COO of Brickfield Group",
     aspect: "3/4",
     tone: "sage",
+    src: photo_timothy,
+    focus: "50% 25%",
     prompt:
       "Placeholder only — use the real headshot from the shoot. Environmental portrait setting: Canvas courtyard, open shade.",
   }),
@@ -445,10 +492,11 @@ export const media = {
   }),
   contactHero: shot({
     title: "Contact · 35 Brickfield Road",
-    alt: "The entrance at 35 Brickfield Road, Woodstock",
+    alt: "Brickfield Canvas, 35 Brickfield Road, Woodstock",
     aspect: "4/3",
     tone: "stone",
-    src: canvasPhoto.url,
+    src: photo_canvas_exterior,
+    focus: "40% 62%",
     prompt:
       "Welcoming entrance to a converted industrial office campus, open steel-framed glass doors, planters either side, warm morning light.",
   }),
@@ -469,18 +517,13 @@ import si_357f12aa from "@/assets/stand-in/357f12aa.webp";
 import si_5bc69ba9 from "@/assets/stand-in/5bc69ba9.webp";
 import si_66ae3f86 from "@/assets/stand-in/66ae3f86.webp";
 import si_711614b0 from "@/assets/stand-in/711614b0.webp";
-import si_7449a88d from "@/assets/stand-in/7449a88d.webp";
 import si_97512505 from "@/assets/stand-in/97512505.webp";
-import si_9871ff25 from "@/assets/stand-in/9871ff25.webp";
 import si_9c720f5d from "@/assets/stand-in/9c720f5d.webp";
-import si_b153bae0 from "@/assets/stand-in/b153bae0.webp";
 import si_b23d9d70 from "@/assets/stand-in/b23d9d70.webp";
 import si_b772ec77 from "@/assets/stand-in/b772ec77.webp";
 import si_bdf2b160 from "@/assets/stand-in/bdf2b160.webp";
 import si_c7bb7a9e from "@/assets/stand-in/c7bb7a9e.webp";
 import si_c9344f4f from "@/assets/stand-in/c9344f4f.webp";
-import si_cc3873b2 from "@/assets/stand-in/cc3873b2.webp";
-import si_cd9275ce from "@/assets/stand-in/cd9275ce.webp";
 import si_d1597a16 from "@/assets/stand-in/d1597a16.webp";
 import si_d53154cb from "@/assets/stand-in/d53154cb.webp";
 import si_f9854d80 from "@/assets/stand-in/f9854d80.webp";
@@ -488,18 +531,13 @@ import si_fb1e5004 from "@/assets/stand-in/fb1e5004.webp";
 import si_ffbe175e from "@/assets/stand-in/ffbe175e.webp";
 
 export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> = {
-  canvasBefore: { src: si_9871ff25, focus: "50% 55%" },
   canvasAfter: { src: si_66ae3f86, focus: "50% 60%" },
   canvasCourtyard: { src: si_fb1e5004, focus: "35% 60%" },
   canvasEvents: { src: si_bdf2b160, focus: "50% 50%" },
   canvasSolar: { src: si_b772ec77, focus: "50% 60%" },
   loopBefore: { src: si_b23d9d70, focus: "50% 55%" },
-  loopWarehouse: { src: si_7449a88d, focus: "50% 50%" },
-  loopYard: { src: si_cd9275ce, focus: "50% 60%" },
-  loopOffice: { src: si_cc3873b2, focus: "50% 80%" },
   loopPower: { src: si_08df4776, focus: "50% 55%" },
   loopFabrication: { src: si_357f12aa, focus: "50% 55%" },
-  callHero: { src: si_b153bae0, focus: "50% 62%" },
   callPlant: { src: si_f9854d80, focus: "50% 45%" },
   wierdaHero: { src: si_23053cb2, focus: "50% 40%" },
   wierdaStreet: { src: si_c7bb7a9e, focus: "50% 55%" },

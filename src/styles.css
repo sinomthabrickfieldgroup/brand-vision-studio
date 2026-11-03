@@ -1269,3 +1269,6 @@
   .site-loader-logo { clip-path: none; }
   .site-loader-wall rect.is-laid { animation: none; }
 }
+@layer components {
+  .media-credit { position: absolute; left: 10px; bottom: 8px; z-index: 2; font-size: .62rem; letter-spacing: .02em; color: oklch(1 0 0 / .85); text-shadow: 0 1px 6px oklch(0 0 0 / .5); pointer-events: none; }
+}

@@ -363,7 +363,7 @@ export const properties: Property[] = [
         type: "gallery",
         eyebrow: "Gallery",
         title: "Strong bones, clean lines",
-        media: ["loopHero", "loopWarehouse", "loopYard", "loopOffice", "loopPower"],
+        media: ["loopHero", "loopWarehouse", "loopOffice", "loopYard", "loopTopDown"],
       },
       {
         type: "split",
