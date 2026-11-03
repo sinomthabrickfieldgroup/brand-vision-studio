@@ -12,7 +12,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "Backed by Firefly Capital, Brickfield Group has spent fifteen years buying and transforming underused buildings into productive precincts.",
+          "Backed by Firefly Capital, Brickfield Group has spent more than  fifteen years buying and transforming underused buildings into productive precincts.",
       },
       { property: "og:title", content: "About Brickfield Group" },
       {
@@ -88,7 +88,7 @@ function About() {
             Patient <em>capital</em>
           </>
         }
-        text="Backed by Firefly Capital, we have spent fifteen years buying and transforming underused buildings into productive precincts."
+        text="Backed by Firefly Capital, we have spent over fifteen years buying and transforming underused buildings into productive precincts."
         media="aboutHero"
         slidesEyebrow="Fifteen years in the making"
         slides={[
