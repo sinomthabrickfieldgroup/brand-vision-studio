@@ -51,7 +51,7 @@ const pillars: {
     label: "Portfolio",
   },
   {
-    title: "Patient capital means no short-term pressure",
+    title: "Patient capital lets us think in decades",
     text: "We hold for the long term and build value.",
     media: "aboutHero",
     to: "/about",
