@@ -158,7 +158,7 @@ export function EnquiryForm({
               type="button"
               aria-pressed={role === r}
               onClick={() => setRole(role === r ? "" : r)}
-              className={cn("tab-chip bg-background", role === r && "is-active")}
+              className={cn("tab-chip", role === r && "is-active")}
             >
               {r}
             </button>
