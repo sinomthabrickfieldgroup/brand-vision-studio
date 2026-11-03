@@ -98,8 +98,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" },
-      // Provisional B monogram (not yet approved). The SVG adapts to light and dark browser themes;
-      // the .ico and PNGs sit on a paper tile so they stay readable anywhere.
+      // Provisional B monogram (not yet approved) on a tile. The SVG tile is charcoal on light browser themes and paper on dark ones;
+      // the .ico and PNGs sit on a charcoal tile so they stay readable anywhere.
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
