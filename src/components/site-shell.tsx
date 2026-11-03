@@ -1,31 +1,327 @@
-import { Link } from "@tanstack/react-router";
-import { Menu, X, ArrowUpRight } from "lucide-react";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Link, useLocation } from "@tanstack/react-router";
+import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Media } from "@/components/media";
+import { CONTACT, properties, propertyTypes } from "@/lib/portfolio";
+import { cn } from "@/lib/utils";
 
 const navigation = [
   { label: "About", to: "/about" },
-  { label: "Brickfield Canvas", to: "/brickfield-canvas" },
-  { label: "9 Loop Street", to: "/loop-street" },
-  { label: "Contact", to: "/contact" },
+  { label: "Sustainability", to: "/sustainability" },
+  { label: "Services", to: "/services" },
 ] as const;
 
-export function Logo() {
-  return <Link to="/" aria-label="Brickfield Group home" className="brand-link flex flex-wrap items-baseline gap-x-2 leading-none"><span className="font-sans text-lg">BRICKFIELD</span><span className="font-sans text-lg text-accent">GROUP</span></Link>;
+export function Logo({ light }: { light?: boolean }) {
+  return (
+    <Link
+      to="/"
+      aria-label="Brickfield Group home"
+      className="brand-link flex flex-wrap items-baseline gap-x-2 leading-none"
+    >
+      <span
+        className={cn(
+          "font-sans text-[17px] font-semibold tracking-[0.18em]",
+          light && "text-primary-foreground",
+        )}
+      >
+        BRICKFIELD
+      </span>
+      <span className="font-sans text-[17px] font-semibold tracking-[0.18em] text-accent">
+        GROUP
+      </span>
+    </Link>
+  );
+}
+
+function PortfolioMenu({ onNavigate }: { onNavigate: () => void }) {
+  const [preview, setPreview] = useState(properties[0]?.slug);
+  const current = properties.find((p) => p.slug === preview) ?? properties[0]!;
+  return (
+    <div className="mega-menu">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-10 md:px-10 lg:grid-cols-[1fr_1fr_1fr_minmax(0,1.3fr)]">
+        {propertyTypes.map((type) => (
+          <div key={type}>
+            <p className="eyebrow">
+              <span className="eyebrow-rule" aria-hidden="true" />
+              {type}
+            </p>
+            <ul className="mt-5 space-y-1">
+              {properties
+                .filter((p) => p.type === type)
+                .map((p) => (
+                  <li key={p.slug}>
+                    <Link
+                      to="/portfolio/$slug"
+                      params={{ slug: p.slug }}
+                      onClick={onNavigate}
+                      onMouseEnter={() => setPreview(p.slug)}
+                      onFocus={() => setPreview(p.slug)}
+                      className="mega-link group"
+                    >
+                      <span className="font-display text-xl">{p.name}</span>
+                      <span className="text-xs text-muted-foreground">
+                        {p.address}, {p.area}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
+        ))}
+        <div className="hidden lg:block">
+          <div className="relative aspect-[4/3] overflow-hidden">
+            {properties.map((p) => (
+              <div key={p.slug} className={cn("tab-image", p.slug === current.slug && "is-active")}>
+                <Media id={p.hero} fill reveal={false} />
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              {current.type} · {current.city}
+            </p>
+            <Link to="/portfolio" onClick={onNavigate} className="action action-solid">
+              <span className="action-label">View portfolio</span>
+              <span className="action-icon" aria-hidden="true">
+                <ArrowUpRight size={16} />
+              </span>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function SiteHeader() {
-  const [open, setOpen] = useState(false);
-  return <header className="sticky top-0 z-30 border-b bg-background/95 backdrop-blur">
-    <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-6 md:px-8">
-      <Logo />
-      <nav aria-label="Main navigation" className="hidden items-center gap-7 text-sm lg:flex">{navigation.map(item => <Link key={item.to} to={item.to} className="link-gold py-1" activeProps={{ className: "text-fern" }}>{item.label}</Link>)}</nav>
-      <Button variant="ghost" size="icon" className="lg:hidden" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)}>{open ? <X /> : <Menu />}</Button>
-    </div>
-    {open && <nav aria-label="Mobile navigation" className="editorial-menu border-t px-6 pb-6 lg:hidden">{navigation.map(item => <Link key={item.to} to={item.to} onClick={() => setOpen(false)} className="block border-b py-4 text-base" activeProps={{ className: "text-fern" }}>{item.label}</Link>)}</nav>}
-  </header>;
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const pathname = useLocation({ select: (l) => l.pathname });
+  const closeTimer = useRef<number>(undefined);
+
+  useEffect(() => {
+    setMobileOpen(false);
+    setMegaOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      setHidden(y > 240 && y > last + 4);
+      if (y < last - 4) setHidden(false);
+      last = y;
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.style.overflow = mobileOpen ? "hidden" : "";
+    return () => {
+      document.documentElement.style.overflow = "";
+    };
+  }, [mobileOpen]);
+
+  const openMega = () => {
+    window.clearTimeout(closeTimer.current);
+    setMegaOpen(true);
+  };
+  const closeMega = () => {
+    closeTimer.current = window.setTimeout(() => setMegaOpen(false), 160);
+  };
+
+  return (
+    <header
+      className={cn(
+        "site-header",
+        scrolled && "is-scrolled",
+        hidden && !megaOpen && !mobileOpen && "is-hidden",
+        (megaOpen || mobileOpen) && "is-open",
+      )}
+      onKeyDown={(e) => e.key === "Escape" && (setMegaOpen(false), setMobileOpen(false))}
+    >
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 md:px-10">
+        <Logo />
+        <nav aria-label="Main navigation" className="hidden items-center gap-8 text-sm lg:flex">
+          {navigation.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="nav-link"
+              activeProps={{ className: "is-active" }}
+            >
+              {item.label}
+            </Link>
+          ))}
+          <div onMouseEnter={openMega} onMouseLeave={closeMega}>
+            <button
+              type="button"
+              className={cn(
+                "nav-link inline-flex items-center gap-1.5",
+                (megaOpen || pathname.startsWith("/portfolio")) && "is-active",
+              )}
+              aria-expanded={megaOpen}
+              aria-controls="portfolio-menu"
+              onClick={() => setMegaOpen((o) => !o)}
+            >
+              Portfolio{" "}
+              <ChevronDown
+                size={14}
+                className={cn("transition-transform duration-500", megaOpen && "rotate-180")}
+              />
+            </button>
+            {megaOpen && (
+              <div id="portfolio-menu" onMouseEnter={openMega}>
+                <PortfolioMenu onNavigate={() => setMegaOpen(false)} />
+              </div>
+            )}
+          </div>
+        </nav>
+        <div className="flex items-center gap-3">
+          <Link to="/contact" className="action action-solid hidden sm:inline-flex">
+            <span className="action-label">Contact</span>
+            <span className="action-icon" aria-hidden="true">
+              <ArrowUpRight size={16} />
+            </span>
+          </Link>
+          <button
+            type="button"
+            className="round-btn lg:hidden"
+            aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen(!mobileOpen)}
+          >
+            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+          </button>
+        </div>
+      </div>
+      {megaOpen && (
+        <div
+          className="mega-scrim hidden lg:block"
+          onClick={() => setMegaOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+      {mobileOpen && (
+        <nav aria-label="Mobile navigation" className="mobile-menu lg:hidden">
+          <div className="px-6 pb-10 pt-4">
+            {[
+              ...navigation,
+              { label: "Portfolio", to: "/portfolio" as const },
+              { label: "Contact", to: "/contact" as const },
+            ].map((item, i) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className="mobile-link"
+                style={{ animationDelay: `${i * 60}ms` }}
+              >
+                <span className="font-display text-4xl">{item.label}</span>
+                <ArrowUpRight size={20} />
+              </Link>
+            ))}
+            <p className="eyebrow mt-10">
+              <span className="eyebrow-rule" aria-hidden="true" />
+              The portfolio
+            </p>
+            <div className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 text-sm">
+              {properties.map((p) => (
+                <Link
+                  key={p.slug}
+                  to="/portfolio/$slug"
+                  params={{ slug: p.slug }}
+                  className="text-muted-foreground"
+                >
+                  {p.name}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </nav>
+      )}
+    </header>
+  );
 }
 
 export function SiteFooter() {
-  return <footer className="border-t"><div className="mx-auto max-w-6xl px-6 py-14 md:px-8"><div className="flex flex-col justify-between gap-10 md:flex-row"><Logo /><div className="space-y-3 text-sm text-muted-foreground"><p>35 Brickfield Road, Woodstock, Cape Town</p><a className="block link-gold w-fit" href="mailto:info@brickfieldgroup.co.za">info@brickfieldgroup.co.za</a><a className="block" href="tel:+27218307050">021 830 7050</a></div><Link to="/contact" className="flex h-fit items-center gap-3 text-sm">Let’s talk <ArrowUpRight size={17} /></Link></div><p className="mt-12 border-t pt-5 text-xs text-muted-foreground">Brickfield Group · Patient capital. Long-term perspective.</p></div></footer>;
+  return (
+    <footer className="relative overflow-hidden bg-primary text-primary-foreground">
+      <div className="mx-auto max-w-7xl px-6 pt-20 md:px-10">
+        <div className="grid gap-12 md:grid-cols-[minmax(0,2fr)_1fr_1fr]">
+          <div>
+            <Logo light />
+            <p className="mt-8 max-w-sm font-display text-3xl leading-tight">
+              Patient capital. Long-term perspective.
+            </p>
+            <div className="mt-10 grid gap-6 text-sm sm:grid-cols-2">
+              <div>
+                <p className="text-primary-foreground/50">Address</p>
+                <a
+                  href={CONTACT.maps}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="link-gold mt-2 block w-fit"
+                >
+                  {CONTACT.address}
+                </a>
+              </div>
+              <div>
+                <p className="text-primary-foreground/50">Contact</p>
+                <a href={`mailto:${CONTACT.email}`} className="link-gold mt-2 block w-fit">
+                  {CONTACT.email}
+                </a>
+                <a href={CONTACT.tel} className="link-gold mt-1 block w-fit">
+                  {CONTACT.phone}
+                </a>
+              </div>
+            </div>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+              Navigation
+            </p>
+            <ul className="mt-5 space-y-2.5 text-sm">
+              {[
+                ...navigation,
+                { label: "Portfolio", to: "/portfolio" as const },
+                { label: "Contact", to: "/contact" as const },
+              ].map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="link-gold">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.2em] text-primary-foreground/50">
+              Portfolio
+            </p>
+            <ul className="mt-5 space-y-2.5 text-sm">
+              {properties.map((p) => (
+                <li key={p.slug}>
+                  <Link to="/portfolio/$slug" params={{ slug: p.slug }} className="link-gold">
+                    {p.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+        <div className="mt-16 flex flex-col justify-between gap-3 border-t border-primary-foreground/15 py-6 text-xs text-primary-foreground/50 sm:flex-row">
+          <p>© {new Date().getFullYear()} Brickfield Group. All rights reserved.</p>
+          <p>Cape Town · Johannesburg</p>
+        </div>
+      </div>
+      <p className="footer-wordmark" aria-hidden="true">
+        Brickfield
+      </p>
+    </footer>
+  );
 }
