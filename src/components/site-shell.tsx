@@ -30,13 +30,19 @@ export function LogoMark({
 
 export function Logo({ light, slot = light ? "footer" : "header" }: { light?: boolean; slot?: "header" | "footer" }) {
   // The lockup only changes in the dev switcher; everywhere else this is the approved wordmark.
-  const { id, light: lightMode } = useLockup(slot);
+  const { id, light: lightMode, shape } = useLockup(slot);
   return (
     <Link to="/" aria-label="Brickfield Group home" className="brand-link inline-flex">
       {id === "wordmark" || id === "none" ? (
         <LogoMark light={light} />
       ) : (
-        <BrandLockup id={id} light={lightMode} reverse={Boolean(light)} className={cn(light && "text-primary-foreground")} />
+        <BrandLockup
+          id={id}
+          light={lightMode}
+          shape={shape}
+          reverse={Boolean(light)}
+          className={cn(light && "text-primary-foreground")}
+        />
       )}
     </Link>
   );
@@ -44,11 +50,11 @@ export function Logo({ light, slot = light ? "footer" : "header" }: { light?: bo
 
 /** The oversized, faint mark under the footer. Follows the switcher's watermark slot. */
 function FooterWatermark() {
-  const { id, light } = useLockup("watermark");
+  const { id, light, shape } = useLockup("watermark");
   if (id === "none") return null;
   return (
     <div className="footer-wordmark" aria-hidden="true">
-      {id === "wordmark" ? <Wordmark title="" /> : <BrandLockup id={id} light={light} reverse title="" fluid />}
+      {id === "wordmark" ? <Wordmark title="" /> : <BrandLockup id={id} light={light} shape={shape} reverse title="" fluid />}
     </div>
   );
 }

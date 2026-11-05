@@ -1,15 +1,15 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { LOCKUPS, type LockupId, type LockupLight } from "@/components/brand-lockup";
+import { LOCKUPS, type DoorShape, type LockupId, type LockupLight } from "@/components/brand-lockup";
 
 /**
  * Dev-only lockup switcher. The site renders the plain wordmark everywhere (the default) on the
  * server and in production. In `vite dev`, or after visiting any page with `?lockups=1` (handy on a
  * Vercel preview), a small panel lets you pick a lockup, and whether the doorway is open (no fill)
- * or lit gold, separately for the header logo, the footer logo and the footer watermark. Choices
+ * or lit gold, and whether the door is rectangular or arched, separately for the header logo, the footer logo and the footer watermark. Choices
  * are kept in localStorage. Remove this file and its provider once a lockup is approved.
  */
 export type Slot = "header" | "footer" | "watermark";
-export type SlotChoice = { id: LockupId | "none"; light: LockupLight };
+export type SlotChoice = { id: LockupId | "none"; light: LockupLight; shape: DoorShape };
 type Choices = Record<Slot, SlotChoice>;
 
 const SLOTS: { id: Slot; label: string }[] = [
@@ -18,9 +18,9 @@ const SLOTS: { id: Slot; label: string }[] = [
   { id: "watermark", label: "Watermark" },
 ];
 const DEFAULT: Choices = {
-  header: { id: "wordmark", light: "paper" },
-  footer: { id: "wordmark", light: "paper" },
-  watermark: { id: "wordmark", light: "paper" },
+  header: { id: "wordmark", light: "paper", shape: "rect" },
+  footer: { id: "wordmark", light: "paper", shape: "rect" },
+  watermark: { id: "wordmark", light: "paper", shape: "rect" },
 };
 const KEY = "bf:lockups";
 const OLD_KEY = "bf:lockup"; // single-choice format from the first version of the switcher
@@ -50,17 +50,19 @@ const isValid = (c: unknown, slot: Slot): c is SlotChoice =>
   typeof c === "object" &&
   ((slot === "watermark" && (c as SlotChoice).id === "none") || LOCKUPS.some((l) => l.id === (c as SlotChoice).id));
 
+const withShape = (c: SlotChoice): SlotChoice => ({ ...c, shape: c.shape === "arched" ? "arched" : "rect" });
+
 function load(): Choices {
   const saved = read<Partial<Choices> | null>(KEY, null);
   if (saved) {
     return {
-      header: isValid(saved.header, "header") ? saved.header : DEFAULT.header,
-      footer: isValid(saved.footer, "footer") ? saved.footer : DEFAULT.footer,
-      watermark: isValid(saved.watermark, "watermark") ? saved.watermark : DEFAULT.watermark,
+      header: isValid(saved.header, "header") ? withShape(saved.header) : DEFAULT.header,
+      footer: isValid(saved.footer, "footer") ? withShape(saved.footer) : DEFAULT.footer,
+      watermark: isValid(saved.watermark, "watermark") ? withShape(saved.watermark) : DEFAULT.watermark,
     };
   }
   const old = read<SlotChoice | null>(OLD_KEY, null); // carry over the earlier single choice
-  return isValid(old, "header") ? { ...DEFAULT, header: old, footer: old } : DEFAULT;
+  return isValid(old, "header") ? { ...DEFAULT, header: withShape(old), footer: withShape(old) } : DEFAULT;
 }
 
 export function LockupProvider({ children }: { children: ReactNode }) {
@@ -142,6 +144,13 @@ export function LockupProvider({ children }: { children: ReactNode }) {
                 {(["paper", "gold"] as const).map((l) => (
                   <button key={l} type="button" aria-pressed={current.light === l} onClick={() => update({ light: l })}>
                     {l === "paper" ? "Open (no fill)" : "Gold light"}
+                  </button>
+                ))}
+              </div>
+              <div className="lockup-switcher-row">
+                {(["rect", "arched"] as const).map((d) => (
+                  <button key={d} type="button" aria-pressed={current.shape === d} onClick={() => update({ shape: d })}>
+                    {d === "rect" ? "Rectangular door" : "Arched door"}
                   </button>
                 ))}
               </div>

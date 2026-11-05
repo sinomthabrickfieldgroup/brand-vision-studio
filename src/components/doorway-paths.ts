@@ -9,3 +9,15 @@ export const DOORWAY = {
   hingeTop: "M8.75066 12.6602H8.19067V14.5446H8.75066V12.6602Z",
   hingeBottom: "M8.75066 25.0977H8.19067V26.9821H8.75066V25.0977Z",
 } as const;
+
+/* Rectangular variant on the same grid and bounds: same frame thickness, sliver of light, hinges and
+   door perspective as the arched drawing, with a flat head. The door's top edge drops 1 unit towards
+   its free edge so it still reads as swung open. */
+export const DOORWAY_RECT = {
+  bounds: DOORWAY.bounds,
+  frame: "M6 29.9976V2H24.6664V29.9976H22.4703V4.1537H8.19604V29.9976H6Z",
+  light: "M8.19604 29.9963V4.1537H22.4703V29.9963H8.19604Z",
+  door: "M8.74463 29.9989V6.3086L18.6268 7.3086V27.3068L8.74463 29.9989Z",
+  hingeTop: DOORWAY.hingeTop,
+  hingeBottom: DOORWAY.hingeBottom,
+} as const;

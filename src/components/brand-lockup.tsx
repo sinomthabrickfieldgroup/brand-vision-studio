@@ -1,4 +1,4 @@
-import { DOORWAY } from "@/components/doorway-paths";
+import { DOORWAY, DOORWAY_RECT } from "@/components/doorway-paths";
 import { WORDMARK } from "@/components/wordmark-paths";
 import { cn } from "@/lib/utils";
 
@@ -21,6 +21,7 @@ export const LOCKUPS = [
 
 export type LockupId = (typeof LOCKUPS)[number]["id"];
 export type LockupLight = "paper" | "gold";
+export type DoorShape = "arched" | "rect";
 
 const CHAR = "#3A3A3C";
 const GOLD = "#D6B060";
@@ -33,19 +34,22 @@ const { bounds } = DOORWAY;
 type Box = { x: number; y: number; w: number; h: number };
 
 /** The doorway with its top-left at (x, y) and height h. */
-function Door({ x, y, h, reverse, light }: { x: number; y: number; h: number; reverse: boolean; light: LockupLight }) {
+function Door({
+  x, y, h, reverse, light, shape,
+}: { x: number; y: number; h: number; reverse: boolean; light: LockupLight; shape: DoorShape }) {
   const k = h / bounds.height;
+  const D = shape === "rect" ? DOORWAY_RECT : DOORWAY;
   // The opening is see-through (the background shows through the doorway) unless it's lit gold.
   // Reverse with gold: the door turns charcoal so it stands out against the light.
   const opening = light === "gold" ? GOLD : "none";
   const door = reverse && light === "gold" ? CHAR : "currentColor";
   return (
     <g transform={`translate(${x - bounds.x * k} ${y - bounds.y * k}) scale(${k})`} className="lockup-doorway">
-      <path d={DOORWAY.frame} fill="currentColor" className="lockup-frame" />
-      <path d={DOORWAY.light} fill={opening} className="lockup-opening" />
-      <path d={DOORWAY.door} fill={door} className="lockup-door" />
-      <path d={DOORWAY.hingeTop} fill={door} className="lockup-door" />
-      <path d={DOORWAY.hingeBottom} fill={door} className="lockup-door" />
+      <path d={D.frame} fill="currentColor" className="lockup-frame" />
+      <path d={D.light} fill={opening} className="lockup-opening" />
+      <path d={D.door} fill={door} className="lockup-door" />
+      <path d={D.hingeTop} fill={door} className="lockup-door" />
+      <path d={D.hingeBottom} fill={door} className="lockup-door" />
     </g>
   );
 }
@@ -59,8 +63,10 @@ function Group({ x, y }: { x: number; y: number }) {
   return <path d={WORDMARK.group} transform={`translate(${x - G_X0} ${y})`} className="wordmark-group" />;
 }
 
-function layout(id: Exclude<LockupId, "wordmark">, reverse: boolean, light: LockupLight) {
-  const door = (x: number, y: number, h: number) => <Door x={x} y={y} h={h} reverse={reverse} light={light} />;
+function layout(id: Exclude<LockupId, "wordmark">, reverse: boolean, light: LockupLight, shape: DoorShape) {
+  const door = (x: number, y: number, h: number) => (
+    <Door x={x} y={y} h={h} reverse={reverse} light={light} shape={shape} />
+  );
   switch (id) {
     case "horizontal":
     case "horizontal-compact": {
@@ -111,6 +117,7 @@ function layout(id: Exclude<LockupId, "wordmark">, reverse: boolean, light: Lock
 export function BrandLockup({
   id,
   light = "paper",
+  shape = "arched",
   reverse = false,
   className,
   title = "Brickfield Group",
@@ -118,13 +125,14 @@ export function BrandLockup({
 }: {
   id: Exclude<LockupId, "wordmark">;
   light?: LockupLight;
+  shape?: DoorShape;
   reverse?: boolean;
   className?: string | undefined;
   title?: string;
   /** Size by width from CSS (e.g. the footer watermark) instead of by capital height. */
   fluid?: boolean;
 }) {
-  const { box, node } = layout(id, reverse, light);
+  const { box, node } = layout(id, reverse, light, shape);
   const pad = 2;
   return (
     <svg
@@ -132,7 +140,7 @@ export function BrandLockup({
       role={title ? "img" : undefined}
       aria-label={title || undefined}
       aria-hidden={title ? undefined : true}
-      className={cn("lockup", `lockup-${id}`, className)}
+      className={cn("lockup", `lockup-${id}`, `lockup-door-${shape}`, className)}
       style={fluid ? undefined : { height: `calc(var(--lockup-cap, 14px) * ${((box.h + 2 * pad) / 100).toFixed(3)})` }}
     >
       {node}
