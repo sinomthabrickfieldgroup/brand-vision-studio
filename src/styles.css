@@ -1252,6 +1252,31 @@
   .wordmark-group { fill: var(--accent); }
   .site-header .wordmark { height: 15px; }
   footer .wordmark { height: 20px; }
+  /* Doorway lockups (dev switcher only). --lockup-cap is the wordmark's capital height, so every
+     lockup keeps the lettering the same size as the plain wordmark in that slot. */
+  .lockup { display: block; width: auto; overflow: visible; }
+  .site-header .lockup { --lockup-cap: 13px; }
+  footer .lockup { --lockup-cap: 17px; }
+  @media (min-width: 768px) { .site-header .lockup { --lockup-cap: 15px; } }
+  .lockup-switcher { position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column-reverse; align-items: flex-end; z-index: 90; font: 12px/1.4 Inter, system-ui, sans-serif; color: #3A3A3C; }
+  .lockup-switcher-toggle { background: #3A3A3C; color: #FCFCFC; border-radius: 999px; padding: 6px 12px; box-shadow: 0 4px 16px rgb(0 0 0 / 0.18); }
+  .lockup-switcher-panel { margin-bottom: 8px; width: 340px; background: #FCFCFC; border: 1px solid #E4E0D8; border-radius: 12px; padding: 12px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.16); display: grid; gap: 10px; }
+  .lockup-switcher-panel label { display: grid; gap: 4px; }
+  .lockup-switcher-panel label span, .lockup-switcher-panel p { color: #77736C; }
+  .lockup-switcher-panel select { border: 1px solid #DDD8CF; border-radius: 8px; padding: 6px 8px; background: #fff; }
+  .lockup-switcher-row { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .lockup-switcher-row button { border: 1px solid #DDD8CF; border-radius: 8px; padding: 4px 9px; background: #fff; }
+  .lockup-switcher-row button[aria-pressed="true"] { background: #3A3A3C; border-color: #3A3A3C; color: #FCFCFC; }
+  .lockup-switcher-sep { width: 1px; height: 18px; background: #E4E0D8; margin: 0 2px; }
+  .lockup-switcher-tabs { display: grid; grid-template-columns: repeat(3, 1fr); background: #EFECE6; border-radius: 9px; padding: 3px; gap: 3px; }
+  .lockup-switcher-tabs button { border-radius: 7px; padding: 5px 4px; color: #5d5952; }
+  .lockup-switcher-tabs button[aria-selected="true"] { background: #fff; color: #3A3A3C; box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
+  .lockup-switcher-copy span { color: #77736C; margin-right: 2px; }
+  .lockup-switcher-select { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; }
+  .lockup-switcher-select select { min-width: 0; }
+  .lockup-switcher-select button, .lockup-switcher-row button { border: 1px solid #DDD8CF; border-radius: 8px; padding: 4px 9px; background: #fff; }
+  .lockup-switcher-row button:disabled { opacity: .4; }
+  @media print { .lockup-switcher { display: none; } }
   .site-loader-logo .wordmark-stacked { height: 64px; }
   @media (min-width: 768px) { .site-header .wordmark { height: 17px; } .site-loader-logo .wordmark-stacked { height: 84px; } }
 }
@@ -1320,6 +1345,12 @@
   .footer-wordmark { display: flex; justify-content: center; padding: 3rem 1.5rem 2.5rem; font-size: 0; line-height: 0; color: oklch(1 0 0 / .07); margin: 0; }
   .footer-wordmark .wordmark { width: min(92vw, 1180px); height: auto; }
   .footer-wordmark .wordmark-group { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
+  .footer-wordmark .lockup { width: min(92vw, 1180px); height: auto; }
+  /* The watermark keeps its faint tint whatever lockup or tone it uses. */
+  .footer-wordmark .lockup-ink { fill: currentColor; }
+  .footer-wordmark .lockup-gold { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
+  /* The stacked and mark-only lockups are tall: cap them so the watermark stays a band, not a wall. */
+  .footer-wordmark .lockup-stacked, .footer-wordmark .lockup-mark { max-height: 42vh; width: auto; }
 }
 
 /* ─── Progressive image loading ──────────────────────────────────────────── */

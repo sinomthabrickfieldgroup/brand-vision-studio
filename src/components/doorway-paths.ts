@@ -1,0 +1,23 @@
+/* Provisional doorway mark (not yet approved), drawn on a 32px grid in Figma.
+   frame and door take the ink colour; light is the opening behind the door. */
+export const DOORWAY = {
+  /** The mark's own bounds inside its 32 x 32 drawing grid. */
+  bounds: { x: 6, y: 2, width: 18.6664, height: 27.9989 },
+  frame: "M6 29.9976V11.1531C6 8.72552 6.98331 6.3974 8.73362 4.68087C10.4839 2.96434 12.8579 2 15.3332 2C17.8085 2 20.1824 2.96434 21.9327 4.68087C23.683 6.3974 24.6664 8.72552 24.6664 11.1531V29.9976H22.4703V11.1531C22.4703 9.29671 21.7184 7.51638 20.3799 6.20374C19.0414 4.8911 17.2261 4.15366 15.3332 4.15366C13.4403 4.15366 11.6249 4.8911 10.2865 6.20374C8.94799 7.51638 8.19604 9.29671 8.19604 11.1531V29.9976H6Z",
+  light: "M8.19604 29.9963V11.1517C8.19604 9.29539 8.94799 7.51506 10.2865 6.20242C11.6249 4.88978 13.4403 4.15234 15.3332 4.15234C17.2261 4.15234 19.0414 4.88978 20.3799 6.20242C21.7184 7.51506 22.4703 9.29539 22.4703 11.1517V29.9963H8.19604Z",
+  door: "M8.74463 29.9989V11.1543C8.74463 9.86916 9.26521 8.63663 10.1918 7.72788C11.1185 6.81913 12.3753 6.30859 13.6857 6.30859C14.9962 6.30859 16.253 6.81913 17.1796 7.72788C18.1062 8.63663 18.6268 9.86916 18.6268 11.1543V27.3068L8.74463 29.9989Z",
+  hingeTop: "M8.75066 12.6602H8.19067V14.5446H8.75066V12.6602Z",
+  hingeBottom: "M8.75066 25.0977H8.19067V26.9821H8.75066V25.0977Z",
+} as const;
+
+/* Rectangular variant on the same grid and bounds: same frame thickness, sliver of light, hinges and
+   door perspective as the arched drawing, with a flat head. The door's top edge drops 1 unit towards
+   its free edge so it still reads as swung open. */
+export const DOORWAY_RECT = {
+  bounds: DOORWAY.bounds,
+  frame: "M6 29.9976V2H24.6664V29.9976H22.4703V4.1537H8.19604V29.9976H6Z",
+  light: "M8.19604 29.9963V4.1537H22.4703V29.9963H8.19604Z",
+  door: "M8.74463 29.9989V6.3086L18.6268 7.3086V27.3068L8.74463 29.9989Z",
+  hingeTop: DOORWAY.hingeTop,
+  hingeBottom: DOORWAY.hingeBottom,
+} as const;
