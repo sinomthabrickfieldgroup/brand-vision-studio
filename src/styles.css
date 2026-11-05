@@ -1260,7 +1260,7 @@
   @media (min-width: 768px) { .site-header .lockup { --lockup-cap: 15px; } }
   .lockup-switcher { position: fixed; right: 16px; bottom: 16px; display: flex; flex-direction: column-reverse; align-items: flex-end; z-index: 90; font: 12px/1.4 Inter, system-ui, sans-serif; color: #3A3A3C; }
   .lockup-switcher-toggle { background: #3A3A3C; color: #FCFCFC; border-radius: 999px; padding: 6px 12px; box-shadow: 0 4px 16px rgb(0 0 0 / 0.18); }
-  .lockup-switcher-panel { margin-bottom: 8px; width: 290px; background: #FCFCFC; border: 1px solid #E4E0D8; border-radius: 12px; padding: 12px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.16); display: grid; gap: 10px; }
+  .lockup-switcher-panel { margin-bottom: 8px; width: 340px; background: #FCFCFC; border: 1px solid #E4E0D8; border-radius: 12px; padding: 12px; box-shadow: 0 10px 30px rgb(0 0 0 / 0.16); display: grid; gap: 10px; }
   .lockup-switcher-panel label { display: grid; gap: 4px; }
   .lockup-switcher-panel label span, .lockup-switcher-panel p { color: #77736C; }
   .lockup-switcher-panel select { border: 1px solid #DDD8CF; border-radius: 8px; padding: 6px 8px; background: #fff; }
@@ -1272,6 +1272,10 @@
   .lockup-switcher-tabs button { border-radius: 7px; padding: 5px 4px; color: #5d5952; }
   .lockup-switcher-tabs button[aria-selected="true"] { background: #fff; color: #3A3A3C; box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
   .lockup-switcher-copy span { color: #77736C; margin-right: 2px; }
+  .lockup-switcher-select { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 6px; }
+  .lockup-switcher-select select { min-width: 0; }
+  .lockup-switcher-select button, .lockup-switcher-row button { border: 1px solid #DDD8CF; border-radius: 8px; padding: 4px 9px; background: #fff; }
+  .lockup-switcher-row button:disabled { opacity: .4; }
   @media print { .lockup-switcher { display: none; } }
   .site-loader-logo .wordmark-stacked { height: 64px; }
   @media (min-width: 768px) { .site-header .wordmark { height: 17px; } .site-loader-logo .wordmark-stacked { height: 84px; } }
@@ -1342,9 +1346,9 @@
   .footer-wordmark .wordmark { width: min(92vw, 1180px); height: auto; }
   .footer-wordmark .wordmark-group { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
   .footer-wordmark .lockup { width: min(92vw, 1180px); height: auto; }
-  .footer-wordmark .lockup-frame, .footer-wordmark .lockup-door { fill: currentColor; }
-  .footer-wordmark .lockup-opening[fill="none"] { fill: none; }
-  .footer-wordmark .lockup-opening:not([fill="none"]) { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
+  /* The watermark keeps its faint tint whatever lockup or tone it uses. */
+  .footer-wordmark .lockup-ink { fill: currentColor; }
+  .footer-wordmark .lockup-gold { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
   /* The stacked and mark-only lockups are tall: cap them so the watermark stays a band, not a wall. */
   .footer-wordmark .lockup-stacked, .footer-wordmark .lockup-mark { max-height: 42vh; width: auto; }
 }

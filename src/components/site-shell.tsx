@@ -3,8 +3,7 @@ import { ArrowUpRight, ChevronDown, Mail, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Media } from "@/components/media";
-import { BrandLockup } from "@/components/brand-lockup";
-import { useLockup } from "@/components/lockup-switcher";
+import { FooterLogo, FooterWatermark, HeaderLogo } from "@/components/brand-logos";
 import { Wordmark } from "@/components/wordmark";
 import { CONTACT, properties, propertyTypes } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
@@ -28,35 +27,9 @@ export function LogoMark({
   return <Wordmark layout={layout} className={cn(light && "text-primary-foreground", className)} />;
 }
 
-export function Logo({ light, slot = light ? "footer" : "header" }: { light?: boolean; slot?: "header" | "footer" }) {
-  // The lockup only changes in the dev switcher; everywhere else this is the approved wordmark.
-  const { id, light: lightMode, shape } = useLockup(slot);
-  return (
-    <Link to="/" aria-label="Brickfield Group home" className="brand-link inline-flex">
-      {id === "wordmark" || id === "none" ? (
-        <LogoMark light={light} />
-      ) : (
-        <BrandLockup
-          id={id}
-          light={lightMode}
-          shape={shape}
-          reverse={Boolean(light)}
-          className={cn(light && "text-primary-foreground")}
-        />
-      )}
-    </Link>
-  );
-}
-
-/** The oversized, faint mark under the footer. Follows the switcher's watermark slot. */
-function FooterWatermark() {
-  const { id, light, shape } = useLockup("watermark");
-  if (id === "none") return null;
-  return (
-    <div className="footer-wordmark" aria-hidden="true">
-      {id === "wordmark" ? <Wordmark title="" /> : <BrandLockup id={id} light={light} shape={shape} reverse title="" fluid />}
-    </div>
-  );
+/** Kept for callers that still import Logo: the header or footer logo from src/lib/brand.ts. */
+export function Logo({ light }: { light?: boolean }) {
+  return light ? <FooterLogo /> : <HeaderLogo />;
 }
 
 function PortfolioMenu({ onNavigate }: { onNavigate: () => void }) {
@@ -183,7 +156,7 @@ export function SiteHeader() {
           {mobileOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
         <div className="order-2 justify-self-center lg:order-1">
-          <Logo />
+          <HeaderLogo />
         </div>
         <nav
           aria-label="Main navigation"
@@ -291,7 +264,7 @@ export function SiteFooter() {
       <div className="mx-auto max-w-7xl px-6 pt-20 md:px-10">
         <div className="grid gap-12 md:grid-cols-[minmax(0,2fr)_1fr_1fr]">
           <div>
-            <Logo light />
+            <FooterLogo />
             <p className="mt-8 max-w-sm font-display text-3xl leading-tight">
               Patient capital. Long-term perspective.
             </p>
