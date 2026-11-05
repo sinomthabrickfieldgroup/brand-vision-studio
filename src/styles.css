@@ -1268,6 +1268,10 @@
   .lockup-switcher-row button { border: 1px solid #DDD8CF; border-radius: 8px; padding: 4px 9px; background: #fff; }
   .lockup-switcher-row button[aria-pressed="true"] { background: #3A3A3C; border-color: #3A3A3C; color: #FCFCFC; }
   .lockup-switcher-sep { width: 1px; height: 18px; background: #E4E0D8; margin: 0 2px; }
+  .lockup-switcher-tabs { display: grid; grid-template-columns: repeat(3, 1fr); background: #EFECE6; border-radius: 9px; padding: 3px; gap: 3px; }
+  .lockup-switcher-tabs button { border-radius: 7px; padding: 5px 4px; color: #5d5952; }
+  .lockup-switcher-tabs button[aria-selected="true"] { background: #fff; color: #3A3A3C; box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
+  .lockup-switcher-copy span { color: #77736C; margin-right: 2px; }
   @media print { .lockup-switcher { display: none; } }
   .site-loader-logo .wordmark-stacked { height: 64px; }
   @media (min-width: 768px) { .site-header .wordmark { height: 17px; } .site-loader-logo .wordmark-stacked { height: 84px; } }
@@ -1337,6 +1341,12 @@
   .footer-wordmark { display: flex; justify-content: center; padding: 3rem 1.5rem 2.5rem; font-size: 0; line-height: 0; color: oklch(1 0 0 / .07); margin: 0; }
   .footer-wordmark .wordmark { width: min(92vw, 1180px); height: auto; }
   .footer-wordmark .wordmark-group { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
+  .footer-wordmark .lockup { width: min(92vw, 1180px); height: auto; }
+  .footer-wordmark .lockup-frame, .footer-wordmark .lockup-door { fill: currentColor; }
+  .footer-wordmark .lockup-opening[fill="none"] { fill: none; }
+  .footer-wordmark .lockup-opening:not([fill="none"]) { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
+  /* The stacked and mark-only lockups are tall: cap them so the watermark stays a band, not a wall. */
+  .footer-wordmark .lockup-stacked, .footer-wordmark .lockup-mark { max-height: 42vh; width: auto; }
 }
 
 /* ─── Progressive image loading ──────────────────────────────────────────── */

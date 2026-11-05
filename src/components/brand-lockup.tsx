@@ -40,12 +40,12 @@ function Door({ x, y, h, reverse, light }: { x: number; y: number; h: number; re
   const opening = light === "gold" ? GOLD : "none";
   const door = reverse && light === "gold" ? CHAR : "currentColor";
   return (
-    <g transform={`translate(${x - bounds.x * k} ${y - bounds.y * k}) scale(${k})`} className="lockup-mark">
-      <path d={DOORWAY.frame} fill="currentColor" />
-      <path d={DOORWAY.light} fill={opening} />
-      <path d={DOORWAY.door} fill={door} />
-      <path d={DOORWAY.hingeTop} fill={door} />
-      <path d={DOORWAY.hingeBottom} fill={door} />
+    <g transform={`translate(${x - bounds.x * k} ${y - bounds.y * k}) scale(${k})`} className="lockup-doorway">
+      <path d={DOORWAY.frame} fill="currentColor" className="lockup-frame" />
+      <path d={DOORWAY.light} fill={opening} className="lockup-opening" />
+      <path d={DOORWAY.door} fill={door} className="lockup-door" />
+      <path d={DOORWAY.hingeTop} fill={door} className="lockup-door" />
+      <path d={DOORWAY.hingeBottom} fill={door} className="lockup-door" />
     </g>
   );
 }
@@ -114,22 +114,26 @@ export function BrandLockup({
   reverse = false,
   className,
   title = "Brickfield Group",
+  fluid = false,
 }: {
   id: Exclude<LockupId, "wordmark">;
   light?: LockupLight;
   reverse?: boolean;
-  className?: string;
+  className?: string | undefined;
   title?: string;
+  /** Size by width from CSS (e.g. the footer watermark) instead of by capital height. */
+  fluid?: boolean;
 }) {
   const { box, node } = layout(id, reverse, light);
   const pad = 2;
   return (
     <svg
       viewBox={`${box.x - pad} ${box.y - pad} ${box.w + 2 * pad} ${box.h + 2 * pad}`}
-      role="img"
-      aria-label={title}
+      role={title ? "img" : undefined}
+      aria-label={title || undefined}
+      aria-hidden={title ? undefined : true}
       className={cn("lockup", `lockup-${id}`, className)}
-      style={{ height: `calc(var(--lockup-cap, 14px) * ${((box.h + 2 * pad) / 100).toFixed(3)})` }}
+      style={fluid ? undefined : { height: `calc(var(--lockup-cap, 14px) * ${((box.h + 2 * pad) / 100).toFixed(3)})` }}
     >
       {node}
     </svg>

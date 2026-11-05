@@ -28,22 +28,28 @@ export function LogoMark({
   return <Wordmark layout={layout} className={cn(light && "text-primary-foreground", className)} />;
 }
 
-export function Logo({ light }: { light?: boolean }) {
+export function Logo({ light, slot = light ? "footer" : "header" }: { light?: boolean; slot?: "header" | "footer" }) {
   // The lockup only changes in the dev switcher; everywhere else this is the approved wordmark.
-  const { id, light: lightMode } = useLockup();
+  const { id, light: lightMode } = useLockup(slot);
   return (
     <Link to="/" aria-label="Brickfield Group home" className="brand-link inline-flex">
-      {id === "wordmark" ? (
+      {id === "wordmark" || id === "none" ? (
         <LogoMark light={light} />
       ) : (
-        <BrandLockup
-          id={id}
-          light={lightMode}
-          reverse={Boolean(light)}
-          className={cn(light && "text-primary-foreground")}
-        />
+        <BrandLockup id={id} light={lightMode} reverse={Boolean(light)} className={cn(light && "text-primary-foreground")} />
       )}
     </Link>
+  );
+}
+
+/** The oversized, faint mark under the footer. Follows the switcher's watermark slot. */
+function FooterWatermark() {
+  const { id, light } = useLockup("watermark");
+  if (id === "none") return null;
+  return (
+    <div className="footer-wordmark" aria-hidden="true">
+      {id === "wordmark" ? <Wordmark title="" /> : <BrandLockup id={id} light={light} reverse title="" fluid />}
+    </div>
   );
 }
 
@@ -352,9 +358,7 @@ export function SiteFooter() {
           <p>Cape Town · Johannesburg</p>
         </div>
       </div>
-      <div className="footer-wordmark" aria-hidden="true">
-        <Wordmark title="" />
-      </div>
+      <FooterWatermark />
     </footer>
   );
 }
