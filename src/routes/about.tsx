@@ -293,8 +293,7 @@ function About() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-14 md:flex-row md:items-center md:px-10">
           <Eyebrow>Backed by Firefly Capital</Eyebrow>
           <p className="max-w-2xl font-display text-2xl leading-snug md:text-3xl">
-            Capital that measures returns in decades lets us buy, fix and hold what others would
-            flip.
+            Capital that measures returns in decades lets us buy well, improve patiently and hold for good.
           </p>
         </div>
       </section>
