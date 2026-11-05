@@ -99,8 +99,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" },
-      // Provisional doorway mark (not yet approved). favicon.svg is charcoal on light browser themes and inverts on dark ones;
-      // the .ico is the same mark on transparent, and the app icons sit on a paper tile.
+      // Provisional doorway mark (rectangular, not yet approved). favicon.svg is charcoal on light browser themes and light on
+      // dark ones, with the doorway left unfilled; the .ico is the same mark on transparent, and the app icons sit on a paper tile.
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
