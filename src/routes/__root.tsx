@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "@/components/site-shell";
 import { EditorialMotion } from "@/components/editorial-motion";
+import { LockupProvider } from "@/components/lockup-switcher";
 import { LOADER_SCRIPT, SiteLoader } from "@/components/site-loader";
 
 function NotFoundComponent() {
@@ -135,11 +136,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <SiteLoader />
-      <SiteHeader />
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <EditorialMotion><Outlet /></EditorialMotion>
-      <SiteFooter />
+      <LockupProvider>
+        <SiteLoader />
+        <SiteHeader />
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <EditorialMotion><Outlet /></EditorialMotion>
+        <SiteFooter />
+      </LockupProvider>
     </QueryClientProvider>
   );
 }

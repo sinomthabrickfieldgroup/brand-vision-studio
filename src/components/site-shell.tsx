@@ -3,6 +3,8 @@ import { ArrowUpRight, ChevronDown, Mail, Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Media } from "@/components/media";
+import { BrandLockup } from "@/components/brand-lockup";
+import { useLockup } from "@/components/lockup-switcher";
 import { Wordmark } from "@/components/wordmark";
 import { CONTACT, properties, propertyTypes } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
@@ -27,9 +29,20 @@ export function LogoMark({
 }
 
 export function Logo({ light }: { light?: boolean }) {
+  // The lockup only changes in the dev switcher; everywhere else this is the approved wordmark.
+  const { id, light: lightMode } = useLockup();
   return (
     <Link to="/" aria-label="Brickfield Group home" className="brand-link inline-flex">
-      <LogoMark light={light} />
+      {id === "wordmark" ? (
+        <LogoMark light={light} />
+      ) : (
+        <BrandLockup
+          id={id}
+          light={lightMode}
+          reverse={Boolean(light)}
+          className={cn(light && "text-primary-foreground")}
+        />
+      )}
     </Link>
   );
 }
