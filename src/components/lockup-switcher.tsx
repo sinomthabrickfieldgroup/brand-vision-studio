@@ -4,7 +4,7 @@ import { LOCKUPS, type LockupId, type LockupLight } from "@/components/brand-loc
 /**
  * Dev-only lockup switcher. The site renders the plain wordmark (the default) on the server and in
  * production. In `vite dev`, or after visiting any page with `?lockups=1` (handy on a Vercel preview),
- * a small panel lets you pick a lockup and the doorway's light colour; the choice is kept in
+ * a small panel lets you pick a lockup and whether the doorway is open (no fill) or lit gold; the choice is kept in
  * localStorage. Remove this file and its provider once a lockup is approved.
  */
 type Choice = { id: LockupId; light: LockupLight };
@@ -95,7 +95,7 @@ export function LockupProvider({ children }: { children: ReactNode }) {
                     aria-pressed={choice.light === l}
                     onClick={() => update({ light: l })}
                   >
-                    {l === "paper" ? "Paper light" : "Gold light"}
+                    {l === "paper" ? "Open (no fill)" : "Gold light"}
                   </button>
                 ))}
               </div>

@@ -24,7 +24,6 @@ export type LockupLight = "paper" | "gold";
 
 const CHAR = "#3A3A3C";
 const GOLD = "#D6B060";
-const PAPER = "#FCFCFC";
 const B_W = 816.6;
 const G_W = 426.6;
 const G_X0 = 8.19; // GROUP's left side-bearing in its own path
@@ -36,9 +35,9 @@ type Box = { x: number; y: number; w: number; h: number };
 /** The doorway with its top-left at (x, y) and height h. */
 function Door({ x, y, h, reverse, light }: { x: number; y: number; h: number; reverse: boolean; light: LockupLight }) {
   const k = h / bounds.height;
-  // Light theme: charcoal frame and door; the opening is paper or gold.
-  // Reverse: the frame takes the light text colour; the opening inverts to charcoal, or stays gold with a dark door.
-  const opening = light === "gold" ? GOLD : reverse ? CHAR : PAPER;
+  // The opening is see-through (the background shows through the doorway) unless it's lit gold.
+  // Reverse with gold: the door turns charcoal so it stands out against the light.
+  const opening = light === "gold" ? GOLD : "none";
   const door = reverse && light === "gold" ? CHAR : "currentColor";
   return (
     <g transform={`translate(${x - bounds.x * k} ${y - bounds.y * k}) scale(${k})`} className="lockup-mark">
