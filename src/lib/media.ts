@@ -42,6 +42,9 @@ import photo_loop_facilities_kitchen from "@/assets/photos/loop-kitchen-001.jpg"
 import photo_loop_guardhouse from "@/assets/photos/loop-guardhouse.jpg";
 import photo_loop_ventilation from "@/assets/photos/loop-roof-inffra-001.jpg";
 import photo_wierda_aerial from "@/assets/photos/wierda-aerial.webp";
+import photo_wierda_logo_front from "@/assets/photos/wierda-logo-front.webp";
+import photo_wierda_jacaranda from "@/assets/photos/wierda-jacaranda.webp";
+import photo_wierda_precinct from "@/assets/photos/wierda-precinct.webp";
 import photo_wierda_signage from "@/assets/photos/wierda-signage.webp";
 import photo_wierda_courtyard_skyline from "@/assets/photos/wierda-courtyard-skyline.webp";
 import photo_wierda_nso_entrance from "@/assets/photos/wierda-nso-entrance.webp";
@@ -506,6 +509,33 @@ export const media = {
     src: photo_wierda_courtyard_skyline,
     focus: "50% 60%",
     prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaJacaranda: shot({
+    title: "66/68 Wierda · arrival",
+    alt: "A white two-storey office building at 66/68 Wierda with a glazed entrance, behind a jacaranda in bloom",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_jacaranda,
+    focus: "50% 55%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaLogoFront: shot({
+    title: "66/68 Wierda · logo window",
+    alt: "The front of a building at 66/68 Wierda, with a large glazed panel between two trees and dappled shade",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_wierda_logo_front,
+    focus: "50% 50%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaPrecinct: shot({
+    title: "66/68 Wierda · precinct",
+    alt: "Tiled roofs and jacarandas at 66/68 Wierda, with the Sandton skyline beyond",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_precinct,
+    focus: "55% 60%",
+    prompt: "Frame from the November 2026 Wierda Valley drone footage.",
   }),
   wierdaGarden: shot({
     title: "66/68 Wierda · garden courtyard",

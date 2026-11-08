@@ -124,4 +124,10 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JYgC2yB3+w2ePivTrKktAAP7ytLqU0L5xqQV3kYzTYW6JCQyo1Z01RXruiQGBfvHa62eAZXoPJez0HZzv2ICj0Mgh79hR0a3tTt5TUViBfq5jjT2FrZFXeYKeUiWWAAA=",
   "wierda-aerial":
     "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAABQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgC1GoADS3sjwFD5YW5YUdJAAPulg4KtV1dGCtDq3RwmhX76wpUjQRQtlBiQMqoOX0dY/Ls68uob//rYSuH++794bK1Up2qY3m5+hp5ddfbhyqo8Lw5y/J2Fz1diuC5ze4vDDiKLYUehgAA=",
+  "wierda-logo-front":
+    "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JYwC/OBxNerWGy/EqoX+djwAA/niKdUEyM8g3FhkK9byUP33PiadHhi2f3Ss6T4/B2PX4/AOfUyuOf4vKCwpxcFDgTCMcHSpuNWQw+XvLrYss9OfPnAAA",
+  "wierda-jacaranda":
+    "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JYgCsABjp7QML7zOV8LrvaAD+2fMs7YsSI4NhGYyjbdjizrpVLQWlu4Pe+KHAXOMZm7Sv6/A0AMiQGhZMZjlxF+izdzy9SMPmcSGzxkAOAAAA",
+  "wierda-precinct":
+    "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JYwC/OCB+2K31872O5Lr/KcAA/fh3q/BSkN5XRAPO3jpNsCMDojxf/Je8BvYX9gowUqx6T3kwemKbt/baAAAA",
 };
