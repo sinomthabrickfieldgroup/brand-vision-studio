@@ -64,6 +64,12 @@ import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
 import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
 import photo_loop_yard from "@/assets/photos/loop-yard.webp";
 import photo_loop_top_down from "@/assets/photos/loop-top-down.webp";
+import photo_loop_offices_before from "@/assets/photos/loop-offices-before.webp";
+import photo_loop_offices_after from "@/assets/photos/loop-offices-after.webp";
+import photo_loop_meeting_before from "@/assets/photos/loop-meeting-before.webp";
+import photo_loop_meeting_after from "@/assets/photos/loop-meeting-after.webp";
+import photo_loop_staffroom_before from "@/assets/photos/loop-staffroom-before.webp";
+import photo_loop_staffroom_after from "@/assets/photos/loop-staffroom-after.webp";
 import photo_loop_aerial_angle from "@/assets/photos/loop-aerial-angle.webp";
 import photo_loop_warehouse_wide from "@/assets/photos/loop-warehouse-wide.webp";
 import photo_loop_warehouse_light from "@/assets/photos/loop-warehouse-light.webp";
@@ -516,6 +522,60 @@ export const media = {
     tone: "concrete",
     src: photo_loop_parking,
     focus: "55% 60%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopOfficesBefore: shot({
+    title: "9 Loop Street · offices, before",
+    alt: "The open-plan office at 9 Loop Street before refurbishment: worn rubber flooring, old fittings and loose cabling",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_loop_offices_before,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopOfficesAfter: shot({
+    title: "9 Loop Street · offices",
+    alt: "The refurbished open-plan office at 9 Loop Street: laminate floor, LED lighting, split air-conditioning and new doors",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_loop_offices_after,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopMeetingBefore: shot({
+    title: "9 Loop Street · private office, before",
+    alt: "A private office at 9 Loop Street before refurbishment, with an old timber table, shelving and a glass board",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_loop_meeting_before,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopMeetingAfter: shot({
+    title: "9 Loop Street · private office",
+    alt: "A refurbished private office at 9 Loop Street, with timber floors, downlights and air-conditioning",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_loop_meeting_after,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopStaffroomBefore: shot({
+    title: "9 Loop Street · staff room, before",
+    alt: "The staff room at 9 Loop Street before refurbishment: cracked floor, extractor fans and notices on the walls",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_loop_staffroom_before,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopStaffroomAfter: shot({
+    title: "9 Loop Street · staff room",
+    alt: "The refurbished staff room at 9 Loop Street: sealed floor, fresh paint and glazed doors through to the offices",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_loop_staffroom_after,
+    focus: "50% 50%",
     prompt: "Still from the 9 Loop Street shoot.",
   }),
   loopRoof: shot({

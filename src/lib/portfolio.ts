@@ -368,12 +368,10 @@ export const properties: Property[] = [
           { label: "Exterior", before: "loopBefore", after: "loopHero" },
           { label: "Interior", before: "loopInteriorBefore", after: "loopWarehouse" },
           { label: "Mezzanine", before: "loopMezzanineBefore", after: "loopOffice" },
-          {
-            label: "Facilities",
-            before: "loopFacilitiesBefore",
-            after: "loopFacilitiesAfter",
-            caption: "Offices and bathrooms",
-          },
+          { label: "Offices", before: "loopOfficesBefore", after: "loopOfficesAfter" },
+          { label: "Private office", before: "loopMeetingBefore", after: "loopMeetingAfter" },
+          { label: "Staff room", before: "loopStaffroomBefore", after: "loopStaffroomAfter" },
+          { label: "Kitchen", before: "loopFacilitiesBefore", after: "loopFacilitiesAfter" },
         ],
       },
       {

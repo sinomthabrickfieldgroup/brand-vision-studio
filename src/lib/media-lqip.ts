@@ -152,4 +152,16 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBOgBHn6onEx6O7zrXZ0AP7Qpzc+ByTxwgSeaGtQeZywTyNNqZUZP2MAf58TA9y2H6TXzAqsDJ2opn+DhhSupZxVymvDIybIdaKA9olmoSDp0Jz6uiDvnDETcbkaomMcAAAA",
   "loop-aerial-angle":
     "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAABwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JZQBUQvAC4HVZVmnl1jph0I/jAAD+k8KxZ/02eq54UzfrF8732gSmZwQyeckwHOC3G+Ia3tMIryP59WMNd9oRjtbLFZ2/lBKCn0VpZ9pYd3Fqkp8QUfIQovCTZ10hUbEWkB0xIakMP76x4aQAAfWwkCOAAA==",
+  "loop-offices-before":
+    "data:image/webp;base64,UklGRlwAAABXRUJQVlA4IFAAAADQAwCdASoUAAsAPu1kqk4ppaQiMAgBMB2JZwDLLBtYmMu+DLfv1AAA/p+G0+48BtuOwU4u20DXlclWk9+b7yEHO+OVZhoybFjDRezpiCgAAA==",
+  "loop-offices-after":
+    "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAwCdASoUAAsAPu1kqk4ppaQiMAgBMB2JZwDCoExCcMQozp1I4NAAAPoBgo51zUgxw1uOh18KLNGPVBIcssbSnj+JLJDMk+i32OQ/6m1YsxU00VJmjyPiAAA=",
+  "loop-meeting-before":
+    "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAADQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBUegl4M4Z8J/elcUQAAzWwPRSYyRlXxoG8DHu0yQXAPuDy9tLSlBrE62hwZe5IYXPEkjL926oSNB3AAAA==",
+  "loop-meeting-after":
+    "data:image/webp;base64,UklGRl4AAABXRUJQVlA4IFIAAACQAwCdASoUAAsAPu1kqk2ppaQiMAgBMB2JZQCdABSKvwOSxk6AAM0yZnLqer2NLuobW9vAwKo4GuGA7Ez7UWlNhrYPPHy6+nB62QmwSMS0mPgA",
+  "loop-staffroom-before":
+    "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAABQAwCdASoUAAsAPu1kqk4ppaQiMAgBMB2JaQAAG4cs+zSHAAD+lxAxVtp/WocZX9iYLBWBkwXVkryYFmLCMUZyB2Z0BQAA",
+  "loop-staffroom-after":
+    "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JYgCdMoACIOkOdT0k4mxAAP0oAzVp9nbjLL/s6mVFsqSmPRx5P+suENiWd7dsv2NJk6r+1UOkhu0XdWHENn9NLitZAna7GtPiAAAA",
 };
