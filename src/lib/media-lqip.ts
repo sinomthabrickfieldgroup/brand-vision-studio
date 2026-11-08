@@ -130,4 +130,24 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JYgCsABjp7QML7zOV8LrvaAD+2fMs7YsSI4NhGYyjbdjizrpVLQWlu4Pe+KHAXOMZm7Sv6/A0AMiQGhZMZjlxF+izdzy9SMPmcSGzxkAOAAAA",
   "wierda-precinct":
     "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JYwC/OCB+2K31872O5Lr/KcAA/fh3q/BSkN5XRAPO3jpNsCMDojxf/Je8BvYX9gowUqx6T3kwemKbt/baAAAA",
+  "loop-bathrooms":
+    "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYwC3uBmMESZqV4cyugAA+TIqAqqoQjSk7tAFQUVLV9wrwWcE7o+Jkk+r18q5TfAV2YpNNlY2oNYC8MV0BSREpUOE68SohlEkM68AAAA=",
+  "loop-warehouse-wide":
+    "data:image/webp;base64,UklGRm4AAABXRUJQVlA4IGIAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBUehDwPyJ+RMi4rvjwAAP7am2jibgbSwnqORc33NNQHrFHsAakOQjUPUqrkcZganFHzs97jrJdacrxv4TyACvJ+ERbSotrMAA==",
+  "loop-warehouse-light":
+    "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBACdASoUAAsAPu1kqU2ppaQiMAgBMB2JYwCw7CFqE+DpIxoJolP4AAD+7z5tILOaJAXIo5NrotQbd4qkxTiDHxewZRto4KzEjfu8NJjgpYQEq7q+jNkM+s3Kz4V3Km1Q2iDgwlj8POAA",
+  "loop-office-floor":
+    "data:image/webp;base64,UklGRmAAAABXRUJQVlA4IFQAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZQDA3CLRCOvEsTiZauAAAPVBg03MXf0udnBO+xRUw/Ngi9ExGtMpsPg0M64+QfDAFHTdQcnosR4oEAA=",
+  "loop-mezzanine-deck":
+    "data:image/webp;base64,UklGRmIAAABXRUJQVlA4IFYAAACwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JZwDE2B6F6y2Ozq6ROAD+vF1wKEBfQagd3TN4GoM8yhITC4916epvDiNRxim4/OgUfIJVfthbWbrcFRwAAA==",
+  "loop-mezzanine-stairs":
+    "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAwCdASoUAAsAPu1kqU2ppaOiMAgBMB2JZwDG9BM+TNvit2SjpWRAAPjZBh2BklJLlaDM+Uy+RhACG4bvLT3VUANr49Ta5izc8WrrMErtD6xVXQVO5c2R6lJRRdBziVHPFUAA",
+  "loop-mezzanine-span":
+    "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAAAwBACdASoUAAsAPu1kqU2ppaOiMAgBMB2JZwDE2CBvfcDHzDINhdAqhgAA+4Xqk+ce4ZnAYpREB7Sf4vLTC6ExMoqRmensBlWHLoK47qPUh/fdwVaujqQ/HWo4HXzN7KNhg+2hAAA=",
+  "loop-mezzanine-columns":
+    "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAADQAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JZwAATrHOr2TYsqWEnAAA9Zbgkxz1VzzSsLcWGwJk80VDOLtvPjsvSnEys4yeR/S0Hrj2oKtwOXp8D08wMUAA",
+  "loop-office-floor-2":
+    "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAACQAwCdASoUAAsAPu1kqU2ppaOiMAgBMB2JZQDE2Aq8TVy18xrAAMxFS7ec8abUbtIpvN4qZASAE8fZkzUd8MOZz66SJwvQOF3opmQbrz8gGVLMsRpACC6CwAIXMAAA",
+  "loop-parking":
+    "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBOgBHn6onEx6O7zrXZ0AP7Qpzc+ByTxwgSeaGtQeZywTyNNqZUZP2MAf58TA9y2H6TXzAqsDJ2opn+DhhSupZxVymvDIybIdaKA9olmoSDp0Jz6uiDvnDETcbkaomMcAAAA",
 };

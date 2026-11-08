@@ -64,6 +64,16 @@ import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
 import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
 import photo_loop_yard from "@/assets/photos/loop-yard.webp";
 import photo_loop_top_down from "@/assets/photos/loop-top-down.webp";
+import photo_loop_warehouse_wide from "@/assets/photos/loop-warehouse-wide.webp";
+import photo_loop_warehouse_light from "@/assets/photos/loop-warehouse-light.webp";
+import photo_loop_mezzanine_deck from "@/assets/photos/loop-mezzanine-deck.webp";
+import photo_loop_mezzanine_stairs from "@/assets/photos/loop-mezzanine-stairs.webp";
+import photo_loop_mezzanine_span from "@/assets/photos/loop-mezzanine-span.webp";
+import photo_loop_mezzanine_columns from "@/assets/photos/loop-mezzanine-columns.webp";
+import photo_loop_office_floor from "@/assets/photos/loop-office-floor.webp";
+import photo_loop_office_floor_2 from "@/assets/photos/loop-office-floor-2.webp";
+import photo_loop_bathrooms from "@/assets/photos/loop-bathrooms.webp";
+import photo_loop_parking from "@/assets/photos/loop-parking.webp";
 import photo_trevor_jacobs from "@/assets/photos/trevor-jacobs.webp";
 import photo_rowan_gordon from "@/assets/photos/rowan-gordon.webp";
 import photo_timothy from "@/assets/photos/timothy.webp";
@@ -407,6 +417,96 @@ export const media = {
     tone: "concrete",
     src: photo_loop_top_down,
     prompt: "Top-down drone view of the refurbished building and its yard.",
+  }),
+  loopWarehouseWide: shot({
+    title: "9 Loop Street · warehouse",
+    alt: "The refurbished warehouse at 9 Loop Street: exposed steel trusses, roof lights, a roller door and an epoxy floor",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_warehouse_wide,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopWarehouseLight: shot({
+    title: "9 Loop Street · warehouse light",
+    alt: "Afternoon light through the clerestory windows of the 9 Loop Street warehouse, looking through to the mezzanine bay",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_warehouse_light,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopMezzanineDeck: shot({
+    title: "9 Loop Street · mezzanine deck",
+    alt: "The open steel mezzanine deck at 9 Loop Street under the roof trusses, with clerestory windows along the wall",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_mezzanine_deck,
+    focus: "50% 55%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopMezzanineStairs: shot({
+    title: "9 Loop Street · mezzanine stairs",
+    alt: "A steel stair up to the mezzanine at 9 Loop Street, with white-painted beams and roller doors beyond",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_mezzanine_stairs,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopMezzanineSpan: shot({
+    title: "9 Loop Street · under the mezzanine",
+    alt: "The covered floor beneath the 9 Loop Street mezzanine, with slim steel columns and an epoxy floor",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_mezzanine_span,
+    focus: "50% 55%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopMezzanineColumns: shot({
+    title: "9 Loop Street · mezzanine bay",
+    alt: "Light across the floor beneath the 9 Loop Street mezzanine, with white steel columns and beams",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_mezzanine_columns,
+    focus: "50% 55%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopOfficeFloor: shot({
+    title: "9 Loop Street · offices",
+    alt: "The refurbished open-plan office at 9 Loop Street: laminate floor, split air-conditioning and a row of windows",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_office_floor,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopOfficeFloor2: shot({
+    title: "9 Loop Street · offices",
+    alt: "Another view of the open-plan office at 9 Loop Street, with LED lighting and windows on two sides",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_office_floor_2,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopBathrooms: shot({
+    title: "9 Loop Street · bathrooms and kitchen",
+    alt: "New bathrooms and a fitted kitchen off the offices at 9 Loop Street",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_bathrooms,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopParking: shot({
+    title: "9 Loop Street · parking",
+    alt: "The parking bays along the boundary wall at 9 Loop Street",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_parking,
+    focus: "55% 60%",
+    prompt: "Still from the 9 Loop Street shoot.",
   }),
   loopRoof: shot({
     title: "9 Loop Street · roof ventilation",
