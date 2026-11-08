@@ -64,6 +64,7 @@ import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
 import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
 import photo_loop_yard from "@/assets/photos/loop-yard.webp";
 import photo_loop_top_down from "@/assets/photos/loop-top-down.webp";
+import photo_loop_aerial_angle from "@/assets/photos/loop-aerial-angle.webp";
 import photo_loop_warehouse_wide from "@/assets/photos/loop-warehouse-wide.webp";
 import photo_loop_warehouse_light from "@/assets/photos/loop-warehouse-light.webp";
 import photo_loop_mezzanine_deck from "@/assets/photos/loop-mezzanine-deck.webp";
@@ -409,6 +410,15 @@ export const media = {
     focus: "50% 45%",
     prompt:
       "Modern office and canteen block attached to a warehouse, glazed facade, simple timber and steel interior visible, neat landscaping strip, soft afternoon light.",
+  }),
+  loopAerialAngle: shot({
+    title: "9 Loop Street · the building",
+    alt: "9 Loop Street from the air at an angle: the long refurbished building with its charcoal roof, ridge ventilators, roller doors and marked parking along the yard",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_aerial_angle,
+    focus: "55% 55%",
+    prompt: "Angled drone view of the refurbished 9 Loop Street building.",
   }),
   loopTopDown: shot({
     title: "9 Loop Street · plan view",
