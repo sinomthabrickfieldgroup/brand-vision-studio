@@ -41,6 +41,19 @@ import photo_loop_before_kitchen from "@/assets/photos/loop-kitchen-before-001.j
 import photo_loop_facilities_kitchen from "@/assets/photos/loop-kitchen-001.jpg";
 import photo_loop_guardhouse from "@/assets/photos/loop-guardhouse.jpg";
 import photo_loop_ventilation from "@/assets/photos/loop-roof-inffra-001.jpg";
+import photo_wierda_signage from "@/assets/photos/wierda-signage.webp";
+import photo_wierda_courtyard_skyline from "@/assets/photos/wierda-courtyard-skyline.webp";
+import photo_wierda_nso_entrance from "@/assets/photos/wierda-nso-entrance.webp";
+import photo_wierda_boardroom from "@/assets/photos/wierda-boardroom.webp";
+import photo_wierda_breakout from "@/assets/photos/wierda-breakout.webp";
+import photo_wierda_canteen from "@/assets/photos/wierda-canteen.webp";
+import photo_wierda_garden_courtyard from "@/assets/photos/wierda-garden-courtyard.webp";
+import photo_wierda_block_b from "@/assets/photos/wierda-block-b.webp";
+import photo_wierda_facade from "@/assets/photos/wierda-facade.webp";
+import photo_wierda_kitchen from "@/assets/photos/wierda-kitchen.webp";
+import photo_wierda_open_plan from "@/assets/photos/wierda-open-plan.webp";
+import photo_wierda_roses from "@/assets/photos/wierda-roses.webp";
+import photo_wierda_lobby from "@/assets/photos/wierda-lobby.webp";
 
 import photo_loop_aerial from "@/assets/photos/loop-aerial.webp";
 import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
@@ -474,37 +487,123 @@ export const media = {
   }),
 
   // ── 66/68 Wierda (Wierda Valley, Sandton) ──────────────────────────────────
+  // Stills from the Nov 2026 shoot. Which building (66 or 68) each shows is still to be confirmed.
   wierdaHero: shot({
-    title: "66/68 Wierda · the pair",
-    alt: "66/68 Wierda office building in Wierda Valley, Sandton",
+    title: "66/68 Wierda · courtyard and skyline",
+    alt: "The landscaped courtyard and parking at 66/68 Wierda, with the Sandton skyline beyond",
     aspect: "21/9",
-    tone: "dusk",
-    prompt:
-      "Two neighbouring contemporary A-grade office buildings side by side in Wierda Valley, Sandton, Johannesburg, pale stone and glass facades, basement parking ramp, mature trees, Highveld golden-hour light, clear sky.",
+    tone: "sage",
+    src: photo_wierda_courtyard_skyline,
+    focus: "50% 60%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
   }),
-  wierdaLobby: shot({
-    title: "66/68 Wierda · lobby",
-    alt: "Lobby at 66/68 Wierda",
+  wierdaGarden: shot({
+    title: "66/68 Wierda · garden courtyard",
+    alt: "The tree-shaded garden courtyard at 66/68 Wierda, with a rose arch, water feature and long outdoor tables",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_garden_courtyard,
+    focus: "50% 55%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaFacade: shot({
+    title: "66/68 Wierda · facade",
+    alt: "A pale brick facade at 66/68 Wierda with a tall glazed panel, framed by roses and clipped hedges",
     aspect: "4/3",
     tone: "stone",
-    prompt:
-      "Calm double-volume office lobby, stone floor, timber slat wall, sculptural pendant light, a large plant, warm daylight, empty.",
+    src: photo_wierda_facade,
+    focus: "45% 50%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
   }),
-  wierdaFloor: shot({
-    title: "66/68 Wierda · office floor",
-    alt: "Office floor at 66/68 Wierda",
+  wierdaBlockB: shot({
+    title: "66/68 Wierda · Block B entrance",
+    alt: "The double-height glazed entrance to Block B at 66/68 Wierda, under mature trees",
     aspect: "4/3",
     tone: "stone",
-    prompt:
-      "Single-tenant corporate office floor, glass meeting rooms along one side, workstations, city views of Sandton through floor-to-ceiling glazing, soft afternoon light.",
+    src: photo_wierda_block_b,
+    focus: "50% 50%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
   }),
-  wierdaStreet: shot({
-    title: "66/68 Wierda · precinct",
-    alt: "The Wierda Valley precinct around 66/68 Wierda",
+  wierdaSignage: shot({
+    title: "66/68 Wierda · wayfinding",
+    alt: "The campus directory sign at 66/68 Wierda among roses and hedges",
     aspect: "4/3",
     tone: "sage",
-    prompt:
-      "Leafy Sandton office precinct street, pavements under trees, low-rise office buildings, a few pedestrians in business attire out of focus, golden light.",
+    src: photo_wierda_signage,
+    focus: "50% 50%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaRoses: shot({
+    title: "66/68 Wierda · garden detail",
+    alt: "Climbing roses on a garden arch at 66/68 Wierda, with the open parking beyond",
+    aspect: "4/3",
+    tone: "sage",
+    src: photo_wierda_roses,
+    focus: "45% 50%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaLobby: shot({
+    title: "66/68 Wierda · reception",
+    alt: "A bright reception at 66/68 Wierda with lounge seating and a glazed entrance to the gardens",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_wierda_lobby,
+    focus: "55% 55%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaFloor: shot({
+    title: "66/68 Wierda · open-plan floor",
+    alt: "An open-plan office floor at 66/68 Wierda, with planter dividers and timber screens",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_wierda_open_plan,
+    focus: "50% 55%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaBreakout: shot({
+    title: "66/68 Wierda · breakout area",
+    alt: "A breakout and dining area at 66/68 Wierda, with timber slat screens and a polished tile floor",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_wierda_breakout,
+    focus: "50% 55%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaCanteen: shot({
+    title: "66/68 Wierda · canteen",
+    alt: "The staff canteen at 66/68 Wierda, seen through timber slats",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_wierda_canteen,
+    focus: "50% 55%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaKitchen: shot({
+    title: "66/68 Wierda · kitchen",
+    alt: "A staff kitchen at 66/68 Wierda, with tree views and a balcony",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_wierda_kitchen,
+    focus: "50% 50%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaBoardroom: shot({
+    title: "66/68 Wierda · boardroom",
+    alt: "A boardroom at 66/68 Wierda, with a large table, video conferencing screen and garden views",
+    aspect: "4/3",
+    tone: "stone",
+    src: photo_wierda_boardroom,
+    focus: "50% 55%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
+  }),
+  wierdaNsoEntrance: shot({
+    title: "66/68 Wierda · tenant entrance",
+    alt: "A tenant entrance at 66/68 Wierda, with access control and branded signage",
+    aspect: "4/3",
+    tone: "night",
+    src: photo_wierda_nso_entrance,
+    focus: "50% 50%",
+    prompt: "Still from the November 2026 Wierda Valley shoot.",
   }),
 
   // ── 24 Montague Drive (Montague Gardens) ──────────────────────────────────
@@ -707,7 +806,6 @@ export type MediaId = keyof typeof media;
  */
 import si_08df4776 from "@/assets/stand-in/08df4776.webp";
 import si_1aafbb24 from "@/assets/stand-in/1aafbb24.webp";
-import si_23053cb2 from "@/assets/stand-in/23053cb2.webp";
 import si_29810c3b from "@/assets/stand-in/29810c3b.webp";
 import si_357f12aa from "@/assets/stand-in/357f12aa.webp";
 import si_5bc69ba9 from "@/assets/stand-in/5bc69ba9.webp";
@@ -716,7 +814,6 @@ import si_97512505 from "@/assets/stand-in/97512505.webp";
 import si_9c720f5d from "@/assets/stand-in/9c720f5d.webp";
 import si_b23d9d70 from "@/assets/stand-in/b23d9d70.webp";
 import si_b772ec77 from "@/assets/stand-in/b772ec77.webp";
-import si_c7bb7a9e from "@/assets/stand-in/c7bb7a9e.webp";
 import si_c9344f4f from "@/assets/stand-in/c9344f4f.webp";
 import si_d1597a16 from "@/assets/stand-in/d1597a16.webp";
 import si_d53154cb from "@/assets/stand-in/d53154cb.webp";
@@ -737,8 +834,6 @@ export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> 
   loopPower: { src: photo_loop_ventilation, focus: "50% 55%" },
   loopFabrication: { src: si_357f12aa, focus: "50% 55%" },
   callPlant: { src: si_f9854d80, focus: "50% 45%" },
-  wierdaHero: { src: si_23053cb2, focus: "50% 40%" },
-  wierdaStreet: { src: si_c7bb7a9e, focus: "50% 55%" },
   montagueHero: { src: si_5bc69ba9, focus: "70% 60%" },
   montagueYard: { src: si_97512505, focus: "50% 70%" },
   montagueInterior: { src: si_d53154cb, focus: "50% 50%" },

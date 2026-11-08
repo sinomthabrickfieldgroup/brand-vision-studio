@@ -503,8 +503,8 @@ export const properties: Property[] = [
     summary:
       "Two A-Grade office buildings in Wierda Valley, Sandton: 5,636m² GLA combined, fully let to Nimble Group on a long-term basis.",
     hero: "wierdaHero",
-    slides: ["wierdaStreet"],
-    card: "wierdaLobby",
+    slides: ["wierdaGarden", "wierdaFacade", "wierdaBlockB"],
+    card: "wierdaGarden",
     facts: [
       { value: "5,636m²", label: "Combined GLA" },
       { value: "2", label: "A-Grade buildings" },
@@ -534,7 +534,7 @@ export const properties: Property[] = [
         eyebrow: "The holding",
         title: "Acquired separately. Operated as one.",
         text: "66 and 68 Wierda Road East are neighbouring A-Grade office properties in Wierda Valley, Sandton. Together they are fully let to Nimble Group.",
-        media: "wierdaLobby",
+        media: "wierdaSignage",
       },
       {
         type: "compare",
@@ -544,7 +544,7 @@ export const properties: Property[] = [
         columns: [
           {
             name: "66 Wierda",
-            media: "wierdaFloor",
+            media: "wierdaBlockB",
             stats: [
               { value: "1,806m²", label: "GLA" },
               { value: "57", label: "Parking bays", text: "18 basement + 39 undercover" },
@@ -552,7 +552,7 @@ export const properties: Property[] = [
           },
           {
             name: "68 Wierda",
-            media: "wierdaHero",
+            media: "wierdaFacade",
             stats: [
               { value: "3,830m²", label: "GLA" },
               {
@@ -568,13 +568,24 @@ export const properties: Property[] = [
         type: "gallery",
         eyebrow: "Gallery",
         title: "The buildings and the precinct",
-        media: ["wierdaHero", "wierdaLobby", "wierdaFloor", "wierdaStreet"],
+        media: [
+          "wierdaGarden",
+          "wierdaHero",
+          "wierdaLobby",
+          "wierdaFloor",
+          "wierdaBreakout",
+          "wierdaCanteen",
+          "wierdaKitchen",
+          "wierdaBoardroom",
+          "wierdaRoses",
+          "wierdaNsoEntrance",
+        ],
       },
       {
         type: "specs",
         eyebrow: "Specifications",
         title: "The asset at a glance",
-        media: "wierdaStreet",
+        media: "wierdaGarden",
       },
     ],
     ctas: fullyLetCtas(),
