@@ -38,6 +38,7 @@ import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
 import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
 import photo_loop_yard from "@/assets/photos/loop-yard.webp";
 import photo_loop_top_down from "@/assets/photos/loop-top-down.webp";
+import photo_loop_roof from "@/assets/photos/loop-roof-inffra-001.webp";
 import photo_trevor_jacobs from "@/assets/photos/trevor-jacobs.webp";
 import photo_rowan_gordon from "@/assets/photos/rowan-gordon.webp";
 import photo_timothy from "@/assets/photos/timothy.webp";
@@ -329,6 +330,15 @@ export const media = {
     tone: "concrete",
     src: photo_loop_top_down,
     prompt: "Top-down drone view of the refurbished building and its yard.",
+  }),
+  loopRoof: shot({
+    title: "9 Loop Street · roof ventilation",
+    alt: "The new charcoal roof at 9 Loop Street, with a row of static ventilators along the ridge",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_roof,
+    focus: "50% 55%",
+    prompt: "Drone close-up of the new roof sheeting and ridge ventilators at 9 Loop Street.",
   }),
   loopPower: shot({
     title: "9 Loop Street · 400A supply",

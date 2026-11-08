@@ -44,6 +44,8 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAACwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JaACw7Ax9WNdQTrhSQAD8jsfAX2iQupQ0s+5wh4k2UrfpvM0d1LA+BLYsf6anjG2DuT9KA6wLBGHJ2fdjo3N0lUACrqm7j2XmuLpxBE0vvygUFbcQAqXRerswOFexYdxMs5P2sAA=",
   "loop-mezzanine":
     "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JZQDG9BMvqeycVrKlZkaAAP5BD71PcVyTkaSQ6AtmXIm5UyTHn1MkCOf9qFFif82AnSXhfs3cuV8UbGHlNMopcF4T4/i+xlHF+AAA",
+  "loop-roof-inffra-001":
+    "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAACQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBWABNkwfz8kme0AAPfP7X1UM0okcEo6i69J7aXaHSHmtBVLdX7ESrJqO52bAVDlFI3ZbTYYs0I8Yj2u0NTINhNBAAAA",
   "loop-top-down":
     "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAACwAwCdASoUAAsAPu1mqk4ppaOiMAgBMB2JaADCgBKRftbBRaLtUgD+BzcreQJgdQqmJAyQ1SxpKjZafyQlM7ivNSshw39+rSBHj/CtIq6aDnL3oTFFIgjwMoiV/3KrC1EkZ3JM99HCO/p+XwwgAnvfH4wyFEHI71+zXjdw11eRZs9HAAA=",
   "loop-warehouse":
