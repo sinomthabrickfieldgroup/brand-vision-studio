@@ -150,4 +150,6 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRmoAAABXRUJQVlA4IF4AAACQAwCdASoUAAsAPu1kqU2ppaOiMAgBMB2JZQDE2Aq8TVy18xrAAMxFS7ec8abUbtIpvN4qZASAE8fZkzUd8MOZz66SJwvQOF3opmQbrz8gGVLMsRpACC6CwAIXMAAA",
   "loop-parking":
     "data:image/webp;base64,UklGRogAAABXRUJQVlA4IHwAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBOgBHn6onEx6O7zrXZ0AP7Qpzc+ByTxwgSeaGtQeZywTyNNqZUZP2MAf58TA9y2H6TXzAqsDJ2opn+DhhSupZxVymvDIybIdaKA9olmoSDp0Jz6uiDvnDETcbkaomMcAAAA",
+  "loop-aerial-angle":
+    "data:image/webp;base64,UklGRpgAAABXRUJQVlA4IIwAAABwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JZQBUQvAC4HVZVmnl1jph0I/jAAD+k8KxZ/02eq54UzfrF8732gSmZwQyeckwHOC3G+Ia3tMIryP59WMNd9oRjtbLFZ2/lBKCn0VpZ9pYd3Fqkp8QUfIQovCTZ10hUbEWkB0xIakMP76x4aQAAfWwkCOAAA==",
 };

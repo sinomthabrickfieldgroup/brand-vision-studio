@@ -330,8 +330,8 @@ export const properties: Property[] = [
     summary:
       "A newly refurbished premium industrial facility in Maitland: 2,362m² GLA, 400A three-phase power and dual yard access, occupied by AMD Engineering.",
     hero: "loopHero",
-    slides: ["loopWarehouse", "loopOffice", "loopTopDown"],
-    card: "loopWarehouse",
+    slides: ["loopAerialAngle", "loopWarehouse", "loopOffice", "loopTopDown"],
+    card: "loopAerialAngle",
     facts: [
       { value: "2,362m²", label: "Gross lettable area" },
       { value: "400A", label: "Three-phase power" },
@@ -403,6 +403,7 @@ export const properties: Property[] = [
         title: "Strong bones, clean lines",
         media: [
           "loopHero",
+          "loopAerialAngle",
           "loopTopDown",
           "loopWarehouse",
           "loopWarehouseWide",
