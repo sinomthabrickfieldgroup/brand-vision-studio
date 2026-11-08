@@ -8,6 +8,7 @@ import {
   ShieldCheck,
   Sun,
   Wifi,
+  Wind,
   Zap,
 } from "lucide-react";
 import {
@@ -86,6 +87,31 @@ const systems: {
         text: "Roofs that collect, not just shed.",
       },
       { icon: Landmark, title: "Less municipal draw", text: "Lower dependence, lower risk." },
+    ],
+  },
+  {
+    key: "air",
+    icon: Wind,
+    eyebrow: "Air",
+    title: "Roofs that breathe",
+    text: "Heat and fumes rise, so we let them out at the top. The new roof at 9 Loop Street has static ventilators along the full ridge, moving air through the warehouse all day without a single motor.",
+    media: "loopRoof",
+    points: [
+      {
+        icon: Wind,
+        title: "Passive ridge ventilation",
+        text: "No motors, no power, no running cost.",
+      },
+      {
+        icon: Gauge,
+        title: "Heat and fumes out",
+        text: "Hot air leaves where it gathers, at the ridge.",
+      },
+      {
+        icon: Building2,
+        title: "Fitted with the new roof",
+        text: "Part of the 2026 refurbishment.",
+      },
     ],
   },
   // {
@@ -179,10 +205,10 @@ function Sustainability() {
         >
           <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
             <div className={i % 2 === 1 ? "md:order-2" : undefined}>
-              {s.key === "power" ? (
-                <Media id={s.media} className="aspect-[4/5]" parallax={0.06} />
+              {s.key === "water" || s.key === "comms" ? (
+                <SystemDiagram kind={s.key} />
               ) : (
-                <SystemDiagram kind={s.key === "water" ? "water" : "comms"} />
+                <Media id={s.media} className="aspect-[4/5]" parallax={0.06} />
               )}
             </div>
             <div>

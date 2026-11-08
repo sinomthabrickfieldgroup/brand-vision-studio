@@ -391,6 +391,15 @@ export const media = {
     src: photo_loop_top_down,
     prompt: "Top-down drone view of the refurbished building and its yard.",
   }),
+  loopRoof: shot({
+    title: "9 Loop Street · roof ventilation",
+    alt: "The new charcoal roof at 9 Loop Street, with a row of static ventilators along the ridge",
+    aspect: "16/9",
+    tone: "concrete",
+    src: photo_loop_ventilation,
+    focus: "50% 55%",
+    prompt: "Drone close-up of the new roof sheeting and ridge ventilators at 9 Loop Street.",
+  }),
   loopPower: shot({
     title: "9 Loop Street · 400A supply",
     alt: "Upgraded three-phase power distribution at 9 Loop Street",
