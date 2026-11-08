@@ -123,13 +123,13 @@ export const LQIP: Record<string, string> = {
   "wierda-signage":
     "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JYgC2yB3+w2ePivTrKktAAP7ytLqU0L5xqQV3kYzTYW6JCQyo1Z01RXruiQGBfvHa62eAZXoPJez0HZzv2ICj0Mgh79hR0a3tTt5TUViBfq5jjT2FrZFXeYKeUiWWAAA=",
   "wierda-aerial":
-    "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAABQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgC1GoADS3sjwFD5YW5YUdJAAPulg4KtV1dGCtDq3RwmhX76wpUjQRQtlBiQMqoOX0dY/Ls68uob//rYSuH++794bK1Up2qY3m5+hp5ddfbhyqo8Lw5y/J2Fz1diuC5ze4vDDiKLYUehgAA=",
+    "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAAAQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JZACsACHuwgEDuTs46GkyAAD+ox0x3tth30eebZgAkrvzb2rXKEt2tPonEya8xSBAWusYbd5jk/z3AGZSIcMHmrGmbh2yqgwxPjg/mPQluOB8UqAGFZfFsQ28d1BjzN0O727zHRAAAA==",
   "wierda-logo-front":
-    "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAAAwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JYwC/OBxNerWGy/EqoX+djwAA/niKdUEyM8g3FhkK9byUP33PiadHhi2f3Ss6T4/B2PX4/AOfUyuOf4vKCwpxcFDgTCMcHSpuNWQw+XvLrYss9OfPnAAA",
+    "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JaACdMoACnn1g40RbHkwAAPJJWKcphsn3Kq4VWYItaIT7r8avKob2P5DTcd3FKH58p0ZIGSz9UxXqXwsWc8ZBzdMd5OJ7/wFk02MDU3Owo3+fUEh05rGg6cdhqque0XAAAA==",
   "wierda-jacaranda":
-    "data:image/webp;base64,UklGRnYAAABXRUJQVlA4IGoAAAAQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JYgCsABjp7QML7zOV8LrvaAD+2fMs7YsSI4NhGYyjbdjizrpVLQWlu4Pe+KHAXOMZm7Sv6/A0AMiQGhZMZjlxF+izdzy9SMPmcSGzxkAOAAAA",
+    "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAAAQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JQBYfv/wHC/o1cdbjjRixQAD+6d9TEOXjDkYfm3A2Imk4hP92wyoTVGcvtoR7e5N5wdomf1+M9npF7gdZXWfrYcY7zMCGENjmfP6ZEMej7ROJD2dgxuEgxuMGtFdCgAA=",
   "wierda-precinct":
-    "data:image/webp;base64,UklGRmQAAABXRUJQVlA4IFgAAAAwBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JYwC/OCB+2K31872O5Lr/KcAA/fh3q/BSkN5XRAPO3jpNsCMDojxf/Je8BvYX9gowUqx6T3kwemKbt/baAAAA",
+    "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAAAwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgCsMoADR84V0W+t8NZVIAAA9kZAGYeu7R+yS7hbmW3fZXt7c0r/vmZeUt9ukMiZaJzfBQLJGMBfBDu+0T5VDsyC0xbnOoTgDHFuJkislbiE5IgZJftD0+J4C5Q+MYcRRZnUmQAAAA==",
   "loop-bathrooms":
     "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYwC3uBmMESZqV4cyugAA+TIqAqqoQjSk7tAFQUVLV9wrwWcE7o+Jkk+r18q5TfAV2YpNNlY2oNYC8MV0BSREpUOE68SohlEkM68AAAA=",
   "loop-warehouse-wide":
@@ -166,4 +166,20 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JYgCdMoACIOkOdT0k4mxAAP0oAzVp9nbjLL/s6mVFsqSmPRx5P+suENiWd7dsv2NJk6r+1UOkhu0XdWHENn9NLitZAna7GtPiAAAA",
   "loop-offices-2-before":
     "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADQAwCdASoUAAsAPu1kqU2ppaQiMAgBMB2JaQDLLCKSoDo1duDAL9AA/ujSYJEphOtqb5z5mJdOj3nJGtCPFjKcT+QOiqCJfAay5w5GEK2cytirzrJ9wzLwnTr4QXCcYG5kAAAA",
+  "wierda-street":
+    "data:image/webp;base64,UklGRowAAABXRUJQVlA4IIAAAACQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBWGUAS0wwCwQcmyV3S9mVcOEAAA/iewR4nFERX4ZrG8LrcuWa52gkUVXcvbrpywPJVSmo1x7PFWNSfv/Gx9/N50wrj9axxAOVALsW7JvVdyMKpzqlIhSkUEGbYZhRxWBS2uZFOAAA==",
+  "wierda-skyline":
+    "data:image/webp;base64,UklGRmgAAABXRUJQVlA4IFwAAADwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JYwC7ACB/EJlB5NrdgEqAAPzJHVObu0TuoAhfM1TwynEkbxcUl8GiT+IxTPk/B6ujN/11CEgh4nOwGXNwrvE/vIAAAA==",
+  "wierda-building-tan":
+    "data:image/webp;base64,UklGRnQAAABXRUJQVlA4IGgAAADQAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JZQC7ABUIBPSFeKPmhoAA/Z0RenuruLn0BZ8ZwFP5s7kcWlOQ7rW4RsdwvAUOWOiLcLD+TByFMYsh1D5jIEfrANdi8yBuWs2hKXJlGPWwAA==",
+  "wierda-covered-parking":
+    "data:image/webp;base64,UklGRooAAABXRUJQVlA4IH4AAACwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgCdH8G7G5/8CAeDcB/fG4ZPLPQAAPwhSeTUqWIjqt5CFXPuQbagfZGX+GA1Loq9L1sAhPjyvcF2RrSWTmgiUu9lanTRByd8wD6mYo8varpvOCvhAIQIORU3oPwahG2qDf8vIAA=",
+  "wierda-arches":
+    "data:image/webp;base64,UklGRpYAAABXRUJQVlA4IIoAAABwBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JQBYhhswXQghdJo/jeUfVgJ4vAAD+6eM85yZmMbCSmW4Ku8bOeypp9DZHBWTDgYLHTwP3srCXM0YYOcBjFYj3RhCuwtFN//2a9eiZnz9t0/MJD8tnUqIU1HPbmlqGL8kPUY4MDBA6AtR2VyZ+/kKAAAA=",
+  "wierda-courtyard-arch":
+    "data:image/webp;base64,UklGRnwAAABXRUJQVlA4IHAAAACwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JZwDE2BnTyQPlwyFGAAD9eFK6N9v3N6KfnwxGdiys04BFyk4EO238+dM/iL9k+WZAigxBtz6Fy16bS+/ioSo/5f1L4jVwbD4djjDNnL52QzIZLDJsyAAA",
+  "wierda-pots":
+    "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAAAQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JZwCw7YvMtM2DDMpNMNwmVAD8decmwaT9kCKbHYrvX6YmPAqitwZgjFDIXpjgZAEvwqU9OD9ETTvae8J95EsTW855uv6LWVaJo2FLzLch5NXWFKtypi/q94UhBKBJJAAAAA==",
+  "wierda-grounds":
+    "data:image/webp;base64,UklGRoYAAABXRUJQVlA4IHoAAABQBACdASoUAAsAPu1iqU2ppaQiMAgBMB2JZQCdINoJ/gPFQhynK/D0Yz0QAP5McQs3fIl7IrTz6LrvmOtH7pZz1lUA8mcLWfmbr3N5hQwOLEc0uW/ql6tgpOb4XSzIzOzWn1ZV+CeqiCA9E/8q9duDqJE0PmG5dwAAAA==",
 };

@@ -45,6 +45,14 @@ import photo_wierda_aerial from "@/assets/photos/wierda-aerial.webp";
 import photo_wierda_logo_front from "@/assets/photos/wierda-logo-front.webp";
 import photo_wierda_jacaranda from "@/assets/photos/wierda-jacaranda.webp";
 import photo_wierda_precinct from "@/assets/photos/wierda-precinct.webp";
+import photo_wierda_street from "@/assets/photos/wierda-street.webp";
+import photo_wierda_skyline from "@/assets/photos/wierda-skyline.webp";
+import photo_wierda_building_tan from "@/assets/photos/wierda-building-tan.webp";
+import photo_wierda_covered_parking from "@/assets/photos/wierda-covered-parking.webp";
+import photo_wierda_arches from "@/assets/photos/wierda-arches.webp";
+import photo_wierda_courtyard_arch from "@/assets/photos/wierda-courtyard-arch.webp";
+import photo_wierda_pots from "@/assets/photos/wierda-pots.webp";
+import photo_wierda_grounds from "@/assets/photos/wierda-grounds.webp";
 import photo_wierda_signage from "@/assets/photos/wierda-signage.webp";
 import photo_wierda_courtyard_skyline from "@/assets/photos/wierda-courtyard-skyline.webp";
 import photo_wierda_nso_entrance from "@/assets/photos/wierda-nso-entrance.webp";
@@ -678,7 +686,7 @@ export const media = {
     aspect: "21/9",
     tone: "sage",
     src: photo_wierda_aerial,
-    focus: "50% 50%",
+    focus: "50% 60%",
     prompt: "Frame from the November 2026 Wierda Valley drone footage.",
   }),
   wierdaCourtyard: shot({
@@ -701,7 +709,7 @@ export const media = {
   }),
   wierdaLogoFront: shot({
     title: "66/68 Wierda · logo window",
-    alt: "The front of a building at 66/68 Wierda, with a large glazed panel between two trees and dappled shade",
+    alt: "A brick wing at 66/68 Wierda with a tall glazed panel carrying the tenant's logo, behind roses and hedges",
     aspect: "16/9",
     tone: "stone",
     src: photo_wierda_logo_front,
@@ -716,6 +724,78 @@ export const media = {
     src: photo_wierda_precinct,
     focus: "55% 60%",
     prompt: "Frame from the November 2026 Wierda Valley drone footage.",
+  }),
+  wierdaStreet: shot({
+    title: "66/68 Wierda · street frontage",
+    alt: "66/68 Wierda from the air: the street frontage, main gate and guardhouse, with the campus and its jacarandas behind",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_street,
+    focus: "50% 55%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaSkyline: shot({
+    title: "66/68 Wierda · in context",
+    alt: "The tiled roofs and jacarandas of 66/68 Wierda among mature trees, with the Sandton skyline beyond",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_skyline,
+    focus: "55% 60%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaBuildingTan: shot({
+    title: "66/68 Wierda · face-brick building",
+    alt: "A three-storey face-brick office building at 66/68 Wierda with grey columns, raised planters and basement parking",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_building_tan,
+    focus: "55% 55%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaCoveredParking: shot({
+    title: "66/68 Wierda · covered parking",
+    alt: "Covered parking bays and landscaped planters at 66/68 Wierda",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_covered_parking,
+    focus: "45% 60%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaArches: shot({
+    title: "66/68 Wierda · rose arches",
+    alt: "A path through a row of white rose arches at 66/68 Wierda, between the office wings",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_arches,
+    focus: "50% 55%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaCourtyardArch: shot({
+    title: "66/68 Wierda · courtyard",
+    alt: "The shaded courtyard at 66/68 Wierda seen through a rose arch: a stone water feature, long tables and an umbrella",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_courtyard_arch,
+    focus: "50% 60%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaPots: shot({
+    title: "66/68 Wierda · courtyard detail",
+    alt: "Blue and orange pots along the courtyard water feature at 66/68 Wierda, under a large tree",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_pots,
+    focus: "50% 60%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
+  }),
+  wierdaGrounds: shot({
+    title: "66/68 Wierda · grounds",
+    alt: "Lawns, paths and visitor parking at 66/68 Wierda, with Sandton towers in the distance",
+    aspect: "16/9",
+    tone: "sage",
+    src: photo_wierda_grounds,
+    focus: "50% 55%",
+    prompt: "Frame from the November 2026 Wierda Valley footage.",
   }),
   wierdaGarden: shot({
     title: "66/68 Wierda · garden courtyard",

@@ -70,6 +70,7 @@ const heroSlides: Slide[] = [
   { id: "canvasHero", label: "Brickfield Canvas, Woodstock", slug: "brickfield-canvas" },
   { id: "canvasLobby", label: "Inside Canvas", slug: "brickfield-canvas" },
   { id: "loopHero", label: "9 Loop Street, Maitland", slug: "9-loop-street" },
+  { id: "wierdaJacaranda", label: "Wierda Valley, Sandton", slug: "66-68-wierda" },
   { id: "canvasCourtyard", label: "The Canvas terrace", slug: "brickfield-canvas" },
   { id: "albertHero", label: "219 Albert Road, Woodstock", slug: "219-albert-road" },
   { id: "callHero", label: "Brickfield Call Centre", slug: "brickfield-call-centre" },
