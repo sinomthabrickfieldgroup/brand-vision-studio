@@ -33,6 +33,15 @@ import photo_canvas_front_desk from "@/assets/photos/canvas-front-desk.webp";
 import photo_canvas_reading_nook from "@/assets/photos/canvas-reading-nook.webp";
 import photo_canvas_exterior from "@/assets/photos/canvas-exterior-hd.webp";
 import photo_call_centre_exterior from "@/assets/photos/call-centre-exterior.webp";
+// remember to optimise these 
+import photo_loop_before_aerial from "@/assets/photos/loop-before-aerial.jpg";
+import photo_loop_before_interior from "@/assets/photos/loop-before-mezzanine-001.jpg";
+import photo_loop_before_mezzanine from "@/assets/photos/loop-before-mezzanine-view-003.jpg";
+import photo_loop_before_kitchen from "@/assets/photos/loop-kitchen-before-001.jpg";
+import photo_loop_facilities_kitchen from "@/assets/photos/loop-kitchen-001.jpg";
+import photo_loop_guardhouse from "@/assets/photos/loop-guardhouse.jpg";
+import photo_loop_ventilation from "@/assets/photos/loop-roof-inffra-001.jpg";
+
 import photo_loop_aerial from "@/assets/photos/loop-aerial.webp";
 import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
 import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
@@ -289,14 +298,22 @@ export const media = {
     alt: "9 Loop Street as a logistics depot before refurbishment",
     aspect: "21/9",
     tone: "concrete",
+    src: photo_loop_before_aerial,
+    focus: "50% 55%",
     prompt:
       "The same industrial facility BEFORE refurbishment, identical framing: a tired conventional warehouse and logistics depot, faded cladding, rusted roller doors, potholed yard, overcast flat light, documentary style. Use a progress photo from the refurbishment if one exists.",
+    mobileFocus: "50% 60%",
+    mobileZoom: 1.15,
   }),
   loopInteriorBefore: shot({
     title: "9 Loop Street · interior, before",
     alt: "The warehouse floor at 9 Loop Street before refurbishment",
     aspect: "16/9",
     tone: "concrete",
+    src: photo_loop_before_interior,
+    focus: "50% 55%",
+    mobileFocus: "50% 60%",
+    mobileZoom: 1.15,
     prompt:
       "The 9 Loop Street warehouse floor BEFORE refurbishment, framed to match the after shot: worn concrete floor, old lighting, tired roof sheeting, depot clutter. Use a progress photo if one exists.",
   }),
@@ -305,22 +322,34 @@ export const media = {
     alt: "The mezzanine area at 9 Loop Street before refurbishment",
     aspect: "16/9",
     tone: "stone",
+    src: photo_loop_before_mezzanine,
+    focus: "50% 55%",
     prompt:
       "The mezzanine area at 9 Loop Street BEFORE refurbishment, framed to match the after shot of the 302m² steel mezzanine. Use a progress photo if one exists.",
+    mobileFocus: "50% 60%",
+    mobileZoom: 1.15,
   }),
   loopFacilitiesBefore: shot({
     title: "9 Loop Street · offices and bathrooms, before",
     alt: "The offices and bathrooms at 9 Loop Street before refurbishment",
     aspect: "16/9",
     tone: "stone",
+    src: photo_loop_before_kitchen,
+    focus: "50% 55%",
     prompt:
       "The 9 Loop Street offices or bathrooms BEFORE refurbishment, framed to match the after shot: dated finishes, old fittings. Use a progress photo if one exists.",
+    mobileFocus: "50% 60%",
+    mobileZoom: 1.15,
   }),
   loopFacilitiesAfter: shot({
     title: "9 Loop Street · offices and bathrooms",
     alt: "The refurbished offices and bathrooms at 9 Loop Street",
     aspect: "16/9",
     tone: "stone",
+    src: photo_loop_facilities_kitchen,
+    focus: "50% 55%",
+    mobileFocus: "50% 60%",
+    mobileZoom: 1.15,
     prompt:
       "The refurbished offices or bathrooms at 9 Loop Street, same framing as the before shot: clean modern finishes, good daylight, simple and practical.",
   }),
@@ -377,6 +406,16 @@ export const media = {
     tone: "dusk",
     prompt:
       "Steel fabrication workshop in operation, sparks from a welder in the mid-ground, steel beams on trestles, warm glow against a cool warehouse interior, worker unrecognisable behind a welding mask.",
+  }),
+  loopGuardhouse: shot({
+    title: "9 Loop Street · guardhouse",
+    alt: "The guardhouse at 9 Loop Street, with a security officer on duty",
+    aspect: "4/3",
+    tone: "night",  
+    src: photo_loop_guardhouse,
+      focus: "50% 55%",
+      prompt:
+        "Small security guardhouse at the entrance to an industrial facility, a uniformed security officer on duty, warm interior light, cool evening sky.",
   }),
 
   // ── Brickfield Call Centre (33 Brickfield Road, Woodstock) ────────────────
@@ -686,7 +725,7 @@ export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> 
   securityControl: { src: si_security_control, focus: "35% 65%" },
   canvasSolar: { src: si_b772ec77, focus: "50% 60%" },
   loopBefore: { src: si_b23d9d70, focus: "50% 55%" },
-  loopPower: { src: si_08df4776, focus: "50% 55%" },
+  loopPower: { src: photo_loop_ventilation, focus: "50% 55%" },
   loopFabrication: { src: si_357f12aa, focus: "50% 55%" },
   callPlant: { src: si_f9854d80, focus: "50% 45%" },
   wierdaHero: { src: si_23053cb2, focus: "50% 40%" },
