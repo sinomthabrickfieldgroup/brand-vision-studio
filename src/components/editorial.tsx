@@ -1,10 +1,10 @@
 import { Link, type LinkProps } from "@tanstack/react-router";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
-import { Fragment, useEffect, useRef, useState, type ReactNode } from "react";
+import { Fragment, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { HeroSlideshow, type Slide } from "@/components/hero-slideshow";
 import { Media } from "@/components/media";
 import { hasImage, type MediaId } from "@/lib/media";
-import type { Item, Stat } from "@/lib/portfolio";
+import type { BeforeAfterView, Item, Stat } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
 /* ─── Type ──────────────────────────────────────────────────────────────── */
@@ -385,10 +385,26 @@ export function Gallery({ media, className }: { media: MediaId[]; className?: st
 
 /* ─── Before / after ────────────────────────────────────────────────────── */
 
-export function BeforeAfter({ before, after }: { before: MediaId; after: MediaId }) {
+export function BeforeAfter({
+  views: viewsProp,
+  before,
+  after,
+}: {
+  /** Several pairs render as pill tabs above the slider. */
+  views?: BeforeAfterView[];
+  before?: MediaId;
+  after?: MediaId;
+}) {
+  // Pairs still waiting on photos show as placeholders in dev and stay hidden in production.
+  const views: BeforeAfterView[] = (
+    viewsProp ?? (before && after ? [{ label: "Before and after", before, after }] : [])
+  ).filter((v) => import.meta.env.DEV || (hasImage(v.before) && hasImage(v.after)));
+  const [active, setActive] = useState(0);
   const [value, setValue] = useState(50);
   const root = useRef<HTMLDivElement>(null);
+  const tabs = useRef<(HTMLButtonElement | null)[]>([]);
   const touched = useRef(false);
+  const id = useId();
 
   // One gentle sweep the first time it scrolls into view, hinting that it can be dragged.
   useEffect(() => {
@@ -417,32 +433,91 @@ export function BeforeAfter({ before, after }: { before: MediaId; after: MediaId
     };
   }, []);
 
+  const view = views[active] ?? views[0];
+  if (!view) return null;
+
+  const select = (i: number) => {
+    const next = (i + views.length) % views.length;
+    touched.current = true;
+    setActive(next);
+    setValue(50);
+    tabs.current[next]?.focus();
+  };
+
   return (
-    <div ref={root} className="before-after" style={{ ["--split" as string]: `${value}%` }}>
-      <Media id={after} fill reveal={false} />
-      <div className="before-after-before">
-        <Media id={before} fill reveal={false} />
+    <div>
+      {views.length > 1 && (
+        <div
+          role="tablist"
+          aria-label="Compare areas"
+          className="before-after-tabs"
+          onKeyDown={(e) => {
+            if (e.key === "ArrowRight") select(active + 1);
+            else if (e.key === "ArrowLeft") select(active - 1);
+            else return;
+            e.preventDefault();
+          }}
+        >
+          {views.map((v, i) => (
+            <button
+              key={v.label}
+              ref={(el) => {
+                tabs.current[i] = el;
+              }}
+              id={`${id}-tab-${i}`}
+              role="tab"
+              type="button"
+              aria-selected={i === active}
+              aria-controls={`${id}-panel`}
+              tabIndex={i === active ? 0 : -1}
+              onClick={() => select(i)}
+              className={cn("tab-chip", i === active && "is-active")}
+            >
+              {v.label}
+            </button>
+          ))}
+        </div>
+      )}
+      <div
+        ref={root}
+        id={`${id}-panel`}
+        role={views.length > 1 ? "tabpanel" : undefined}
+        aria-labelledby={views.length > 1 ? `${id}-tab-${active}` : undefined}
+        className="before-after"
+        style={{ ["--split" as string]: `${value}%` }}
+      >
+        <div key={active} className="before-after-view">
+          <Media id={view.after} fill reveal={false} />
+          <div className="before-after-before">
+            <Media id={view.before} fill reveal={false} />
+          </div>
+        </div>
+        <div className="before-after-handle" aria-hidden="true">
+          <span>
+            <ArrowLeft size={14} />
+            <ArrowRight size={14} />
+          </span>
+        </div>
+        <span className="before-after-label left-5">Before</span>
+        <span className="before-after-label right-5">After</span>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          value={value}
+          onChange={(e) => {
+            touched.current = true;
+            setValue(Number(e.target.value));
+          }}
+          aria-label={
+            views.length > 1
+              ? `Compare ${view.label.toLowerCase()} before and after`
+              : "Compare before and after"
+          }
+          className="before-after-range"
+        />
       </div>
-      <div className="before-after-handle" aria-hidden="true">
-        <span>
-          <ArrowLeft size={14} />
-          <ArrowRight size={14} />
-        </span>
-      </div>
-      <span className="before-after-label left-5">Before</span>
-      <span className="before-after-label right-5">After</span>
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={value}
-        onChange={(e) => {
-          touched.current = true;
-          setValue(Number(e.target.value));
-        }}
-        aria-label="Compare before and after"
-        className="before-after-range"
-      />
+      {view.caption && <p className="mt-4 text-sm text-muted-foreground">{view.caption}</p>}
     </div>
   );
 }

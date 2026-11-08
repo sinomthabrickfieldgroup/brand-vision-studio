@@ -31,7 +31,7 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
               {block.text}
             </p>
           </div>
-          <BeforeAfter before={block.before} after={block.after} />
+          <BeforeAfter views={block.views} />
         </section>
       );
     case "gallery":

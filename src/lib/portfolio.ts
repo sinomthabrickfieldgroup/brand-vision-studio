@@ -19,14 +19,23 @@ export interface Spec {
   href?: string;
 }
 
+export interface BeforeAfterView {
+  /** Pill label, e.g. "Exterior". */
+  label: string;
+  before: MediaId;
+  after: MediaId;
+  /** Optional one-line note under the slider, e.g. what the tab covers. */
+  caption?: string;
+}
+
 export type Block =
   | {
       type: "beforeAfter";
       eyebrow: string;
       title: string;
       text: string;
-      before: MediaId;
-      after: MediaId;
+      /** One pair, or several shown as pill tabs above the slider. */
+      views: BeforeAfterView[];
     }
   | { type: "gallery"; eyebrow: string; title: string; text?: string; media: MediaId[] }
   | {
@@ -179,8 +188,7 @@ export const properties: Property[] = [
         eyebrow: "The transformation",
         title: "From general industrial to a campus for Africa's next decade",
         text: "In 2016 we acquired a general industrial property at 35 Brickfield Road. Over three years it was stripped back and rebuilt. Drag to see the difference.",
-        before: "canvasBefore",
-        after: "canvasAfter",
+        views: [{ label: "Exterior", before: "canvasBefore", after: "canvasAfter" }],
       },
       {
         type: "specs",
@@ -356,8 +364,17 @@ export const properties: Property[] = [
         eyebrow: "Newly completed · August 2026",
         title: "Five months from depot to premium facility",
         text: "Before the refurbishment, 9 Loop Street was a conventional industrial warehouse and logistics depot. Now it has upgraded power, modern offices and yard access built for heavy link trucks.",
-        before: "loopBefore",
-        after: "loopHero",
+        views: [
+          { label: "Exterior", before: "loopBefore", after: "loopHero" },
+          { label: "Interior", before: "loopInteriorBefore", after: "loopWarehouse" },
+          { label: "Mezzanine", before: "loopMezzanineBefore", after: "loopOffice" },
+          {
+            label: "Facilities",
+            before: "loopFacilitiesBefore",
+            after: "loopFacilitiesAfter",
+            caption: "Offices and bathrooms",
+          },
+        ],
       },
       {
         type: "split",

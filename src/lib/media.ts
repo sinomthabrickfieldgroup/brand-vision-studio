@@ -292,6 +292,38 @@ export const media = {
     prompt:
       "The same industrial facility BEFORE refurbishment, identical framing: a tired conventional warehouse and logistics depot, faded cladding, rusted roller doors, potholed yard, overcast flat light, documentary style. Use a progress photo from the refurbishment if one exists.",
   }),
+  loopInteriorBefore: shot({
+    title: "9 Loop Street · interior, before",
+    alt: "The warehouse floor at 9 Loop Street before refurbishment",
+    aspect: "16/9",
+    tone: "concrete",
+    prompt:
+      "The 9 Loop Street warehouse floor BEFORE refurbishment, framed to match the after shot: worn concrete floor, old lighting, tired roof sheeting, depot clutter. Use a progress photo if one exists.",
+  }),
+  loopMezzanineBefore: shot({
+    title: "9 Loop Street · mezzanine, before",
+    alt: "The mezzanine area at 9 Loop Street before refurbishment",
+    aspect: "16/9",
+    tone: "stone",
+    prompt:
+      "The mezzanine area at 9 Loop Street BEFORE refurbishment, framed to match the after shot of the 302m² steel mezzanine. Use a progress photo if one exists.",
+  }),
+  loopFacilitiesBefore: shot({
+    title: "9 Loop Street · offices and bathrooms, before",
+    alt: "The offices and bathrooms at 9 Loop Street before refurbishment",
+    aspect: "16/9",
+    tone: "stone",
+    prompt:
+      "The 9 Loop Street offices or bathrooms BEFORE refurbishment, framed to match the after shot: dated finishes, old fittings. Use a progress photo if one exists.",
+  }),
+  loopFacilitiesAfter: shot({
+    title: "9 Loop Street · offices and bathrooms",
+    alt: "The refurbished offices and bathrooms at 9 Loop Street",
+    aspect: "16/9",
+    tone: "stone",
+    prompt:
+      "The refurbished offices or bathrooms at 9 Loop Street, same framing as the before shot: clean modern finishes, good daylight, simple and practical.",
+  }),
   loopWarehouse: shot({
     title: "9 Loop Street · warehouse floor",
     alt: "The column-efficient warehouse floor and mezzanine at 9 Loop Street",

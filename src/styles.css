@@ -717,6 +717,34 @@
       aspect-ratio: 4 / 3;
     }
   }
+  .before-after-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .before-after-tabs::-webkit-scrollbar {
+    display: none;
+  }
+  .before-after-tabs .tab-chip {
+    flex: none;
+  }
+  .before-after-view {
+    position: absolute;
+    inset: 0;
+    animation: before-after-in 0.5s var(--ease-editorial) both;
+  }
+  @keyframes before-after-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .before-after-view {
+      animation: none;
+    }
+  }
   .before-after-before {
     position: absolute;
     inset: 0;
