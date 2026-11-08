@@ -64,6 +64,7 @@ import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
 import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
 import photo_loop_yard from "@/assets/photos/loop-yard.webp";
 import photo_loop_top_down from "@/assets/photos/loop-top-down.webp";
+import photo_loop_offices_2_before from "@/assets/photos/loop-offices-2-before.webp";
 import photo_loop_offices_before from "@/assets/photos/loop-offices-before.webp";
 import photo_loop_offices_after from "@/assets/photos/loop-offices-after.webp";
 import photo_loop_meeting_before from "@/assets/photos/loop-meeting-before.webp";
@@ -575,6 +576,15 @@ export const media = {
     aspect: "16/9",
     tone: "stone",
     src: photo_loop_staffroom_after,
+    focus: "50% 50%",
+    prompt: "Still from the 9 Loop Street shoot.",
+  }),
+  loopOffices2Before: shot({
+    title: "9 Loop Street · offices, before",
+    alt: "A second office space at 9 Loop Street before refurbishment: water-stained ceiling, hanging cables, worn rubber flooring",
+    aspect: "16/9",
+    tone: "stone",
+    src: photo_loop_offices_2_before,
     focus: "50% 50%",
     prompt: "Still from the 9 Loop Street shoot.",
   }),

@@ -164,4 +164,6 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRlIAAABXRUJQVlA4IEYAAABQAwCdASoUAAsAPu1kqk4ppaQiMAgBMB2JaQAAG4cs+zSHAAD+lxAxVtp/WocZX9iYLBWBkwXVkryYFmLCMUZyB2Z0BQAA",
   "loop-staffroom-after":
     "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADwAwCdASoUAAsAPu1iqk2ppaQiMAgBMB2JYgCdMoACIOkOdT0k4mxAAP0oAzVp9nbjLL/s6mVFsqSmPRx5P+suENiWd7dsv2NJk6r+1UOkhu0XdWHENn9NLitZAna7GtPiAAAA",
+  "loop-offices-2-before":
+    "data:image/webp;base64,UklGRnAAAABXRUJQVlA4IGQAAADQAwCdASoUAAsAPu1kqU2ppaQiMAgBMB2JaQDLLCKSoDo1duDAL9AA/ujSYJEphOtqb5z5mJdOj3nJGtCPFjKcT+QOiqCJfAay5w5GEK2cytirzrJ9wzLwnTr4QXCcYG5kAAAA",
 };
