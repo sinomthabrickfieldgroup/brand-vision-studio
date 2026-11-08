@@ -413,7 +413,7 @@ export const properties: Property[] = [
           "loopMezzanineSpan",
           "loopMezzanineColumns",
           "loopOfficeFloor",
-          "loopOfficeFloor2",
+          // "loopOfficeFloor2",
           "loopBathrooms",
           "loopYard",
           "loopParking",

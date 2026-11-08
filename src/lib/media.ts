@@ -972,7 +972,7 @@ export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> 
   canvasSolar: { src: si_b772ec77, focus: "50% 60%" },
   loopBefore: { src: si_b23d9d70, focus: "50% 55%" },
   loopPower: { src: photo_loop_ventilation, focus: "50% 55%" },
-  loopFabrication: { src: si_357f12aa, focus: "50% 55%" },
+  loopFabrication: { src: photo_loop_warehouse_light, focus: "50% 55%" },
   callPlant: { src: si_f9854d80, focus: "50% 45%" },
   montagueHero: { src: si_5bc69ba9, focus: "70% 60%" },
   montagueYard: { src: si_97512505, focus: "50% 70%" },
