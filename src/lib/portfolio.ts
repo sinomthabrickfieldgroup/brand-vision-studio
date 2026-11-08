@@ -503,7 +503,7 @@ export const properties: Property[] = [
     summary:
       "Two A-Grade office buildings in Wierda Valley, Sandton: 5,636m² GLA combined, fully let to Nimble Group on a long-term basis.",
     hero: "wierdaHero",
-    slides: ["wierdaGarden", "wierdaFacade", "wierdaBlockB"],
+    slides: ["wierdaGarden", "wierdaCourtyard", "wierdaFacade", "wierdaBlockB"],
     card: "wierdaGarden",
     facts: [
       { value: "5,636m²", label: "Combined GLA" },
@@ -569,8 +569,9 @@ export const properties: Property[] = [
         eyebrow: "Gallery",
         title: "The buildings and the precinct",
         media: [
-          "wierdaGarden",
           "wierdaHero",
+          "wierdaGarden",
+          "wierdaCourtyard",
           "wierdaLobby",
           "wierdaFloor",
           "wierdaBreakout",

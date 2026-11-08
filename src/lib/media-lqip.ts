@@ -122,4 +122,6 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRoAAAABXRUJQVlA4IHQAAADQAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgCw7BdNdpyjMuiWVgwA+JFMAsbg2kU3C7ewkWxx+Yu57LEDFyZ0qgQnr2Ocsw1LXqyBsB8h3pIZz94QDZQCQdr24YLS9fR8A5ibbKbpkx1n+3Gg0Snsx0QAAA==",
   "wierda-signage":
     "data:image/webp;base64,UklGRoQAAABXRUJQVlA4IHgAAADwAwCdASoUAAsAPu1iqU2ppaQiMAgBMB2JYgC2yB3+w2ePivTrKktAAP7ytLqU0L5xqQV3kYzTYW6JCQyo1Z01RXruiQGBfvHa62eAZXoPJez0HZzv2ICj0Mgh79hR0a3tTt5TUViBfq5jjT2FrZFXeYKeUiWWAAA=",
+  "wierda-aerial":
+    "data:image/webp;base64,UklGRpAAAABXRUJQVlA4IIQAAABQBACdASoUAAsAPu1iqU2ppaOiMAgBMB2JYgC1GoADS3sjwFD5YW5YUdJAAPulg4KtV1dGCtDq3RwmhX76wpUjQRQtlBiQMqoOX0dY/Ls68uob//rYSuH++794bK1Up2qY3m5+hp5ddfbhyqo8Lw5y/J2Fz1diuC5ze4vDDiKLYUehgAA=",
 };

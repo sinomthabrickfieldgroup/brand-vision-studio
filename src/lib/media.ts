@@ -41,6 +41,7 @@ import photo_loop_before_kitchen from "@/assets/photos/loop-kitchen-before-001.j
 import photo_loop_facilities_kitchen from "@/assets/photos/loop-kitchen-001.jpg";
 import photo_loop_guardhouse from "@/assets/photos/loop-guardhouse.jpg";
 import photo_loop_ventilation from "@/assets/photos/loop-roof-inffra-001.jpg";
+import photo_wierda_aerial from "@/assets/photos/wierda-aerial.webp";
 import photo_wierda_signage from "@/assets/photos/wierda-signage.webp";
 import photo_wierda_courtyard_skyline from "@/assets/photos/wierda-courtyard-skyline.webp";
 import photo_wierda_nso_entrance from "@/assets/photos/wierda-nso-entrance.webp";
@@ -489,9 +490,18 @@ export const media = {
   // ── 66/68 Wierda (Wierda Valley, Sandton) ──────────────────────────────────
   // Stills from the Nov 2026 shoot. Which building (66 or 68) each shows is still to be confirmed.
   wierdaHero: shot({
+    title: "66/68 Wierda · from above",
+    alt: "66/68 Wierda from the air: the campus among jacaranda trees in Wierda Valley, with the Sandton skyline behind",
+    aspect: "21/9",
+    tone: "sage",
+    src: photo_wierda_aerial,
+    focus: "50% 50%",
+    prompt: "Frame from the November 2026 Wierda Valley drone footage.",
+  }),
+  wierdaCourtyard: shot({
     title: "66/68 Wierda · courtyard and skyline",
     alt: "The landscaped courtyard and parking at 66/68 Wierda, with the Sandton skyline beyond",
-    aspect: "21/9",
+    aspect: "16/9",
     tone: "sage",
     src: photo_wierda_courtyard_skyline,
     focus: "50% 60%",
