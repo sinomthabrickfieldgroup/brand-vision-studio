@@ -6,17 +6,17 @@ import type { DoorShape, LockupId, LockupLight, LockupTone } from "@/components/
  * "Copy config" button copies the current picks in this exact shape, ready to paste over LOGOS.
  *
  *   id     wordmark | horizontal | horizontal-compact | two-line | two-line-offset | two-line-right
- *          | stacked | divider | mark  (the doorway mark is provisional, so production still uses the wordmark)
- *   shape  rect | arched          the door's head
- *   light  open | gold            the doorway left see-through, or lit gold
- *   tone   ink | gold-mark | gold ink: charcoal on light, cream on dark · gold-mark: doorway in gold · gold: all gold
+ *          | stacked | divider | mark
+ *   shape  portfolio | rect | arched   the portfolio mark (approved), or the provisional doorway
+ *   light  open | gold            doorway only: left see-through, or lit gold
+ *   tone   ink | gold-mark | gold ink: charcoal on light, cream on dark · gold-mark: mark in gold · gold: all gold
  */
 export type LogoConfig = { id: LockupId; shape: DoorShape; light: LockupLight; tone: LockupTone };
 export type LogoSlot = "header" | "footer" | "watermark";
 
 export const LOGOS: Record<LogoSlot, LogoConfig | null> = {
-  header: { id: "wordmark", shape: "rect", light: "open", tone: "ink" },
-  footer: { id: "wordmark", shape: "rect", light: "open", tone: "ink" },
+  header: { id: "horizontal", shape: "portfolio", light: "open", tone: "ink" },
+  footer: { id: "horizontal", shape: "portfolio", light: "open", tone: "ink" },
   /** null hides the watermark. */
-  watermark: { id: "wordmark", shape: "rect", light: "open", tone: "ink" },
+  watermark: { id: "wordmark", shape: "portfolio", light: "open", tone: "ink" },
 };

@@ -1,4 +1,5 @@
 import { DOORWAY, DOORWAY_RECT } from "@/components/doorway-paths";
+import { PORTFOLIO_MARK } from "@/components/portfolio-mark-paths";
 import { WORDMARK } from "@/components/wordmark-paths";
 import { cn } from "@/lib/utils";
 
@@ -22,7 +23,8 @@ export const LOCKUPS = [
 export type LockupId = (typeof LOCKUPS)[number]["id"];
 /** The doorway's opening: see-through, or lit gold. */
 export type LockupLight = "open" | "gold";
-export type DoorShape = "rect" | "arched";
+/** Which mark sits beside the wordmark: the portfolio mark, or the provisional doorway (rectangular or arched door). */
+export type DoorShape = "portfolio" | "rect" | "arched";
 /** ink: charcoal or cream mark and BRICKFIELD · gold-mark: the doorway in gold · gold: everything gold. */
 export type LockupTone = "ink" | "gold-mark" | "gold";
 export type Surface = "light" | "dark";
@@ -55,8 +57,21 @@ function colours(surface: Surface, tone: LockupTone, light: LockupLight): Colour
   return { mark, door, opening: lit ? gold : null, brickfield: tone === "gold" ? gold : ink, group: gold };
 }
 
-/** The doorway with its top-left at (x, y) and height h. */
+const boundsOf = (shape: DoorShape) => (shape === "portfolio" ? PORTFOLIO_MARK.bounds : bounds);
+
+/** The mark with its top-left at (x, y) and height h: the portfolio mark, or the doorway. */
 function Door({ x, y, h, shape, c }: { x: number; y: number; h: number; shape: DoorShape; c: Colours }) {
+  if (shape === "portfolio") {
+    const b = PORTFOLIO_MARK.bounds;
+    const k = h / b.height;
+    return (
+      <g transform={`translate(${x - b.x * k} ${y - b.y * k}) scale(${k})`} className="lockup-portfolio">
+        {PORTFOLIO_MARK.paths.map((d) => (
+          <path key={d} d={d} fill={c.mark.fill} className={cn("lockup-frame", c.mark.cls)} />
+        ))}
+      </g>
+    );
+  }
   const k = h / bounds.height;
   const D = shape === "rect" ? DOORWAY_RECT : DOORWAY;
   return (
@@ -69,8 +84,6 @@ function Door({ x, y, h, shape, c }: { x: number; y: number; h: number; shape: D
     </g>
   );
 }
-
-const markWidth = (h: number) => (bounds.width * h) / bounds.height;
 
 function Brickfield({ x, y, c }: { x: number; y: number; c: Colours }) {
   return (
@@ -95,6 +108,7 @@ function Group({ x, y, c }: { x: number; y: number; c: Colours }) {
 
 function layout(id: LockupId, shape: DoorShape, c: Colours): { box: Box; node: React.ReactNode } {
   const door = (x: number, y: number, h: number) => <Door x={x} y={y} h={h} shape={shape} c={c} />;
+  const markWidth = (h: number) => (boundsOf(shape).width * h) / boundsOf(shape).height;
   const words = (x: number) => (
     <>
       <Brickfield x={x} y={0} c={c} />
@@ -166,7 +180,7 @@ export type LockupProps = {
  */
 export function BrandLockup({
   id,
-  shape = "rect",
+  shape = "portfolio",
   light = "open",
   tone = "ink",
   surface = "light",

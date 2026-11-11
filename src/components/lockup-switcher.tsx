@@ -17,7 +17,7 @@ const SLOTS: { id: LogoSlot; label: string }[] = [
 ];
 const KEY = "bf:lockups";
 const FLAG = "bf:lockups-enabled";
-const FALLBACK: LogoConfig = { id: "wordmark", shape: "rect", light: "open", tone: "ink" };
+const FALLBACK: LogoConfig = { id: "horizontal", shape: "portfolio", light: "open", tone: "ink" };
 
 const LogoContext = createContext<Choices>(LOGOS);
 
@@ -53,7 +53,7 @@ function normalise(raw: unknown, base: LogoConfig | null): LogoConfig | null {
   const b = base ?? FALLBACK;
   return {
     id: r.id as LogoConfig["id"],
-    shape: r.shape === "arched" || r.shape === "rect" ? r.shape : b.shape,
+    shape: r.shape === "portfolio" || r.shape === "arched" || r.shape === "rect" ? r.shape : b.shape,
     light: r.light === "gold" ? "gold" : r.light === "open" || r.light === "paper" ? "open" : b.light,
     tone: r.tone === "gold" || r.tone === "gold-mark" || r.tone === "ink" ? r.tone : b.tone,
   };
@@ -178,7 +178,11 @@ export function LockupProvider({ children }: { children: ReactNode }) {
               <Toggle<DoorShape>
                 disabled={hidden}
                 value={current?.shape}
-                options={[["rect", "Rectangular door", (shape) => update({ shape })], ["arched", "Arched door", (shape) => update({ shape })]]}
+                options={[
+                  ["portfolio", "Portfolio", (shape) => update({ shape })],
+                  ["rect", "Door", (shape) => update({ shape })],
+                  ["arched", "Arched door", (shape) => update({ shape })],
+                ]}
               />
               <Toggle<LockupTone>
                 disabled={hidden}
@@ -190,7 +194,7 @@ export function LockupProvider({ children }: { children: ReactNode }) {
                 ]}
               />
               <Toggle<LockupLight>
-                disabled={hidden}
+                disabled={hidden || current?.shape === "portfolio"}
                 value={current?.tone === "ink" ? current.light : undefined}
                 options={[["open", "Open doorway", (light) => update({ light })], ["gold", "Gold light", (light) => update({ light, tone: "ink" })]]}
               />
