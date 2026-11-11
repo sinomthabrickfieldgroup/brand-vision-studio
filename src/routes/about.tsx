@@ -92,9 +92,9 @@ function About() {
         media="aboutHero"
         slidesEyebrow="Fifteen years in the making"
         slides={[
-          { id: "aboutHero", label: "Woodstock and beyond" },
+          // { id: "aboutHero", label: "Woodstock and beyond" },
           { id: "canvasHero", label: "Brickfield Canvas", slug: "brickfield-canvas" },
-          { id: "precinct", label: "Thinking in blocks" },
+          // { id: "precinct", label: "Thinking in blocks" },
           { id: "albertHero", label: "219 Albert Road", slug: "219-albert-road" },
           { id: "loopAerialAngle", label: "9 Loop Street, Maitland", slug: "9-loop-street" },
           { id: "wierdaHero", label: "66/68 Wierda, Sandton", slug: "66-68-wierda" },
