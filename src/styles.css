@@ -1377,6 +1377,10 @@
   /* The watermark keeps its faint tint whatever lockup or tone it uses. */
   .footer-wordmark .lockup-ink { fill: currentColor; }
   .footer-wordmark .lockup-gold { fill: color-mix(in oklch, var(--accent) 22%, transparent); }
+  /* Outline marks are strokes, not fills. */
+  .lockup path.lockup-line { fill: none; }
+  .footer-wordmark .lockup-line.lockup-ink { stroke: currentColor; }
+  .footer-wordmark .lockup-line.lockup-gold { stroke: color-mix(in oklch, var(--accent) 22%, transparent); }
   /* The stacked and mark-only lockups are tall: cap them so the watermark stays a band, not a wall. */
   .footer-wordmark .lockup-stacked, .footer-wordmark .lockup-mark { max-height: 42vh; width: auto; }
 }

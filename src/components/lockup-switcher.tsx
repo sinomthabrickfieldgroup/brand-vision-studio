@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { LOCKUPS, type DoorShape, type LockupLight, type LockupTone } from "@/components/brand-lockup";
+import { LOCKUPS, type DoorShape, type LockupLight, type LockupTone, type SecondWord } from "@/components/brand-lockup";
 import { LOGOS, type LogoConfig, type LogoSlot } from "@/lib/brand";
 
 /**
@@ -17,7 +17,8 @@ const SLOTS: { id: LogoSlot; label: string }[] = [
 ];
 const KEY = "bf:lockups";
 const FLAG = "bf:lockups-enabled";
-const FALLBACK: LogoConfig = { id: "horizontal", shape: "portfolio", light: "open", tone: "ink" };
+const SHAPES: DoorShape[] = ["portfolio", "portfolio-line", "portfolio-line-bold", "rect", "arched"];
+const FALLBACK: LogoConfig = { id: "horizontal", shape: "portfolio", word: "group", light: "open", tone: "ink" };
 
 const LogoContext = createContext<Choices>(LOGOS);
 
@@ -47,13 +48,14 @@ function write(key: string, value: unknown) {
 function normalise(raw: unknown, base: LogoConfig | null): LogoConfig | null {
   if (raw === null) return null;
   if (!raw || typeof raw !== "object") return base;
-  const r = raw as { id?: unknown; shape?: unknown; light?: unknown; tone?: unknown };
+  const r = raw as { id?: unknown; shape?: unknown; word?: unknown; light?: unknown; tone?: unknown };
   if (r.id === "none") return null;
   if (!LOCKUPS.some((l) => l.id === r.id)) return base;
   const b = base ?? FALLBACK;
   return {
     id: r.id as LogoConfig["id"],
-    shape: r.shape === "portfolio" || r.shape === "arched" || r.shape === "rect" ? r.shape : b.shape,
+    shape: SHAPES.includes(r.shape as DoorShape) ? (r.shape as DoorShape) : b.shape,
+    word: r.word === "services" || r.word === "group" ? r.word : b.word,
     light: r.light === "gold" ? "gold" : r.light === "open" || r.light === "paper" ? "open" : b.light,
     tone: r.tone === "gold" || r.tone === "gold-mark" || r.tone === "ink" ? r.tone : b.tone,
   };
@@ -74,7 +76,7 @@ const asConfig = (c: Choices) =>
   SLOTS.map(({ id }) => {
     const v = c[id];
     return v
-      ? `  ${id}: { id: "${v.id}", shape: "${v.shape}", light: "${v.light}", tone: "${v.tone}" },`
+      ? `  ${id}: { id: "${v.id}", shape: "${v.shape}", word: "${v.word}", light: "${v.light}", tone: "${v.tone}" },`
       : `  ${id}: null,`;
   }).join("\n") +
   "\n};\n";
@@ -179,9 +181,19 @@ export function LockupProvider({ children }: { children: ReactNode }) {
                 disabled={hidden}
                 value={current?.shape}
                 options={[
-                  ["portfolio", "Portfolio", (shape) => update({ shape })],
+                  ["portfolio", "Solid", (shape) => update({ shape })],
+                  ["portfolio-line", "Line", (shape) => update({ shape })],
+                  ["portfolio-line-bold", "Bold line", (shape) => update({ shape })],
                   ["rect", "Door", (shape) => update({ shape })],
-                  ["arched", "Arched door", (shape) => update({ shape })],
+                  ["arched", "Arched", (shape) => update({ shape })],
+                ]}
+              />
+              <Toggle<SecondWord>
+                disabled={hidden}
+                value={current?.word}
+                options={[
+                  ["group", "Group", (word) => update({ word })],
+                  ["services", "Services", (word) => update({ word })],
                 ]}
               />
               <Toggle<LockupTone>
@@ -194,7 +206,7 @@ export function LockupProvider({ children }: { children: ReactNode }) {
                 ]}
               />
               <Toggle<LockupLight>
-                disabled={hidden || current?.shape === "portfolio"}
+                disabled={hidden || Boolean(current?.shape.startsWith("portfolio"))}
                 value={current?.tone === "ink" ? current.light : undefined}
                 options={[["open", "Open doorway", (light) => update({ light })], ["gold", "Gold light", (light) => update({ light, tone: "ink" })]]}
               />
