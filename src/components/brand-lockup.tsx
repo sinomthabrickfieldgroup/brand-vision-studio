@@ -25,7 +25,7 @@ export type LockupId = (typeof LOCKUPS)[number]["id"];
 /** The doorway's opening: see-through, or lit gold. */
 export type LockupLight = "open" | "gold";
 /** Which mark sits beside the wordmark: the portfolio mark, or the provisional doorway (rectangular or arched door). */
-export type DoorShape = "portfolio" | "portfolio-line" | "portfolio-line-bold" | "rect" | "arched";
+export type DoorShape = "portfolio" | "portfolio-line" | "portfolio-line-bold" | "portfolio-relief" | "rect" | "arched";
 /** The word after BRICKFIELD. */
 export type SecondWord = "group" | "services";
 /** ink: charcoal or cream mark and BRICKFIELD · gold-mark: the doorway in gold · gold: everything gold. */
@@ -73,6 +73,45 @@ function Door({ x, y, h, shape, c }: { x: number; y: number; h: number; shape: D
   if (isPortfolio(shape)) {
     const b = PORTFOLIO_MARK.bounds;
     const k = h / b.height;
+    if (shape === "portfolio-relief") {
+      const ink = c.mark.fill.toUpperCase();
+      const [from, to] =
+        ink === BRAND_COLOURS.gold ? PORTFOLIO_MARK.relief.gold
+        : ink === BRAND_COLOURS.cream ? PORTFOLIO_MARK.relief.cream
+        : PORTFOLIO_MARK.relief.charcoal;
+      return (
+        <g transform={`translate(${x - b.x * k} ${y - b.y * k}) scale(${k})`} className="lockup-portfolio">
+          <defs>
+            <linearGradient id={`${uid}-g`} x1="-60" y1="60" x2="190" y2="280" gradientUnits="userSpaceOnUse">
+              <stop stopColor={from} />
+              <stop offset="1" stopColor={to} />
+            </linearGradient>
+            <filter id={`${uid}-f`} x="-5%" y="-5%" width="115%" height="115%" colorInterpolationFilters="sRGB">
+              <feOffset in="SourceAlpha" dx="1.1" dy="1.8" />
+              <feGaussianBlur stdDeviation="0.85" />
+              <feColorMatrix values="0 0 0 0 0.227 0 0 0 0 0.227 0 0 0 0 0.235 0 0 0 0.18 0" result="drop" />
+              <feOffset in="SourceAlpha" dx="-0.7" dy="-0.8" />
+              <feGaussianBlur stdDeviation="0.175" />
+              <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" />
+              <feColorMatrix values="0 0 0 0 0.973 0 0 0 0 0.957 0 0 0 0 0.925 0 0 0 0.36 0" result="light" />
+              <feOffset in="SourceAlpha" dx="0.95" dy="1.15" />
+              <feGaussianBlur stdDeviation="0.225" />
+              <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" />
+              <feColorMatrix values="0 0 0 0 0.227 0 0 0 0 0.227 0 0 0 0 0.235 0 0 0 0.55 0" result="dark" />
+              <feMerge>
+                <feMergeNode in="drop" />
+                <feMergeNode in="SourceGraphic" />
+                <feMergeNode in="light" />
+                <feMergeNode in="dark" />
+              </feMerge>
+            </filter>
+          </defs>
+          {PORTFOLIO_MARK.paths.map((d) => (
+            <path key={d} d={d} fill={`url(#${uid}-g)`} filter={`url(#${uid}-f)`} className="lockup-frame lockup-relief" />
+          ))}
+        </g>
+      );
+    }
     // Outline versions: a centred stroke clipped to the shape, i.e. Figma's inside stroke.
     const sw = shape === "portfolio" ? 0 : PORTFOLIO_MARK.lineWidth[shape === "portfolio-line" ? "line" : "line-bold"];
     return (

@@ -15,4 +15,13 @@ export const PORTFOLIO_MARK = {
   ],
   /** Outline versions (Figma Group 36): the same shapes drawn as an inside stroke. */
   lineWidth: { line: 6, "line-bold": 12 },
+  /**
+   * "Architectural relief" (Figma): the same paths with a soft diagonal gradient, a faint drop
+   * shadow, a light top-left edge and a dark bottom-right edge. Stops per ink colour.
+   */
+  relief: {
+    charcoal: ["#545354", "#404041"],
+    cream: ["#FFFDF8", "#E9E3D6"],
+    gold: ["#E2C077", "#C69E4C"],
+  },
 } as const;

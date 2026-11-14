@@ -7,8 +7,8 @@ import type { DoorShape, LockupId, LockupLight, LockupTone, SecondWord } from "@
  *
  *   id     wordmark | horizontal | horizontal-compact | two-line | two-line-offset | two-line-right
  *          | stacked | divider | mark
- *   shape  portfolio | portfolio-line | portfolio-line-bold | rect | arched
- *          the portfolio mark (solid, thin outline, bold outline), or the earlier doorway
+ *   shape  portfolio | portfolio-line | portfolio-line-bold | portfolio-relief | rect | arched
+ *          the portfolio mark (solid, thin outline, bold outline, relief), or the earlier doorway
  *   word   group | services       BRICKFIELD GROUP or BRICKFIELD SERVICES
  *   light  open | gold            doorway only: left see-through, or lit gold
  *   tone   ink | gold-mark | gold ink: charcoal on light, cream on dark · gold-mark: mark in gold · gold: all gold

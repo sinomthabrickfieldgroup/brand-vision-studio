@@ -17,7 +17,34 @@ const SLOTS: { id: LogoSlot; label: string }[] = [
 ];
 const KEY = "bf:lockups";
 const FLAG = "bf:lockups-enabled";
-const SHAPES: DoorShape[] = ["portfolio", "portfolio-line", "portfolio-line-bold", "rect", "arched"];
+const FAVICON_KEY = "bf:favicon";
+
+/** Favicons to compare in the browser tab (files in public/favicons/). "" = the site's own. */
+const FAVICONS: [string, string][] = [
+  ["", "Site default"],
+  ["portfolio", "Solid"],
+  ["portfolio-line-bold", "Bold line"],
+  ["portfolio-relief", "Relief"],
+  ["doorway", "Doorway"],
+];
+
+/** Points every icon link at the chosen SVG, or restores the originals. Dev preview only. */
+function applyFavicon(name: string) {
+  document.querySelectorAll<HTMLLinkElement>('link[rel="icon"]').forEach((link) => {
+    const d = link.dataset;
+    d["originalHref"] ??= link.getAttribute("href") ?? "";
+    d["originalType"] ??= link.getAttribute("type") ?? "";
+    if (name) {
+      link.href = `/favicons/${name}.svg`;
+      link.type = "image/svg+xml";
+    } else {
+      link.setAttribute("href", d["originalHref"] ?? "");
+      if (d["originalType"]) link.type = d["originalType"];
+      else link.removeAttribute("type");
+    }
+  });
+}
+const SHAPES: DoorShape[] = ["portfolio", "portfolio-line", "portfolio-line-bold", "portfolio-relief", "rect", "arched"];
 const FALLBACK: LogoConfig = { id: "horizontal", shape: "portfolio", word: "group", light: "open", tone: "ink" };
 
 const LogoContext = createContext<Choices>(LOGOS);
@@ -107,6 +134,7 @@ export function LockupProvider({ children }: { children: ReactNode }) {
   const [slot, setSlot] = useState<LogoSlot>("header");
   const [open, setOpen] = useState(false);
   const [note, setNote] = useState("");
+  const [favicon, setFavicon] = useState("");
 
   // Read overrides after hydration so server and client render the same first frame.
   useEffect(() => {
@@ -115,8 +143,19 @@ export function LockupProvider({ children }: { children: ReactNode }) {
     if (params.get("lockups") === "1") write(FLAG, true);
     const on = import.meta.env.DEV || read(FLAG, false);
     setEnabled(on);
-    if (on) setChoices(load());
+    if (on) {
+      setChoices(load());
+      const saved = read(FAVICON_KEY, "");
+      setFavicon(saved);
+      if (saved) applyFavicon(saved);
+    }
   }, []);
+
+  const pickFavicon = (name: string) => {
+    setFavicon(name);
+    write(FAVICON_KEY, name);
+    applyFavicon(name);
+  };
 
   const save = (value: Choices) => {
     setChoices(value);
@@ -184,6 +223,7 @@ export function LockupProvider({ children }: { children: ReactNode }) {
                   ["portfolio", "Solid", (shape) => update({ shape })],
                   ["portfolio-line", "Line", (shape) => update({ shape })],
                   ["portfolio-line-bold", "Bold line", (shape) => update({ shape })],
+                  ["portfolio-relief", "Relief", (shape) => update({ shape })],
                   ["rect", "Door", (shape) => update({ shape })],
                   ["arched", "Arched", (shape) => update({ shape })],
                 ]}
@@ -216,6 +256,14 @@ export function LockupProvider({ children }: { children: ReactNode }) {
                   <button key={s.id} type="button" onClick={() => copyTo(s.id)}>{s.label}</button>
                 ))}
               </div>
+              <label>
+                <span>Favicon</span>
+                <select value={favicon} onChange={(e) => pickFavicon(e.target.value)}>
+                  {FAVICONS.map(([v, label]) => (
+                    <option key={v} value={v}>{label}</option>
+                  ))}
+                </select>
+              </label>
               <div className="lockup-switcher-row">
                 <button type="button" onClick={copyConfig}>Copy config</button>
                 <button type="button" onClick={() => save(LOGOS)}>Reset to config</button>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+  <!-- Doorway mark, rectangular (provisional). Charcoal frame and door; the opening is left unfilled. Light on dark browser themes. -->
+  <style>
+    .i { fill: #3A3A3C; }
+    @media (prefers-color-scheme: dark) {
+      .i { fill: #FCFCFC; }
+    }
+  </style>
+  <path class="i" d="M6 29.9976V2H24.6664V29.9976H22.4703V4.1537H8.19604V29.9976H6Z"/>
+  <path class="i" d="M8.74463 29.9989V6.3086L18.6268 7.3086V27.3068L8.74463 29.9989Z"/>
+  <path class="i" d="M8.75066 12.6602H8.19067V14.5446H8.75066V12.6602Z"/>
+  <path class="i" d="M8.75066 25.0977H8.19067V26.9821H8.75066V25.0977Z"/>
+</svg>
