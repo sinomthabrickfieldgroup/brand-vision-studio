@@ -157,7 +157,7 @@ function Index() {
               {
                 value: `${Math.floor(portfolioTotals.gla / 1000)}K+`,
                 label: "Square metres held",
-                text: "Across six properties in two cities.",
+                text: "Across seven properties in two cities.",
               },
               {
                 value: "2019",
@@ -246,7 +246,7 @@ function Index() {
         items={properties}
         intro={
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <SectionIntro eyebrow="The portfolio" title="Six buildings. One long view." />
+            <SectionIntro eyebrow="The portfolio" title="Seven properties. One long view." />
             <ActionLink to="/portfolio" variant="outline" className="self-start md:self-auto">
               View all properties
             </ActionLink>

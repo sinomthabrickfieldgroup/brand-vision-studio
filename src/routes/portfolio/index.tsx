@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ActionLink, CtaPair, PageHero, SectionIntro, StatFigure } from "@/components/editorial";
 import { PortfolioIndex, ProjectCard } from "@/components/portfolio-views";
-import { portfolioTotals, properties, propertyTypes, type PropertyType } from "@/lib/portfolio";
+import { countHoldings, portfolioTotals, properties, propertyTypes, type PropertyType } from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/portfolio/")({
@@ -101,7 +101,7 @@ function Portfolio() {
               >
                 {t}
                 <span className="ml-2 text-xs opacity-60">
-                  {t === "All" ? properties.length : properties.filter((p) => p.type === t).length}
+                  {countHoldings(t === "All" ? properties : properties.filter((p) => p.type === t))}
                 </span>
               </button>
             ))}

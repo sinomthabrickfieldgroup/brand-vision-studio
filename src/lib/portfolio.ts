@@ -87,6 +87,8 @@ export type Block =
 
 export interface Property {
   slug: string;
+  /** How many properties this page covers (66 and 68 Wierda are two properties on one page). Defaults to 1. */
+  holdings?: number;
   name: string;
   address: string;
   area: string;
@@ -516,6 +518,7 @@ export const properties: Property[] = [
   },
   {
     slug: "66-68-wierda",
+    holdings: 2,
     name: "66/68 Wierda",
     address: "66 & 68 Wierda Road East",
     area: "Wierda Valley, Sandton",
@@ -784,8 +787,13 @@ export const portfolioTotals = (() => {
       ),
     0,
   );
-  return { gla, count: properties.length, cities: new Set(properties.map((p) => p.city)).size };
+  return { gla, count: countHoldings(properties), cities: new Set(properties.map((p) => p.city)).size };
 })();
+
+/** Number of properties (not pages) in a list: 66/68 Wierda counts as two. */
+export function countHoldings(list: Property[]) {
+  return list.reduce((n, p) => n + (p.holdings ?? 1), 0);
+}
 
 export const mailto = (subject: string, body?: string) =>
   `mailto:info@brickfieldgroup.co.za?subject=${encodeURIComponent(subject)}${body ? `&body=${encodeURIComponent(body)}` : ""}`;
