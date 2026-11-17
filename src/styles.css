@@ -796,6 +796,10 @@
     background: oklch(0.24 0.005 60 / 0.7);
     color: var(--primary-foreground);
     backdrop-filter: blur(6px);
+    transition: opacity 0.3s var(--ease-editorial);
+  }
+  .before-after-label[data-hidden="true"] {
+    opacity: 0;
   }
   .before-after-range {
     position: absolute;

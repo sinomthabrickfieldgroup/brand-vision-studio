@@ -498,8 +498,9 @@ export function BeforeAfter({
             <ArrowRight size={14} />
           </span>
         </div>
-        <span className="before-after-label left-5">Before</span>
-        <span className="before-after-label right-5">After</span>
+        {/* A label fades out once its side shows less than a tenth of the picture. */}
+        <span className="before-after-label left-5" data-hidden={value < 10}>Before</span>
+        <span className="before-after-label right-5" data-hidden={value > 90}>After</span>
         <input
           type="range"
           min={0}
