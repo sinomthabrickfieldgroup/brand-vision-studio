@@ -1440,6 +1440,12 @@
   .stat { container-type: inline-size; min-width: 0; }
   .stat-value { font-size: clamp(1.7rem, 19cqi, 3.75rem); white-space: nowrap; }
   .stat-xl .stat-value { font-size: clamp(2.4rem, 26cqi, 6rem); }
+  /* Phones: each big stat becomes one short row, figure beside its label. */
+  @media (max-width: 767px) {
+    .stat-row-mobile { display: grid; grid-template-columns: 8.5rem 1fr; align-items: baseline; gap: 1rem; }
+    .stat-row-mobile .stat-value { font-size: 2.6rem; }
+    .stat-row-mobile .stat-value + div { margin-top: 0; }
+  }
   .timeline-year { font-size: clamp(1.9rem, 1.4rem + 1.6vw, 2.5rem); line-height: 1; }
 }
 

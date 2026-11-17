@@ -20,6 +20,7 @@ import {
   StatFigure,
   TabShowcase,
 } from "@/components/editorial";
+import { cn } from "@/lib/utils";
 import { Media } from "@/components/media";
 import { SystemDiagram } from "@/components/system-diagram";
 import type { MediaId } from "@/lib/media";
@@ -162,7 +163,7 @@ function Sustainability() {
           <Eyebrow light className="!text-accent">
             The numbers behind the build
           </Eyebrow>
-          <div className="mt-12 grid gap-10 md:grid-cols-3">
+          <div className="mt-8 grid gap-5 md:mt-12 md:grid-cols-3 md:gap-10">
             {[
               { value: "50%", label: "HVAC efficiency above baseline" },
               { value: "R150m+", label: "Infrastructure investment at Canvas" },
@@ -172,7 +173,7 @@ function Sustainability() {
                 key={s.label}
                 stat={s}
                 light
-                className="stat-xl border-t border-primary-foreground/20 pt-6"
+                className="stat-xl stat-row-mobile border-t border-primary-foreground/20 pt-4 md:pt-6"
               />
             ))}
           </div>
@@ -203,8 +204,9 @@ function Sustainability() {
           id={s.key}
           className="mx-auto max-w-7xl scroll-mt-32 px-6 py-24 md:px-10 md:py-32"
         >
-          <div className="grid items-center gap-12 md:grid-cols-2 md:gap-20">
-            <div className={i % 2 === 1 ? "md:order-2" : undefined}>
+          {/* Desktop: picture and story side by side. Phone and tablet: story, a smaller picture, then the points. */}
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-20">
+            <div className={cn("hidden lg:block", i % 2 === 1 && "lg:order-2")}>
               {s.key === "water" || s.key === "comms" ? (
                 <SystemDiagram kind={s.key} />
               ) : (
@@ -213,11 +215,23 @@ function Sustainability() {
             </div>
             <div>
               <SectionIntro eyebrow={s.eyebrow} title={s.title} text={s.text} />
-              <div className="mt-10 grid gap-4 sm:grid-cols-2">
+              <div className="mt-8 lg:hidden">
+                {s.key === "water" || s.key === "comms" ? (
+                  <SystemDiagram kind={s.key} />
+                ) : (
+                  <Media id={s.media} className="aspect-[16/10] md:aspect-[16/9]" />
+                )}
+              </div>
+              <div
+                className={cn(
+                  "mt-8 grid gap-4 md:mt-10 lg:grid-cols-2",
+                  s.points.length % 3 === 0 ? "md:grid-cols-3" : "md:grid-cols-2",
+                )}
+              >
                 {s.points.map((p) => (
                   <div
                     key={p.title}
-                    className="group flex gap-4 rounded-sm border p-5 transition-colors duration-500 hover:border-foreground"
+                    className="group flex gap-4 rounded-sm border p-5 transition-colors duration-500 hover:border-foreground md:flex-col md:gap-3 lg:flex-row lg:gap-4"
                     data-reveal-item
                   >
                     <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-accent/25 text-fern transition-colors group-hover:bg-primary group-hover:text-accent">
