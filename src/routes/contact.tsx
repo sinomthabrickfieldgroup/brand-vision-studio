@@ -82,42 +82,45 @@ function Contact() {
 
       {/* Find us */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:px-10 md:pb-32">
-        <div className="grid gap-12 md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-16">
-          <div className="divide-y border-y">
+        {/* Phone: picture first, then compact rows, so both fit one screen. Tablet: rows beside a landscape picture. */}
+        <div className="grid gap-6 md:gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+          <div className="order-2 divide-y border-y md:grid md:grid-cols-3 md:divide-x md:divide-y-0 lg:block lg:divide-x-0 lg:divide-y">
             {channels.map((c) => (
               <a
                 key={c.label}
                 href={c.href}
-                className="group flex items-start gap-5 py-7"
+                className="group flex items-start gap-3 py-4 md:flex-col md:gap-3 md:px-5 md:py-6 md:first:pl-0 lg:flex-row lg:gap-5 lg:px-0 lg:py-7"
                 {...(c.href.startsWith("http")
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
                 data-reveal-item
               >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full border transition-colors duration-500 group-hover:bg-primary group-hover:text-accent">
-                  <c.icon size={18} />
+                <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border transition-colors duration-500 group-hover:bg-primary group-hover:text-accent lg:h-12 lg:w-12">
+                  <c.icon size={16} />
                 </span>
                 <span className="min-w-0">
-                  <span className="block text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="block text-[0.65rem] uppercase tracking-[0.18em] text-muted-foreground lg:text-xs">
                     {c.label}
                   </span>
-                  <span className="mt-2 block break-words font-display text-2xl leading-snug transition-colors group-hover:text-fern">
+                  <span className="mt-1 block break-words font-display text-lg leading-snug transition-colors group-hover:text-fern lg:mt-2 lg:text-2xl">
                     {c.value}
                   </span>
-                  <span className="mt-1 block text-sm text-muted-foreground">{c.note}</span>
+                  <span className="mt-0.5 hidden text-sm text-muted-foreground sm:block lg:mt-1">{c.note}</span>
                 </span>
                 <ArrowUpRight
-                  className="ml-auto mt-1 shrink-0 text-fern transition-transform duration-500 group-hover:rotate-45"
-                  size={20}
+                  className="ml-auto mt-1 shrink-0 text-fern transition-transform duration-500 group-hover:rotate-45 md:hidden lg:block"
+                  size={18}
                 />
               </a>
             ))}
           </div>
-          <Media
-            id="contactHero"
-            className="aspect-[4/3] md:aspect-auto md:h-full"
-            parallax={0.05}
-          />
+          <div className="order-1 overflow-hidden lg:order-2">
+            <Media
+              id="contactHero"
+              className="aspect-[2/1] md:aspect-[21/9] lg:aspect-auto lg:h-full"
+              parallax={0.05}
+            />
+          </div>
         </div>
       </section>
 
