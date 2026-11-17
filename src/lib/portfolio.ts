@@ -649,7 +649,7 @@ export const properties: Property[] = [
     tenants: [],
     headline: "Two businesses. One well-run park.",
     summary:
-      "A multi-tenant industrial park in Montague Gardens: a 7,362m² General Industrial site with dual access, 35 parking bays and room to load.",
+      "A multi-tenant industrial park in Montague Gardens: a 7,362m² General Industrial site with dual access, 35 parking bays and room to load, let to an aluminium products manufacturer and a furniture wholesaler.",
     hero: "montagueHero",
     slides: [],
     card: "montagueHero",
@@ -665,7 +665,7 @@ export const properties: Property[] = [
       { label: "Erf size", value: "7,362m²" },
       { label: "Zoning", value: "General Industrial" },
       { label: "Parking", value: "35 bays + 10 visitor bays" },
-      { label: "Tenants", value: "Two established businesses" },
+      { label: "Tenants", value: "Manufacturing and furniture wholesale" },
       { label: "Acquired", value: "2012" },
     ],
     highlights: [
@@ -678,7 +678,7 @@ export const properties: Property[] = [
         type: "split",
         eyebrow: "The park",
         title: "Managed to a standard that keeps serious operators",
-        text: "Acquired in 2012, 24 Montague is home to two established businesses. The park offers dual access, ample parking and loading facilities.",
+        text: "Acquired in 2012, 24 Montague is home to two established businesses: an aluminium products manufacturer and a furniture wholesaler. Dual access, loading bays and on-site parking keep production, deliveries and trade customers moving.",
         media: "montagueYard",
         items: [
           { title: "Dual access", text: "Suited to logistics and manufacturing." },
