@@ -14,7 +14,6 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader, SiteFooter } from "@/components/site-shell";
 import { EditorialMotion } from "@/components/editorial-motion";
-import { LockupProvider } from "@/components/lockup-switcher";
 import { LOADER_SCRIPT, SiteLoader } from "@/components/site-loader";
 
 function NotFoundComponent() {
@@ -100,7 +99,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" },
       // Portfolio mark. favicon.svg is charcoal on light browser themes and cream on dark ones; the .ico is the same mark on
-      // transparent, and the app icons sit on a light tile. The dev Logo panel can swap in the files in public/favicons/.
+      // transparent, and the app icons sit on a light tile.
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
       { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
@@ -136,13 +135,11 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <LockupProvider>
         <SiteLoader />
         <SiteHeader />
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <EditorialMotion><Outlet /></EditorialMotion>
         <SiteFooter />
-      </LockupProvider>
     </QueryClientProvider>
   );
 }
