@@ -34,7 +34,7 @@ import photo_canvas_reading_nook from "@/assets/photos/canvas-reading-nook.webp"
 import photo_canvas_exterior from "@/assets/photos/canvas-exterior-hd.webp";
 import photo_call_centre_exterior from "@/assets/photos/call-centre-exterior.webp";
 // remember to optimise these 
-import photo_loop_before_aerial from "@/assets/photos/loop-before-aerial.jpg";
+import photo_loop_before_aerial from "@/assets/photos/loop-before-aerial-site.webp";
 import photo_loop_before_interior from "@/assets/photos/loop-before-mezzanine-001.jpg";
 import photo_loop_before_mezzanine from "@/assets/photos/loop-before-mezzanine-view-003.jpg";
 import photo_loop_before_kitchen from "@/assets/photos/loop-kitchen-before-001.jpg";
@@ -67,11 +67,11 @@ import photo_wierda_open_plan from "@/assets/photos/wierda-open-plan.webp";
 import photo_wierda_roses from "@/assets/photos/wierda-roses.webp";
 import photo_wierda_lobby from "@/assets/photos/wierda-lobby.webp";
 
-import photo_loop_aerial from "@/assets/photos/loop-aerial.webp";
+import photo_loop_aerial from "@/assets/photos/loop-aerial-site.webp";
 import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
 import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
 import photo_loop_yard from "@/assets/photos/loop-yard.webp";
-import photo_loop_top_down from "@/assets/photos/loop-top-down.webp";
+import photo_loop_top_down from "@/assets/photos/loop-top-down-site.webp";
 import photo_loop_offices_2_before from "@/assets/photos/loop-offices-2-before.webp";
 import photo_loop_offices_before from "@/assets/photos/loop-offices-before.webp";
 import photo_loop_offices_after from "@/assets/photos/loop-offices-after.webp";
@@ -79,7 +79,7 @@ import photo_loop_meeting_before from "@/assets/photos/loop-meeting-before.webp"
 import photo_loop_meeting_after from "@/assets/photos/loop-meeting-after.webp";
 import photo_loop_staffroom_before from "@/assets/photos/loop-staffroom-before.webp";
 import photo_loop_staffroom_after from "@/assets/photos/loop-staffroom-after.webp";
-import photo_loop_aerial_angle from "@/assets/photos/loop-aerial-angle.webp";
+import photo_loop_aerial_angle from "@/assets/photos/loop-aerial-angle-site.webp";
 import photo_loop_warehouse_wide from "@/assets/photos/loop-warehouse-wide.webp";
 import photo_loop_warehouse_light from "@/assets/photos/loop-warehouse-light.webp";
 import photo_loop_mezzanine_deck from "@/assets/photos/loop-mezzanine-deck.webp";
