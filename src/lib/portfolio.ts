@@ -335,10 +335,10 @@ export const properties: Property[] = [
     typeLabel: "Industrial",
     status: "Just completed",
     acquired: "March 2026",
-    tenants: ["AMD Engineering"],
+    tenants: [],
     headline: "Refurbished from the ground up.",
     summary:
-      "A newly refurbished premium industrial facility in Maitland: 2,362m² GLA, 400A three-phase power and dual yard access, occupied by AMD Engineering.",
+      "A newly refurbished premium industrial facility in Maitland: 2,362m² GLA, 400A three-phase power and dual yard access, fully let to an established engineering business.",
     hero: "loopHero",
     slides: ["loopAerialAngle", "loopWarehouse", "loopOffice", "loopTopDown"],
     card: "loopAerialAngle",
@@ -366,7 +366,7 @@ export const properties: Property[] = [
       "Dual yard access via Loop Street and Norway Street",
       "400A three-phase power suited to heavy engineering and fabrication",
       "Comprehensively refurbished in 2026, 100% occupied",
-      "Home to AMD Engineering, a specialist steel fabrication firm established in 1993",
+      "Let to an established engineering and fabrication business",
     ],
     blocks: [
       {
@@ -432,13 +432,13 @@ export const properties: Property[] = [
       },
       {
         type: "split",
-        eyebrow: "Tenant",
-        title: "Purpose-suited to AMD Engineering",
-        text: "The first tenant is AMD Engineering, a Maitland-based specialist in steel fabrication and manufacturing, established in 1993. The 400A supply and column-efficient floor were suited to how they work.",
+        eyebrow: "Operations",
+        title: "Built for heavy engineering",
+        text: "The building is fully let to an established engineering and fabrication business. The 400A three-phase supply, open-span floor and dual yard access suit heavy machinery, steel handling and truck movements.",
         media: "loopFabrication",
         reverse: true,
         stats: [
-          { value: "1993", label: "AMD Engineering established" },
+          { value: "400A", label: "Three-phase supply" },
           { value: "100%", label: "Occupied on completion" },
         ],
       },
@@ -646,7 +646,7 @@ export const properties: Property[] = [
     typeLabel: "Industrial",
     status: "Active",
     acquired: "2012",
-    tenants: ["Wispeco", "Rich Home"],
+    tenants: [],
     headline: "Two businesses. One well-run park.",
     summary:
       "A multi-tenant industrial park in Montague Gardens: a 7,362m² General Industrial site with dual access, 35 parking bays and room to load.",
@@ -665,7 +665,7 @@ export const properties: Property[] = [
       { label: "Erf size", value: "7,362m²" },
       { label: "Zoning", value: "General Industrial" },
       { label: "Parking", value: "35 bays + 10 visitor bays" },
-      { label: "Tenants", value: "Wispeco, Rich Home" },
+      { label: "Tenants", value: "Two established businesses" },
       { label: "Acquired", value: "2012" },
     ],
     highlights: [
@@ -678,7 +678,7 @@ export const properties: Property[] = [
         type: "split",
         eyebrow: "The park",
         title: "Managed to a standard that keeps serious operators",
-        text: "Acquired in 2012, 24 Montague is home to two established businesses, Wispeco and Rich Home. The park offers dual access, ample parking and loading facilities.",
+        text: "Acquired in 2012, 24 Montague is home to two established businesses. The park offers dual access, ample parking and loading facilities.",
         media: "montagueYard",
         items: [
           { title: "Dual access", text: "Suited to logistics and manufacturing." },
@@ -712,7 +712,7 @@ export const properties: Property[] = [
     typeLabel: "Industrial",
     status: "New acquisition",
     acquired: "October 2025",
-    tenants: ["Jambo", "Digital Express"],
+    tenants: [],
     headline: "Heritage bones. Modern tenants.",
     summary:
       "A heritage industrial building on Albert Road, Woodstock, home to a mix of makers and print operations.",
@@ -732,7 +732,7 @@ export const properties: Property[] = [
       { label: "Zoning", value: "Mixed-use" },
       { label: "Height", value: "7.5m to 13m" },
       { label: "Power supply", value: "300A" },
-      { label: "Tenants", value: "Jambo, Digital Express" },
+      { label: "Tenant mix", value: "Makers and print operations" },
       { label: "Acquired", value: "October 2025" },
     ],
     highlights: [
