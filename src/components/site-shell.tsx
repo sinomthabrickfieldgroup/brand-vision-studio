@@ -330,9 +330,10 @@ export function SiteFooter() {
             href="https://fireflycapital.co.za"
             target="_blank"
             rel="noopener noreferrer"
-            className="link-gold w-fit"
+            className="link-gold inline-flex w-fit items-center gap-1"
           >
-            A subsidiary of Firefly Capital ↗
+            A subsidiary of Firefly Capital
+            <ArrowUpRight size={14} aria-hidden="true" />
           </a>
           <p>Cape Town · Johannesburg</p>
         </div>
