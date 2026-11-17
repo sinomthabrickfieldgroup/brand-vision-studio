@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { ActionLink, CtaPair, Eyebrow, PageHero, SectionIntro } from "@/components/editorial";
+import { cn } from "@/lib/utils";
 import { Media } from "@/components/media";
 import { Legible, LegibleScrim } from "@/components/legible";
 import type { MediaId } from "@/lib/media";
@@ -225,13 +226,13 @@ function About() {
             text="The people who find the buildings and make them work."
           />
         </div>
-        <div className="mt-14 grid gap-10 md:grid-cols-3 md:gap-8">
+        {/* Phones: a compact row per person (small portrait beside the text). Tablet and up: three columns. */}
+        <div className="mt-10 grid gap-8 md:mt-14 md:grid-cols-3 md:gap-8">
           {team.map((person, i) => (
             <article
               key={person.name}
-              className="group"
+              className={cn("group grid grid-cols-[6.5rem_1fr] items-start gap-5 md:block", i === 1 && "md:mt-16")}
               data-reveal-item
-              style={{ marginTop: i === 1 ? "4rem" : undefined }}
             >
               <div className="overflow-hidden">
                 <Media
@@ -239,11 +240,13 @@ function About() {
                   className="aspect-[3/4] transition-transform duration-[1.4s] group-hover:scale-[1.03]"
                 />
               </div>
-              <div className="mt-6 flex items-baseline justify-between gap-4 border-t pt-4">
-                <h3 className="font-display text-2xl">{person.name}</h3>
-                <span className="text-xs uppercase tracking-[0.18em] text-fern">{person.role}</span>
+              <div>
+                <div className="flex flex-col gap-1 md:mt-6 md:flex-row md:items-baseline md:justify-between md:gap-4 md:border-t md:pt-4">
+                  <h3 className="font-display text-xl md:text-2xl">{person.name}</h3>
+                  <span className="text-xs uppercase tracking-[0.18em] text-fern">{person.role}</span>
+                </div>
+                <p className="mt-2 text-sm text-muted-foreground md:mt-3 md:text-base">{person.text}</p>
               </div>
-              <p className="mt-3 text-muted-foreground">{person.text}</p>
             </article>
           ))}
         </div>
