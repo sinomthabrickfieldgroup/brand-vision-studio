@@ -25,12 +25,12 @@ export function ProjectCard({
       data-reveal-item
     >
       <div className="relative">
-        <Media id={property.card} className={tall ? "aspect-[4/5]" : "aspect-[4/3]"} />
+        <Media id={property.card} className={tall ? "aspect-[4/3] md:aspect-[4/5]" : "aspect-[4/3]"} />
         <span className="card-arrow" aria-hidden="true">
           <ArrowUpRight size={20} />
         </span>
-        <div className="absolute left-4 top-4 z-[3] flex flex-wrap gap-2">
-          <span className="tag border-transparent bg-background/85 text-foreground">
+        <div className="absolute left-2 top-2 z-[3] flex flex-wrap gap-2 md:left-4 md:top-4">
+          <span className="tag border-transparent bg-background/85 text-foreground max-md:px-2 max-md:py-0.5 max-md:text-[0.65rem]">
             {property.typeLabel}
           </span>
           {property.status !== "Active" && (
@@ -40,38 +40,41 @@ export function ProjectCard({
           )}
         </div>
       </div>
-      <div className="mt-5 flex items-baseline justify-between gap-4 border-t pt-4">
-        <h3 className="font-display text-2xl">{property.name}</h3>
+      <div className="mt-3 flex flex-col gap-1 border-t pt-3 md:mt-5 md:flex-row md:items-baseline md:justify-between md:gap-4 md:pt-4">
+        <h3 className="font-display text-lg leading-tight md:text-2xl">{property.name}</h3>
         <span className="shrink-0 text-xs text-muted-foreground">{property.area}</span>
       </div>
-      <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{property.summary}</p>
+      <p className="mt-2 line-clamp-2 hidden text-sm text-muted-foreground md:block">{property.summary}</p>
     </Link>
   );
 }
 
-/** A typographic index of the portfolio; on desktop a preview image follows the cursor. */
+/**
+ * A typographic index of the portfolio. With a mouse, hovering a row shows its picture at the
+ * centre of the screen; on touch screens each row carries a small thumbnail instead.
+ */
 export function PortfolioIndex({ items }: { items: Property[] }) {
   const [hovered, setHovered] = useState<string | null>(null);
-  const [pos, setPos] = useState({ x: 0, y: 0 });
   return (
-    <div
-      onMouseMove={(e) => setPos({ x: e.clientX, y: e.clientY })}
-      onMouseLeave={() => setHovered(null)}
-      className="border-b"
-    >
+    <div onMouseLeave={() => setHovered(null)} className="border-b">
       {items.map((p, i) => (
         <Link
           key={p.slug}
           to="/portfolio/$slug"
           params={{ slug: p.slug }}
           className="index-row"
-          onMouseEnter={() => setHovered(p.slug)}
+          onMouseEnter={() => {
+            if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) setHovered(p.slug);
+          }}
           data-reveal-item
         >
-          <span className="font-display text-sm tabular-nums text-muted-foreground">
+          <span className="index-num font-display text-sm tabular-nums text-muted-foreground">
             {String(i + 1).padStart(2, "0")}
           </span>
-          <span className="font-display text-3xl md:text-4xl">{p.name}</span>
+          <span className="index-thumb overflow-hidden rounded-sm" aria-hidden="true">
+            <Media id={p.card} className="aspect-[4/3]" reveal={false} bare />
+          </span>
+          <span className="font-display text-2xl md:text-4xl">{p.name}</span>
           <span className="hidden text-sm text-muted-foreground md:block">{p.address}</span>
           <span className="hidden text-sm text-muted-foreground md:block">
             {p.type} · {p.city}
@@ -81,13 +84,9 @@ export function PortfolioIndex({ items }: { items: Property[] }) {
           </span>
         </Link>
       ))}
-      <div className="hidden md:block" aria-hidden="true">
+      <div aria-hidden="true">
         {items.map((p) => (
-          <div
-            key={p.slug}
-            className={cn("index-preview", hovered === p.slug && "is-visible")}
-            style={{ left: pos.x + 200, top: pos.y }}
-          >
+          <div key={p.slug} className={cn("index-preview", hovered === p.slug && "is-visible")}>
             <Media id={p.hero} fill reveal={false} />
           </div>
         ))}

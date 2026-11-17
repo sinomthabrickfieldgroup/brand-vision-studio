@@ -461,7 +461,7 @@ export const properties: Property[] = [
       "6,101m² of purpose-built office space in Woodstock, fully occupied by Nimble Group, next door to Brickfield Canvas.",
     hero: "callHero",
     slides: [],
-    card: "callFloor",
+    card: "callHero",
     facts: [
       { value: "6,101m²", label: "Contiguous office space" },
       { value: "68", label: "Parking bays" },

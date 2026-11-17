@@ -107,7 +107,7 @@ function Portfolio() {
             ))}
           </div>
         </div>
-        <div key={filter} className="mt-14 grid gap-x-8 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
+        <div key={filter} className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:mt-14 md:gap-x-8 md:gap-y-16 lg:grid-cols-3">
           {visible.map((p, i) => (
             <ProjectCard
               key={p.slug}

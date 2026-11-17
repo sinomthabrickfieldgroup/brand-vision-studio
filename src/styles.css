@@ -1036,26 +1036,31 @@
       grid-template-columns: 4rem minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) auto;
     }
   }
-  .index-row:hover {
-    padding-left: 1rem;
-    color: var(--fern);
+  /* Pointer devices: hover nudges the row and shows a preview, fixed at the centre of the screen. */
+  @media (hover: hover) and (pointer: fine) {
+    .index-row:hover {
+      padding-left: 1rem;
+      color: var(--fern);
+    }
+    .index-row:hover .index-arrow {
+      transform: rotate(45deg);
+    }
   }
   .index-row .index-arrow {
     transition: transform 0.6s var(--ease-editorial);
   }
-  .index-row:hover .index-arrow {
-    transform: rotate(45deg);
-  }
   .index-preview {
     position: fixed;
+    left: 50%;
+    top: 50%;
     z-index: 40;
-    width: 340px;
+    width: min(34vw, 440px);
     aspect-ratio: 4 / 3;
     pointer-events: none;
     overflow: hidden;
     border-radius: 4px;
     opacity: 0;
-    transform: translate(-50%, -50%) scale(0.85) rotate(-3deg);
+    transform: translate(-50%, -50%) scale(0.92);
     transition:
       opacity 0.35s,
       transform 0.6s var(--ease-editorial);
@@ -1063,7 +1068,35 @@
   }
   .index-preview.is-visible {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1) rotate(0);
+    transform: translate(-50%, -50%) scale(1);
+  }
+  /* Phones show cards two-up: no corner arrow, and smaller badges. */
+  @media (max-width: 767px) {
+    .project-card .card-arrow { display: none; }
+    .project-card .status-badge { padding: 0.15rem 0.5rem; font-size: 0.6rem; }
+  }
+  /* Touch screens: no hover previews; each row carries a small thumbnail instead of its number. */
+  .index-thumb {
+    display: none;
+  }
+  @media (hover: none), (pointer: coarse) {
+    .index-preview {
+      display: none;
+    }
+    .index-row {
+      grid-template-columns: 4.5rem minmax(0, 1fr) auto;
+    }
+    .index-num {
+      display: none;
+    }
+    .index-thumb {
+      display: block;
+    }
+  }
+  @media (hover: none) and (min-width: 768px), (pointer: coarse) and (min-width: 768px) {
+    .index-row {
+      grid-template-columns: 6rem minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+    }
   }
 
   .pillar-card {
