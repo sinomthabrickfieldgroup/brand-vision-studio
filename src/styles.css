@@ -798,6 +798,33 @@
     backdrop-filter: blur(6px);
     transition: opacity 0.3s var(--ease-editorial);
   }
+  /* A gallery for a property that hasn't been photographed yet: blurred behind a banner. */
+  .gallery-soon {
+    position: relative;
+  }
+  .gallery-soon-behind {
+    filter: blur(14px) grayscale(0.7);
+    opacity: 0.45;
+    pointer-events: none;
+    user-select: none;
+  }
+  .gallery-soon-banner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: min(88vw, 34rem);
+    padding: 1.75rem 2rem;
+    border-radius: 1rem;
+    background: var(--primary);
+    color: var(--primary-foreground);
+    text-align: center;
+    box-shadow: 0 24px 60px -24px oklch(0 0 0 / 0.5);
+  }
+  .gallery-soon-banner .eyebrow {
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
   .before-after-label[data-hidden="true"] {
     opacity: 0;
   }

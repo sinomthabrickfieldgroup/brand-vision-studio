@@ -44,9 +44,21 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
             )}
           >
             <SectionIntro eyebrow={block.eyebrow} title={block.title} text={block.text} />
-            <p className="text-sm text-muted-foreground">Drag or use the arrows</p>
+            {!block.comingSoon && <p className="text-sm text-muted-foreground">Drag or use the arrows</p>}
           </div>
-          <Gallery media={block.media} />
+          {block.comingSoon ? (
+            <div className="gallery-soon">
+              <div className="gallery-soon-behind" aria-hidden="true" inert>
+                <Gallery media={block.media} />
+              </div>
+              <div className="gallery-soon-banner">
+                <p className="eyebrow">Photography coming soon</p>
+                <p>{block.comingSoon}</p>
+              </div>
+            </div>
+          ) : (
+            <Gallery media={block.media} />
+          )}
         </section>
       );
     case "split":

@@ -37,7 +37,15 @@ export type Block =
       /** One pair, or several shown as pill tabs above the slider. */
       views: BeforeAfterView[];
     }
-  | { type: "gallery"; eyebrow: string; title: string; text?: string; media: MediaId[] }
+  | {
+      type: "gallery";
+      eyebrow: string;
+      title: string;
+      text?: string;
+      media: MediaId[];
+      /** Set while the property hasn't been photographed: the gallery sits behind a "coming soon" banner with this note. */
+      comingSoon?: string;
+    }
   | {
       type: "split";
       eyebrow: string;
@@ -486,6 +494,7 @@ export const properties: Property[] = [
         eyebrow: "Gallery",
         title: "Exterior, workspaces and common areas",
         media: ["callHero", "callFloor", "callBreakout", "callEntrance"],
+        comingSoon: "We're scheduling a shoot at Brickfield Call Centre. More photos will be added here soon.",
       },
       {
         type: "split",
@@ -639,8 +648,8 @@ export const properties: Property[] = [
     summary:
       "A multi-tenant industrial park in Montague Gardens: a 7,362m² General Industrial site with dual access, 35 parking bays and room to load.",
     hero: "montagueHero",
-    slides: ["montagueYard", "montagueInterior"],
-    card: "montagueInterior",
+    slides: [],
+    card: "montagueHero",
     facts: [
       { value: "4,232m²", label: "Gross lettable area" },
       { value: "7,362m²", label: "Erf size" },
@@ -679,6 +688,7 @@ export const properties: Property[] = [
         eyebrow: "Gallery",
         title: "The park, the yard and the street it works on",
         media: ["montagueHero", "montagueYard", "montagueInterior", "montagueStreet"],
+        comingSoon: "We're scheduling a shoot at 24 Montague. Photos will be added here soon.",
       },
       {
         type: "specs",
@@ -704,8 +714,8 @@ export const properties: Property[] = [
     summary:
       "A heritage industrial building on Albert Road, Woodstock, home to a mix of makers and print operations.",
     hero: "albertHero",
-    slides: ["albertInterior", "albertLoading"],
-    card: "albertInterior",
+    slides: [],
+    card: "albertHero",
     facts: [
       { value: "5,200m²", label: "Gross lettable area" },
       { value: "13m", label: "Maximum height" },
@@ -744,6 +754,7 @@ export const properties: Property[] = [
         eyebrow: "Gallery",
         title: "A working building in a working neighbourhood",
         media: ["albertHero", "albertInterior", "albertLoading", "albertStreet"],
+        comingSoon: "We're scheduling a shoot at 219 Albert Road. Photos will be added here soon.",
       },
       {
         type: "specs",

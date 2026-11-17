@@ -42,6 +42,8 @@ import photo_loop_facilities_kitchen from "@/assets/photos/loop-kitchen-001.jpg"
 import photo_loop_guardhouse from "@/assets/photos/loop-guardhouse.jpg";
 import photo_loop_ventilation from "@/assets/photos/loop-roof-inffra-001.jpg";
 import photo_wierda_aerial from "@/assets/photos/wierda-aerial.webp";
+import photo_albert_placeholder from "@/assets/photos/albert-placeholder.webp";
+import photo_montague_placeholder from "@/assets/photos/montague-placeholder.webp";
 import photo_wierda_logo_front from "@/assets/photos/wierda-logo-front.webp";
 import photo_wierda_jacaranda from "@/assets/photos/wierda-jacaranda.webp";
 import photo_wierda_precinct from "@/assets/photos/wierda-precinct.webp";
@@ -912,6 +914,10 @@ export const media = {
     alt: "24 Montague Drive industrial building",
     aspect: "21/9",
     tone: "concrete",
+    // Branded placeholder until the shoot is done.
+    src: photo_montague_placeholder,
+    focus: "50% 50%",
+    mobileFocus: "78% 60%",
     prompt:
       "Well-kept multi-tenant industrial park in Montague Gardens, Cape Town: two adjoining warehouse units with light grey cladding and roller doors, a shared yard with two access gates, parking bays, mountains faint on the horizon, clean even midday light.",
   }),
@@ -946,6 +952,10 @@ export const media = {
     alt: "219/237 Albert Road industrial building in Woodstock",
     aspect: "21/9",
     tone: "brick",
+    // Branded placeholder until the shoot is done.
+    src: photo_albert_placeholder,
+    focus: "50% 50%",
+    mobileFocus: "78% 60%",
     prompt:
       "Heritage red-brick industrial building on Albert Road, Woodstock, Cape Town, tall arched windows, painted steel doors, a building between 7.5 and 13 metres high, creative-district street life out of focus, late-afternoon light.",
   }),
@@ -1108,7 +1118,6 @@ import si_08df4776 from "@/assets/stand-in/08df4776.webp";
 import si_1aafbb24 from "@/assets/stand-in/1aafbb24.webp";
 import si_29810c3b from "@/assets/stand-in/29810c3b.webp";
 import si_357f12aa from "@/assets/stand-in/357f12aa.webp";
-import si_5bc69ba9 from "@/assets/stand-in/5bc69ba9.webp";
 import si_711614b0 from "@/assets/stand-in/711614b0.webp";
 import si_97512505 from "@/assets/stand-in/97512505.webp";
 import si_9c720f5d from "@/assets/stand-in/9c720f5d.webp";
@@ -1134,11 +1143,9 @@ export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> 
   loopPower: { src: photo_loop_ventilation, focus: "50% 55%" },
   loopFabrication: { src: photo_loop_warehouse_light, focus: "50% 55%" },
   callPlant: { src: si_f9854d80, focus: "50% 45%" },
-  montagueHero: { src: si_5bc69ba9, focus: "70% 60%" },
   montagueYard: { src: si_97512505, focus: "50% 70%" },
   montagueInterior: { src: si_d53154cb, focus: "50% 50%" },
   montagueStreet: { src: si_d1597a16, focus: "50% 50%" },
-  albertHero: { src: si_ffbe175e, focus: "50% 50%" },
   albertInterior: { src: si_1aafbb24, focus: "50% 40%" },
   albertLoading: { src: si_29810c3b, focus: "45% 60%" },
   aboutHero: { src: si_c9344f4f, focus: "50% 55%" },
