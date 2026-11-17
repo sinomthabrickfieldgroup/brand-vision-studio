@@ -239,7 +239,7 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
                   </ul>
                 </div>
               )}
-              {property.tenants.length > 0 && (
+              {/* {property.tenants.length > 0 && (
                 <div className="mt-14">
                   <Eyebrow>{property.tenants.length === 1 ? "Tenant" : "Tenants"}</Eyebrow>
                   <div className="mt-6 flex flex-wrap gap-3">
@@ -250,7 +250,7 @@ function BlockView({ block, property }: { block: Block; property: Property }) {
                     ))}
                   </div>
                 </div>
-              )}
+              )} */}
               {property.external && (
                 <div className="mt-14 flex flex-wrap gap-3">
                   {property.external.map((e, i) => (
