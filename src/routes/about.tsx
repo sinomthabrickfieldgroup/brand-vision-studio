@@ -65,12 +65,12 @@ const team: { name: string; role: string; text: string; media: MediaId }[] = [
     text: "Trevor has led Brickfield Group for over fifteen years, building a portfolio from R600m to R1bn.",
     media: "portraitTrevor",
   },
-  {
-    name: "Rowan Gordon",
-    role: "Director",
-    text: "Rowan brings deep capital markets experience and oversees the group's long-term investment strategy.",
-    media: "portraitRowan",
-  },
+  // {
+  //   name: "Rowan Gordon",
+  //   role: "Director",
+  //   text: "Rowan brings deep capital markets experience and oversees the group's long-term investment strategy.",
+  //   media: "portraitRowan",
+  // },
   {
     name: "Timothy Manners-Wood",
     role: "COO",
