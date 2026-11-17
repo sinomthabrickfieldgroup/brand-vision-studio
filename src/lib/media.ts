@@ -917,7 +917,7 @@ export const media = {
     // Branded placeholder until the shoot is done.
     src: photo_montague_placeholder,
     focus: "50% 50%",
-    mobileFocus: "78% 60%",
+    mobileFocus: "68% 60%",
     prompt:
       "Well-kept multi-tenant industrial park in Montague Gardens, Cape Town: two adjoining warehouse units with light grey cladding and roller doors, a shared yard with two access gates, parking bays, mountains faint on the horizon, clean even midday light.",
   }),
@@ -955,7 +955,7 @@ export const media = {
     // Branded placeholder until the shoot is done.
     src: photo_albert_placeholder,
     focus: "50% 50%",
-    mobileFocus: "78% 60%",
+    mobileFocus: "68% 60%",
     prompt:
       "Heritage red-brick industrial building on Albert Road, Woodstock, Cape Town, tall arched windows, painted steel doors, a building between 7.5 and 13 metres high, creative-district street life out of focus, late-afternoon light.",
   }),

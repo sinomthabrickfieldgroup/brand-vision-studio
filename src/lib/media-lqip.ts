@@ -191,7 +191,7 @@ export const LQIP: Record<string, string> = {
   "loop-top-down-site":
     "data:image/webp;base64,UklGRnIAAABXRUJQVlA4IGYAAADwAwCdASoUAAsAPu1kqU2ppaOiMAgBMB2JZQAAW++s/CjRfqp9uAIAAP5B5atEsATl7Pa0kgqhMaDbGPe8Yv+wjLIskpTH7Gb5Lp1tGhRz4On+97Pw1z/K0op9NnuJw49/Cl2AAAA=",
   "albert-placeholder":
-    "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACwAgCdASoUAAkAPu1iqU2tJaOiMAgBoB2JaQAAeyAA/u3YqHWImabJgm8AIAAA",
+    "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADQAgCdASoUAAkAPu1iqk4tJaQiMAgBoB2JaQAAfj4AAP7t2LTz89kxAAA=",
   "montague-placeholder":
-    "data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAADwAgCdASoUAAkAPu1iqU2tJaOiMAgBoB2JaQAAetCIAAD+7dikbInNbUwPjgAA",
+    "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADQAgCdASoUAAkAPu1iqk4tJaQiMAgBoB2JaQAAfj4AAP7t2KTCPSiJgAA=",
 };
