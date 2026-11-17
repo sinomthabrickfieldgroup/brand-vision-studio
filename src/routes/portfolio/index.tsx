@@ -1,28 +1,27 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageHead } from "@/lib/seo";
 import { useState } from "react";
 import { ActionLink, CtaPair, PageHero, SectionIntro, StatFigure } from "@/components/editorial";
 import { PortfolioIndex, ProjectCard } from "@/components/portfolio-views";
-import { countHoldings, portfolioTotals, properties, propertyTypes, type PropertyType } from "@/lib/portfolio";
+import {
+  countHoldings,
+  portfolioTotals,
+  properties,
+  propertyTypes,
+  type PropertyType,
+} from "@/lib/portfolio";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/portfolio/")({
-  head: () => ({
-    meta: [
-      { title: "Portfolio, Brickfield Group" },
-      {
-        name: "description",
-        content:
-          "Mixed-use, office and industrial properties in Cape Town and Johannesburg, held for the long term and managed by our own team.",
-      },
-      { property: "og:title", content: "A portfolio built on patient capital" },
-      {
-        property: "og:description",
-        content: "Fifteen years of disciplined adaptive reuse across Cape Town and Johannesburg.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Portfolio | Brickfield Group",
+      description:
+        "Seven mixed-use, office and industrial properties in Cape Town and Johannesburg, held for the long term and managed by our own team.",
+      path: "/portfolio",
+      ogTitle: "A portfolio built on patient capital",
+      ogDescription: "Disciplined adaptive reuse across Cape Town and Johannesburg since 2009.",
+    }),
   component: Portfolio,
 });
 
@@ -107,7 +106,10 @@ function Portfolio() {
             ))}
           </div>
         </div>
-        <div key={filter} className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:mt-14 md:gap-x-8 md:gap-y-16 lg:grid-cols-3">
+        <div
+          key={filter}
+          className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 md:mt-14 md:gap-x-8 md:gap-y-16 lg:grid-cols-3"
+        >
           {visible.map((p, i) => (
             <ProjectCard
               key={p.slug}

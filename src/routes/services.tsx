@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageHead } from "@/lib/seo";
 import { ArrowUpRight, Check, Mail, MapPin, Phone, ShieldCheck, Sparkles } from "lucide-react";
 import { ActionLink, CtaPair, Marquee, PageHero, SectionIntro } from "@/components/editorial";
 import { Media } from "@/components/media";
@@ -7,23 +8,15 @@ import type { MediaId } from "@/lib/media";
 import { CONTACT, mailto } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/services")({
-  head: () => ({
-    meta: [
-      { title: "Services: Commercial cleaning and security | Brickfield Group" },
-      {
-        name: "description",
-        content:
-          "In-house commercial cleaning and security teams, running since 2020 and available to third-party clients in Cape Town.",
-      },
-      { property: "og:title", content: "Brickfield Services, Built to operate" },
-      {
-        property: "og:description",
-        content: "Cleaning and security run by the people who own the building.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Services: Commercial cleaning and security | Brickfield Group",
+      description:
+        "In-house commercial cleaning and security teams, running since 2020 and available to third-party clients in Cape Town.",
+      path: "/services",
+      ogTitle: "Brickfield Services, Built to operate",
+      ogDescription: "Cleaning and security run by the people who own the building.",
+    }),
   component: Services,
 });
 

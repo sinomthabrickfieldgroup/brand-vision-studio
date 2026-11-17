@@ -83,12 +83,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { name: "theme-color", content: "#f8f5ef", media: "(prefers-color-scheme: light)" },
       { name: "theme-color", content: "#252526", media: "(prefers-color-scheme: dark)" },
+      // Fallbacks only: every page sets its own title, description, canonical URL and previews
+      // through pageHead (src/lib/seo.ts).
       { title: "Brickfield Group" },
-      { name: "description", content: "Patient capital and adaptive reuse in Cape Town and Johannesburg." },
-      { property: "og:title", content: "Brickfield Group" },
-      { property: "og:description", content: "Spaces that work for the long term." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      {
+        name: "description",
+        content: "Patient capital and adaptive reuse in Cape Town and Johannesburg.",
+      },
     ],
     links: [
       {
@@ -97,7 +98,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap",
+      },
       // Portfolio mark. favicon.svg is charcoal on light browser themes and cream on dark ones; the .ico is the same mark on
       // transparent, and the app icons sit on a light tile.
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
@@ -135,11 +139,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-        <SiteLoader />
-        <SiteHeader />
-        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-        <EditorialMotion><Outlet /></EditorialMotion>
-        <SiteFooter />
+      <SiteLoader />
+      <SiteHeader />
+      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <EditorialMotion>
+        <Outlet />
+      </EditorialMotion>
+      <SiteFooter />
     </QueryClientProvider>
   );
 }

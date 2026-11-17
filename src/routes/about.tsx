@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { pageHead } from "@/lib/seo";
 import { ArrowUpRight } from "lucide-react";
 import { ActionLink, CtaPair, Eyebrow, PageHero, SectionIntro } from "@/components/editorial";
 import { cn } from "@/lib/utils";
@@ -7,23 +8,15 @@ import { Legible, LegibleScrim } from "@/components/legible";
 import type { MediaId } from "@/lib/media";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About Brickfield Group" },
-      {
-        name: "description",
-        content:
-          "Backed by Firefly Capital, Brickfield Group has spent more than  fifteen years buying and transforming underused buildings into productive precincts.",
-      },
-      { property: "og:title", content: "About Brickfield Group" },
-      {
-        property: "og:description",
-        content: "Patient capital, adaptive reuse and in-house operations.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "About | Brickfield Group",
+      description:
+        "Backed by Firefly Capital, Brickfield Group has been buying and transforming underused buildings into productive precincts since 2009.",
+      path: "/about",
+      ogTitle: "About Brickfield Group",
+      ogDescription: "Patient capital, adaptive reuse and in-house operations.",
+    }),
   component: About,
 });
 
@@ -231,7 +224,10 @@ function About() {
           {team.map((person, i) => (
             <article
               key={person.name}
-              className={cn("group grid grid-cols-[6.5rem_1fr] items-start gap-5 md:block", i === 1 && "md:mt-16")}
+              className={cn(
+                "group grid grid-cols-[6.5rem_1fr] items-start gap-5 md:block",
+                i === 1 && "md:mt-16",
+              )}
               data-reveal-item
             >
               <div className="overflow-hidden">
@@ -243,9 +239,13 @@ function About() {
               <div>
                 <div className="flex flex-col gap-1 md:mt-6 md:flex-row md:items-baseline md:justify-between md:gap-4 md:border-t md:pt-4">
                   <h3 className="font-display text-xl md:text-2xl">{person.name}</h3>
-                  <span className="text-xs uppercase tracking-[0.18em] text-fern">{person.role}</span>
+                  <span className="text-xs uppercase tracking-[0.18em] text-fern">
+                    {person.role}
+                  </span>
                 </div>
-                <p className="mt-2 text-sm text-muted-foreground md:mt-3 md:text-base">{person.text}</p>
+                <p className="mt-2 text-sm text-muted-foreground md:mt-3 md:text-base">
+                  {person.text}
+                </p>
               </div>
             </article>
           ))}
@@ -298,7 +298,8 @@ function About() {
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 py-14 md:flex-row md:items-center md:px-10">
           <Eyebrow>Backed by Firefly Capital</Eyebrow>
           <p className="max-w-2xl font-display text-2xl leading-snug md:text-3xl">
-            Capital that measures returns in decades lets us buy well, improve patiently and hold for good.
+            Capital that measures returns in decades lets us buy well, improve patiently and hold
+            for good.
           </p>
         </div>
       </section>

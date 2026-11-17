@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { organizationJsonLd, pageHead } from "@/lib/seo";
 import { ArrowUpRight } from "lucide-react";
 import {
   ActionLink,
@@ -16,23 +17,16 @@ import { hasImage, type MediaId } from "@/lib/media";
 import { portfolioTotals, properties } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Brickfield Group, Patient capital and adaptive reuse" },
-      {
-        name: "description",
-        content:
-          "Fifteen years of disciplined adaptive reuse and precinct development in Cape Town and Johannesburg.",
-      },
-      { property: "og:title", content: "Brickfield Group" },
-      {
-        property: "og:description",
-        content: "We build and hold spaces that work for the long term.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Brickfield Group | Patient capital and adaptive reuse",
+      description:
+        "Since 2009, Brickfield Group has bought, restored and held industrial, office and mixed-use buildings in Cape Town and Johannesburg.",
+      path: "/",
+      ogTitle: "Brickfield Group",
+      ogDescription: "We thrive when our tenants thrive. Seven properties, held for the long term.",
+      jsonLd: organizationJsonLd,
+    }),
   component: Index,
 });
 

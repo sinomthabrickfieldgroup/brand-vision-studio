@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageHead } from "@/lib/seo";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { ActionLink, CtaPair, Eyebrow, SectionIntro } from "@/components/editorial";
 import { Media } from "@/components/media";
@@ -6,23 +7,15 @@ import { EnquiryForm } from "@/components/enquiry-form";
 import { CONTACT } from "@/lib/portfolio";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact Brickfield Group" },
-      {
-        name: "description",
-        content:
-          "Talk to the people who run the buildings. 35 Brickfield Road, Woodstock, Cape Town.",
-      },
-      { property: "og:title", content: "Contact Brickfield Group" },
-      {
-        property: "og:description",
-        content: "We answer every message. No brokers on commission, no call centres.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Contact | Brickfield Group",
+      description:
+        "Talk to the people who run the buildings. 35 Brickfield Road, Woodstock, Cape Town. 021 830 0750, info@brickfieldgroup.co.za.",
+      path: "/contact",
+      ogTitle: "Contact Brickfield Group",
+      ogDescription: "We answer every message. No brokers on commission, no call centres.",
+    }),
   validateSearch: (search: Record<string, unknown>): { property?: string; topic?: string } => ({
     ...(typeof search["property"] === "string" ? { property: search["property"] } : {}),
     ...(typeof search["topic"] === "string" ? { topic: search["topic"] } : {}),
@@ -105,7 +98,9 @@ function Contact() {
                   <span className="mt-1 block break-words font-display text-lg leading-snug transition-colors group-hover:text-fern lg:mt-2 lg:text-2xl">
                     {c.value}
                   </span>
-                  <span className="mt-0.5 hidden text-sm text-muted-foreground sm:block lg:mt-1">{c.note}</span>
+                  <span className="mt-0.5 hidden text-sm text-muted-foreground sm:block lg:mt-1">
+                    {c.note}
+                  </span>
                 </span>
                 <ArrowUpRight
                   className="ml-auto mt-1 shrink-0 text-fern transition-transform duration-500 group-hover:rotate-45 md:hidden lg:block"

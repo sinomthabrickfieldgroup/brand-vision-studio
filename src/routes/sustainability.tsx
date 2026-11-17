@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { pageHead } from "@/lib/seo";
 import {
   BatteryCharging,
   Building2,
@@ -26,23 +27,17 @@ import { SystemDiagram } from "@/components/system-diagram";
 import type { MediaId } from "@/lib/media";
 
 export const Route = createFileRoute("/sustainability")({
-  head: () => ({
-    meta: [
-      { title: "Sustainability, Brickfield Group" },
-      {
-        name: "description",
-        content:
-          "Solar and standby power, and borehole water. Infrastructure that works for decades.",
-      },
-      { property: "og:title", content: "Built to endure | Brickfield Group" },
-      {
-        property: "og:description",
-        content: "Infrastructure investment that keeps tenants running and protects returns.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () =>
+    pageHead({
+      title: "Sustainability | Brickfield Group",
+      description:
+        "Rooftop solar, standby power, borehole water and passive ventilation. Infrastructure that keeps tenants running for decades.",
+      path: "/sustainability",
+      ogTitle: "Built to endure | Brickfield Group",
+      ogDescription: "Infrastructure investment that keeps tenants running and protects returns.",
+      image: "/og/sustainability.jpg",
+      imageAlt: "Rooftop solar at Brickfield Canvas",
+    }),
   component: Sustainability,
 });
 
