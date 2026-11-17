@@ -24,7 +24,6 @@ import photo_canvas_breakout from "@/assets/photos/canvas-breakout.webp";
 import photo_canvas_desks_detail from "@/assets/photos/canvas-desks-detail.webp";
 import photo_canvas_gym from "@/assets/photos/canvas-gym.webp";
 import photo_canvas_terrace from "@/assets/photos/canvas-terrace.webp";
-import photo_canvas_presentation from "@/assets/photos/canvas-presentation.webp";
 import photo_canvas_meeting_room from "@/assets/photos/canvas-meeting-room.webp";
 import photo_canvas_garden_corridor from "@/assets/photos/canvas-garden-corridor.webp";
 import photo_canvas_atrium from "@/assets/photos/canvas-atrium.webp";
@@ -69,6 +68,8 @@ import photo_wierda_open_plan from "@/assets/photos/wierda-open-plan.webp";
 import photo_wierda_roses from "@/assets/photos/wierda-roses.webp";
 import photo_wierda_lobby from "@/assets/photos/wierda-lobby.webp";
 
+import photo_canvas_events from "@/assets/photos/canvas-events.webp";
+import photo_canvas_solar from "@/assets/photos/canvas-solar.webp";
 import photo_loop_aerial from "@/assets/photos/loop-aerial-site.webp";
 import photo_loop_warehouse from "@/assets/photos/loop-warehouse.webp";
 import photo_loop_mezzanine from "@/assets/photos/loop-mezzanine.webp";
@@ -287,12 +288,12 @@ export const media = {
       "Small boutique gym in a converted warehouse, rubber floor, timber wall slats, racks of dumbbells and two rowing machines, warm accent lighting, empty, early evening.",
   }),
   canvasEvents: shot({
-    title: "Canvas · in session",
-    alt: "A presentation in a Canvas meeting space",
+    title: "Canvas · events",
+    alt: "An evening event at Brickfield Canvas: guests at cocktail tables, with the bar against the brick wall behind",
     aspect: "4/3",
     tone: "dusk",
-    src: photo_canvas_presentation,
-    focus: "40% 45%",
+    src: photo_canvas_events,
+    focus: "42% 55%",
     prompt:
       "Evening community event in a brick courtyard, festoon string lights, people standing in small groups holding drinks, all slightly out of focus, warm dusk sky.",
   }),
@@ -318,9 +319,11 @@ export const media = {
   }),
   canvasSolar: shot({
     title: "Canvas · rooftop solar",
-    alt: "Rooftop solar array at Brickfield Canvas",
+    alt: "Rows of solar panels across the roof at Brickfield Canvas, seen from a drone, with the parking below",
     aspect: "16/9",
     tone: "stone",
+    src: photo_canvas_solar,
+    focus: "50% 45%",
     prompt:
       "Aerial drone view of rows of solar PV panels on an industrial building roof in Woodstock, Cape Town, city grid and Table Mountain in the background, crisp clear afternoon light.",
   }),
@@ -1122,7 +1125,6 @@ import si_711614b0 from "@/assets/stand-in/711614b0.webp";
 import si_97512505 from "@/assets/stand-in/97512505.webp";
 import si_9c720f5d from "@/assets/stand-in/9c720f5d.webp";
 import si_b23d9d70 from "@/assets/stand-in/b23d9d70.webp";
-import si_b772ec77 from "@/assets/stand-in/b772ec77.webp";
 import si_c9344f4f from "@/assets/stand-in/c9344f4f.webp";
 import si_d1597a16 from "@/assets/stand-in/d1597a16.webp";
 import si_d53154cb from "@/assets/stand-in/d53154cb.webp";
@@ -1138,7 +1140,6 @@ export const standIns: Partial<Record<MediaId, { src: string; focus: string }>> 
   cleaningDetail: { src: si_cleaning_detail, focus: "70% 50%" },
   securityTeam: { src: si_security_control, focus: "40% 70%" },
   securityControl: { src: si_security_control, focus: "35% 65%" },
-  canvasSolar: { src: si_b772ec77, focus: "50% 60%" },
   loopBefore: { src: si_b23d9d70, focus: "50% 55%" },
   loopPower: { src: photo_loop_ventilation, focus: "50% 55%" },
   loopFabrication: { src: photo_loop_warehouse_light, focus: "50% 55%" },

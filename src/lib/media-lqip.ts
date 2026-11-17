@@ -194,4 +194,8 @@ export const LQIP: Record<string, string> = {
     "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADQAgCdASoUAAkAPu1iqk4tJaQiMAgBoB2JaQAAfj4AAP7t2LTz89kxAAA=",
   "montague-placeholder":
     "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADQAgCdASoUAAkAPu1iqk4tJaQiMAgBoB2JaQAAfj4AAP7t2KTCPSiJgAA=",
+  "canvas-events":
+    "data:image/webp;base64,UklGRpoAAABXRUJQVlA4II4AAADwAwCdASoUAAsAPu1iqU2ppaOiMAgBMB2JbACdMoACoDzjqlhYbTSAAP3jIkwYp0Wu/A4It2frxXyZB6WNLlIb6QhtytKgQzSfOWLDH3OxT0xOsByV1XL86ksV0//xPTML6uhGCVEsDHNWXJA2YjC/ef8Fh3806g+0vGHt3j0fHtoEgU939eJcdtJHyHwA",
+  "canvas-solar":
+    "data:image/webp;base64,UklGRmwAAABXRUJQVlA4IGAAAADwAwCdASoUAAsAPu1iqk4ppaQiMAgBMB2JZwDG9CP7DUos5mj48nAAAOAZoLO/pmB7E3uhJ78rPI4rcImtN5e3Rf80qlNIv9S/vc9WKJYv/Lwt7XtWKtu1ksjXItkAAAA=",
 };
